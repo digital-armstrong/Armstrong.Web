@@ -77,4 +77,22 @@ $ wget -q  https://raw.githubusercontent.com/petervanderdoes/gitflow-avh/develop
 - [Git-flow](https://jeffkreeftmeijer.com/git-flow/) 
 - [Git-flow usage](https://github.com/petervanderdoes/gitflow-avh#git-flow-usage)
 
+## Workflow
+
+### First start
+
+```bash
+git copy git@github.com:digital-armstrong/Armstrong.Web.git \ 
+    && cd Armstrong.Web \ 
+    && docker build -t arms-web . \ 
+    && docker-compose build \ 
+    && docker-compose run --rm web bash -c "bundle install"
+```
+
+### Commit rules
+
+1. Commits should be small and meaningful;
+2. Before adding changes to the index and committing, you must do `bandle exec rubocop -a`;
+3. Always work on git-flow, waiting for code reviews and responding to comments by adding commits in 
+continuation of an open pull request.
 
