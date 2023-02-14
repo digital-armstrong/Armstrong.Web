@@ -1,5 +1,7 @@
 # Armstrong.Web
 
+![cover](https://user-images.githubusercontent.com/46975515/218666180-742098ba-98f2-4979-960b-6a706436372f.png)
+
 A web-patform for ARMStrong. This web-platform should be included client 
 for ARMStrong, OMIT and assistant for shield "D".
 
