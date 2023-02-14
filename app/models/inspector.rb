@@ -1,0 +1,2 @@
+class Inspector < User
+end
