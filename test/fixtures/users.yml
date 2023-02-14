@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tabel_id: 1
+  first_name: MyString
+  second_name: MyString
+  last_name: MyString
+  email: MyString
+  phone: MyString
+  password_digest: <%= BCrypt::Password.create("secret") %>
+  avatar_url: MyString
+  type: 
+
+two:
+  tabel_id: 1
+  first_name: MyString
+  second_name: MyString
+  last_name: MyString
+  email: MyString
+  phone: MyString
+  password_digest: <%= BCrypt::Password.create("secret") %>
+  avatar_url: MyString
+  type: 

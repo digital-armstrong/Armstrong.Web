@@ -1,0 +1,2 @@
+class Default < User
+end
