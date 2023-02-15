@@ -1,0 +1,2 @@
+class SupplementaryKit < ApplicationRecord
+end
