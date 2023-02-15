@@ -10,9 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_14_094840) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_15_042304) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "buildings", force: :cascade do |t|
+    t.string "name"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_buildings_on_organization_id"
+  end
+
+  create_table "divisions", force: :cascade do |t|
+    t.string "name"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_divisions_on_organization_id"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.string "full_address"
+    t.string "zip_code"
+    t.string "phone"
+    t.string "fax"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.string "name"
+    t.bigint "building_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["building_id"], name: "index_rooms_on_building_id"
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "name"
+    t.bigint "division_id", null: false
+    t.bigint "organization_id", null: false
+    t.bigint "building_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["building_id"], name: "index_services_on_building_id"
+    t.index ["division_id"], name: "index_services_on_division_id"
+    t.index ["organization_id"], name: "index_services_on_organization_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.integer "tabel_id"
@@ -29,4 +76,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_14_094840) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "buildings", "organizations"
+  add_foreign_key "divisions", "organizations"
+  add_foreign_key "rooms", "buildings"
+  add_foreign_key "services", "buildings"
+  add_foreign_key "services", "divisions"
+  add_foreign_key "services", "organizations"
 end
