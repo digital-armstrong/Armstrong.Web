@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_15_090409) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_15_094522) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_090409) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_buildings_on_organization_id"
+  end
+
+  create_table "channels", force: :cascade do |t|
+    t.string "name"
+    t.integer "channel_id"
+    t.bigint "device_id", null: false
+    t.bigint "room_id", null: false
+    t.bigint "server_id", null: false
+    t.bigint "service_id", null: false
+    t.text "location_description"
+    t.float "self_background", default: 0.0
+    t.float "pre_emergency_limit", default: 1.0
+    t.float "emergency_limit", default: 2.0
+    t.float "consumptiom", default: 1.0
+    t.float "conversion_coefficient", default: 0.0
+    t.float "event_system_value", default: 0.0
+    t.float "event_not_system_value", default: 0.0
+    t.float "event_impulse_value", default: 0.0
+    t.datetime "event_datetime"
+    t.integer "event_count", default: 0
+    t.integer "event_error_count", default: 0
+    t.boolean "is_special_control", default: false
+    t.boolean "is_online"
+    t.string "state", default: "normal"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_channels_on_device_id"
+    t.index ["room_id"], name: "index_channels_on_room_id"
+    t.index ["server_id"], name: "index_channels_on_server_id"
+    t.index ["service_id"], name: "index_channels_on_service_id"
   end
 
   create_table "device_models", force: :cascade do |t|
@@ -180,6 +210,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_090409) do
   end
 
   add_foreign_key "buildings", "organizations"
+  add_foreign_key "channels", "devices"
+  add_foreign_key "channels", "rooms"
+  add_foreign_key "channels", "servers"
+  add_foreign_key "channels", "services"
   add_foreign_key "device_models", "manufacturers"
   add_foreign_key "device_models", "measurement_classes"
   add_foreign_key "device_models", "measurement_groups"
