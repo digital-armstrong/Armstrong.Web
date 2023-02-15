@@ -11,4 +11,5 @@ FactoryBot.define do
 
   sequence(:name) { |n| "testname#{n}" }
 
+  sequence(:ip_adress) { |n| "#{n}.#{n}.#{n}.#{n}"}
 end
