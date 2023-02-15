@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_15_080821) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_15_081247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,6 +44,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_080821) do
     t.string "site_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "measurement_classes", force: :cascade do |t|
+    t.string "name"
+    t.bigint "measurement_group_id", null: false
+    t.integer "arms_device_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["measurement_group_id"], name: "index_measurement_classes_on_measurement_group_id"
   end
 
   create_table "measurement_groups", force: :cascade do |t|
@@ -112,6 +121,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_080821) do
 
   add_foreign_key "buildings", "organizations"
   add_foreign_key "divisions", "organizations"
+  add_foreign_key "measurement_classes", "measurement_groups"
   add_foreign_key "rooms", "buildings"
   add_foreign_key "servers", "rooms"
   add_foreign_key "servers", "services"
