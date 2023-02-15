@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class OrganizationTest < ActiveSupport::TestCase
   test 'create_organization_model' do

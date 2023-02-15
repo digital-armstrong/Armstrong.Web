@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :server do
-    name { "MyString" }
+    name { 'MyString' }
     ip_adress
     inventory_id { 1 }
     service { association :service }
