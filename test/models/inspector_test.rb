@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class InspectorTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'create_user_model_inspector' do
+    inspector = create(:inspector)
+    assert inspector.persisted?
+  end
 end
