@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_15_081804) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_15_082353) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,30 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_081804) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_buildings_on_organization_id"
+  end
+
+  create_table "device_models", force: :cascade do |t|
+    t.string "name"
+    t.bigint "measurement_group_id", null: false
+    t.bigint "measurement_class_id", null: false
+    t.string "measuring_unit"
+    t.string "safety_class"
+    t.float "accuracy_class"
+    t.float "measurement_sensitivity"
+    t.float "measurement_min"
+    t.float "measurement_max"
+    t.bigint "manufacturer_id", null: false
+    t.bigint "supplementary_kit_id", null: false
+    t.boolean "is_complete_device"
+    t.boolean "is_tape_rolling_mechanism"
+    t.string "doc_url"
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["manufacturer_id"], name: "index_device_models_on_manufacturer_id"
+    t.index ["measurement_class_id"], name: "index_device_models_on_measurement_class_id"
+    t.index ["measurement_group_id"], name: "index_device_models_on_measurement_group_id"
+    t.index ["supplementary_kit_id"], name: "index_device_models_on_supplementary_kit_id"
   end
 
   create_table "device_reg_groups", force: :cascade do |t|
@@ -128,6 +152,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_15_081804) do
   end
 
   add_foreign_key "buildings", "organizations"
+  add_foreign_key "device_models", "manufacturers"
+  add_foreign_key "device_models", "measurement_classes"
+  add_foreign_key "device_models", "measurement_groups"
+  add_foreign_key "device_models", "supplementary_kits"
   add_foreign_key "divisions", "organizations"
   add_foreign_key "measurement_classes", "measurement_groups"
   add_foreign_key "rooms", "buildings"
