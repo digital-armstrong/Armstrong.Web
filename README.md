@@ -1,98 +1,24 @@
-# Armstrong.Web
+# README
 
-![cover](https://user-images.githubusercontent.com/46975515/218666180-742098ba-98f2-4979-960b-6a706436372f.png)
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-A web-patform for ARMStrong. This web-platform should be included client 
-for ARMStrong, OMIT and assistant for shield "D".
+Things you may want to cover:
 
-## Before start
+* Ruby version
 
-### Configuring your workspace:
+* System dependencies
 
-#### Install and configure Docker and Docker-Compose;
+* Configuration
 
-Installing:
+* Database creation
 
-```bash
-sudo dnf remove docker \
-                docker-client \
-                docker-client-latest \
-                docker-common \
-                docker-latest \
-                docker-latest-logrotate \
-                docker-logrotate \
-                docker-selinux \
-                docker-engine-selinux \
-                docker-engine
+* Database initialization
 
-sudo dnf -y install dnf-plugins-core
+* How to run the test suite
 
-sudo dnf config-manager \
-    --add-repo \
-    https://download.docker.com/linux/fedora/docker-ce.repo
+* Services (job queues, cache servers, search engines, etc.)
 
-sudo dnf install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-```
+* Deployment instructions
 
-Fixing problem:
-
-```bash
-usermod -a -G docker $USER
-```
-
-Start after system be load:
-
-```bash
-sudo systemctl enable docker
-```
-
-#### Install [ZSH and Oh-my-zsh](https://ohmyz.sh/)
-
-Install:
-
-```bash
-sudo dnf install zsh
-```
-
-```bash
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-```
-
-Set as default shell:
-
-```bash
-chsh -s $(which zsh)
-```
-
-#### Install [git-flow](https://github.com/petervanderdoes/gitflow-avh)
-
-Install:
-
-```bash
-$ wget -q  https://raw.githubusercontent.com/petervanderdoes/gitflow-avh/develop/contrib/gitflow-installer.sh && sudo bash gitflow-installer.sh install stable; rm gitflow-installer.sh
-```
-
-### Read manual
-
-- [Git-flow](https://jeffkreeftmeijer.com/git-flow/) 
-- [Git-flow usage](https://github.com/petervanderdoes/gitflow-avh#git-flow-usage)
-
-## Workflow
-
-### First start
-
-```bash
-git copy git@github.com:digital-armstrong/Armstrong.Web.git \ 
-    && cd Armstrong.Web \ 
-    && docker build -t arms-web . \ 
-    && docker-compose build \ 
-    && docker-compose run --rm web bash -c "bundle install"
-```
-
-### Commit rules
-
-1. Commits should be small and meaningful;
-2. Before adding changes to the index and committing, you must do `bandle exec rubocop -a`;
-3. Always work on git-flow, waiting for code reviews and responding to comments by adding commits in 
-continuation of an open pull request.
-
+* ...
