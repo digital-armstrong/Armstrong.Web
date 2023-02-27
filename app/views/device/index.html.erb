@@ -1,2 +1,52 @@
-<h1>Device#index</h1>
-<p>Find me in app/views/device/index.html.erb</p>
+<div class="row">
+  <div class="col-2">
+    <div class="list-group shadow-lg">
+      <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+        The current link item
+      </a>
+      <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+      <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+      <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+      <a class="list-group-item list-group-item-action disabled">A disabled link item</a>
+    </div>
+  </div>
+  <div class="col-10 shadow-lg rounded">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Таб. №</th>
+          <th scope="col">Сер. №</th>
+          <th scope="col">Модель</th>
+          <th scope="col">Год выпуска</th>
+          <th scope="col">Год ввода</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @devices.each do |device| %>
+          <tr>
+            <th scope="row"><%= device.tabel_id %></th>
+            <td><%= device.serial_id %></td>
+            <td><%= device.device_model.name %></td>
+            <td><%= device.year_of_production %></td>
+            <td><%= device.year_of_commissioning %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row my-5">
+  <div class="col-2">
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col-8">
+        <%= paginate @devices %>
+      </div>
+      <div class="col-4">
+        <%= page_entries_info @devices %>
+      </div>
+    </div>
+  </div>
+</div>
