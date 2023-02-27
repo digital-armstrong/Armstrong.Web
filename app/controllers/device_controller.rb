@@ -9,11 +9,36 @@ class DeviceController < ApplicationController
       per(params[:per_page])
   end
 
+  def create; end
+
+  def update
+    @device = Device.find(params[:id])
+    if @device.update(device_params)
+      redirect_to(device_path)
+    else
+      render(:edit)
+    end
+  end
+
+  def destroy; end
+
   def edit
     @device = Device.find(params[:id])
   end
 
   def new
     @device = Device.new
+  end
+
+  private
+
+  def device_params
+    params.require(:device).permit(:inventory_id,
+                                   :tabel_id,
+                                   :serial_id,
+                                   :device_model_id,
+                                   :device_reg_group_id,
+                                   :year_of_production,
+                                   :year_of_commissioning)
   end
 end
