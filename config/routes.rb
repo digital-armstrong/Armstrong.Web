@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   resources :home
   resources :armstrong, only: [:index, :show]
   resources :about, only: [:index]
-  resources :device, only: [:index, :show]
+  resources :device, only: [:index, :show, :new, :edit]
 end
