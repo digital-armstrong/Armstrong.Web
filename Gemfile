@@ -46,6 +46,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'bootsnap', require: false
 
+gem 'kaminari', '~> 1.2', '>= 1.2.2'
+gem 'ransack', '~> 4.0'
+gem 'responders', '~> 3.1'
+gem 'active_model_serializers', '~> 0.10.13'
+
 group :development, :test do
   gem 'debug', platforms: [:mri, :mingw, :x64_mingw]
 
