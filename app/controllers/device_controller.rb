@@ -1,5 +1,9 @@
 class DeviceController < ApplicationController
-  def show; end
+  def show
+    @device = Device.find(params[:id])
+    supplementary_kit_id = SupplementaryKit.find(@device.device_model.supplementary_kit_id)
+    @devices = DeviceModel.where(supplementary_kit_id:)
+  end
 
   def index
     @query = Device.ransack(params[:q])

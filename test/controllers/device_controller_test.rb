@@ -17,7 +17,7 @@ class DeviceControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should patch update" do
+  test 'should patch update' do
     device = create(:device)
     device_attrs = attributes_for(:device)
     patch :update, params: { id: device.id, device: device_attrs }

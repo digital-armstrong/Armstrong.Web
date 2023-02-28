@@ -23,28 +23,16 @@
           <th scope="col">Модель</th>
           <th scope="col">Год выпуска</th>
           <th scope="col">Год ввода</th>
-          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <% @devices.each do |device| %>
-          <tr>
+          <tr onclick="document.location = `<%=device_path(device)%>`" style="cursor:pointer">
             <th scope="row"><%= device.tabel_id %></th>
             <td><%= device.serial_id %></td>
             <td><%= device.device_model.name %></td>
             <td><%= device.year_of_production %></td>
             <td><%= device.year_of_commissioning %></td>
-            <td>
-              <%= link_to edit_device_path(device) do %>
-                <i class="bi bi-pencil-fill"></i>
-              <% end %>
-              <%= link_to device_path(device) do %>
-                <i class="bi bi-eye-fill"></i>
-              <% end %>
-              <%= link_to edit_device_path(device) do %>
-                <i class="bi bi-bucket-fill"></i>
-              <% end %>
-            </td>
           </tr>
         <% end %>
       </tbody>
