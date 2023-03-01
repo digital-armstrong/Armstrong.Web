@@ -145,13 +145,13 @@
     <p>
       <span>
         <strong>E-mail: </strong>
-        <%= @device.device_model.manufacturer.email %>
+        <%= mail_to @device.device_model.manufacturer.email %>
       </span>
     </p>
     <p>
       <span>
         <strong>Сайт: </strong>
-        <%= @device.device_model.manufacturer.site_url %>
+        <%= link_to "#{@device.device_model.manufacturer.site_url}", @device.device_model.manufacturer.site_url, target: :blank %>
       </span>
     </p>
   </div>
