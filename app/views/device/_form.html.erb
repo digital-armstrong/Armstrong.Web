@@ -1,0 +1,14 @@
+  <p>
+    <%= f.input :inventory_id %>
+    <%= f.input :tabel_id, label: 'Табельный №', placeholder: 'Номер, присвоенный в ЦСМИТ' %>
+    <%= f.input :serial_id %>
+    <%= f.association :device_reg_group %>
+    <%= f.input :year_of_production %>
+    <%= f.input :year_of_commissioning %>
+    <%= f.association :device_model %>
+  </p>
+
+  <p>
+    <%= f.button :submit, "Save", class: "btn btn-primary" %>
+    <%= f.button :submit, "Back", formaction: device_index_path, formmethod: "get" %>
+  </p>

@@ -1,16 +1,3 @@
 <%= simple_form_for @device, as: :device, url: device_path(@device), class: "form-group row" do |f| %>
-  <p>
-    <%= f.input :inventory_id %>
-    <%= f.input :tabel_id, label: 'Табельный №', placeholder: 'Номер, присвоенный в ЦСМИТ' %>
-    <%= f.input :serial_id %>
-    <%= f.association :device_reg_group %>
-    <%= f.input :year_of_production %>
-    <%= f.input :year_of_commissioning %>
-    <%= f.association :device_model %>
-  </p>
-
-  <p>
-    <%= f.button :submit, "Save", class: "btn btn-primary" %>
-    <%= f.button :submit, "Back", formaction: device_index_path, formmethod: "get" %>
-  </p>
+<%= render 'form', f: f %>
 <% end %>
