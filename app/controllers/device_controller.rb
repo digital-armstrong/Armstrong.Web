@@ -13,8 +13,6 @@ class DeviceController < ApplicationController
       per(params[:per_page])
   end
 
-  def create; end
-
   def update
     @device = Device.find(params[:id])
     if @device.update(device_params)
@@ -24,7 +22,11 @@ class DeviceController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    @device = Device.find(params[:id])
+    @device.destroy
+    redirect_to(device_index_path)
+  end
 
   def edit
     @device = Device.find(params[:id])
