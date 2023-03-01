@@ -24,6 +24,12 @@ class DeviceControllerTest < ActionController::TestCase
     assert_response :redirect
   end
 
+  test 'should delete destroy' do
+    device = create(:device)
+    delete :destroy, params: { id: device.id }
+    assert_response :redirect
+  end
+
   test 'should get new' do
     get :new
     assert_response :success
