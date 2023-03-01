@@ -7,4 +7,9 @@ class DeviceModel < ApplicationRecord
   has_many :devices
 
   validates :name, presence: true
+
+  def self.ransackable_attributes(_auth_object = nil)
+    ['accuracy_class', 'created_at', 'doc_url', 'id', 'image_url', 'is_complete_device', 'is_tape_rolling_mechanism', 'manufacturer_id',
+     'measurement_class_id', 'measurement_group_id', 'measurement_max', 'measurement_min', 'measurement_sensitivity', 'measuring_unit', 'name', 'safety_class', 'supplementary_kit_id', 'updated_at']
+  end
 end
