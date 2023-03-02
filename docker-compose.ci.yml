@@ -13,4 +13,3 @@ services:
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
     command: sh -c "bundle exec rails javascript:install:esbuild && bundle exec rails css:install:bootstrap && bundle exec rails db:create db:migrate && bundle exec rake test"
-
