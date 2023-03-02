@@ -37,14 +37,14 @@ class DeviceController < ApplicationController
   end
 
   def create
-    @device = Device.new device_params
+    @device = Device.new(device_params)
     if @device.save
       redirect_to(device_index_path)
     else
       render(:new)
     end
   end
-  
+
   private
 
   def device_params
