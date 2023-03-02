@@ -1,3 +1,5 @@
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fdigital-armstrong%2FArmstrong.Web%2Fbadge%3Fref%3Ddevelop&style=flat)](https://actions-badge.atrox.dev/digital-armstrong/Armstrong.Web/goto?ref=develop)
+
 # Armstrong.Web
 
 ![cover](https://user-images.githubusercontent.com/46975515/218666180-742098ba-98f2-4979-960b-6a706436372f.png)
