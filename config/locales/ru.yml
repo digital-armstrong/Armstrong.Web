@@ -1,0 +1,19 @@
+ru:
+  activerecord:
+    errors:
+      models:
+        device:
+          attributes:
+            device_model:
+              required: "не может быть пустой"
+            device_reg_group:
+              required: "не может быть пустой"
+    attributes:
+      device:
+        inventory_id: "Инвентарный №"
+        device_model: "Модель"
+        serial_id: "Серийный №"
+        tabel_id: "Табельный №"
+        device_reg_group: "Регистрационная группа"
+        year_of_production: "Год выпуска"
+        year_of_commissioning: "Год ввода"
