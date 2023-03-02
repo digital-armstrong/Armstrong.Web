@@ -1,4 +1,4 @@
-<%= simple_form_for @device, as: :device, url: path, class: "form-group row" do |f| %>
+<%= simple_form_for @device, as: :device, url: path, data: { turbo: false }, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
       <%= f.input :inventory_id, label: 'Инвентарный №', placeholder: 'Инвентарный номер устройства', input_html: {:tabindex => 1} %>
