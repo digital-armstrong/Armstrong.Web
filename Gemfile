@@ -56,6 +56,8 @@ gem 'ransack', '~> 4.0'
 gem 'responders', '~> 3.1'
 gem 'active_model_serializers', '~> 0.10.13'
 gem 'russian', '~> 0.6.0'
+gem 'prawn', '~> 2.4'
+gem 'prawn-table', '~> 0.2.2'
 
 group :development, :test do
   gem 'debug', platforms: [:mri, :mingw, :x64_mingw]
