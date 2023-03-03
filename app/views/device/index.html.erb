@@ -1,9 +1,44 @@
 <div class="row">
   <div class="col-2">
-    <%= search_form_for(@query, url:device_index_path, method: :get, class: "mb-3 shadow-lg rounded") do |f| %>
-      <%= f.search_field :serial_id_cont, class: 'form-control', placeholder: 'Поиск по S/N' %>
-    <% end %>
-    <div class="list-group shadow-lg">
+    <div class="accordion mb-3" id="accordionFilter">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFilter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            Фильтрация
+          </button>
+        </h2>
+        <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+          <%= search_form_for(@query, url:device_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+            <%= f.label :tabel_id, class:"mb-2"%>
+            <%= f.search_field :tabel_id_eq, class: 'form-control', placeholder: 'Номер' %>
+            <%= f.label :serial_id, class:"my-2" %>
+            <%= f.search_field :serial_id_cont, class: 'form-control ', placeholder: 'Номер' %>
+            <%= f.label :device_model_id, class:"my-2" %>
+            <%= f.search_field :device_model_name_cont, class: 'form-control', placeholder: 'Название' %>
+            <%= f.label :year_of_production, class:"my-2" %>
+            <div class="row px-2">
+              <div class="col px-1">
+                <%= f.search_field :year_of_production_gteq, class: 'form-control', placeholder: 'От' %>
+              </div>
+              <div class="col px-1">
+                <%= f.search_field :year_of_production_lteq, class: 'form-control', placeholder: 'До' %>
+              </div>
+            </div>
+            <%= f.label :year_of_commissioning, class:"my-2" %>
+            <div class="row px-2 mb-2">
+              <div class="col px-1">
+                <%= f.search_field :year_of_commissioning_gteq, class: 'form-control', placeholder: 'От' %>
+              </div>
+              <div class="col px-1">
+                <%= f.search_field :year_of_commissioning_lteq, class: 'form-control', placeholder: 'До' %>
+              </div>
+            </div>
+            <%= f.submit "Применить", class: 'btn btn-primary w-100'%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="list-group shadow">
       <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
         The current link item
       </a>

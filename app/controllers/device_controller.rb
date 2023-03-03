@@ -8,6 +8,7 @@ class DeviceController < ApplicationController
   def index
     @query = Device.ransack(params[:q])
     @devices = @query.result.
+      includes(:device_model).
       order(:tabel_id).
       page(params[:page]).
       per(params[:per_page])
