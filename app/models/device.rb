@@ -1,4 +1,6 @@
 class Device < ApplicationRecord
+  include ExportPdf
+
   belongs_to :device_model
   belongs_to :device_reg_group
 
