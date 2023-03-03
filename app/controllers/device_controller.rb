@@ -48,7 +48,7 @@ class DeviceController < ApplicationController
 
   def download
     respond_to do |format|
-      format.pdf { send_data Device.to_pdf, filename: "table-#{Date.today}.pdf" }
+      format.pdf { send_data(Device.to_pdf, filename: "table-#{Date.today}.pdf") }
     end
   end
 
