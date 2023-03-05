@@ -1,10 +1,12 @@
 class Device < ApplicationRecord
+  include ExportPdf
+
   belongs_to :device_model
   belongs_to :device_reg_group
 
   has_many :inspections
   has_one :channel
-  
+
   validates :inventory_id, numericality: { less_than_or_equal_to: 2147483647 }, presence: true, uniqueness: true
   validates :serial_id, :tabel_id, presence: true, uniqueness: true
 
