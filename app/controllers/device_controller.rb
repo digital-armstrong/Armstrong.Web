@@ -47,8 +47,12 @@ class DeviceController < ApplicationController
   end
 
   def download
+    query = Device.ransack(params[:q])
+    devices = query.result.
+      includes(:device_model).
+      order(:tabel_id)
     respond_to do |format|
-      format.pdf { send_data(Device.to_pdf, filename: "table-#{Date.today}.pdf") }
+      format.pdf { send_data(devices.to_pdf, filename: "table-#{Date.today}.pdf") }
     end
   end
 
