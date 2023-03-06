@@ -1,20 +1,47 @@
-<div class="col shadow rounded">
+<div class="row">
+  <div class="col-2">
+    <div class="accordion mb-3" id="accordionFilter">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFilter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            Фильтрация
+          </button>
+        </h2>
+        <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+          <%= search_form_for(@query, url:device_model_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+            <%= f.label :name, class:"mb-2"%>
+            <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Название' %>
+            <%= f.label :manufacturer_id, class:"my-2" %>
+            <%= f.collection_select(:manufacturer_id_eq, Manufacturer.all,
+            :id, :name, {:include_blank => true}, {:class=>'form-select form-select-sm'}) %>
+            <%= f.label :measurement_group_id, class:"my-2" %>
+            <%= f.search_field :measurement_group_name_cont, class: 'form-control', placeholder: 'Название' %>
+            <%= f.submit "Применить", class: 'btn btn-primary w-100'%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= link_to new_device_model_path, class: "btn btn-primary my-3 w-100 shadow" do %>
+      <i class="bi bi-plus-square"></i><span> Добавить</span>
+    <% end %>
+  </div>
+  <div class="col shadow rounded">
     <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">Название</th>
           <th scope="col">Производитель</th>
-          <th scope="col">Группа изм.</th>
-          <th scope="col">Класс изм.</th>
-          <th scope="col">Единица изм.</th>
-          <th scope="col">Чувств. изм.</th>
-          <th scope="col">Мин. вел. изм.</th>
-          <th scope="col">Макс. вел. изм.</th>
-          <th scope="col">Класс безоп.</th>
+          <th scope="col">Группа</th>
+          <th scope="col">Класс</th>
+          <th scope="col">Единицы</th>
+          <th scope="col">Чувств.</th>
+          <th scope="col">Мин.</th>
+          <th scope="col">Макс.</th>
+          <th scope="col">Класс без.</th>
           <th scope="col">Класс точн.</th>
           <th scope="col">Набор</th>
           <th scope="col">Полный набор?</th>
-          <th scope="col">Имеет л/п мех.?</th>
+          <th scope="col">Л/п мех.</th>
         </tr>
       </thead>
       <tbody>
@@ -37,4 +64,5 @@
         <% end %>
       </tbody>
     </table>
+  </div>
 </div>

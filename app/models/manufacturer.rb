@@ -6,4 +6,8 @@ class Manufacturer < ApplicationRecord
   validates :name, presence: true
   validates :email,
             format: { with: @email_regex }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    ['adress', 'created_at', 'email', 'id', 'name', 'phone', 'site_url', 'updated_at']
+  end
 end
