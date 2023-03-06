@@ -1,0 +1,56 @@
+<%= simple_form_for @device_model, as: :device_model, url: path, data: {turbo: false}, class: "form-group row" do |f| %>
+  <div class="row">
+    <div class="col">
+      <%= f.input :name, placeholder: "Название", input_html: {:tabindex => 1} %>
+    </div>
+    <div class="col">
+      <%= f.association :manufacturer, input_html: {:tabindex => 2} %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.association :measurement_group, input_html: {:tabindex => 3} %>
+    </div>
+    <div class="col">
+      <%= f.association :measurement_class, input_html: {:tabindex => 4} %>
+    </div>
+    <div class="col">
+      <%= f.input :measuring_unit, placeholder: "Название", input_html: {:tabindex => 5} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.input :measurement_sensitivity, placeholder: "Название", input_html: {:tabindex => 6} %>
+    </div>
+    <div class="col">
+      <%= f.input :measurement_min, placeholder: "Название", input_html: {:tabindex => 7} %>
+    </div>
+    <div class="col">
+      <%= f.input :measurement_max, placeholder: "Название", input_html: {:tabindex => 8} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.input :safety_class, placeholder: "Название", input_html: {:tabindex => 9} %>
+    </div>
+    <div class="col">
+      <%= f.input :accuracy_class, placeholder: "Название", input_html: {:tabindex => 10} %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.association :supplementary_kit, input_html: {:tabindex => 11} %>
+    </div>
+    <div class="col">
+      <%= f.input :is_complete_device, input_html: {:tabindex => 12, :checked => true} %>
+      <%= f.input :is_tape_rolling_mechanism, input_html: {:tabindex => 13} %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div>
+    <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
+    <%= f.button :submit, "Назад", formaction: device_model_index_path, formmethod: "get" %>
+  </div>
+<% end %>

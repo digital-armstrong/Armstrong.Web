@@ -1,0 +1,40 @@
+<div class="col shadow rounded">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Название</th>
+          <th scope="col">Производитель</th>
+          <th scope="col">Группа изм.</th>
+          <th scope="col">Класс изм.</th>
+          <th scope="col">Единица изм.</th>
+          <th scope="col">Чувств. изм.</th>
+          <th scope="col">Мин. вел. изм.</th>
+          <th scope="col">Макс. вел. изм.</th>
+          <th scope="col">Класс безоп.</th>
+          <th scope="col">Класс точн.</th>
+          <th scope="col">Набор</th>
+          <th scope="col">Полный набор?</th>
+          <th scope="col">Имеет л/п мех.?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @device_models.each do |device_model| %>
+          <tr onclick="document.location = `<%=device_model_path(device_model)%>`" style="cursor:pointer">
+            <th scope="row"><%= device_model.name %></th>
+            <td><%= device_model.manufacturer.name %></td>
+            <td><%= device_model.measurement_group.name %></td>
+            <td><%= device_model.measurement_class.name %></td>
+            <td><%= device_model.measuring_unit %></td>
+            <td><%= device_model.measurement_sensitivity %></td>
+            <td><%= device_model.measurement_min %></td>
+            <td><%= device_model.measurement_max %></td>
+            <td><%= device_model.safety_class %></td>
+            <td><%= device_model.accuracy_class %></td>
+            <td><%= device_model.supplementary_kit.name %></td>
+            <td><%= device_model.is_complete_device %></td>
+            <td><%= device_model.is_tape_rolling_mechanism %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>

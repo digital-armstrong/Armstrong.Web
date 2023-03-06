@@ -1,0 +1,23 @@
+<div class="row my-3">
+  <div class="col p-4 shadow rounded">
+    <div class="row text-center">
+      <h1>Модель приборов</h1>
+      <hr class="divider">
+    </div>
+    <p>
+      <span>
+        <strong>Название: </strong>
+        <%= @device_model.name %>
+      </span>
+    </p>
+    <div class="row px-0 ">
+      <div class="col">
+        <%= link_to "Изменить", edit_device_model_path(@device_model), class: "btn btn-primary"%>
+      </div>
+      <div class="col">
+        <%= button_to "Удалить", device_model_path(@device_model), method: :delete, class: "btn btn-danger"%>
+      </div>
+    </div>
+  </div>
+</div>
+

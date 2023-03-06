@@ -8,6 +8,16 @@ ru:
               required: "не может быть пустой"
             device_reg_group:
               required: "не может быть пустой"
+        device_model:
+          attributes:
+            manufacturer:
+              required: "не может быть пустым"
+            measurement_group:
+              required: "не может быть пустой"
+            measurement_class:
+              required: "не может быть пустым"
+            supplementary_kit:
+              required: "не может быть пустым"
     models:
       device_model: "Модель"
     attributes:
@@ -23,3 +33,19 @@ ru:
         year_of_commissioning: "Год ввода"
       device_model:
         name: "Название"
+        manufacturer: "Производитель"
+        manufacturer_id: "Производитель"
+        measurement_group: "Группа измерений"
+        measurement_group_id: "Группа измерений"
+        measurement_class: "Класс измерений"
+        measurement_class_id: "Класс измерений"
+        measuring_unit: "Единица измерений"
+        measurement_sensitivity: "Чувствительность измерений"
+        measurement_min: "Минимальная величина измерений"
+        measurement_max: "Максимальная величина измерений"
+        safety_class: "Класс безопасности"
+        accuracy_class: "Класс точности"
+        supplementary_kit: "Набор"
+        supplementary_kit_id: "Набор"
+        is_complete_device: "Полный набор?"
+        is_tape_rolling_mechanism: "Имеет лентопротяжный механизм?"

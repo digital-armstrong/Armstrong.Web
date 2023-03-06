@@ -30,4 +30,8 @@ class DeviceModel < ApplicationRecord
       'updated_at',
     ]
   end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ['measurement_group', 'measurement_class', 'manufacturer', 'supplementary_kit', 'devices']
+  end
 end

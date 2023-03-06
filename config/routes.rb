@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :armstrong, only: [:index, :show]
   resources :about, only: [:index]
   resources :device
+  resources :device_model
 end
