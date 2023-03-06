@@ -1,11 +1,6 @@
 require 'test_helper'
 
 class DeviceControllerTest < ActionController::TestCase
-  # test 'should get show' do
-  #   get :show
-  #   assert_response :success
-  # end
-
   test 'should get index' do
     get :index
     assert_response :success
@@ -32,6 +27,19 @@ class DeviceControllerTest < ActionController::TestCase
 
   test 'should get new' do
     get :new
+    assert_response :success
+  end
+
+  test 'should get show' do
+    device = create(:device)
+    get :show, params: { id: device.id }
+    assert_response :success
+  end
+
+  test 'should post create' do
+    device = create(:device)
+    device_attrs = attributes_for(:device)
+    post :create, params: { id: device.id, device: device_attrs }
     assert_response :success
   end
 end
