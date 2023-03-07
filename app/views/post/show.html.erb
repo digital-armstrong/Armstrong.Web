@@ -1,0 +1,18 @@
+<h1><%= @post.title %></h1>
+<hr class="deliver">
+<p>
+  <span>
+    <strong>Опубликован: </strong>
+    <%= @post.created_at %>
+  </span>
+  <span>
+    <strong>Обновлен: </strong>
+    <%= @post.updated_at %>
+  </span>
+</p>
+<p>
+  <span>
+    <strong>Автор: </strong>
+    <%= "#{@post.user.first_name} #{@post.user.last_name}" %></p>
+  </span>
+<p><%= @post.body %></p>

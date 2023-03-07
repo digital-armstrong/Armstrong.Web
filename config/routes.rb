@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :about, only: [:index]
   resources :device
   resources :device_model
+  resources :post
 end
