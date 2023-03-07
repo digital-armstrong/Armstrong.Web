@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class PostTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'create_post_model' do
+    post = create(:post)
+    assert post.persisted?
+  end
 end

@@ -3,8 +3,6 @@ class PostController < ApplicationController
     @post = Post.find(params[:id])
   end
 
-  def index; end
-
   def new
     @post = Post.new
   end
@@ -19,9 +17,25 @@ class PostController < ApplicationController
     end
   end
 
-  def update; end
+  def edit
+    @post = Post.find(params[:id])
+  end
 
-  def delete; end
+  def update
+    @post = Post.find(params[:id])
+
+    if @post.update(post_params)
+      redirect_to(post_path(@post.id))
+    else
+      render(:edit)
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to(home_index_path)
+  end
 
   private
 

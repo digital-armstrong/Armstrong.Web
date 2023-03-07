@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :post do
-    user { nil }
+    user { association :user }
     title { 'MyString' }
     body { 'MyText' }
     category { 'MyString' }

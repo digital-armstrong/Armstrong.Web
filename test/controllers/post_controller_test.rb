@@ -1,33 +1,40 @@
 require 'test_helper'
 
-class PostControllerTest < ActionDispatch::IntegrationTest
+class PostControllerTest < ActionController::TestCase
   test 'should get show' do
-    get post_show_url
-    assert_response :success
-  end
-
-  test 'should get index' do
-    get post_index_url
+    post = create(:post)
+    get :show, params: { id: post.id }
     assert_response :success
   end
 
   test 'should get new' do
-    get post_new_url
+    get :new
     assert_response :success
   end
 
-  test 'should get create' do
-    get post_create_url
+  test 'should get edit' do
+    post = create(:post)
+    get :edit, params: { id: post.id }
     assert_response :success
   end
 
-  test 'should get update' do
-    get post_update_url
+  test 'should patch update' do
+    post = create(:post)
+    post_attrs = attributes_for(:post)
+    patch :update, params: { id: post.id, post: post_attrs }
+    assert_response :redirect
+  end
+
+  test 'should post create' do
+    post = create(:post)
+    post_attrs = attributes_for(:post)
+    post :create, params: { id: post.id, post: post_attrs }
     assert_response :success
   end
 
-  test 'should get delete' do
-    get post_delete_url
-    assert_response :success
+  test 'should delete destroy' do
+    post = create(:post)
+    delete :destroy, params: { id: post.id }
+    assert_response :redirect
   end
 end
