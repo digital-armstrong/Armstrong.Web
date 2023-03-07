@@ -5,6 +5,7 @@ class DeviceModel < ApplicationRecord
   belongs_to :supplementary_kit
 
   has_many :devices
+  has_many :device_component
 
   validates :name, presence: true
 
