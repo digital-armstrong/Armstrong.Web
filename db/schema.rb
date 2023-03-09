@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_065700) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
     t.index ["room_id"], name: "index_channels_on_room_id"
     t.index ["server_id"], name: "index_channels_on_server_id"
     t.index ["service_id"], name: "index_channels_on_service_id"
+  end
+
+  create_table "device_components", force: :cascade do |t|
+    t.integer "serial_id"
+    t.string "name"
+    t.bigint "device_model_id", null: false
+    t.float "measurement_max"
+    t.float "measurement_min"
+    t.string "measuring_unit"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_model_id"], name: "index_device_components_on_device_model_id"
   end
 
   create_table "device_models", force: :cascade do |t|
@@ -154,6 +167,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "body"
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.bigint "building_id", null: false
@@ -214,6 +237,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
   add_foreign_key "channels", "rooms"
   add_foreign_key "channels", "servers"
   add_foreign_key "channels", "services"
+  add_foreign_key "device_components", "device_models"
   add_foreign_key "device_models", "manufacturers"
   add_foreign_key "device_models", "measurement_classes"
   add_foreign_key "device_models", "measurement_groups"
@@ -224,6 +248,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
   add_foreign_key "inspections", "devices"
   add_foreign_key "inspections", "users"
   add_foreign_key "measurement_classes", "measurement_groups"
+  add_foreign_key "posts", "users"
   add_foreign_key "rooms", "buildings"
   add_foreign_key "servers", "rooms"
   add_foreign_key "servers", "services"

@@ -1,4 +1,48 @@
+Admin.create(
+  tabel_id: 1,
+  first_name: 'Admin',
+  last_name: 'Admin',
+  email: 'admin@admin.ru',
+  password: '12345678'
+)
+
+10.times do |i|
+  Engineer.create(
+    tabel_id: 72000 + i,
+    first_name: "First#{i}",
+    last_name: "Last#{i}",
+    email: "engineer#{i}@email.ru",
+    password: "123456789#{i}"
+  )
+end
+
+10.times do |i|
+  Inspector.create(
+    tabel_id: 82000 + i,
+    first_name: "First#{i}",
+    last_name: "Last#{i}",
+    email: "engineer#{i}@email.ru",
+    password: "123456789#{i}"
+  )
+end
+
 # seed Manufacturers
+
+Manufacturer.create(
+  name: "НПП ДОЗА",
+  adress: "124498, город Москва, город Зеленоград, Георгиевский проспект, дом 5, этаж 2, комната 49, ООО НПП «Доза»",
+  phone: "+7 (495) 777-84-85",
+  email: "info@doza.ru",
+  site_url: "https://www.doza.ru/"
+)
+
+Manufacturer.create(
+  name: "ОАО Пятигорский завод Импульс",
+  adress: "357500, Россия, Ставропольский край, г. Пятигорск, ул. Малыгина, 5, ОАО «Пятигорский завод «Импульс»",
+  phone: "+7 (879) 333-65-14",
+  email: "contact@pzi.ru",
+  site_url: "http://pzi.ru/"
+)
 
 10.times do |i|
   Manufacturer.create(
@@ -12,33 +56,85 @@ end
 
 # seed Reg Group
 
-5.times do |i|
-  dev_rg = DeviceRegGroup.new
-
-  dev_rg.name = "Group_#{i}"
-
-  dev_rg.save
-end
+DeviceRegGroup.create(name: "ГАН")
+DeviceRegGroup.create(name: "РосТехНадзор")
+DeviceRegGroup.create(name: "Без группы")
 
 # seed MeasurementGroup
 
-5.times do |i|
-  MeasurementGroup.create(
-    name: "Group_#{i}"
-  )
-end
+MeasurementGroup.create(name: "Температурный")
+MeasurementGroup.create(name: "Рад. контроль")
+MeasurementGroup.create(name: "Электроизмеритель")
 
 # seed MeasurementClass
 
-15.times do |i|
-  MeasurementClass.create(
-    name: "Group_#{i}",
-    measurement_group: MeasurementGroup.find_by(id: rand(1..5)),
-    arms_device_type: rand(1..3)
-  )
-end
+MeasurementClass.create(
+  name: "Термометр",
+  measurement_group: MeasurementGroup.find_by(name: "Температурный"),
+  arms_device_type: nil
+)
+
+MeasurementClass.create(
+  name: "МЭД",
+  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
+  arms_device_type: 1
+)
+
+MeasurementClass.create(
+  name: "Альфа",
+  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
+  arms_device_type: 1
+)
+
+MeasurementClass.create(
+  name: "Бета",
+  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
+  arms_device_type: 1
+)
+
+MeasurementClass.create(
+  name: "Гамма",
+  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
+  arms_device_type: 1
+)
+
+MeasurementClass.create(
+  name: "Активность Аэрозолей",
+  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
+  arms_device_type: 3
+)
+
+MeasurementClass.create(
+  name: "Активность Газов",
+  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
+  arms_device_type: 3
+)
+
+MeasurementClass.create(
+  name: "Радиометр/Дозиметр",
+  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
+  arms_device_type: nil
+)
+
+MeasurementClass.create(
+  name: "Амперметр",
+  measurement_group: MeasurementGroup.find_by(name: "Электроизмеритель"),
+  arms_device_type: nil
+)
+
+MeasurementClass.create(
+  name: "Вольтметр",
+  measurement_group: MeasurementGroup.find_by(name: "Электроизмеритель"),
+  arms_device_type: nil
+)
 
 # seed SupplementaryKits
+
+SupplementaryKit.create(
+  name: "МКС-АТ1117М-комплект-1",
+  serial_id: "310",
+  description: "Набор для приборов типа МКС-АТ1117М с тремя БД (Бета, Альфа, Альфа)"
+)
 
 20.times do |i|
   SupplementaryKit.create(
@@ -49,6 +145,42 @@ end
 end
 
 # seed DeviceModel
+
+DeviceModel.create(
+  name: "МКС-АТ1117М (БОИ)",
+  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
+  measurement_class: MeasurementClass.find_by(name: "Радиометр/Дозиметр"),
+  measuring_unit: "Зв",
+  safety_class: "3Н",
+  accuracy_class: 0.2,
+  measurement_sensitivity: nil,
+  measurement_min: 0.001,
+  measurement_max: 1.0,
+  manufacturer: Manufacturer.find_by(name: "НПП ДОЗА"),
+  supplementary_kit: SupplementaryKit.find_by(name: "МКС-АТ1117М-комплект-1"),
+  is_complete_device: false,
+  is_tape_rolling_mechanism: false,
+  doc_url: "https://www.doza.ru/catalog/handheld/124/",
+  image_url: nil
+)
+
+DeviceModel.create(
+  name: "МКС-АТ1117М (БДПБ-01)",
+  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
+  measurement_class: MeasurementClass.find_by(name: "Радиометр/Дозиметр"),
+  measuring_unit: "мин-1·см-2",
+  safety_class: "3Н",
+  accuracy_class: 0.2,
+  measurement_sensitivity: nil,
+  measurement_min: 1,
+  measurement_max: 500000,
+  manufacturer: Manufacturer.find_by(name: "НПП ДОЗА"),
+  supplementary_kit: SupplementaryKit.find_by(name: "МКС-АТ1117М-комплект-1"),
+  is_complete_device: false,
+  is_tape_rolling_mechanism: false,
+  doc_url: "https://www.doza.ru/catalog/handheld/124/",
+  image_url: nil
+)
 
 100.times do |i|
   DeviceModel.create(
@@ -84,3 +216,10 @@ end
   )
 end
 
+10.times do |i|
+  Post.create(
+    user: Admin.first,
+    title: "This is post title №#{i}",
+    body: "Some who have read the book, or at any rate have reviewed it, found it boring, absurd, or contemptible, and I have no cause to complain, since I have similar opinions of their works, or of the kinds of writing that they evidently prefer."
+  )
+end

@@ -5,6 +5,7 @@ class DeviceModel < ApplicationRecord
   belongs_to :supplementary_kit
 
   has_many :devices
+  has_many :device_component
 
   validates :name, presence: true
 
@@ -29,5 +30,9 @@ class DeviceModel < ApplicationRecord
       'supplementary_kit_id',
       'updated_at',
     ]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ['measurement_group', 'measurement_class', 'manufacturer', 'supplementary_kit', 'devices']
   end
 end

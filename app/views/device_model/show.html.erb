@@ -1,0 +1,122 @@
+<div class="row my-3">
+  <div class="col p-4 shadow rounded">
+    <div class="row text-center">
+      <h1>Модель</h1>
+      <hr class="divider">
+    </div>
+    <p>
+      <span>
+        <strong>Название модели: </strong>
+        <%= @device_model.name %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Группа прибора: </strong>
+        <%= @device_model.measurement_group.name %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Класс прибора: </strong>
+        <%= @device_model.measurement_class.name %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Класс безопасности: </strong>
+        <%= @device_model.safety_class %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Класс точности: </strong>
+        <%= @device_model.accuracy_class %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Чувствительность: </strong>
+        <%= @device_model.measurement_sensitivity %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Диапазон измерений: </strong>
+        <%= @device_model.measurement_min %> ÷ <%=
+        @device_model.measurement_max %>, <%=
+        @device_model.measuring_unit %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Документациця: </strong>
+        <%= link_to device_index_path do %>
+          <i class="bi bi-file-earmark-arrow-down-fill"></i>
+        <% end %>
+      </span>
+    </p>
+    <div class="row px-0" style="max-width:650px; min-width:600px">
+      <div class="col-2">
+        <%= link_to "Изменить", edit_device_model_path(@device_model), class: "btn btn-primary"%>
+      </div>
+      <div class="col-2">
+        <%= button_to "Удалить", device_model_path(@device_model), method: :delete, class: "btn btn-danger"%>
+      </div>
+    </div>
+  </div>
+  <% unless @device_model.is_complete_device %>
+    <div class="col p-4 shadow ms-3 rounded">
+      <div class="row text-center">
+        <h1>Состав набора</h1>
+        <hr class="divider">
+        <p>
+        <span>
+          <strong>Набор: </strong>
+            <% @device_models_in_supp_kit.each do |device_model| %>
+            <li style="list-style-type: none;"><%= link_to "#{device_model.name}", device_model_path(device_model)%></li>
+            <%end%>
+        </span>
+      </p>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col p-4 shadow rounded">
+    <div class="row text-center">
+      <h1>Производитель</h1>
+      <hr class="divider">
+    </div>
+    <p>
+      <span>
+        <strong>Производитель: </strong>
+        <%= @device_model.manufacturer.name %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Адрес: </strong>
+        <%= @device_model.manufacturer.adress %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Телефон: </strong>
+        <%= @device_model.manufacturer.phone %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>E-mail: </strong>
+        <%= mail_to @device_model.manufacturer.email %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Сайт: </strong>
+        <%= link_to "#{@device_model.manufacturer.site_url}", @device_model.manufacturer.site_url, target: :blank %>
+      </span>
+    </p>
+  </div>
+</div>
