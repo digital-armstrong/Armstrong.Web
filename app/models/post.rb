@@ -3,7 +3,7 @@ class Post < ApplicationRecord
 
   validates :user, presence: true
 
-  def formatted_date (param)
+  def formatted_date(param)
     param.strftime('%d.%m.%Y %H:%M:%S')
   end
 
