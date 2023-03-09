@@ -28,7 +28,7 @@ class PostControllerTest < ActionController::TestCase
   test 'should post create' do
     post = create(:post)
     post_attrs = attributes_for(:post)
-    post (:create), params: { id: post.id, post: post_attrs }
+    post :create, params: { id: post.id, post: post_attrs }
     assert_response :success
   end
 

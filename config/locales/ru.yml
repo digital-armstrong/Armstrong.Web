@@ -18,8 +18,13 @@ ru:
               required: "не может быть пустым"
             supplementary_kit:
               required: "не может быть пустым"
+        post:
+          attributes:
+            user: 
+              required: "должен быть выбран"
     models:
       device_model: "Модель"
+      supplementary_kit: "Набор"
     attributes:
       device:
         inventory_id: "Инвентарный №"
@@ -49,3 +54,8 @@ ru:
         supplementary_kit_id: "Набор"
         is_complete_device: "Полный набор?"
         is_tape_rolling_mechanism: "Имеет лентопротяжный механизм?"
+      post:
+        title: "Заголовок"
+        body: "Текст записи"
+        user: "Автор"
+        user_id: "Автор"

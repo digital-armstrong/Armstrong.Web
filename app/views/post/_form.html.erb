@@ -1,7 +1,7 @@
 <%= simple_form_for @post, as: :post, url: path, data: { turbo: false }, class: "form-group row" do |f| %>
   <%= f.input :title, placeholder: "Заголовок" %>
   <%= f.input :body, placeholder: "Текст поста" %>
-  <%= f.association :user %>
+  <%= f.association :user, :label_method => lambda { |user| "#{user.last_name} #{user.first_name}" }, value_method: :id, include_blank: false %>
 
   <div>
     <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-2">
+  <div class="">
     <div class="accordion mb-3" id="accordionFilter">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
@@ -9,14 +9,77 @@
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url:device_model_index_path, method: :get, class: "rounded accordion-body") do |f| %>
-            <%= f.label :name, class:"mb-2"%>
-            <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Название' %>
-            <%= f.label :manufacturer_id, class:"my-2" %>
-            <%= f.collection_select(:manufacturer_id_eq, Manufacturer.all,
-            :id, :name, {:include_blank => true}, {:class=>'form-select form-select-sm'}) %>
-            <%= f.label :measurement_group_id, class:"my-2" %>
-            <%= f.search_field :measurement_group_name_cont, class: 'form-control', placeholder: 'Название' %>
-            <%= f.submit "Применить", class: 'btn btn-primary w-100'%>
+            <div class="row">
+              <div class="col">
+                <%= f.label :name, class:"mb-1"%>
+                <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Название' %>
+              </div>
+              <div class="col">
+                <%= f.label :manufacturer_id, class:"mb-1" %>
+                <%= f.collection_select(:manufacturer_id_eq, Manufacturer.all,
+                :id, :name, {:include_blank => 'Не учитывать'}, {:class=>'form-select form-select'}) %>
+              </div>
+              <div class="col">
+                <%= f.label :measurement_group_id, class:"mb-1" %>
+                <%= f.collection_select(:measurement_group_id_eq, MeasurementGroup.all, 
+                :id, :name, {:include_blank => 'Не учитывать'}, {:class=>'form-select form-select'}) %>
+              </div>
+              <div class="col">
+                <%= f.label :measurement_class_id, class:"mb-1" %>
+                <%= f.collection_select(:measurement_class_id_eq, MeasurementClass.all, 
+                :id, :name, {:include_blank => 'Не учитывать'}, {:class=>'form-select form-select'}) %>
+              </div>
+              <div class="col">
+                <%= f.label :measuring_unit, class:"mb-1" %>
+                <%= f.search_field :measuring_unit_cont, class: 'form-control', placeholder: 'мЗв/ч' %>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col">
+                <%= f.label :measurement_sensitivity, class:"mb-1" %>
+                <%= f.search_field :measurement_sensitivity_eq, class: 'form-control', placeholder: '1.0' %>
+              </div>
+              <div class="col">
+                <%= f.label :measurement_min, class:"mb-1" %>
+                <%= f.search_field :measurement_min_eq, class: 'form-control', placeholder: '1.0' %>
+              </div>
+              <div class="col">
+                <%= f.label :measurement_max, class:"mb-1" %>
+                <%= f.search_field :measurement_max_eq, class: 'form-control', placeholder: '1.0' %>
+              </div>
+              <div class="col">
+                <%= f.label :safety_class, class:"mb-1" %>
+                <%= f.search_field :safety_class_cont, class: 'form-control', placeholder: '3Н' %>
+              </div>
+            </div>
+            <div class="row mt-2 mb-3">
+              <div class="col">
+                <%= f.label :accuracy_class, class:"mb-1" %>
+                <%= f.search_field :accuracy_class_eq, class: 'form-control', placeholder: '1.0' %>
+              </div>
+              <div class="col">
+                <%= f.label :supplementary_kit_id, class:"mb-1" %>
+                <%= f.collection_select(:supplementary_kit_id_eq, SupplementaryKit.all, 
+                :id, :name, {:include_blank => 'Не учитывать'}, {:class=>'form-select form-select'}) %>
+              </div>
+              <div class="col">
+                <%= f.label :is_complete_device, class:"mb-1" %>
+                <%= f.select(:is_complete_device_eq, [['Да', true], ['Нет', false]],
+                {:include_blank => 'Не учитывать'}, {:class =>'form-select form-select'})%>
+              </div>
+              <div class="col">
+                <%= f.label :is_tape_rolling_mechanism, class:"mb-1" %>
+                <%= f.select(:is_tape_rolling_mechanism_eq, [['Да', true], ['Нет', false]],
+                {:include_blank => 'Не учитывать'}, {:class =>'form-select form-select'})%>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col"></div>
+              <div class="col"></div>
+              <%= f.submit "Применить", class: 'col btn btn-primary w-100'%>
+              <div class="col"></div>
+              <div class="col"></div>
+            </div>
           <% end %>
         </div>
       </div>
@@ -64,5 +127,18 @@
         <% end %>
       </tbody>
     </table>
+  </div>
+</div>
+<div class="row my-5">
+  <div class="col-2">
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <%= paginate @device_models %>
+      </div>
+      <div class="col"></div>
+    </div>
   </div>
 </div>

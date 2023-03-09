@@ -10,6 +10,10 @@ class DeviceModelController < ApplicationController
 
   def show
     @device_model = DeviceModel.find(params[:id])
+    supplementary_kit = @device_model.supplementary_kit_id
+    unless supplementary_kit.nil?
+      @device_models_in_supp_kit = DeviceModel.where(supplementary_kit_id: supplementary_kit).where.not(id: @device_model.id)
+    end
   end
 
   def new
