@@ -4,38 +4,38 @@
       <%= f.input :name, placeholder: "Название", input_html: {:tabindex => 1} %>
     </div>
     <div class="col">
-      <%= f.association :manufacturer, input_html: {:tabindex => 2} %>
+      <%= f.association :manufacturer, input_html: {:tabindex => 2}, include_blank: false %>
     </div>
     <div class="col"></div>
   </div>
   <div class="row">
     <div class="col">
-      <%= f.association :measurement_group, input_html: {:tabindex => 3} %>
+      <%= f.association :measurement_group, input_html: {:tabindex => 3}, include_blank: false %>
     </div>
     <div class="col">
-      <%= f.association :measurement_class, input_html: {:tabindex => 4} %>
+      <%= f.association :measurement_class, input_html: {:tabindex => 4}, include_blank: false %>
     </div>
     <div class="col">
-      <%= f.input :measuring_unit, placeholder: "Название", input_html: {:tabindex => 5} %>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <%= f.input :measurement_sensitivity, placeholder: "Название", input_html: {:tabindex => 6} %>
-    </div>
-    <div class="col">
-      <%= f.input :measurement_min, placeholder: "Название", input_html: {:tabindex => 7} %>
-    </div>
-    <div class="col">
-      <%= f.input :measurement_max, placeholder: "Название", input_html: {:tabindex => 8} %>
+      <%= f.input :measuring_unit, placeholder: "мЗв/ч", input_html: {:tabindex => 5} %>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <%= f.input :safety_class, placeholder: "Название", input_html: {:tabindex => 9} %>
+      <%= f.input :measurement_sensitivity, placeholder: "1.0", input_html: {:tabindex => 6} %>
     </div>
     <div class="col">
-      <%= f.input :accuracy_class, placeholder: "Название", input_html: {:tabindex => 10} %>
+      <%= f.input :measurement_min, placeholder: "1.0", input_html: {:tabindex => 7} %>
+    </div>
+    <div class="col">
+      <%= f.input :measurement_max, placeholder: "2.0", input_html: {:tabindex => 8} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.input :safety_class, placeholder: "3Н", input_html: {:tabindex => 9} %>
+    </div>
+    <div class="col">
+      <%= f.input :accuracy_class, placeholder: "0.25", input_html: {:tabindex => 10} %>
     </div>
     <div class="col"></div>
   </div>
@@ -44,7 +44,7 @@
       <%= f.association :supplementary_kit, input_html: {:tabindex => 11} %>
     </div>
     <div class="col">
-      <%= f.input :is_complete_device, input_html: {:tabindex => 12, :checked => true} %>
+      <%= f.input :is_complete_device, input_html: {:tabindex => 12} %>
       <%= f.input :is_tape_rolling_mechanism, input_html: {:tabindex => 13} %>
     </div>
     <div class="col"></div>

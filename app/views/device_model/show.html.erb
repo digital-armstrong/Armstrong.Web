@@ -65,7 +65,7 @@
       </div>
     </div>
   </div>
-  <% unless @device_model.is_complete_device %>
+  <% unless @device_model.supplementary_kit.nil? %>
     <div class="col p-4 shadow ms-3 rounded">
       <div class="row text-center">
         <h1>Состав набора</h1>

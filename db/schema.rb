@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_065700) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_10_084422) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_065700) do
     t.float "measurement_min"
     t.float "measurement_max"
     t.bigint "manufacturer_id", null: false
-    t.bigint "supplementary_kit_id", null: false
+    t.integer "supplementary_kit_id"
     t.boolean "is_complete_device"
     t.boolean "is_tape_rolling_mechanism"
     t.string "doc_url"

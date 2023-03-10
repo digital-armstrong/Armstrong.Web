@@ -2,12 +2,13 @@ class DeviceModel < ApplicationRecord
   belongs_to :measurement_group
   belongs_to :measurement_class
   belongs_to :manufacturer
-  belongs_to :supplementary_kit
+  belongs_to :supplementary_kit, optional: true
 
   has_many :devices
   has_many :device_component
 
   validates :name, presence: true
+  validates :measurement_min, :measurement_max, :accuracy_class, :measurement_sensitivity, numericality: true
 
   def self.ransackable_attributes(_auth_object = nil)
     [

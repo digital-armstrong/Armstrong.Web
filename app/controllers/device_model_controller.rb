@@ -12,9 +12,9 @@ class DeviceModelController < ApplicationController
     @device_model = DeviceModel.find(params[:id])
     supplementary_kit = @device_model.supplementary_kit_id
     unless supplementary_kit.nil?
-      @device_models_in_supp_kit = DeviceModel
-        .where(supplementary_kit_id: supplementary_kit)
-        .excluding(@device_model)
+      @device_models_in_supp_kit = DeviceModel.
+        where(supplementary_kit_id: supplementary_kit).
+        excluding(@device_model)
     end
   end
 
@@ -49,6 +49,8 @@ class DeviceModelController < ApplicationController
     @device_model.destroy
     redirect_to(device_model_index_path)
   end
+
+  private
 
   def device_model_params
     params.require(:device_model).permit(
