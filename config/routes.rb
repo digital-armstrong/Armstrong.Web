@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resources :device
   resources :device_model
   resources :post
+  resources :users, only: [:new, :create]
 end
