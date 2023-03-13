@@ -40,6 +40,6 @@ class DeviceControllerTest < ActionController::TestCase
     device = create(:device)
     device_attrs = attributes_for(:device)
     post :create, params: { id: device.id, device: device_attrs }
-    assert_response :success
+    assert_response :redirect
   end
 end

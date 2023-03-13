@@ -9,4 +9,8 @@ Rails.application.routes.draw do
   resources :device
   resources :device_model
   resources :post
+  resources :device_reg_group
+  resources :manufacturer
+  resources :measurement_group
+  resources :measurement_class
 end
