@@ -29,7 +29,7 @@ class PostControllerTest < ActionController::TestCase
     post = create(:post)
     post_attrs = attributes_for(:post)
     post (:create), params: { id: post.id, post: post_attrs } # rubocop:disable all
-    assert_response :success
+    assert_response :redirect
   end
 
   test 'should delete destroy' do

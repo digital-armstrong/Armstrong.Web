@@ -34,7 +34,7 @@ class DeviceModelControllerTest < ActionController::TestCase
     device_model = create(:device_model)
     device_model_attrs = attributes_for(:device_model)
     post :create, params: { id: device_model.id, device_model: device_model_attrs }
-    assert_response :success
+    assert_response :redirect
   end
 
   test 'should delete destroy' do

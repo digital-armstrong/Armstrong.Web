@@ -1,0 +1,70 @@
+<%= render 'shared/device_bread' %>
+<div class="row">
+  <div class="col-2">
+    <div class="accordion mb-3" id="accordionFilter">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFilter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            Фильтрация
+          </button>
+        </h2>
+        <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+          <%= search_form_for(@query, url:manufacturer_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+            <%= f.label :name, class: "mb-2" %>
+            <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
+            <%= f.label :adress, class: "my-2" %>
+            <%= f.search_field :adress_cont, class:"form-control", placeholder:"г. Димитровград, Победы 12" %>
+            <%= f.label :phone, class: "my-2" %>
+            <%= f.search_field :phone_cont, class:"form-control", placeholder:"+7 (999) 123-01-02" %>
+            <%= f.label :email, class: "my-2" %>
+            <%= f.search_field :email_cont, class:"form-control", placeholder:"niiar@example.ru" %>
+            <%= f.label :site_url, class: "my-2" %>
+            <%= f.search_field :site_url_cont, class:"form-control", placeholder:"example.ru" %>
+            <%= f.submit "Применить", class: 'btn btn-primary w-100 mt-4'%>
+          <% end %> 
+        </div>
+      </div>
+    </div>
+    <%= link_to new_manufacturer_path, class: "btn btn-primary my-3 w-100 shadow" do %>
+      <i class="bi bi-plus-square"></i><span> Добавить</span>
+    <% end %>
+  </div>
+  <div class="col-10 shadow rounded">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Название</th>
+          <th scope="col">Адрес</th>
+          <th scope="col">Телефон</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">Сайт</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @manufacturers.each do |manufacturer| %>
+          <tr onclick="document.location = `<%=manufacturer_path(manufacturer)%>`" style="cursor:pointer">
+            <td><%= manufacturer.name %></td>
+            <td><%= manufacturer.adress %></td>
+            <td><%= manufacturer.phone %></td>
+            <td><%= manufacturer.email %></td>
+            <td><%= manufacturer.site_url %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+  </div>
+<div class="row my-5">
+  <div class="col-2">
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <%= paginate @manufacturers %>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>
