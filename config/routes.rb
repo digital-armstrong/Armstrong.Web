@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   post 'device/download', to: 'device#download'
 
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  get 'logout', to: 'sessions#destroy'
+
   resources :home
   resources :armstrong, only: [:index, :show]
   resources :about, only: [:index]

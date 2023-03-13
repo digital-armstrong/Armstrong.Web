@@ -1,0 +1,14 @@
+<div class="container text-center w-50">
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>"><%= value %></div>
+  <% end %>
+
+  <%= image_tag "atom-logo.svg", class: "mb-4 mt-5", width: "72", height: "57" %>
+  <h1 class="h3 mb-3 fw-normal">Форма входа</h1>
+
+  <%= simple_form_for :session, url: login_path, data: { turbo: false }, class: "form-floating" do |f| %>
+    <%= f.input :email, label: 'Электронная почта', placeholder: "example@niiar.ru" %>
+    <%= f.input :password, label: 'Пароль', placeholder: "8 или больше символов" %>
+    <%= f.button :submit, 'Войти', class: "w-100 btn btn-lg btn-primary" %>
+  <% end %>
+</div>
