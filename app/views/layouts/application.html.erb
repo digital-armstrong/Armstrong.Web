@@ -15,23 +15,29 @@
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><%= link_to "Главная", root_path, class: "nav-link px-2 link-secondary" %></li>
-          <li><%= link_to "АСРК", armstrong_index_path, class: "nav-link px-2 link-secondary" %></li>
-          <li><%= link_to "Приборы", device_index_path, class: "nav-link px-2 link-secondary" %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "АСРК", armstrong_index_path, class: "nav-link px-2 link-secondary" %></li>
+            <li><%= link_to "Приборы", device_index_path, class: "nav-link px-2 link-secondary" %></li>
+          <% end %>
           <li><%= link_to "О нас", about_index_path, class: "nav-link px-2 link-secondary" %></li>
         </ul>
 
-        <div class="dropdown text-end">
-          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <%= image_tag "atom-logo.svg", class: "rounded-circle", width: "32", height: "32", alt: "avatar" %>
-          </a>
-          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">Админ. панель</a></li>
-            <li><a class="dropdown-item" href="#">Настройки</a></li>
-            <li><a class="dropdown-item" href="#">Профиль</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Выйти</a></li>
-          </ul>
-        </div>
+        <% if user_signed_in? %>
+          <div class="dropdown text-end">
+            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= image_tag "atom-logo.svg", class: "rounded-circle", width: "32", height: "32", alt: "avatar" %>
+            </a>
+            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+              <li><a class="dropdown-item" href="#">Админ. панель</a></li>
+              <li><a class="dropdown-item" href="#">Настройки</a></li>
+              <li><a class="dropdown-item" href="#">Профиль</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><%= button_to "Выход", destroy_user_session_path, method: :delete, class: "dropdown-item"%></li>
+            </ul>
+          </div>
+          <% else %>
+            <%= link_to "Вход", new_user_session_path, class: "btn btn-primary" %>
+          <% end %>
       </div>
     </div>
   </header>

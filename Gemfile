@@ -58,6 +58,8 @@ gem 'active_model_serializers', '~> 0.10.13'
 gem 'russian', '~> 0.6.0'
 gem 'prawn', '~> 2.4'
 gem 'prawn-table', '~> 0.2.2'
+gem 'devise', '~> 4.2'
+gem 'cancancan', '~> 3.5'
 
 group :development, :test do
   gem 'debug', platforms: [:mri, :mingw, :x64_mingw]

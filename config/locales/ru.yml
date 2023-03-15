@@ -20,7 +20,7 @@ ru:
               required: "не может быть пустым"
         post:
           attributes:
-            user: 
+            user:
               required: "должен быть выбран"
     models:
       device_model: "Модель"

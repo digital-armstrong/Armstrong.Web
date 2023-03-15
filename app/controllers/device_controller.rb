@@ -1,4 +1,6 @@
 class DeviceController < ApplicationController
+  before_action :authenticate_user!
+
   def show
     @device = Device.find(params[:id])
     supplementary_kit_id = SupplementaryKit.find(@device.device_model.supplementary_kit_id)

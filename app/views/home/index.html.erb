@@ -1,5 +1,7 @@
-<%= link_to new_post_path, class: "btn btn-primary my-3 w-100" do %>
-  <i class="bi bi-plus-square"></i><span> Новый пост</span>
+<% if user_signed_in? %>
+  <%= link_to new_post_path, class: "btn btn-primary my-3 w-100" do %>
+    <i class="bi bi-plus-square"></i><span> Новый пост</span>
+  <% end %>
 <% end %>
 <% @posts.each do |post| %>
   <div class="card mb-3">
