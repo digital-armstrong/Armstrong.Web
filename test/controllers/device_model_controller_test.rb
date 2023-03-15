@@ -1,6 +1,13 @@
 require 'test_helper'
 
 class DeviceModelControllerTest < ActionController::TestCase
+  def setup
+    @measurement_group = create(:measurement_group)
+    @measurement_class = create(:measurement_class)
+    @manufacturer = create(:manufacturer)
+    @supplementary_kit = create(:supplementary_kit)
+  end
+
   test 'should get index' do
     get :index
     assert_response :success
@@ -25,14 +32,20 @@ class DeviceModelControllerTest < ActionController::TestCase
 
   test 'should patch update' do
     device_model = create(:device_model)
-    device_model_attrs = attributes_for(:device_model)
+    device_model_attrs = attributes_for(:device_model, measurement_class_id: @measurement_class.id,
+                                                       measurement_group_id: @measurement_group.id,
+                                                       manufacturer_id: @manufacturer.id,
+                                                       supplementary_kit_id: @supplementary_kit.id)
     patch :update, params: { id: device_model.id, device_model: device_model_attrs }
     assert_response :redirect
   end
 
   test 'should post create' do
     device_model = create(:device_model)
-    device_model_attrs = attributes_for(:device_model)
+    device_model_attrs = attributes_for(:device_model, measurement_class_id: @measurement_class.id,
+                                                       measurement_group_id: @measurement_group.id,
+                                                       manufacturer_id: @manufacturer.id,
+                                                       supplementary_kit_id: @supplementary_kit.id)
     post :create, params: { id: device_model.id, device_model: device_model_attrs }
     assert_response :redirect
   end
