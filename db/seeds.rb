@@ -1,4 +1,4 @@
-Admin.create(
+User.create(
   tabel_id: 1,
   first_name: 'Admin',
   last_name: 'Admin',
@@ -6,19 +6,9 @@ Admin.create(
   password: '12345678'
 )
 
-10.times do |i|
-  Engineer.create(
+100.times do |i|
+  User.create(
     tabel_id: 72000 + i,
-    first_name: "First#{i}",
-    last_name: "Last#{i}",
-    email: "engineer#{i}@email.ru",
-    password: "123456789#{i}"
-  )
-end
-
-10.times do |i|
-  Inspector.create(
-    tabel_id: 82000 + i,
     first_name: "First#{i}",
     last_name: "Last#{i}",
     email: "engineer#{i}@email.ru",
