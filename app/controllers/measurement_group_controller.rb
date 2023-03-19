@@ -7,10 +7,6 @@ class MeasurementGroupController < ApplicationController
       per(params[:per_page])
   end
 
-  def show
-    @measurement_group = MeasurementGroup.find(params[:id])
-  end
-
   def new
     @measurement_group = MeasurementGroup.new
   end

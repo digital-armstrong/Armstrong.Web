@@ -1,14 +1,11 @@
 class DeviceRegGroupController < ApplicationController
   def index
+    @device_reg_group = DeviceRegGroup.new
     @query = DeviceRegGroup.ransack(params[:q])
     @device_reg_groups = @query.result.
       order(:name).
       page(params[:page]).
       per(params[:per_page])
-  end
-
-  def show
-    @device_reg_group = DeviceRegGroup.find(params[:id])
   end
 
   def new
@@ -20,7 +17,12 @@ class DeviceRegGroupController < ApplicationController
     if @device_reg_group.save
       redirect_to(device_reg_group_index_path)
     else
-      render(:new)
+      @query = DeviceRegGroup.ransack(params[:q])
+      @device_reg_groups = @query.result.
+        order(:name).
+        page(params[:page]).
+        per(params[:per_page])
+      render(:index)
     end
   end
 

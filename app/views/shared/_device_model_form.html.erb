@@ -1,7 +1,7 @@
 <%= simple_form_for @device_model, as: :device_model, url: path, data: {turbo: false}, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
-      <%= f.input :name, placeholder: "Название", input_html: {:tabindex => 1} %>
+      <%= f.input :name, placeholder: "Название устройства", input_html: {:tabindex => 1} %>
     </div>
     <div class="col">
       <%= f.association :manufacturer, input_html: {:tabindex => 2}, include_blank: false %>

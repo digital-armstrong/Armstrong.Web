@@ -7,10 +7,6 @@ class MeasurementClassController < ApplicationController
       per(params[:per_page])
   end
 
-  def show
-    @measurement_class = MeasurementClass.find(params[:id])
-  end
-
   def new
     @measurement_class = MeasurementClass.new
   end

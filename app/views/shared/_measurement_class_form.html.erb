@@ -1,8 +1,9 @@
 <%= simple_form_for @measurement_class, as: :measurement_class, url: path, data: { turbo: false }, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
-      <%= f.input :name, placeholder: 'Номер присвоенный в ЦСМИТ', input_html: {:tabindex => 1}%>
+      <%= f.input :name, placeholder: 'Название класса измерений', input_html: {:tabindex => 1}%>
       <%= f.association :measurement_group, input_html: {:tabindex => 2} %>
+      <%= f.input :arms_device_type, placeholder: 'Тип прибора по ARMStrong', input_html: {:tabindex => 3}%>
     </div>
   </div>
 

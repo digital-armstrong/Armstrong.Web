@@ -7,10 +7,6 @@ class ManufacturerController < ApplicationController
       per(params[:per_page])
   end
 
-  def show
-    @manufacturer = Manufacturer.find(params[:id])
-  end
-
   def new
     @manufacturer = Manufacturer.new
   end

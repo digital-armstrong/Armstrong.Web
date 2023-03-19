@@ -1,4 +1,4 @@
-<%= render 'shared/device_bread' %>
+<%= render 'shared/device_bread', selected: "manufacturer" %>
 <div class="row">
   <div class="col-2">
     <div class="accordion mb-3" id="accordionFilter">
@@ -38,16 +38,27 @@
           <th scope="col">Телефон</th>
           <th scope="col">E-mail</th>
           <th scope="col">Сайт</th>
+          <th scope="col">Действие</th>
         </tr>
       </thead>
       <tbody>
         <% @manufacturers.each do |manufacturer| %>
-          <tr onclick="document.location = `<%=manufacturer_path(manufacturer)%>`" style="cursor:pointer">
+        <tr>
             <td><%= manufacturer.name %></td>
             <td><%= manufacturer.adress %></td>
             <td><%= manufacturer.phone %></td>
             <td><%= manufacturer.email %></td>
             <td><%= manufacturer.site_url %></td>
+            <td class="border">
+              <div class="d-flex">
+                <%= link_to edit_manufacturer_path(manufacturer.id), class: "btn" do %>
+                  <i class="bi bi-pen"></i>
+                <% end %>
+                <%= button_to manufacturer_path(manufacturer.id), method: :delete, class: "btn" do %>
+                  <i class="bi bi-trash"></i>
+                <% end %>
+              </div>
+            </td>
           </tr>
         <% end %>
       </tbody>

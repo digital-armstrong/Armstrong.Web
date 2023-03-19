@@ -1,11 +1,11 @@
 <%= simple_form_for @manufacturer, as: :manufacturer, url: path, data: { turbo: false }, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
-      <%= f.input :name, placeholder: 'Номер присвоенный в ЦСМИТ', input_html: {:tabindex => 1}%>
-      <%= f.input :adress, placeholder: 'Инвентарный номер устройства', input_html: {:tabindex => 2} %>
-      <%= f.input :phone, placeholder: 'Год выпуска производителем', input_html: {:tabindex => 3} %>
-      <%= f.input :email, placeholder: 'Модель устройства', input_html: {:tabindex => 4} %>
-      <%= f.input :site_url, placeholder: 'Модель устройства', input_html: {:tabindex => 5} %>
+      <%= f.input :name, placeholder: 'Название компании', input_html: {:tabindex => 1}%>
+      <%= f.input :adress, placeholder: 'г. Димитровград, Победы 12', input_html: {:tabindex => 2} %>
+      <%= f.input :phone, placeholder: '+7 (999) 123-01-02', input_html: {:tabindex => 3} %>
+      <%= f.input :email, placeholder: 'niiar@example.ru', input_html: {:tabindex => 4} %>
+      <%= f.input :site_url, placeholder: 'example.ru', input_html: {:tabindex => 5} %>
     </div>
   </div>
 

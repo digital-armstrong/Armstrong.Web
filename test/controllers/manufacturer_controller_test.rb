@@ -6,12 +6,6 @@ class ManufacturerControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test 'should get show' do
-    manufacturer = create(:manufacturer)
-    get :show, params: { id: manufacturer.id }
-    assert_response :success
-  end
-
   test 'should get new' do
     get :new
     assert_response :success

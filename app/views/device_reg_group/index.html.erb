@@ -1,4 +1,4 @@
-<%= render 'shared/device_bread' %>
+<%= render 'shared/device_bread', selected: "device_reg_group" %>
 <div class="row">
   <div class="col-2">
     <div class="accordion mb-3" id="accordionFilter">
@@ -17,9 +17,10 @@
         </div>
       </div>
     </div>
-    <%= link_to new_device_reg_group_path, class: "btn btn-primary my-3 w-100 shadow" do %>
-      <i class="bi bi-plus-square"></i><span> Добавить</span>
-    <% end %>
+    <div>
+      <p>Добавление:</p>
+      <%= render partial: "shared/device_reg_group_form", locals: { path: device_reg_group_index_path } %>
+    </div>
   </div>
   <div class="col-10 shadow rounded">
     <table class="table table-hover">
@@ -30,8 +31,18 @@
       </thead>
       <tbody>
         <% @device_reg_groups.each do |device_reg_group| %>
-          <tr onclick="document.location = `<%=device_reg_group_path(device_reg_group)%>`" style="cursor:pointer">
+          <tr>
             <td><%= device_reg_group.name %></td>
+            <td class="border">
+              <div class="d-flex">
+                <%= link_to edit_device_reg_group_path(device_reg_group.id), class: "btn" do %>
+                  <i class="bi bi-pen"></i>
+                <% end %>
+                <%= button_to device_reg_group_path(device_reg_group.id), method: :delete, class: "btn" do %>
+                  <i class="bi bi-trash"></i>
+                <% end %>
+              </div>
+            </td>
           </tr>
         <% end %>
       </tbody>

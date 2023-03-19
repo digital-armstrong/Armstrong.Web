@@ -34,12 +34,6 @@ class MeasurementClassControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test 'should get show' do
-    measurement_class = create(:measurement_class)
-    get :show, params: { id: measurement_class.id }
-    assert_response :success
-  end
-
   test 'should post create' do
     measurement_class = create(:measurement_class)
     measurement_class_attrs = attributes_for(:measurement_class, measurement_group_id: @measurement_group.id)

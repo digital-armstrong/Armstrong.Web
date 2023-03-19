@@ -6,12 +6,6 @@ class DeviceRegGroupControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test 'should get show' do
-    device_reg_group = create(:device_reg_group)
-    get :show, params: { id: device_reg_group.id }
-    assert_response :success
-  end
-
   test 'should get new' do
     get :new
     assert_response :success
