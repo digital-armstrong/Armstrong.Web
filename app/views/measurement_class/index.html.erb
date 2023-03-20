@@ -17,7 +17,7 @@
                 :id, :name, {:include_blank => 'Не учитывать'}, {:class=>'form-select form-select'}) %>
             <%= f.label :arms_device_type, class: "my-2" %>
             <%= f.search_field :arms_device_type_eq, class:"form-control", placeholder:"1" %>
-          <% end %> 
+          <% end %>
         </div>
       </div>
     </div>
@@ -32,6 +32,7 @@
           <th scope="col">Название</th>
           <th scope="col">Тип</th>
           <th scope="col">Группа измерений</th>
+          <th scope="col" style="width: 10%">Действие</th>
         </tr>
       </thead>
       <tbody>
@@ -40,7 +41,7 @@
             <td><%= measurement_class.name %></td>
             <td><%= measurement_class.arms_device_type %></td>
             <td><%= measurement_class.measurement_group.name %></td>
-            <td class="border">
+            <td>
               <div class="d-flex">
                 <%= link_to edit_measurement_class_path(measurement_class.id), class: "btn" do %>
                   <i class="bi bi-pen"></i>

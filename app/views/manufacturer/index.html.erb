@@ -1,6 +1,6 @@
 <%= render 'shared/device_bread', selected: "manufacturer" %>
 <div class="row">
-  <div class="col-2">
+  <div>
     <div class="accordion mb-3" id="accordionFilter">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
@@ -10,18 +10,32 @@
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url:manufacturer_index_path, method: :get, class: "rounded accordion-body") do |f| %>
-            <%= f.label :name, class: "mb-2" %>
-            <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
-            <%= f.label :adress, class: "my-2" %>
-            <%= f.search_field :adress_cont, class:"form-control", placeholder:"г. Димитровград, Победы 12" %>
-            <%= f.label :phone, class: "my-2" %>
-            <%= f.search_field :phone_cont, class:"form-control", placeholder:"+7 (999) 123-01-02" %>
-            <%= f.label :email, class: "my-2" %>
-            <%= f.search_field :email_cont, class:"form-control", placeholder:"niiar@example.ru" %>
-            <%= f.label :site_url, class: "my-2" %>
-            <%= f.search_field :site_url_cont, class:"form-control", placeholder:"example.ru" %>
-            <%= f.submit "Применить", class: 'btn btn-primary w-100 mt-4'%>
-          <% end %> 
+            <div class="row">
+              <div class="col">
+                <%= f.label :name, class: "mb-2" %>
+                <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
+              </div>
+              <div class="col">
+                <%= f.label :adress, class: "my-2" %>
+                <%= f.search_field :adress_cont, class:"form-control", placeholder:"г. Димитровград, Победы 12" %>
+              </div>
+              <div class="col">
+                <%= f.label :phone, class: "my-2" %>
+                <%= f.search_field :phone_cont, class:"form-control", placeholder:"+7 (999) 123-01-02" %>
+              </div>
+              <div class="col">
+                <%= f.label :email, class: "my-2" %>
+                <%= f.search_field :email_cont, class:"form-control", placeholder:"niiar@example.ru" %>
+              </div>
+              <div class="col">
+                <%= f.label :site_url, class: "my-2" %>
+                <%= f.search_field :site_url_cont, class:"form-control", placeholder:"example.ru" %>
+              </div>
+            </div>
+            <div class="row">
+              <%= f.submit "Применить", class: 'btn btn-primary w-100 mt-4'%>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -29,16 +43,16 @@
       <i class="bi bi-plus-square"></i><span> Добавить</span>
     <% end %>
   </div>
-  <div class="col-10 shadow rounded">
+  <div class="shadow rounded">
     <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col">Название</th>
-          <th scope="col">Адрес</th>
+          <th scope="col" style="width: 30%">Адрес</th>
           <th scope="col">Телефон</th>
           <th scope="col">E-mail</th>
           <th scope="col">Сайт</th>
-          <th scope="col">Действие</th>
+          <th scope="col" style="width: 10%">Действие</th>
         </tr>
       </thead>
       <tbody>
@@ -49,7 +63,7 @@
             <td><%= manufacturer.phone %></td>
             <td><%= manufacturer.email %></td>
             <td><%= manufacturer.site_url %></td>
-            <td class="border">
+            <td>
               <div class="d-flex">
                 <%= link_to edit_manufacturer_path(manufacturer.id), class: "btn" do %>
                   <i class="bi bi-pen"></i>

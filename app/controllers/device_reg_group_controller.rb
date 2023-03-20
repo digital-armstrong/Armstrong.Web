@@ -41,8 +41,15 @@ class DeviceRegGroupController < ApplicationController
 
   def destroy
     @device_reg_group = DeviceRegGroup.find(params[:id])
-    @device_reg_group.destroy
-    redirect_to(device_reg_group_index_path)
+    assigned_devices_count = Device.where(device_reg_group_id: params[:id]).count
+
+    if assigned_devices_count > 0
+      flash[:error] = "Ошибка! На эту регистрационную группу ссылаются приборы."
+      redirect_to(device_reg_group_index_path)
+    else
+      @device_reg_group.destroy
+      redirect_to(device_reg_group_index_path)
+    end
   end
 
   private

@@ -12,7 +12,7 @@
           <%= search_form_for(@query, url:measurement_group_index_path, method: :get, class: "rounded accordion-body") do |f| %>
             <%= f.label :name, class: "mb-2" %>
             <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
-          <% end %> 
+          <% end %>
         </div>
       </div>
     </div>
@@ -25,13 +25,14 @@
       <thead>
         <tr>
           <th scope="col">Название</th>
+          <th scope="col" style="width: 10%">Действие</th>
         </tr>
       </thead>
       <tbody>
         <% @measurement_groupes.each do |measurement_group| %>
         <tr>
-            <td><%= measurement_group.name %></td>
-            <td class="border">
+          <td><%= measurement_group.name %></td>
+            <td >
               <div class="d-flex">
                 <%= link_to edit_measurement_group_path(measurement_group.id), class: "btn" do %>
                   <i class="bi bi-pen"></i>
