@@ -43,13 +43,12 @@ class DeviceRegGroupController < ApplicationController
     @device_reg_group = DeviceRegGroup.find(params[:id])
     assigned_devices_count = Device.where(device_reg_group_id: params[:id]).count
 
-    if assigned_devices_count > 0
-      flash[:error] = "Ошибка! На эту регистрационную группу ссылаются приборы."
-      redirect_to(device_reg_group_index_path)
-    else
+    if assigned_devices_count.zero?
       @device_reg_group.destroy
-      redirect_to(device_reg_group_index_path)
+    else
+      flash[:error] = 'Ошибка! На эту регистрационную группу ссылаются приборы.'
     end
+    redirect_to(device_reg_group_index_path)
   end
 
   private
