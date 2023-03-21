@@ -1,0 +1,2 @@
+module DeviceRegGroupHelper
+end

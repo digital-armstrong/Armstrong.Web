@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :device do
-    inventory_id { 1 }
-    serial_id { 1 }
-    tabel_id { 1 }
+    inventory_id
+    serial_id
+    tabel_id
     device_model { association :device_model }
     device_reg_group { association :device_reg_group }
     year_of_production { 1990 }
