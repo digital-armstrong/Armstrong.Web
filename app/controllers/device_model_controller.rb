@@ -46,8 +46,15 @@ class DeviceModelController < ApplicationController
 
   def destroy
     @device_model = DeviceModel.find(params[:id])
-    @device_model.destroy
-    redirect_to(device_model_index_path)
+    assigned_devices_count = Device.where(device_model_id: params[:id]).count
+
+    if assigned_devices_count.zero?
+      @device_model.destroy
+      redirect_to(device_model_index_path)
+    else
+      flash[:error] = 'Ошибка! На модель прибора ссылаются приборы!'
+      redirect_to(device_model_path(@device_model))
+    end
   end
 
   private

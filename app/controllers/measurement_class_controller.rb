@@ -35,7 +35,13 @@ class MeasurementClassController < ApplicationController
 
   def destroy
     @measurement_class = MeasurementClass.find(params[:id])
-    @measurement_class.destroy
+    assigned_device_models_count = DeviceModel.where(measurement_class_id: params[:id]).count
+
+    if assigned_device_models_count.zero?
+      @measurement_class.destroy
+    else
+      flash[:error] = 'Ошибка! На класс измерения ссылаются модели приборов!'
+    end
     redirect_to(measurement_class_index_path)
   end
 

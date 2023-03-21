@@ -35,7 +35,13 @@ class ManufacturerController < ApplicationController
 
   def destroy
     @manufacturer = Manufacturer.find(params[:id])
-    @manufacturer.destroy
+    assigned_device_models_count = DeviceModel.where(manufacturer_id: params[:id]).count
+
+    if assigned_device_models_count.zero?
+      @manufacturer.destroy
+    else
+      flash[:error] = 'Ошибка! На этого производителя ссылаются модели приборов!'
+    end
     redirect_to(manufacturer_index_path)
   end
 

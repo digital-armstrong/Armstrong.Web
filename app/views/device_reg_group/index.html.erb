@@ -1,9 +1,5 @@
 <%= render 'shared/device_bread', selected: "device_reg_group" %>
-<% flash.each do |type, msg| %>
-  <div class="alert alert-danger">
-    <%= msg %>
-  </div>
-<% end %>
+<%= render 'shared/flash_alert' %>
 <div class="row">
   <div class="col-2">
     <div class="accordion mb-3" id="accordionFilter">

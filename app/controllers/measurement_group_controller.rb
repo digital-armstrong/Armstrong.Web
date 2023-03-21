@@ -35,7 +35,13 @@ class MeasurementGroupController < ApplicationController
 
   def destroy
     @measurement_group = MeasurementGroup.find(params[:id])
-    @measurement_group.destroy
+    assigned_measurement_classes_count = MeasurementClass.where(measurement_group_id: params[:id]).count
+
+    if assigned_measurement_classes_count.zero?
+      @measurement_group.destroy
+    else
+      flash[:error] = 'Ошибка! На этот группу измерений ссылаются классы измерений!'
+    end
     redirect_to(measurement_group_index_path)
   end
 
