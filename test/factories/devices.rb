@@ -7,5 +7,6 @@ FactoryBot.define do
     device_reg_group { association :device_reg_group }
     year_of_production { 1990 }
     year_of_commissioning { 1991 }
+    supplementary_kit { association :supplementary_kit }
   end
 end
