@@ -8,6 +8,7 @@ class Device < ApplicationRecord
 
   belongs_to :device_model
   belongs_to :device_reg_group
+  belongs_to :supplementary_kit, optional: true
 
   has_many :inspections
   has_one :channel
@@ -19,10 +20,10 @@ class Device < ApplicationRecord
 
   def self.ransackable_attributes(_auth_object = nil)
     ['created_at', 'device_model_id', 'device_reg_group_id', 'id', 'inventory_id', 'serial_id', 'tabel_id', 'updated_at',
-     'year_of_commissioning', 'year_of_production']
+     'year_of_commissioning', 'year_of_production', 'supplementary_kit_id']
   end
 
   def self.ransackable_associations(_auth_object = nil)
-    ['channel', 'device_model', 'device_reg_group', 'inspections']
+    ['channel', 'device_model', 'device_reg_group', 'inspections', 'supplementary_kit']
   end
 end

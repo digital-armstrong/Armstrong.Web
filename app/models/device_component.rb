@@ -1,3 +1,3 @@
 class DeviceComponent < ApplicationRecord
-  belongs_to :device_model
+  belongs_to :supplementary_kit
 end

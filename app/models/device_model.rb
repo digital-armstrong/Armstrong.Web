@@ -2,10 +2,8 @@ class DeviceModel < ApplicationRecord
   belongs_to :measurement_group
   belongs_to :measurement_class
   belongs_to :manufacturer
-  belongs_to :supplementary_kit, optional: true
 
   has_many :devices
-  has_many :device_component
 
   validates :name, presence: true
   validates :measurement_min, :measurement_max, :accuracy_class, :measurement_sensitivity, numericality: true
@@ -28,12 +26,11 @@ class DeviceModel < ApplicationRecord
       'measuring_unit',
       'name',
       'safety_class',
-      'supplementary_kit_id',
       'updated_at',
     ]
   end
 
   def self.ransackable_associations(_auth_object = nil)
-    ['measurement_group', 'measurement_class', 'manufacturer', 'supplementary_kit', 'devices']
+    ['measurement_group', 'measurement_class', 'manufacturer', 'devices']
   end
 end
