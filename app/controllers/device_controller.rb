@@ -1,14 +1,14 @@
 class DeviceController < ApplicationController
   def show
     @device = Device.find(params[:id])
-    supplementary_kit_id = SupplementaryKit.find(@device.device_model.supplementary_kit_id)
-    @devices = DeviceModel.where(supplementary_kit_id:)
+    supplementary_kit_id = SupplementaryKit.find(@device.supplementary_kit_id)
+    @devices = Device.where(supplementary_kit_id:)
   end
 
   def index
     @query = Device.ransack(params[:q])
     @devices = @query.result.
-      includes(:device_model).
+      includes(:device_model, :supplementary_kit).
       order(:tabel_id).
       page(params[:page]).
       per(params[:per_page])
@@ -65,6 +65,7 @@ class DeviceController < ApplicationController
                                    :device_model_id,
                                    :device_reg_group_id,
                                    :year_of_production,
-                                   :year_of_commissioning)
+                                   :year_of_commissioning,
+                                  :supplementary_kit_id)
   end
 end
