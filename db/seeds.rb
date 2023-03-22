@@ -209,7 +209,8 @@ end
     device_model: DeviceModel.find_by(id: rand(1..100)),
     device_reg_group: DeviceRegGroup.find_by(id: rand(1..5)),
     year_of_production: 1990,
-    year_of_commissioning: 1991
+    year_of_commissioning: 1991,
+    supplementary_kit: SupplementaryKit.find_by(id: rand(1..20)),
   )
 end
 
