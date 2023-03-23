@@ -1,8 +1,9 @@
 class DeviceController < ApplicationController
   def show
     @device = Device.find(params[:id])
-    supplementary_kit_id = SupplementaryKit.find(@device.supplementary_kit_id)
-    @devices = Device.where(supplementary_kit_id:)
+    unless @device.supplementary_kit_id.nil?
+      @device_components = DeviceComponent.where(supplementary_kit_id: @device.supplementary_kit_id)
+    end
   end
 
   def index
@@ -66,6 +67,6 @@ class DeviceController < ApplicationController
                                    :device_reg_group_id,
                                    :year_of_production,
                                    :year_of_commissioning,
-                                  :supplementary_kit_id)
+                                   :supplementary_kit_id)
   end
 end
