@@ -1,0 +1,83 @@
+<%= render 'shared/device_bread', selected: "supplementary_kit" %>
+<%= render 'shared/flash_alert' %>
+<div class="row">
+  <div>
+    <div class="accordion mb-3" id="accordionFilter">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFilter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            Фильтрация
+          </button>
+        </h2>
+        <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+          <%= search_form_for(@query, url:supplementary_kit_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+            <div class="row">
+            <div class="col">
+              <%= f.label :name %>
+              <%= f.search_field :name_cont, class:"form-control", placeholder:"БДЗБ" %>
+            </div>
+            <div class="col">
+              <%= f.label :serial_id %>
+              <%= f.search_field :serial_id_cont, class:"form-control", placeholder:"0-123-N" %>
+            </div>
+            <div class="col">
+              <%= f.label :description %>
+              <%= f.search_field :description_cont, class:"form-control", placeholder:"Набор для..." %>
+            </div>
+            <div class="row">
+              <%= f.submit "Применить", class: 'btn btn-primary w-100 mt-4'%>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= link_to new_supplementary_kit_path, class: "btn btn-primary my-3 w-100 shadow" do %>
+      <i class="bi bi-plus-square"></i><span> Добавить</span>
+    <% end %>
+  </div>
+  <div class="row">
+    <% @supplementary_kits.each do |supplementary_kit| %>
+      <% sk_text = "Kit#{supplementary_kit.id}" %>
+      <div class="accordion col-6 my-2" id="accordion<%= sk_text %>">
+        <div class="accordion-item ">
+          <h2 class="accordion-header" id="heading<%= sk_text %>">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= sk_text %>" aria-expanded="true" aria-controls="collapse<%= sk_text %>">
+              <strong><%= supplementary_kit.name %></strong>, <%= supplementary_kit.serial_id %>
+            </button>
+          </h2>
+          <div id="collapse<%= sk_text %>" class="accordion-collapse collapse shadow" aria-labelledby="heading<%= sk_text %>">
+            <div class="accordion-body">
+              <% device_components_in_this_sk = @device_components.where(supplementary_kit_id: supplementary_kit.id) %>
+              <%= render 'shared/show/supplementary_kit', device_components: device_components_in_this_sk %>
+              <p>
+                Описание: <%= supplementary_kit.description %>
+              </p>
+              <div class="row px-0 mt-2" style="max-width:650px; min-width:600px">
+                <div class="col-2">
+                  <%= link_to "Изменить", edit_supplementary_kit_path(supplementary_kit), class: "btn btn-primary"%>
+                </div>
+                <div class="col-2">
+                  <%= button_to "Удалить", supplementary_kit_path(supplementary_kit), method: :delete, class: "btn btn-danger"%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="row my-5">
+  <div class="col-2">
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <%= paginate @supplementary_kits %>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>

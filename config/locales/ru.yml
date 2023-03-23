@@ -90,6 +90,10 @@ ru:
         description: "Описание"
         supplementary_kit: "Набор"
         supplementary_kit_id: "Набор"
+      supplementary_kit:
+        serial_id: "Серийный номер"
+        name: "Название"
+        description: "Описание"
       post:
         title: "Заголовок"
         body: "Текст записи"
