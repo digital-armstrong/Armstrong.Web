@@ -144,6 +144,14 @@ SupplementaryKit.create(
   )
 end
 
+100.times do |i|
+  DeviceComponent.create(
+    name: "Device Component #{i}",
+    serial_id: "#{i * 100}-E250-FF",
+    description: "Набор для теста",
+    supplementary_kit: SupplementaryKit.find_by(id: rand(1..20))
+  )
+end
 # seed DeviceModel
 
 DeviceModel.create(
