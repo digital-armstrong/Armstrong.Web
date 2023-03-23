@@ -10,6 +10,7 @@
       <%= f.input :serial_id, label: 'Серийный №', placeholder: 'S/N присвоенный производителем', input_html: {:tabindex => 2} %>
       <%= f.association :device_reg_group, label: 'Регистрационная группа', placeholder: 'Например: "ГАН", "Рос. Тех. Надзор" и т.д.', input_html: {:tabindex => 4} %>
       <%= f.input :year_of_commissioning, label: 'Год ввода', placeholder: 'Год ввода в эксплуатацию', input_html: {:tabindex => 6} %>
+      <%= f.association :supplementary_kit, :include_blank => 'Не учитывать', input_html: {:tabindex => 8} %>
     </div>
   </div>
 

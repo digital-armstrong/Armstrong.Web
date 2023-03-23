@@ -59,11 +59,6 @@
                 <%= f.search_field :accuracy_class_eq, class: 'form-control', placeholder: '1.0' %>
               </div>
               <div class="col">
-                <%= f.label :supplementary_kit_id, class:"mb-1" %>
-                <%= f.collection_select(:supplementary_kit_id_eq, SupplementaryKit.all,
-                :id, :name, {:include_blank => 'Не учитывать'}, {:class=>'form-select form-select'}) %>
-              </div>
-              <div class="col">
                 <%= f.label :is_complete_device, class:"mb-1" %>
                 <%= f.select(:is_complete_device_eq, [['Да', true], ['Нет', false]],
                 {:include_blank => 'Не учитывать'}, {:class =>'form-select form-select'})%>
@@ -103,7 +98,6 @@
           <th scope="col">Макс.</th>
           <th scope="col">Класс без.</th>
           <th scope="col">Класс точн.</th>
-          <th scope="col">Набор</th>
         </tr>
       </thead>
       <tbody>
@@ -119,11 +113,6 @@
             <td><%= device_model.measurement_max %></td>
             <td><%= device_model.safety_class %></td>
             <td><%= device_model.accuracy_class %></td>
-            <% if device_model.supplementary_kit_id.nil? %>
-              <td></td>
-            <% else %>
-              <td><%= device_model.supplementary_kit.name %></td>
-            <% end %>
           </tr>
         <% end %>
       </tbody>
