@@ -10,6 +10,8 @@ class DeviceComponentController < ApplicationController
 
   def show
     @device_component = DeviceComponent.find(params[:id])
+    @device_components = DeviceComponent.where(supplementary_kit_id: @device_component.supplementary_kit_id).
+      excluding(@device_component)
   end
 
   def new
