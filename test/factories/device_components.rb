@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :device_component do
-    supplementary_kit { nil }
+    supplementary_kit { association :supplementary_kit }
     serial_id { 'MyString' }
     name { 'MyString' }
     measurement_min { 1.5 }
