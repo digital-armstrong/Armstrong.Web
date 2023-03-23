@@ -148,6 +148,9 @@ end
   DeviceComponent.create(
     name: "Device Component #{i}",
     serial_id: "#{i * 100}-E250-FF",
+    measurement_min: i.to_f / 2.0,
+    measurement_max: i.to_f * 2.0,
+    measuring_unit: "мЗв/ч",
     description: "Набор для теста",
     supplementary_kit: SupplementaryKit.find_by(id: rand(1..20))
   )
