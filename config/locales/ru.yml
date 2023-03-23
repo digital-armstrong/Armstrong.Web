@@ -84,8 +84,8 @@ ru:
       device_component:
         serial_id: "Серийный номер"
         name: "Название"
-        measurement_min: "Минимальная величина измерений"
-        measurement_max: "Максимальная величина измерений"
+        measurement_min: "Мин. величина измерений"
+        measurement_max: "Макс. величина измерений"
         measuring_unit: "Единица измерений"
         description: "Описание"
         supplementary_kit: "Набор"

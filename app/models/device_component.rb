@@ -1,5 +1,5 @@
 class DeviceComponent < ApplicationRecord
-  belongs_to :supplementary_kit
+  belongs_to :supplementary_kit, optional: true
 
   validates :serial_id, :name, presence: true
   validates :measurement_min, :measurement_max, numericality: true
