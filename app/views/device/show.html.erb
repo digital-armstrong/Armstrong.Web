@@ -151,11 +151,7 @@
         <h1>Компоненты в наборе</h1>
         <hr class="divider">
       </div>
-      <ul>
-      <% @device_components.each do |device_component| %>
-        <li><%=device_component.name %></li>
-      <% end %>
-      </ul>
+      <%= render 'shared/show/supplementary_kit', device_components: @device_components %>
     </div>
   <% end %>
 </div>
