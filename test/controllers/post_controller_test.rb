@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class PostControllerTest < ActionController::TestCase
+  def setup
+    @user = create(:user)
+  end
+
   test 'should get show' do
     post = create(:post)
     get :show, params: { id: post.id }
@@ -20,16 +24,16 @@ class PostControllerTest < ActionController::TestCase
 
   test 'should patch update' do
     post = create(:post)
-    post_attrs = attributes_for(:post)
+    post_attrs = attributes_for(:post, user_id: @user.id)
     patch :update, params: { id: post.id, post: post_attrs }
     assert_response :redirect
   end
 
   test 'should post create' do
     post = create(:post)
-    post_attrs = attributes_for(:post)
+    post_attrs = attributes_for(:post, user_id: @user.id)
     post (:create), params: { id: post.id, post: post_attrs } # rubocop:disable all
-    assert_response :success
+    assert_response :redirect
   end
 
   test 'should delete destroy' do

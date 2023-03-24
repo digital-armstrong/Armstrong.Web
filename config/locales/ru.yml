@@ -22,9 +22,19 @@ ru:
           attributes:
             user:
               required: "должен быть выбран"
+        measurement_class:
+          attributes:
+            measurement_group:
+              required: "должна быть выбрана"
     models:
       device_model: "Модель"
       supplementary_kit: "Набор"
+      device: "Прибор"
+      device_reg_group: "Группа приборов"
+      manufacturer: "Производитель"
+      measurement_class: "Класс измерений"
+      measurement_group: "Группа измерений"
+      post: "Пост"
     attributes:
       device:
         inventory_id: "Инвентарный №"
@@ -54,6 +64,21 @@ ru:
         supplementary_kit_id: "Набор"
         is_complete_device: "Полный набор?"
         is_tape_rolling_mechanism: "Имеет лентопротяжный механизм?"
+      device_reg_group:
+        name: "Название"
+      manufacturer:
+        name: "Название"
+        adress: "Адрес"
+        phone: "Телефон"
+        email: "e-mail"
+        site_url: "Ссылка на сайт"
+      measurement_class:
+        name: "Название"
+        measurement_group: "Группа измерений"
+        measurement_group_id: "Группа измерений"
+        arms_device_type: "Тип"
+      measurement_group:
+        name: "Название"
       post:
         title: "Заголовок"
         body: "Текст записи"
