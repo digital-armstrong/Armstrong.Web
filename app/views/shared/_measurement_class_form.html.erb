@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col">
       <%= f.input :name, placeholder: 'Название класса измерений', input_html: {:tabindex => 1}%>
-      <%= f.association :measurement_group, input_html: {:tabindex => 2} %>
+      <%= f.association :measurement_group, input_html: {:tabindex => 2}, include_blank: false %>
       <%= f.input :arms_device_type, placeholder: 'Тип прибора по ARMStrong', input_html: {:tabindex => 3}%>
     </div>
   </div>

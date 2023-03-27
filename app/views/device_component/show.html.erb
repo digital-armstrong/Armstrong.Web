@@ -31,12 +31,6 @@
         <%= @device_component.description %>
       </span>
     </p>
-    <p>
-      <span>
-        <strong>Набор: </strong>
-        <%= @device_component.supplementary_kit.name %>
-      </span>
-    </p>
     <div class="row px-0" style="max-width:650px; min-width:600px">
       <div class="col-2">
         <%= link_to "Изменить", edit_device_component_path(@device_component), class: "btn btn-primary"%>
@@ -46,22 +40,28 @@
       </div>
     </div>
   </div>
-  <div class="col p-4 shadow rounded ms-3">
-    <div class="row text-center">
-      <h1>Набор</h1>
-      <hr class="divider">
+  <% unless @device_component.supplementary_kit.nil? %>
+    <div class="col p-4 shadow rounded ms-3">
+      <div class="row text-center">
+        <h1>Набор</h1>
+        <hr class="divider">
+      </div>
+      <p>
+        <span>
+          <strong>Название набора: </strong>
+          <%= @device_component.supplementary_kit.name %>
+        </span>
+      </p>
+      <% if @device_components.length > 0 %>
+        <p>
+          <span>
+            <strong>Компоненты в наборе: </strong>
+            <%= render 'shared/show/supplementary_kit', device_components: @device_components %>
+          </span>
+        </p>
+      <% else %>
+        <p>Набор пуст.</p>
+      <% end %>
     </div>
-    <p>
-      <span>
-        <strong>Название набора: </strong>
-        <%= @device_component.supplementary_kit.name %>
-      </span>
-    </p>
-    <p>
-      <span>
-        <strong>Компоненты в наборе: </strong>
-        <%= render 'shared/show/supplementary_kit', device_components: @device_components %>
-      </span>
-    </p>
-  </div>
+  <% end %>
 </div>
