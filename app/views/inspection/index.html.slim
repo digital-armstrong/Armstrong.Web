@@ -1,0 +1,11 @@
+table.table.table-hover
+  thead
+    tr
+      th scope="col" test
+      th scope="col" 2
+      th scope="col" 3
+      th scope="col" 4
+  tbody
+    == @inspections.each do |inspection|
+      td inspection.id
+

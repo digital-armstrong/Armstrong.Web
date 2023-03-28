@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_22_042024) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_28_103457) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -119,15 +119,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_042024) do
   end
 
   create_table "inspections", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.bigint "device_id", null: false
-    t.datetime "inspection_date"
-    t.string "inspection_conclusion"
+    t.datetime "conclusion_date"
+    t.string "conclusion"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "state", default: "sent", null: false
+    t.integer "creator_user_id", null: false
+    t.bigint "assigned_user_id"
+    t.index ["assigned_user_id"], name: "index_inspections_on_assigned_user_id"
+    t.index ["creator_user_id"], name: "index_inspections_on_creator_user_id"
     t.index ["device_id"], name: "index_inspections_on_device_id"
-    t.index ["user_id"], name: "index_inspections_on_user_id"
   end
 
   create_table "manufacturers", force: :cascade do |t|
@@ -244,7 +247,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_042024) do
   add_foreign_key "devices", "device_reg_groups"
   add_foreign_key "divisions", "organizations"
   add_foreign_key "inspections", "devices"
-  add_foreign_key "inspections", "users"
+  add_foreign_key "inspections", "users", column: "assigned_user_id"
+  add_foreign_key "inspections", "users", column: "creator_user_id"
   add_foreign_key "measurement_classes", "measurement_groups"
   add_foreign_key "posts", "users"
   add_foreign_key "rooms", "buildings"

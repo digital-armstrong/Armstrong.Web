@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :home
   resources :armstrong, only: [:index, :show]
   resources :about, only: [:index]
-  resources :device, :device_model, :measurement_class,  :device_component
+  resources :device, :device_model, :measurement_class,  :device_component, :inspection
   resources :manufacturer, :measurement_group, :device_reg_group, :supplementary_kit, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :post
 
