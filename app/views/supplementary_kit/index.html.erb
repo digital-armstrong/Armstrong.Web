@@ -39,7 +39,7 @@
   <div class="row">
     <% @supplementary_kits.each do |supplementary_kit| %>
       <% sk_text = "Kit#{supplementary_kit.id}" %>
-      <div class="accordion col-6 my-2" id="accordion<%= sk_text %>">
+      <div class="accordion col-4 my-2" id="accordion<%= sk_text %>">
         <div class="accordion-item ">
           <h2 class="accordion-header" id="heading<%= sk_text %>">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= sk_text %>" aria-expanded="true" aria-controls="collapse<%= sk_text %>">
