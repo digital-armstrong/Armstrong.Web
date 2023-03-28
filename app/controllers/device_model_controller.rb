@@ -2,7 +2,7 @@ class DeviceModelController < ApplicationController
   def index
     @query = DeviceModel.ransack(params[:q])
     @device_models = @query.result.
-      includes(:measurement_class, :measurement_group, :manufacturer, :supplementary_kit).
+      includes(:measurement_class, :measurement_group, :manufacturer).
       order(:name).
       page(params[:page]).
       per(params[:per_page])
@@ -10,12 +10,6 @@ class DeviceModelController < ApplicationController
 
   def show
     @device_model = DeviceModel.find(params[:id])
-    supplementary_kit = @device_model.supplementary_kit_id
-    unless supplementary_kit.nil?
-      @device_models_in_supp_kit = DeviceModel.
-        where(supplementary_kit_id: supplementary_kit).
-        excluding(@device_model)
-    end
   end
 
   def new

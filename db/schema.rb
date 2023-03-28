@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_10_084422) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_22_042024) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -53,16 +53,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_084422) do
   end
 
   create_table "device_components", force: :cascade do |t|
-    t.integer "serial_id"
+    t.bigint "supplementary_kit_id"
+    t.string "serial_id"
     t.string "name"
-    t.bigint "device_model_id", null: false
-    t.float "measurement_max"
     t.float "measurement_min"
+    t.float "measurement_max"
     t.string "measuring_unit"
-    t.string "description"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["device_model_id"], name: "index_device_components_on_device_model_id"
+    t.index ["supplementary_kit_id"], name: "index_device_components_on_supplementary_kit_id"
   end
 
   create_table "device_models", force: :cascade do |t|
@@ -76,7 +76,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_084422) do
     t.float "measurement_min"
     t.float "measurement_max"
     t.bigint "manufacturer_id", null: false
-    t.integer "supplementary_kit_id"
     t.boolean "is_complete_device"
     t.boolean "is_tape_rolling_mechanism"
     t.string "doc_url"
@@ -86,7 +85,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_084422) do
     t.index ["manufacturer_id"], name: "index_device_models_on_manufacturer_id"
     t.index ["measurement_class_id"], name: "index_device_models_on_measurement_class_id"
     t.index ["measurement_group_id"], name: "index_device_models_on_measurement_group_id"
-    t.index ["supplementary_kit_id"], name: "index_device_models_on_supplementary_kit_id"
   end
 
   create_table "device_reg_groups", force: :cascade do |t|
@@ -105,6 +103,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_084422) do
     t.integer "year_of_commissioning"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "supplementary_kit_id"
     t.index ["device_model_id"], name: "index_devices_on_device_model_id"
     t.index ["device_reg_group_id"], name: "index_devices_on_device_reg_group_id"
     t.index ["inventory_id"], name: "index_devices_on_inventory_id", unique: true
@@ -237,11 +236,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_10_084422) do
   add_foreign_key "channels", "rooms"
   add_foreign_key "channels", "servers"
   add_foreign_key "channels", "services"
-  add_foreign_key "device_components", "device_models"
+  add_foreign_key "device_components", "supplementary_kits"
   add_foreign_key "device_models", "manufacturers"
   add_foreign_key "device_models", "measurement_classes"
   add_foreign_key "device_models", "measurement_groups"
-  add_foreign_key "device_models", "supplementary_kits"
   add_foreign_key "devices", "device_models"
   add_foreign_key "devices", "device_reg_groups"
   add_foreign_key "divisions", "organizations"

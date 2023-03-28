@@ -144,6 +144,17 @@ SupplementaryKit.create(
   )
 end
 
+100.times do |i|
+  DeviceComponent.create(
+    name: "Device Component #{i}",
+    serial_id: "#{i * 100}-E250-FF",
+    measurement_min: i.to_f / 2.0,
+    measurement_max: i.to_f * 2.0,
+    measuring_unit: "мЗв/ч",
+    description: "Набор для теста",
+    supplementary_kit: SupplementaryKit.find_by(id: rand(1..20))
+  )
+end
 # seed DeviceModel
 
 DeviceModel.create(
@@ -157,7 +168,6 @@ DeviceModel.create(
   measurement_min: 0.001,
   measurement_max: 1.0,
   manufacturer: Manufacturer.find_by(name: "НПП ДОЗА"),
-  supplementary_kit: SupplementaryKit.find_by(name: "МКС-АТ1117М-комплект-1"),
   is_complete_device: false,
   is_tape_rolling_mechanism: false,
   doc_url: "https://www.doza.ru/catalog/handheld/124/",
@@ -175,7 +185,6 @@ DeviceModel.create(
   measurement_min: 1,
   measurement_max: 500000,
   manufacturer: Manufacturer.find_by(name: "НПП ДОЗА"),
-  supplementary_kit: SupplementaryKit.find_by(name: "МКС-АТ1117М-комплект-1"),
   is_complete_device: false,
   is_tape_rolling_mechanism: false,
   doc_url: "https://www.doza.ru/catalog/handheld/124/",
@@ -194,7 +203,6 @@ DeviceModel.create(
     measurement_min: i.to_f / 2.0,
     measurement_max: i.to_f * 2.0,
     manufacturer: Manufacturer.find_by(id: rand(1..10)),
-    supplementary_kit: SupplementaryKit.find_by(id: rand(0..20)),
     is_complete_device: [true, false].sample,
     is_tape_rolling_mechanism: [true, false].sample,
     doc_url: "/this/is/doc/path/#{i}",
@@ -212,7 +220,8 @@ end
     device_model: DeviceModel.find_by(id: rand(1..100)),
     device_reg_group: DeviceRegGroup.find_by(id: rand(1..5)),
     year_of_production: 1990,
-    year_of_commissioning: 1991
+    year_of_commissioning: 1991,
+    supplementary_kit: SupplementaryKit.find_by(id: rand(1..20)),
   )
 end
 

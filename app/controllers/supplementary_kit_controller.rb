@@ -1,0 +1,60 @@
+class SupplementaryKitController < ApplicationController
+  def index
+    @query = SupplementaryKit.ransack(params[:q])
+    @supplementary_kits = @query.result.
+      order(:name).
+      page(params[:page]).
+      per(params[:per_page])
+    @device_components = DeviceComponent.all
+  end
+
+  def new
+    @supplementary_kit = SupplementaryKit.new
+  end
+
+  def create
+    @supplementary_kit = SupplementaryKit.new(supplementary_kit_params)
+    if @supplementary_kit.save
+      redirect_to(supplementary_kit_index_path)
+    else
+      render(:new)
+    end
+  end
+
+  def edit
+    @supplementary_kit = SupplementaryKit.find(params[:id])
+  end
+
+  def update
+    @supplementary_kit = SupplementaryKit.find(params[:id])
+    if @supplementary_kit.update(supplementary_kit_params)
+      redirect_to(supplementary_kit_path)
+    else
+      render(:edit)
+    end
+  end
+
+  def destroy
+    @supplementary_kit = SupplementaryKit.find(params[:id])
+
+    assigned_devices_count = Device.where(supplementary_kit_id: params[:id]).count
+    assigned_device_components_count = DeviceComponent.where(supplementary_kit_id: params[:id]).count
+
+    if assigned_devices_count.zero? && assigned_device_components_count.zero?
+      @supplementary_kit.destroy
+    else
+      flash[:error] = 'Ошибка! На этот набор ссылаются приборы или компоненты!'
+    end
+    redirect_to(supplementary_kit_index_path)
+  end
+
+  private
+
+  def supplementary_kit_params
+    params.require(:supplementary_kit).permit(
+      :name,
+      :serial_id,
+      :description,
+    )
+  end
+end

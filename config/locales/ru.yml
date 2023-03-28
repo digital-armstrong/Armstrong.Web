@@ -26,6 +26,10 @@ ru:
           attributes:
             measurement_group:
               required: "должна быть выбрана"
+        device_component:
+          attributes:
+            supplementary_kit:
+              required: "должен быть выбран"    
     models:
       device_model: "Модель"
       supplementary_kit: "Набор"
@@ -60,8 +64,6 @@ ru:
         measurement_max: "Максимальная величина измерений"
         safety_class: "Класс безопасности"
         accuracy_class: "Класс точности"
-        supplementary_kit: "Набор"
-        supplementary_kit_id: "Набор"
         is_complete_device: "Полный набор?"
         is_tape_rolling_mechanism: "Имеет лентопротяжный механизм?"
       device_reg_group:
@@ -79,6 +81,19 @@ ru:
         arms_device_type: "Тип"
       measurement_group:
         name: "Название"
+      device_component:
+        serial_id: "Серийный номер"
+        name: "Название"
+        measurement_min: "Мин. величина измерений"
+        measurement_max: "Макс. величина измерений"
+        measuring_unit: "Единица измерений"
+        description: "Описание"
+        supplementary_kit: "Набор"
+        supplementary_kit_id: "Набор"
+      supplementary_kit:
+        serial_id: "Серийный номер"
+        name: "Название"
+        description: "Описание"
       post:
         title: "Заголовок"
         body: "Текст записи"

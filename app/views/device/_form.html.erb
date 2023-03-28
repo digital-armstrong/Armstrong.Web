@@ -1,15 +1,16 @@
 <%= simple_form_for @device, as: :device, url: path, data: { turbo: false }, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
-      <%= f.input :tabel_id, label: 'Табельный №', placeholder: 'Номер присвоенный в ЦСМИТ', input_html: {:tabindex => 1}%>
-      <%= f.input :inventory_id, label: 'Инвентарный №', placeholder: 'Инвентарный номер устройства', input_html: {:tabindex => 3} %>
-      <%= f.input :year_of_production, label: 'Год выпуска', placeholder: 'Год выпуска производителем', input_html: {:tabindex => 5} %>
-      <%= f.association :device_model, label: 'Модель', placeholder: 'Модель устройства', input_html: {:tabindex => 7} %>
+      <%= f.input :tabel_id, placeholder: 'Номер присвоенный в ЦСМИТ', input_html: {:tabindex => 1}%>
+      <%= f.input :inventory_id, placeholder: 'Инвентарный номер устройства', input_html: {:tabindex => 3} %>
+      <%= f.input :year_of_production, placeholder: 'Год выпуска производителем', input_html: {:tabindex => 5} %>
+      <%= f.association :device_model, input_html: {:tabindex => 7}, include_blank: false %>
     </div>
     <div class="col">
-      <%= f.input :serial_id, label: 'Серийный №', placeholder: 'S/N присвоенный производителем', input_html: {:tabindex => 2} %>
-      <%= f.association :device_reg_group, label: 'Регистрационная группа', placeholder: 'Например: "ГАН", "Рос. Тех. Надзор" и т.д.', input_html: {:tabindex => 4} %>
-      <%= f.input :year_of_commissioning, label: 'Год ввода', placeholder: 'Год ввода в эксплуатацию', input_html: {:tabindex => 6} %>
+      <%= f.input :serial_id, placeholder: 'S/N присвоенный производителем', input_html: {:tabindex => 2} %>
+      <%= f.association :device_reg_group, input_html: {:tabindex => 4}, include_blank: false %>
+      <%= f.input :year_of_commissioning, placeholder: 'Год ввода в эксплуатацию', input_html: {:tabindex => 6} %>
+      <%= f.association :supplementary_kit, :include_blank => 'Не учитывать', input_html: {:tabindex => 8} %>
     </div>
   </div>
 

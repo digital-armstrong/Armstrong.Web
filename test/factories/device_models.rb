@@ -10,7 +10,6 @@ FactoryBot.define do
     measurement_min { 1.5 }
     measurement_max { 1.5 }
     manufacturer { association :manufacturer }
-    supplementary_kit { association :supplementary_kit }
     is_complete_device { false }
     is_tape_rolling_mechanism { false }
     doc_url { 'MyString' }

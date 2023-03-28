@@ -98,16 +98,6 @@
         @device.device_model.measuring_unit %>
       </span>
     </p>
-    <% if @device.device_model.is_complete_device %>
-      <p>
-        <span>
-          <strong>Набор: </strong>
-            <% @devices.each do |device| %>
-            <li><%= link_to "#{device.name}", device_path(device)%></li>
-            <%end%>
-        </span>
-      </p>
-    <% end %>
     <p>
       <span>
         <strong>Документациця: </strong>
@@ -155,5 +145,14 @@
       </span>
     </p>
   </div>
+  <% if @device_components %>
+    <div class="col p-4 shadow ms-3 rounded">
+      <div class="row text-center">
+        <h1>Компоненты в наборе</h1>
+        <hr class="divider">
+      </div>
+      <%= render 'shared/show/supplementary_kit', device_components: @device_components %>
+    </div>
+  <% end %>
 </div>
 

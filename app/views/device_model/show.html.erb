@@ -66,22 +66,6 @@
       </div>
     </div>
   </div>
-  <% unless @device_model.supplementary_kit.nil? %>
-    <div class="col p-4 shadow ms-3 rounded">
-      <div class="row text-center">
-        <h1>Состав набора</h1>
-        <hr class="divider">
-        <p>
-        <span>
-          <strong>Набор: </strong>
-            <% @device_models_in_supp_kit.each do |device_model| %>
-            <li style="list-style-type: none;"><%= link_to "#{device_model.name}", device_model_path(device_model)%></li>
-            <%end%>
-        </span>
-      </p>
-      </div>
-    </div>
-  <% end %>
 </div>
 <div class="row">
   <div class="col p-4 shadow rounded">

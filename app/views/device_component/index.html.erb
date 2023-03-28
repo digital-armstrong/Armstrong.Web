@@ -1,0 +1,87 @@
+<%= render 'shared/device_bread', selected: "device_component" %>
+<%= render 'shared/flash_alert' %>
+<div class="row">
+  <div>
+    <div class="accordion mb-3" id="accordionFilter">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFilter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            Фильтрация
+          </button>
+        </h2>
+        <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+          <%= search_form_for(@query, url:device_component_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+            <div class="row">
+              <div class="col">
+                <%= f.label :serial_id %>
+                <%= f.search_field :serial_id_cont, class:"form-control", placeholder:"0-123-N" %>
+              </div>
+              <div class="col">
+                <%= f.label :name %>
+                <%= f.search_field :name_cont, class:"form-control", placeholder:"БДЗБ" %>
+              </div>
+              <div class="col">
+                <%= f.label :measurement_min %>
+                <%= f.search_field :measurement_min_eq, class:"form-control", placeholder:"1.0" %>
+              </div>
+              <div class="col">
+                <%= f.label :measurement_max %>
+                <%= f.search_field :measurement_max_eq, class:"form-control", placeholder:"2.0" %>
+              </div>
+              <div class="col">
+                <%= f.label :measuring_unit %>
+                <%= f.search_field :measuring_unit_cont, class:"form-control", placeholder:"мЗв/ч" %>
+              </div>
+            </div>
+            <div class="row">
+              <%= f.submit "Применить", class: 'btn btn-primary w-100 mt-4'%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= link_to new_device_component_path, class: "btn btn-primary my-3 w-100 shadow" do %>
+      <i class="bi bi-plus-square"></i><span> Добавить</span>
+    <% end %>
+  </div>
+  <div class="shadow rounded">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">S/N</th>
+          <th scope="col">Название</th>
+          <th scope="col">Мин.</th>
+          <th scope="col">Макс.</th>
+          <th scope="col">Ед. изм</th>
+          <th scope="col">Описание</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @device_components.each do |device_component| %>
+        <tr onclick="document.location = `<%=device_component_path(device_component)%>`" style="cursor:pointer">
+            <td><%= device_component.serial_id %></td>
+            <td><%= device_component.name %></td>
+            <td><%= device_component.measurement_min %></td>
+            <td><%= device_component.measurement_max %></td>
+            <td><%= device_component.measuring_unit %></td>
+            <td><%= device_component.description %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+  </div>
+<div class="row my-5">
+  <div class="col-2">
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <%= paginate @device_components %>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>

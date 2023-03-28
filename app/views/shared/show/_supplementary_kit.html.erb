@@ -1,0 +1,5 @@
+<ul>
+  <% device_components.each do |device_component| %>
+    <li><%= link_to "#{device_component.name}", device_component_path(device_component) %></li>
+  <% end %>
+</ul>

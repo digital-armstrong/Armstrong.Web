@@ -1,11 +1,11 @@
-<div class="col"></div>
-<div class='row text-center shadow rounded mb-4'>
+<div class='row text-center shadow rounded mb-4 ms-0'>
   <% selected = local_assigns[:selected] %>
-  <%= link_to 'Приборы', device_index_path, class: "col btn #{ 'btn-primary' if selected == 'device' }" %>
-  <%= link_to 'Модели', device_model_index_path, class: "col btn #{ 'btn-primary' if selected == 'device_model' }" %>
-  <%= link_to 'Рег.группы', device_reg_group_index_path, class: "col btn #{ 'btn-primary' if selected == 'device_reg_group' }" %>
-  <%= link_to 'Производители', manufacturer_index_path, class: "col btn #{ 'btn-primary' if selected == 'manufacturer' }" %>
-  <%= link_to 'Классы измерений', measurement_class_index_path, class: "col btn #{ 'btn-primary' if selected == 'measurement_class' }" %>
-  <%= link_to 'Группы измерений', measurement_group_index_path, class: "col btn #{ 'btn-primary' if selected == 'measurement_group' }" %>
+  <%= link_to 'Приборы', device_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'device' }" %>
+  <%= link_to 'Модели', device_model_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'device_model' }" %>
+  <%= link_to 'Компоненты', device_component_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'device_component' }" %>
+  <%= link_to 'Наборы', supplementary_kit_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'supplementary_kit' }" %>
+  <%= link_to 'Рег.группы', device_reg_group_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'device_reg_group' }" %>
+  <%= link_to 'Производители', manufacturer_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'manufacturer' }" %>
+  <%= link_to 'Классы измерений', measurement_class_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'measurement_class' }" %>
+  <%= link_to 'Группы измерений', measurement_group_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'measurement_group' }" %>
 </div>
-<div class="col"></div>

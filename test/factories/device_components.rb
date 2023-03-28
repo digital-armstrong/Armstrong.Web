@@ -1,11 +1,11 @@
 FactoryBot.define do
   factory :device_component do
-    serial_id { 1 }
+    supplementary_kit { association :supplementary_kit }
+    serial_id { 'MyString' }
     name { 'MyString' }
-    device_model { association :device_model }
-    measurement_max { 1.5 }
     measurement_min { 1.5 }
+    measurement_max { 1.5 }
     measuring_unit { 'MyString' }
-    description { 'MyString' }
+    description { 'MyText' }
   end
 end
