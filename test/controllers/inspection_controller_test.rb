@@ -13,7 +13,6 @@ class InspectionControllerTest < ActionController::TestCase
 
   test 'should get edit' do
     inspection = create(:inspection)
-    pp inspection
     get :edit, params: { id: inspection.id }
     assert_response :success
   end

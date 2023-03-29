@@ -1,7 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :post
+  has_many :posts
+  has_many :creator_inspections, class_name: 'Inspection', foreign_key: 'creator_id'
+  has_many :performer_inspections, class_name: 'Inspection', foreign_key: 'performer_id'
 
   @email_regex = /\A[\w+\-.]+@[a-z\d-]+(\.[a-z\d-]+)*\.[a-z]+\z/i
 

@@ -7,13 +7,53 @@ class InspectionController < ApplicationController
       per(params[:per])
   end
 
-  def new; end
+  def show
+    @inspection = Inspection.find(params[:id])
+  end
 
-  def create; end
+  def new
+    @inspection = Inspection.new
+  end
 
-  def show; end
+  def create
+    @inspection = Inspection.new(inspection_params)
+    if @inspection.save
+      redirect_to(inspection_index_path)
+    else
+      render(:new)
+    end
+  end
 
-  def edit; end
+  def edit
+    @inspection = Inspection.find(params[:id])
+  end
 
-  def update; end
+  def update
+    @inspection = Inspection.find(params[:id])
+    if @inspection.update(inspection_params)
+      redirect_to(inspection_path)
+    else
+      render(:edit)
+    end
+  end
+
+  def destroy
+    @inspection = Inspection.find(params[:id])
+    @inspection.destroy
+    redirect_to(inspection_index_path)
+  end
+
+  private
+
+  def inspection_params
+    params.require(:inspection).permit(
+      :device_id,
+      :creator_id,
+      :performer_id,
+      :conclusion,
+      :conclusion_date,
+      :description,
+      :state,
+    )
+  end
 end
