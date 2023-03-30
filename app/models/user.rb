@@ -14,4 +14,8 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: true,
             format: { with: @email_regex }
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["avatar_url", "created_at", "email", "first_name", "id", "last_name", "password_digest", "phone", "second_name", "tabel_id", "type", "updated_at"]
+  end
 end
