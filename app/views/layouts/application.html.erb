@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ARMStrong</title>
+    <title><%= full_title(yield(:page_title))%></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -36,6 +36,7 @@
       </div>
     </div>
   </header>
+  <%= yield :device_bread %>
   <body class="container">
     <%= yield %>
   </body>

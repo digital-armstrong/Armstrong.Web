@@ -1,4 +1,6 @@
 class InspectionController < ApplicationController
+  before_action :set_inspection, only: [:show, :edit, :update, :destroy]
+
   def index
     @query = Inspection.ransack(params[:q])
     @query.sorts = ['created_at desc']
@@ -6,10 +8,6 @@ class InspectionController < ApplicationController
       includes(:device, :creator, :performer).
       page(params[:page]).
       per(params[:per_page])
-  end
-
-  def show
-    @inspection = Inspection.find(params[:id])
   end
 
   def new
@@ -25,12 +23,7 @@ class InspectionController < ApplicationController
     end
   end
 
-  def edit
-    @inspection = Inspection.find(params[:id])
-  end
-
   def update
-    @inspection = Inspection.find(params[:id])
     if @inspection.update(inspection_params)
       redirect_to(inspection_path)
     else
@@ -39,12 +32,15 @@ class InspectionController < ApplicationController
   end
 
   def destroy
-    @inspection = Inspection.find(params[:id])
     @inspection.destroy
     redirect_to(inspection_index_path)
   end
 
   private
+
+  def set_inspection
+    @inspection = Inspection.find(params[:id])
+  end
 
   def inspection_params
     params.require(:inspection).permit(

@@ -1,4 +1,6 @@
 class MeasurementGroupController < ApplicationController
+  before_action :set_measurement_group, only: [:edit, :update, :destroy]
+
   def index
     @query = MeasurementGroup.ransack(params[:q])
     @measurement_groupes = @query.result.
@@ -20,12 +22,7 @@ class MeasurementGroupController < ApplicationController
     end
   end
 
-  def edit
-    @measurement_group = MeasurementGroup.find(params[:id])
-  end
-
   def update
-    @measurement_group = MeasurementGroup.find(params[:id])
     if @measurement_group.update(measurement_group_params)
       redirect_to(measurement_group_path)
     else
@@ -34,7 +31,6 @@ class MeasurementGroupController < ApplicationController
   end
 
   def destroy
-    @measurement_group = MeasurementGroup.find(params[:id])
     assigned_measurement_classes_count = MeasurementClass.where(measurement_group_id: params[:id]).count
 
     if assigned_measurement_classes_count.zero?
@@ -46,6 +42,10 @@ class MeasurementGroupController < ApplicationController
   end
 
   private
+
+  def set_measurement_group
+    @measurement_group = MeasurementGroup.find(params[:id])
+  end
 
   def measurement_group_params
     params.require(:measurement_group).permit(

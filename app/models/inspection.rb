@@ -35,7 +35,7 @@ class Inspection < ApplicationRecord
     ['conclusion', 'conclusion_date', 'created_at', 'creator_id', 'description', 'device_id', 'id', 'performer_id', 'state', 'updated_at']
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ["creator", "device", "performer"]
+  def self.ransackable_associations(_auth_object = nil)
+    ['creator', 'device', 'performer']
   end
 end

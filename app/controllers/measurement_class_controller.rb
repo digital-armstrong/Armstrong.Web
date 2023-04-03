@@ -1,4 +1,6 @@
 class MeasurementClassController < ApplicationController
+  before_action :set_measurement_class, only: [:show, :edit, :update, :destroy]
+
   def index
     @query = MeasurementClass.ransack(params[:q])
     @measurement_classes = @query.result.
@@ -20,12 +22,7 @@ class MeasurementClassController < ApplicationController
     end
   end
 
-  def edit
-    @measurement_class = MeasurementClass.find(params[:id])
-  end
-
   def update
-    @measurement_class = MeasurementClass.find(params[:id])
     if @measurement_class.update(measurement_class_params)
       redirect_to(measurement_class_path)
     else
@@ -34,7 +31,6 @@ class MeasurementClassController < ApplicationController
   end
 
   def destroy
-    @measurement_class = MeasurementClass.find(params[:id])
     assigned_device_models_count = DeviceModel.where(measurement_class_id: params[:id]).count
 
     if assigned_device_models_count.zero?
@@ -46,6 +42,10 @@ class MeasurementClassController < ApplicationController
   end
 
   private
+
+  def set_measurement_class
+    @measurement_class = MeasurementClass.find(params[:id])
+  end
 
   def measurement_class_params
     params.require(:measurement_class).permit(

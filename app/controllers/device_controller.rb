@@ -1,6 +1,7 @@
 class DeviceController < ApplicationController
+  before_action :set_device, only: [:show, :edit, :update, :destroy]
+
   def show
-    @device = Device.find(params[:id])
     unless @device.supplementary_kit_id.nil?
       @device_components = DeviceComponent.where(supplementary_kit_id: @device.supplementary_kit_id)
     end
@@ -16,7 +17,6 @@ class DeviceController < ApplicationController
   end
 
   def update
-    @device = Device.find(params[:id])
     if @device.update(device_params)
       redirect_to(device_path)
     else
@@ -25,13 +25,8 @@ class DeviceController < ApplicationController
   end
 
   def destroy
-    @device = Device.find(params[:id])
     @device.destroy
     redirect_to(device_index_path)
-  end
-
-  def edit
-    @device = Device.find(params[:id])
   end
 
   def new
@@ -58,6 +53,10 @@ class DeviceController < ApplicationController
   end
 
   private
+
+  def set_device
+    @device = Device.find(params[:id])
+  end
 
   def device_params
     params.require(:device).permit(:inventory_id,

@@ -1,5 +1,5 @@
 class SupplementaryKit < ApplicationRecord
-  has_many :device_component
+  has_many :device_components
   has_one :device
 
   validates :name, :serial_id, presence: true
