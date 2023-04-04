@@ -1,4 +1,6 @@
 class DeviceModelController < ApplicationController
+  before_action :set_device_model, only: [:show, :edit, :update, :destroy]
+
   def index
     @query = DeviceModel.ransack(params[:q])
     @device_models = @query.result.
@@ -6,10 +8,6 @@ class DeviceModelController < ApplicationController
       order(:name).
       page(params[:page]).
       per(params[:per_page])
-  end
-
-  def show
-    @device_model = DeviceModel.find(params[:id])
   end
 
   def new
@@ -25,12 +23,7 @@ class DeviceModelController < ApplicationController
     end
   end
 
-  def edit
-    @device_model = DeviceModel.find(params[:id])
-  end
-
   def update
-    @device_model = DeviceModel.find(params[:id])
     if @device_model.update(device_model_params)
       redirect_to(device_model_path)
     else
@@ -39,7 +32,6 @@ class DeviceModelController < ApplicationController
   end
 
   def destroy
-    @device_model = DeviceModel.find(params[:id])
     assigned_devices_count = Device.where(device_model_id: params[:id]).count
 
     if assigned_devices_count.zero?
@@ -52,6 +44,10 @@ class DeviceModelController < ApplicationController
   end
 
   private
+
+  def set_device_model
+    @device_model = DeviceModel.find(params[:id])
+  end
 
   def device_model_params
     params.require(:device_model).permit(

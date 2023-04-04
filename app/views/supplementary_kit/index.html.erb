@@ -1,3 +1,4 @@
+<% provide :page_title, "Наборы" %>
 <%= render 'shared/device_bread', selected: "supplementary_kit" %>
 <%= render 'shared/flash_alert' %>
 <div class="row">
@@ -48,8 +49,11 @@
           </h2>
           <div id="collapse<%= sk_text %>" class="accordion-collapse collapse shadow" aria-labelledby="heading<%= sk_text %>">
             <div class="accordion-body">
-              <% device_components_in_this_sk = @device_components.where(supplementary_kit_id: supplementary_kit.id) %>
-              <%= render 'shared/show/supplementary_kit', device_components: device_components_in_this_sk %>
+              <% device_components_in_this_sk = supplementary_kit.device_components %>
+              <% if device_components_in_this_sk.length > 0 %>
+                <p>Компоненты:</p>
+                <%= render 'shared/show/supplementary_kit', device_components: device_components_in_this_sk %>
+              <% end %>
               <p>
                 Описание: <%= supplementary_kit.description %>
               </p>

@@ -1,4 +1,6 @@
 class DeviceRegGroupController < ApplicationController
+  before_action :set_device_reg_group, only: [:edit, :update, :destroy]
+
   def index
     @device_reg_group = DeviceRegGroup.new
     @query = DeviceRegGroup.ransack(params[:q])
@@ -26,12 +28,7 @@ class DeviceRegGroupController < ApplicationController
     end
   end
 
-  def edit
-    @device_reg_group = DeviceRegGroup.find(params[:id])
-  end
-
   def update
-    @device_reg_group = DeviceRegGroup.find(params[:id])
     if @device_reg_group.update(device_reg_group_params)
       redirect_to(device_reg_group_path)
     else
@@ -40,7 +37,6 @@ class DeviceRegGroupController < ApplicationController
   end
 
   def destroy
-    @device_reg_group = DeviceRegGroup.find(params[:id])
     assigned_devices_count = Device.where(device_reg_group_id: params[:id]).count
 
     if assigned_devices_count.zero?
@@ -52,6 +48,10 @@ class DeviceRegGroupController < ApplicationController
   end
 
   private
+
+  def set_device_reg_group
+    @device_reg_group = DeviceRegGroup.find(params[:id])
+  end
 
   def device_reg_group_params
     params.require(:device_reg_group).permit(

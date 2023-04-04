@@ -1,4 +1,6 @@
 class SupplementaryKitController < ApplicationController
+  before_action :set_supplementary_kit, only: [:edit, :update, :destroy]
+
   def index
     @query = SupplementaryKit.ransack(params[:q])
     @supplementary_kits = @query.result.
@@ -21,12 +23,7 @@ class SupplementaryKitController < ApplicationController
     end
   end
 
-  def edit
-    @supplementary_kit = SupplementaryKit.find(params[:id])
-  end
-
   def update
-    @supplementary_kit = SupplementaryKit.find(params[:id])
     if @supplementary_kit.update(supplementary_kit_params)
       redirect_to(supplementary_kit_path)
     else
@@ -35,8 +32,6 @@ class SupplementaryKitController < ApplicationController
   end
 
   def destroy
-    @supplementary_kit = SupplementaryKit.find(params[:id])
-
     assigned_devices_count = Device.where(supplementary_kit_id: params[:id]).count
     assigned_device_components_count = DeviceComponent.where(supplementary_kit_id: params[:id]).count
 
@@ -49,6 +44,10 @@ class SupplementaryKitController < ApplicationController
   end
 
   private
+
+  def set_supplementary_kit
+    @supplementary_kit = SupplementaryKit.find(params[:id])
+  end
 
   def supplementary_kit_params
     params.require(:supplementary_kit).permit(

@@ -232,3 +232,14 @@ end
     body: "Some who have read the book, or at any rate have reviewed it, found it boring, absurd, or contemptible, and I have no cause to complain, since I have similar opinions of their works, or of the kinds of writing that they evidently prefer."
   )
 end
+
+20.times do |i|
+  Inspection.create(
+    device: Device.find_by_id(rand(1..1000)),
+    creator: User.find_by_id(rand(1..10)),
+    performer: User.find_by_id(rand(1..10)),
+    conclusion: "Conclusion #{i}",
+    conclusion_date: Time.at(rand(10.years.ago.to_f..Time.now.to_f)),
+    description: "Description #{i}"
+  )
+end

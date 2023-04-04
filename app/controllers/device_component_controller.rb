@@ -1,4 +1,6 @@
 class DeviceComponentController < ApplicationController
+  before_action :set_device_component, only: [:show, :edit, :update, :destroy]
+
   def index
     @query = DeviceComponent.ransack(params[:q])
     @device_components = @query.result.
@@ -9,7 +11,6 @@ class DeviceComponentController < ApplicationController
   end
 
   def show
-    @device_component = DeviceComponent.find(params[:id])
     @device_components = DeviceComponent.where(supplementary_kit_id: @device_component.supplementary_kit_id).
       excluding(@device_component)
   end
@@ -27,12 +28,7 @@ class DeviceComponentController < ApplicationController
     end
   end
 
-  def edit
-    @device_component = DeviceComponent.find(params[:id])
-  end
-
   def update
-    @device_component = DeviceComponent.find(params[:id])
     if @device_component.update(device_component_params)
       redirect_to(device_component_path)
     else
@@ -41,12 +37,15 @@ class DeviceComponentController < ApplicationController
   end
 
   def destroy
-    @device_component = DeviceComponent.find(params[:id])
     @device_component.destroy
     redirect_to(device_component_index_path)
   end
 
   private
+
+  def set_device_component
+    @device_component = DeviceComponent.find(params[:id])
+  end
 
   def device_component_params
     params.require(:device_component).permit(
