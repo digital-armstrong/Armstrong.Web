@@ -9,11 +9,9 @@ class DeviceController < ApplicationController
 
   def index
     @query = Device.ransack(params[:q])
-    @devices = @query.result.
+    @pagy, @devices = pagy @query.result.
       includes(:device_model, :supplementary_kit).
-      order(:tabel_id).
-      page(params[:page]).
-      per(params[:per_page])
+      order(:tabel_id)
   end
 
   def update

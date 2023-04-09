@@ -51,7 +51,7 @@ gem 'simple_form', '~> 5.2'
 gem 'state_machines', '~> 0.5.0'
 gem 'state_machines-activerecord', '~> 0.8.0'
 
-gem 'kaminari', '~> 1.2', '>= 1.2.2'
+gem 'pagy', '~> 6.0'
 gem 'ransack', '~> 4.0'
 gem 'responders', '~> 3.1'
 gem 'active_model_serializers', '~> 0.10.13'
