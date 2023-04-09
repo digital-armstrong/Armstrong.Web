@@ -3,8 +3,8 @@ class MeasurementClassController < ApplicationController
 
   def index
     @query = MeasurementClass.ransack(params[:q])
-    @pagy, @measurement_classes = pagy @query.result.
-      order(:name)
+    @pagy, @measurement_classes = pagy(@query.result.
+      order(:name))
   end
 
   def new

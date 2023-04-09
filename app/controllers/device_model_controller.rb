@@ -3,9 +3,9 @@ class DeviceModelController < ApplicationController
 
   def index
     @query = DeviceModel.ransack(params[:q])
-    @pagy, @device_models = pagy @query.result.
+    @pagy, @device_models = pagy(@query.result.
       includes(:measurement_class, :measurement_group, :manufacturer).
-      order(:name)
+      order(:name))
   end
 
   def new

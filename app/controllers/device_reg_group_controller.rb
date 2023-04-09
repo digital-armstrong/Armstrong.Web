@@ -4,8 +4,8 @@ class DeviceRegGroupController < ApplicationController
   def index
     @device_reg_group = DeviceRegGroup.new
     @query = DeviceRegGroup.ransack(params[:q])
-    @pagy, @device_reg_groups = pagy @query.result.
-      order(:name)
+    @pagy, @device_reg_groups = pagy(@query.result.
+      order(:name))
   end
 
   def new
