@@ -58,7 +58,7 @@ gem 'active_model_serializers', '~> 0.10.13'
 gem 'rails-i18n', '~> 7.0.0'
 gem 'prawn', '~> 2.4'
 gem 'prawn-table', '~> 0.2.2'
-gem 'jbuilder'
+
 group :development, :test do
   gem 'debug', platforms: [:mri, :mingw, :x64_mingw]
 

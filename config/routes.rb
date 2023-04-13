@@ -3,8 +3,10 @@ Rails.application.routes.draw do
 
   post 'device/download', to: 'device#download'
 
-  namespace :api, defaults: {format: 'json'} do
-    resources :filters, only: :index
+  namespace :api do
+    namespace :v1,  defaults: {format: 'json'} do
+      resources :filters, only: :index
+    end
   end
 
   resources :home
