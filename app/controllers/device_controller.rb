@@ -13,6 +13,7 @@ class DeviceController < ApplicationController
     @pagy, @devices = pagy(@query.result.
       includes(:device_model, :supplementary_kit).
       order(:tabel_id))
+    # authorize! :read, @devices
   end
 
   def update
