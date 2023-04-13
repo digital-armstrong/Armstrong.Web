@@ -3,10 +3,8 @@ class SupplementaryKitController < ApplicationController
 
   def index
     @query = SupplementaryKit.ransack(params[:q])
-    @supplementary_kits = @query.result.
-      order(:name).
-      page(params[:page]).
-      per(params[:per_page])
+    @pagy, @supplementary_kits = pagy(@query.result.
+      order(:name))
     @device_components = DeviceComponent.all
   end
 

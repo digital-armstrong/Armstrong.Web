@@ -3,10 +3,8 @@ class ManufacturerController < ApplicationController
 
   def index
     @query = Manufacturer.ransack(params[:q])
-    @manufacturers = @query.result.
-      order(:name).
-      page(params[:page]).
-      per(params[:per_page])
+    @pagy, @manufacturers = pagy(@query.result.
+      order(:name))
   end
 
   def new

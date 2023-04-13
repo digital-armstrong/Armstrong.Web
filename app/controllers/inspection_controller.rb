@@ -4,10 +4,8 @@ class InspectionController < ApplicationController
   def index
     @query = Inspection.ransack(params[:q])
     @query.sorts = ['created_at desc']
-    @inspections = @query.result.
-      includes(:device, :creator, :performer).
-      page(params[:page]).
-      per(params[:per_page])
+    @pagy, @inspections = pagy(@query.result.
+      includes(:device, :creator, :performer))
   end
 
   def new

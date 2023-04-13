@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   validates :user, presence: true
 
   def formatted_date(param)
-    param.strftime('%d.%m.%Y %H:%M:%S')
+    I18n.l(param, format: :long)
   end
 
   def self.ransackable_attributes(_auth_object = nil)

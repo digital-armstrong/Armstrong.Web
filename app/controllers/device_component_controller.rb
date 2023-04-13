@@ -3,11 +3,9 @@ class DeviceComponentController < ApplicationController
 
   def index
     @query = DeviceComponent.ransack(params[:q])
-    @device_components = @query.result.
+    @pagy, @device_components = pagy(@query.result.
       includes(:supplementary_kit).
-      order(:serial_id).
-      page(params[:page]).
-      per(params[:per_page])
+      order(:serial_id))
   end
 
   def show

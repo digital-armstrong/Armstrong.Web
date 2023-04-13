@@ -1,5 +1,5 @@
 <%= link_to new_post_path, class: "btn btn-primary my-3 w-100" do %>
-  <i class="bi bi-plus-square"></i><span> Новый пост</span>
+  <i class="bi bi-plus-square"></i><span> <%= t(".b_new_post") %></span>
 <% end %>
 <% @posts.each do |post| %>
   <div class="card mb-3">
@@ -8,8 +8,9 @@
     </div>
     <div class="card-body">
       <h5 class="card-title"><%= post.title %></h5>
-      <p class="card-text"><%= post.body %></p>
-      <%= link_to "Читать далее", post_path(post), class: "btn btn-primary" %>
+      <p class="card-text">
+        <%= truncate(sanitize(post.body), length: 200, omission: " #{link_to(t('.more'), post_path(post))}", escape: false) %></p>
+      <%= link_to t(".b_read"), post_path(post), class: "btn btn-primary" %>
     </div>
   </div>
 <% end %>
@@ -20,7 +21,7 @@
     <div class="row">
       <div class="col"></div>
       <div class="col">
-        <%= paginate @posts %>
+        <%= pagination @pagy %>
       </div>
       <div class="col"></div>
     </div>

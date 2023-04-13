@@ -3,10 +3,8 @@ class MeasurementGroupController < ApplicationController
 
   def index
     @query = MeasurementGroup.ransack(params[:q])
-    @measurement_groupes = @query.result.
-      order(:name).
-      page(params[:page]).
-      per(params[:per_page])
+    @pagy, @measurement_groupes = pagy(@query.result.
+      order(:name))
   end
 
   def new

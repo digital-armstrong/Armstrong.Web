@@ -1,4 +1,4 @@
-<%= simple_form_for @device_model, as: :device_model, url: path, data: {turbo: false}, class: "form-group row" do |f| %>
+<%= simple_form_for @device_model, as: :device_model, url: path, data: {turbo: false, controller: 'filter'}, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
       <%= f.input :name, placeholder: "Название устройства", input_html: {:tabindex => 1} %>
@@ -10,10 +10,10 @@
   </div>
   <div class="row">
     <div class="col">
-      <%= f.association :measurement_group, input_html: {:tabindex => 3}, include_blank: false %>
+      <%= f.association :measurement_group, input_html: {:tabindex => 3, data: {'action': 'change->filter#filter' }, id: "filtrator"}, include_blank: false %>
     </div>
     <div class="col">
-      <%= f.association :measurement_class, input_html: {:tabindex => 4}, include_blank: false %>
+      <%= f.association :measurement_class, input_html: {tabindex: 4, id:"filter"}, include_blank: false %>
     </div>
     <div class="col">
       <%= f.input :measuring_unit, placeholder: "мЗв/ч", input_html: {:tabindex => 5} %>

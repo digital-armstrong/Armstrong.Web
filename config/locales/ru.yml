@@ -1,102 +1,93 @@
 ru:
   activerecord:
-    errors:
-      models:
-        device:
-          attributes:
-            device_model:
-              required: "не может быть пустой"
-            device_reg_group:
-              required: "не может быть пустой"
-        device_model:
-          attributes:
-            manufacturer:
-              required: "не может быть пустым"
-            measurement_group:
-              required: "не может быть пустой"
-            measurement_class:
-              required: "не может быть пустым"
-            supplementary_kit:
-              required: "не может быть пустым"
-        post:
-          attributes:
-            user: 
-              required: "должен быть выбран"
-        measurement_class:
-          attributes:
-            measurement_group:
-              required: "должна быть выбрана"
-        device_component:
-          attributes:
-            supplementary_kit:
-              required: "должен быть выбран"    
     models:
-      device_model: "Модель"
-      supplementary_kit: "Набор"
-      device: "Прибор"
-      device_reg_group: "Группа приборов"
-      manufacturer: "Производитель"
-      measurement_class: "Класс измерений"
-      measurement_group: "Группа измерений"
-      post: "Пост"
+      device_model: Модель
+      supplementary_kit: Набор
+      device: Прибор
+      device_reg_group: Группа приборов
+      manufacturer: Производитель
+      measurement_class: Класс измерений
+      measurement_group: Группа измерений
+      post: Пост
     attributes:
       device:
-        inventory_id: "Инвентарный №"
-        device_model: "Модель"
-        device_model_id: "Модель"
-        serial_id: "Серийный №"
-        tabel_id: "Табельный №"
-        device_reg_group: "Регистрационная группа"
-        device_reg_group_id: "Регистрационная группа"
-        year_of_production: "Год выпуска"
-        year_of_commissioning: "Год ввода"
+        inventory_id: Инвентарный №
+        device_model: Модель
+        serial_id: Серийный №
+        tabel_id: Табельный №
+        device_reg_group: Регистрационная группа
+        year_of_production: Год выпуска
+        year_of_commissioning: Год ввода
       device_model:
-        name: "Название"
-        manufacturer: "Производитель"
-        manufacturer_id: "Производитель"
-        measurement_group: "Группа измерений"
-        measurement_group_id: "Группа измерений"
-        measurement_class: "Класс измерений"
-        measurement_class_id: "Класс измерений"
-        measuring_unit: "Единица измерений"
-        measurement_sensitivity: "Чувствительность измерений"
-        measurement_min: "Минимальная величина измерений"
-        measurement_max: "Максимальная величина измерений"
-        safety_class: "Класс безопасности"
-        accuracy_class: "Класс точности"
-        is_complete_device: "Полный набор?"
-        is_tape_rolling_mechanism: "Имеет лентопротяжный механизм?"
+        name: Название
+        manufacturer: Производитель
+        measurement_group: Группа измерений
+        measurement_class: Класс измерений
+        measuring_unit: Единица измерений
+        measurement_sensitivity: Чувствительность измерений
+        measurement_min: Минимальная величина измерений
+        measurement_max: Максимальная величина измерений
+        safety_class: Класс безопасности
+        accuracy_class: Класс точности
+        is_complete_device: Полный набор?
+        is_tape_rolling_mechanism: Имеет лентопротяжный механизм?
       device_reg_group:
-        name: "Название"
+        name: Название
       manufacturer:
-        name: "Название"
-        adress: "Адрес"
-        phone: "Телефон"
-        email: "e-mail"
-        site_url: "Ссылка на сайт"
+        name: Название
+        adress: Адрес
+        phone: Телефон
+        email: e-mail
+        site_url: Ссылка на сайт
       measurement_class:
-        name: "Название"
-        measurement_group: "Группа измерений"
-        measurement_group_id: "Группа измерений"
-        arms_device_type: "Тип"
+        name: Название
+        measurement_group: Группа измерений
+        measurement_group_id: Группа измерений
+        arms_device_type: Тип
       measurement_group:
-        name: "Название"
+        name: Название
       device_component:
-        serial_id: "Серийный номер"
-        name: "Название"
-        measurement_min: "Мин. величина измерений"
-        measurement_max: "Макс. величина измерений"
-        measuring_unit: "Единица измерений"
-        description: "Описание"
-        supplementary_kit: "Набор"
-        supplementary_kit_id: "Набор"
+        serial_id: Серийный номер
+        name: Название
+        measurement_min: Мин. величина измерений
+        measurement_max: Макс. величина измерений
+        measuring_unit: Единица измерений
+        description: Описание
+        supplementary_kit: Набор
       supplementary_kit:
-        serial_id: "Серийный номер"
-        name: "Название"
-        description: "Описание"
+        serial_id: Серийный номер
+        name: Название
+        description: Описание
       post:
-        title: "Заголовок"
-        body: "Текст записи"
-        user: "Автор"
-        user_id: "Автор"
-      
+        title: Заголовок
+        body: Текст записи
+        user: Автор
+  layouts:
+    application:
+      home: Главная
+      ARMS: АСРК
+      devices: Приборы
+      inspections: Инспекции
+      about: О нас
+      admin_panel: Панель админ.
+      settings: Настройки
+      profile: Профиль
+      logout: Выйти
+  post:
+    show:
+      published: Опубликован
+      updated: Обновлен
+      author: Автор
+    form:
+      title: Заголовок поста
+      body: Текст поста
+  home:
+    index:
+      b_new_post: Новый пост
+      b_read: Читать далее
+      more: (далее...)
+  b_change: Изменить
+  b_delete: Удалить
+  b_add: Добавить
+  b_save: Сохранить
+  b_back: Назад

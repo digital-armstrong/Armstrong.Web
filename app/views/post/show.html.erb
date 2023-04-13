@@ -2,25 +2,25 @@
 <hr class="deliver">
 <p>
   <span>
-    <strong>Опубликован: </strong>
+    <strong><%= t('.published') %>: </strong>
     <%= @post.formatted_date(@post.created_at) %>
   </span>
   <span>
-    <strong>Обновлен: </strong>
+    <strong><%= t('.updated') %>:</strong>
     <%= @post.formatted_date(@post.updated_at) %>
   </span>
 </p>
 <p>
   <span>
-    <strong>Автор: </strong>
+    <strong><%= t('.author') %>: </strong>
     <%= "#{@post.user.first_name} #{@post.user.last_name}" %></p>
   </span>
 <p><%= @post.body %></p>
 <div class="row px-0" style="max-width:650px; min-width:600px">
   <div class="col-2">
-    <%= link_to "Изменить", edit_post_path(@post), class: "btn btn-primary"%>
+    <%= link_to t('b_change'), edit_post_path(@post), class: "btn btn-primary"%>
   </div>
   <div class="col-2">
-    <%= button_to "Удалить", post_path(@post), method: :delete, class: "btn btn-danger"%>
+    <%= button_to t('b_delete'), post_path(@post), method: :delete, class: "btn btn-danger"%>
   </div>
 </div>
