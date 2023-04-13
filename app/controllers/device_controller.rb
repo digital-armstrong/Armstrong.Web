@@ -1,4 +1,5 @@
 class DeviceController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_device, only: [:show, :edit, :update, :destroy]
 
   def show

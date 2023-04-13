@@ -1,4 +1,4 @@
-Admin.create(
+User.create(
   tabel_id: 1,
   first_name: 'Admin',
   last_name: 'Admin',
@@ -7,7 +7,7 @@ Admin.create(
 )
 
 10.times do |i|
-  Engineer.create(
+  User.create(
     tabel_id: 72000 + i,
     first_name: "First#{i}",
     last_name: "Last#{i}",
@@ -17,7 +17,7 @@ Admin.create(
 end
 
 10.times do |i|
-  Inspector.create(
+  User.create(
     tabel_id: 82000 + i,
     first_name: "First#{i}",
     last_name: "Last#{i}",
@@ -227,7 +227,7 @@ end
 
 10.times do |i|
   Post.create(
-    user: Admin.first,
+    user: User.first,
     title: "This is post title №#{i}",
     body: "Some who have read the book, or at any rate have reviewed it, found it boring, absurd, or contemptible, and I have no cause to complain, since I have similar opinions of their works, or of the kinds of writing that they evidently prefer."
   )
