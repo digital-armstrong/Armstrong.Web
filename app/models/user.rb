@@ -3,11 +3,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+  has_many :inspections
+  has_many :posts
 
-  has_many :post
-  # enum role: [ :ilya, :admin ]
   @email_regex = /\A[\w+\-.]+@[a-z\d-]+(\.[a-z\d-]+)*\.[a-z]+\z/i
-
+  ROLES = %i[admin default engineer inspector dosimetrist]
   validates :first_name, :last_name, presence: true
   validates :tabel_id, numericality: { less_than_or_equal_to: 2147483647 }, presence: true, uniqueness: true
   validates :password, presence: true, length: { minimum: 6 }

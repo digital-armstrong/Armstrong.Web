@@ -225,6 +225,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_042024) do
     t.string "second_name"
     t.string "last_name"
     t.string "phone"
+    t.string "role"
     t.string "avatar_url"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

@@ -1,5 +1,6 @@
 class ManufacturerController < ApplicationController
   before_action :set_manufacturer, only: [:edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @query = Manufacturer.ransack(params[:q])

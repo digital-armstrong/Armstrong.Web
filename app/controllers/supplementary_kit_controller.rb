@@ -1,5 +1,6 @@
 class SupplementaryKitController < ApplicationController
   before_action :set_supplementary_kit, only: [:edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @query = SupplementaryKit.ransack(params[:q])

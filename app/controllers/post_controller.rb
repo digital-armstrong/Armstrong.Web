@@ -1,6 +1,7 @@
 class PostController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   def new
     @post = Post.new

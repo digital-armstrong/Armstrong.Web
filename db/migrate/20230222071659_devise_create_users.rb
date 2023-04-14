@@ -8,6 +8,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
       t.string :second_name
       t.string :last_name
       t.string :phone
+      t.string :role
       t.string :avatar_url
 
       ## Database authenticatable

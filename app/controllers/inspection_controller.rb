@@ -1,11 +1,12 @@
 class InspectionController < ApplicationController
   before_action :set_inspection, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   def index
     @query = Inspection.ransack(params[:q])
     @query.sorts = ['created_at desc']
     @pagy, @inspections = pagy(@query.result.
       includes(:device, :creator, :performer))
+
   end
 
   def new
