@@ -26,9 +26,11 @@
         <% if user_signed_in? %>
           <div class="dropdown text-end">
             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= image_tag "atom-logo.svg", class: "rounded-circle", width: "32", height: "32", alt: "avatar" %>
+              <%= image_tag "atom-logo.svg", class: "mx-1", width: "32", height: "32", alt: "avatar" %>
+              <%= current_user.first_name %>
+              <%= current_user.last_name%>
             </a>
-            <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+            <ul class="dropdown-menu dropdown-menu-lg-end text-small" aria-labelledby="dropdownUser1">
               <li><a class="dropdown-item" href="#">Админ. панель</a></li>
               <li><a class="dropdown-item" href="#">Настройки</a></li>
               <li><a class="dropdown-item" href="#">Профиль</a></li>

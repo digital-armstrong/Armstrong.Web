@@ -6,7 +6,6 @@ class InspectionController < ApplicationController
     @query.sorts = ['created_at desc']
     @pagy, @inspections = pagy(@query.result.
       includes(:device, :creator, :performer))
-
   end
 
   def new

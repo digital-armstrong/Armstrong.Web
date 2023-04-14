@@ -11,7 +11,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   def create
-    params[:role] ||= User::ROLE.second
     super
   end
 

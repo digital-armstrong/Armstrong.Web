@@ -229,7 +229,17 @@ end
   Post.create(
     user: User.first,
     title: "This is post title №#{i}",
-    body: "Some who have read the book, or at any rate have reviewed it, found it boring, absurd, or contemptible, and I have no cause to complain, since I have similar opinions of their works, or of the kinds of writing that they evidently prefer."
+    body: "Some who have read the book, or at any rate have reviewed it, found it boring, absurd, or contemptible, and I have no cause to complain, since I have similar opinions of their works, or of the kinds of writing that they evidently prefer.",
+    category: "Public"
+  )
+end
+
+2.times do |i|
+  Post.create(
+    user: User.first,
+    title: "This is post title №#{i}",
+    body: "Some who have read the book, or at any rate have reviewed it, found it boring, absurd, or contemptible, and I have no cause to complain, since I have similar opinions of their works, or of the kinds of writing that they evidently prefer.",
+    category: "УРБ-106"
   )
 end
 
