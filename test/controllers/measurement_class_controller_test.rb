@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class MeasurementClassControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   def setup
+    sign_in(users(:admin))
     @measurement_group = create(:measurement_group)
   end
 
