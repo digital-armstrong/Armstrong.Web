@@ -1,5 +1,6 @@
 class DeviceComponentController < ApplicationController
   before_action :set_device_component, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @query = DeviceComponent.ransack(params[:q])

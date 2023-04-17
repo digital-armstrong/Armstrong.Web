@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class PostControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   def setup
+    sign_in(users(:admin))
     @user = create(:user)
   end
 

@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class ManufacturerControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
+  def setup
+    sign_in(users(:admin))
+  end
+
   test 'should get index' do
     get :index
     assert_response :success

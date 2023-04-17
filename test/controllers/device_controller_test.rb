@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class DeviceControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+
   def setup
+    sign_in(users(:admin))
     @device_model = create(:device_model)
     @device_reg_group = create(:device_reg_group)
   end
