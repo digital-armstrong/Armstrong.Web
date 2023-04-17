@@ -11,7 +11,7 @@
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
-          <%= search_form_for(@query, url:device_component_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+          <%= search_form_for(@query, url:admin_device_component_index_path, method: :get, class: "rounded accordion-body") do |f| %>
             <div class="row">
               <div class="col">
                 <%= f.label :serial_id %>
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <%= link_to new_device_component_path, class: "btn btn-primary my-3 w-100 shadow" do %>
+    <%= link_to new_admin_device_component_path, class: "btn btn-primary my-3 w-100 shadow" do %>
       <i class="bi bi-plus-square"></i><span> Добавить</span>
     <% end %>
   </div>
@@ -59,7 +59,7 @@
       </thead>
       <tbody>
         <% @device_components.each do |device_component| %>
-        <tr onclick="document.location = `<%=device_component_path(device_component)%>`" style="cursor:pointer">
+        <tr onclick="document.location = `<%=admin_device_component_path(device_component)%>`" style="cursor:pointer">
             <td><%= device_component.serial_id %></td>
             <td><%= device_component.name %></td>
             <td><%= device_component.measurement_min %></td>

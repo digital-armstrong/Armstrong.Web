@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'home#index'
+  root 'post#index'
 
   post 'device/download', to: 'device#download'
 
@@ -10,15 +10,21 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    get '', to: 'admin#index'
+    resources :users
+    resources :device, :device_model, :measurement_class,  :device_component
+    resources :manufacturer, :measurement_group, :device_reg_group, :supplementary_kit, except: [:show]
+  end
+
   devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    sessions: 'users/sessions'
   }
+
   resources :home
   resources :armstrong, only: [:index, :show]
   resources :about, only: [:index]
-  resources :device, :device_model, :measurement_class,  :device_component, :inspection
-  resources :manufacturer, :measurement_group, :device_reg_group, :supplementary_kit, except: [:show]
+  resources :device, :inspection
   resources :post
 
 end

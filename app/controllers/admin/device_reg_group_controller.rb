@@ -1,4 +1,4 @@
-class DeviceRegGroupController < ApplicationController
+class Admin::DeviceRegGroupController < ApplicationController
   before_action :set_device_reg_group, only: [:edit, :update, :destroy]
   load_and_authorize_resource
 

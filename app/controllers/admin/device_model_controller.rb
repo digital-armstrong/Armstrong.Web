@@ -1,4 +1,4 @@
-class DeviceModelController < ApplicationController
+class Admin::DeviceModelController < ApplicationController
   before_action :set_device_model, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 

@@ -3,7 +3,8 @@ User.create(
   first_name: 'Admin',
   last_name: 'Admin',
   email: 'admin@admin.ru',
-  password: '12345678'
+  password: '12345678',
+  role: 'admin'
 )
 
 10.times do |i|
@@ -12,7 +13,8 @@ User.create(
     first_name: "First#{i}",
     last_name: "Last#{i}",
     email: "engineer#{i}@email.ru",
-    password: "123456789#{i}"
+    password: "123456789#{i}",
+    role: 'engineer'
   )
 end
 
@@ -21,8 +23,9 @@ end
     tabel_id: 82000 + i,
     first_name: "First#{i}",
     last_name: "Last#{i}",
-    email: "engineer#{i}@email.ru",
-    password: "123456789#{i}"
+    email: "inspector#{i}@email.ru",
+    password: "123456789#{i}",
+    role: 'inspector'
   )
 end
 

@@ -1,4 +1,4 @@
-class MeasurementClassController < ApplicationController
+class Admin::MeasurementClassController < ApplicationController
   before_action :set_measurement_class, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
