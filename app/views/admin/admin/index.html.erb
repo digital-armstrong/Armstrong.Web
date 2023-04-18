@@ -1,11 +1,1 @@
-<ul class="nav nav-tabs">
-  <li class="nav-item">
-    <%= link_to "Пользователи", admin_users_path, class: 'nav-link active', aria_current: 'page' %>
-  </li>
-  <li class="nav-item">
-    <%= link_to "Приборы", admin_device_index_path, class: 'nav-link' %>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Инспекции</a>
-  </li>
-</ul>
+<%= render 'shared/admin_navbar', selected: "user" %>
