@@ -12,6 +12,51 @@
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url:admin_users_path, method: :get, data:{controller: "filter"}, class: "rounded accordion-body") do |f| %>
             <div class="row">
+              <div class="col">
+                <%= f.label :tabel_id, class:"mb-1" %>
+                <%= f.search_field :tabel_id_eq, class: 'form-control', placeholder: '1' %>
+              </div>
+              <div class="col">
+                <%= f.label :first_name, class:"mb-1"%>
+                <%= f.search_field :first_name_cont, class: 'form-control', placeholder: 'Иван' %>
+              </div>
+              <div class="col">
+                <%= f.label :last_name, class:"mb-1" %>
+                <%= f.search_field :last_name_cont, class: 'form-control', placeholder: 'Иванов' %>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col">
+                <%= f.label :second_name, class:"mb-1" %>
+                <%= f.search_field :second_name_cont, class: 'form-control', placeholder: 'Иванович' %>
+              </div>
+              <div class="col">
+                <%= f.label :role, class:"mb-1" %>
+                <%= f.select(:role_eq, {:collection => User::ROLES.sort.map {|k,v| [v,k]}},
+                {:include_blank => 'Не учитывать'}, {:class =>'form-select form-select'})%>
+              </div>
+              <div class="col">
+                <%= f.label :email, class:"mb-1" %>
+                <%= f.search_field :email_cont, class: 'form-control', placeholder: 'Иванович' %>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col">
+                <%= f.label :phone, class:"mb-1" %>
+                <%= f.search_field :phone_cont, class: 'form-control', placeholder: '+79021234578' %>
+              </div>
+              <div class="col">
+                <%= f.label :created_at, class:"mb-1" %>
+                <%= f.date_field :created_at_gteq, class: 'form-control-sm' %>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col"></div>
+              <div class="col"></div>
+              <%= f.submit "Применить", class: 'col btn btn-primary w-100'%>
+              <div class="col"></div>
+              <div class="col"></div>
+            </div>
               
           <% end %>
         </div>
@@ -20,12 +65,11 @@
     <%= link_to new_admin_user_path, class: "btn btn-primary my-3 w-100 shadow" do %>
       <i class="bi bi-plus-square"></i><span> Добавить</span>
     <% end %>
-
+  </div>
   <div class="col shadow rounded">
     <table class="table table-hover">
       <thead>
         <tr>
-        <th scope="col"></th>
           <th scope="col"><%=t('.tabel_id')%></th>
           <th scope="col"><%=t('.last_name')%></th>
           <th scope="col"><%=t('.first_name')%></th>
@@ -41,7 +85,6 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-          <td><%= user.id %></td>
             <td><%= user.tabel_id %></td>
             <td><%= user.last_name %></td>
             <td><%= user.first_name %></td>
@@ -67,7 +110,6 @@
     </table>
   </div>
 </div>
-  </div>
 <div class="row my-5">
   <div class="col-2">
   </div>

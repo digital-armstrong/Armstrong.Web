@@ -9,11 +9,6 @@ class Admin::DeviceComponentController < ApplicationController
       order(:serial_id))
   end
 
-  def show
-    @device_components = DeviceComponent.where(supplementary_kit_id: @device_component.supplementary_kit_id).
-      excluding(@device_component)
-  end
-
   def new
     @device_component = DeviceComponent.new
   end
@@ -21,7 +16,7 @@ class Admin::DeviceComponentController < ApplicationController
   def create
     @device_component = DeviceComponent.new(device_component_params)
     if @device_component.save
-      redirect_to(device_component_index_path)
+      redirect_to(admin_device_component_index_path)
     else
       render(:new)
     end
@@ -29,7 +24,7 @@ class Admin::DeviceComponentController < ApplicationController
 
   def update
     if @device_component.update(device_component_params)
-      redirect_to(device_component_path)
+      redirect_to(admin_device_component_index_path)
     else
       render(:edit)
     end
@@ -37,7 +32,7 @@ class Admin::DeviceComponentController < ApplicationController
 
   def destroy
     @device_component.destroy
-    redirect_to(device_component_index_path)
+    redirect_to(admin_device_component_index_path)
   end
 
   private

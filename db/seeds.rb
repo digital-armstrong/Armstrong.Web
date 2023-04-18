@@ -29,6 +29,16 @@ end
   )
 end
 
+10.times do |i|
+  User.create(
+    tabel_id: 92000 + i,
+    first_name: "First#{i}",
+    last_name: "Last#{i}",
+    email: "dosimetrist#{i}@email.ru",
+    password: "123456789#{i}",
+    role: 'dosimetrist'
+  )
+end
 # seed Manufacturers
 
 Manufacturer.create(

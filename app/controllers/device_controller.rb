@@ -1,13 +1,8 @@
 class DeviceController < ApplicationController
+  include DeviceConcern
   before_action :authenticate_user!
   before_action :set_device, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
-
-  def show
-    unless @device.supplementary_kit_id.nil?
-      @device_components = DeviceComponent.where(supplementary_kit_id: @device.supplementary_kit_id)
-    end
-  end
 
   def index
     @query = Device.ransack(params[:q])
@@ -16,30 +11,25 @@ class DeviceController < ApplicationController
       order(:tabel_id))
   end
 
-  def update
-    if @device.update(device_params)
-      redirect_to(device_path)
-    else
-      render(:edit)
-    end
-  end
-
-  def destroy
-    @device.destroy
-    redirect_to(device_index_path)
-  end
-
   def new
     @device = Device.new
   end
 
   def create
-    @device = Device.new(device_params)
-    if @device.save
-      redirect_to(device_index_path)
-    else
-      render(:new)
-    end
+    device_create(device_index_path, device_params)
+  end
+  
+  def show
+    device_show(@device)
+  end
+
+  def update
+    device_update(@device, device_params, device_path)
+  end
+
+  def destroy
+    @device.destroy
+    redirect_to(device_index_path)
   end
 
   def download

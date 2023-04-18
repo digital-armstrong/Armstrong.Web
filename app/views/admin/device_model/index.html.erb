@@ -1,5 +1,5 @@
 <% provide :page_title, "Модели" %>
-<%= render 'shared/device_bread', selected: "device_model" %>
+<%= render 'shared/admin/navbar/device_bread', selected: "device_model" %>
 <div class="row">
   <div>
     <div class="accordion mb-3" id="accordionFilter">
@@ -10,7 +10,7 @@
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
-          <%= search_form_for(@query, url:device_model_index_path, method: :get, data:{controller: "filter"}, class: "rounded accordion-body") do |f| %>
+          <%= search_form_for(@query, url:admin_device_model_index_path, method: :get, data:{controller: "filter"}, class: "rounded accordion-body") do |f| %>
             <div class="row">
               <div class="col">
                 <%= f.label :name, class:"mb-1"%>
@@ -81,10 +81,10 @@
         </div>
       </div>
     </div>
-    <%= link_to new_device_model_path, class: "btn btn-primary my-3 w-100 shadow" do %>
+    <%= link_to new_admin_device_model_path, class: "btn btn-primary my-3 w-100 shadow" do %>
       <i class="bi bi-plus-square"></i><span> Добавить</span>
     <% end %>
-
+  </div>
   <div class="col shadow rounded">
     <table class="table table-hover">
       <thead>
@@ -103,7 +103,7 @@
       </thead>
       <tbody>
         <% @device_models.each do |device_model| %>
-          <tr onclick="document.location = `<%=device_model_path(device_model)%>`" style="cursor:pointer">
+          <tr onclick="document.location = `<%=admin_device_model_path(device_model)%>`" style="cursor:pointer">
             <td><%= device_model.name %></td>
             <td><%= device_model.manufacturer.name %></td>
             <td><%= device_model.measurement_group.name %></td>
@@ -120,7 +120,6 @@
     </table>
   </div>
 </div>
-  </div>
 <div class="row my-5">
   <div class="col-2">
   </div>

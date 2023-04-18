@@ -15,7 +15,7 @@ class Admin::MeasurementGroupController < ApplicationController
   def create
     @measurement_group = MeasurementGroup.new(measurement_group_params)
     if @measurement_group.save
-      redirect_to(measurement_group_index_path)
+      redirect_to(admin_measurement_group_index_path)
     else
       render(:new)
     end
@@ -23,7 +23,7 @@ class Admin::MeasurementGroupController < ApplicationController
 
   def update
     if @measurement_group.update(measurement_group_params)
-      redirect_to(measurement_group_path)
+      redirect_to(admin_measurement_group_path)
     else
       render(:edit)
     end
@@ -37,7 +37,7 @@ class Admin::MeasurementGroupController < ApplicationController
     else
       flash[:error] = 'Ошибка! На этот группу измерений ссылаются классы измерений!'
     end
-    redirect_to(measurement_group_index_path)
+    redirect_to(admin_measurement_group_index_path)
   end
 
   private

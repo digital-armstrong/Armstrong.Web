@@ -16,7 +16,7 @@ class Admin::SupplementaryKitController < ApplicationController
   def create
     @supplementary_kit = SupplementaryKit.new(supplementary_kit_params)
     if @supplementary_kit.save
-      redirect_to(supplementary_kit_index_path)
+      redirect_to(admin_supplementary_kit_index_path)
     else
       render(:new)
     end
@@ -24,7 +24,7 @@ class Admin::SupplementaryKitController < ApplicationController
 
   def update
     if @supplementary_kit.update(supplementary_kit_params)
-      redirect_to(supplementary_kit_path)
+      redirect_to(admin_supplementary_kit_path)
     else
       render(:edit)
     end
@@ -39,7 +39,7 @@ class Admin::SupplementaryKitController < ApplicationController
     else
       flash[:error] = 'Ошибка! На этот набор ссылаются приборы или компоненты!'
     end
-    redirect_to(supplementary_kit_index_path)
+    redirect_to(admin_supplementary_kit_index_path)
   end
 
   private

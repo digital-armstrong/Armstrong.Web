@@ -60,10 +60,10 @@
     </p>
     <div class="row px-0" style="max-width:650px; min-width:600px">
       <div class="col-2">
-        <%= link_to "Изменить", edit_device_model_path(@device_model), class: "btn btn-primary"%>
+        <%= link_to "Изменить", edit_admin_device_model_path(@device_model), class: "btn btn-primary"%>
       </div>
       <div class="col-2">
-        <%= button_to "Удалить", device_model_path(@device_model), method: :delete, class: "btn btn-danger"%>
+        <%= button_to "Удалить", admin_device_model_path(@device_model), method: :delete, class: "btn btn-danger"%>
       </div>
     </div>
   </div>

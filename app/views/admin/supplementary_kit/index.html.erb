@@ -1,5 +1,5 @@
 <% provide :page_title, "Наборы" %>
-<%= render 'shared/device_bread', selected: "supplementary_kit" %>
+<%= render 'shared/admin/navbar/device_bread', selected: "supplementary_kit" %>
 <%= render 'shared/flash_alert' %>
 <div class="row">
   <div>
@@ -11,29 +11,29 @@
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
-          <%= search_form_for(@query, url:supplementary_kit_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+          <%= search_form_for(@query, url:admin_supplementary_kit_index_path, method: :get, class: "rounded accordion-body") do |f| %>
             <div class="row">
-            <div class="col">
-              <%= f.label :name %>
-              <%= f.search_field :name_cont, class:"form-control", placeholder:"БДЗБ" %>
+              <div class="col">
+                <%= f.label :name %>
+                <%= f.search_field :name_cont, class:"form-control", placeholder:"БДЗБ" %>
+              </div>
+              <div class="col">
+                <%= f.label :serial_id %>
+                <%= f.search_field :serial_id_cont, class:"form-control", placeholder:"0-123-N" %>
+              </div>
+              <div class="col">
+                <%= f.label :description %>
+                <%= f.search_field :description_cont, class:"form-control", placeholder:"Набор для..." %>
+              </div>
+              <div class="row">
+                <%= f.submit "Применить", class: 'btn btn-primary w-100 mt-4'%>
+              </div>
             </div>
-            <div class="col">
-              <%= f.label :serial_id %>
-              <%= f.search_field :serial_id_cont, class:"form-control", placeholder:"0-123-N" %>
-            </div>
-            <div class="col">
-              <%= f.label :description %>
-              <%= f.search_field :description_cont, class:"form-control", placeholder:"Набор для..." %>
-            </div>
-            <div class="row">
-              <%= f.submit "Применить", class: 'btn btn-primary w-100 mt-4'%>
-            </div>
-            <% end %>
-          </div>
+          <% end %>
         </div>
       </div>
     </div>
-    <%= link_to new_supplementary_kit_path, class: "btn btn-primary my-3 w-100 shadow" do %>
+    <%= link_to new_admin_supplementary_kit_path, class: "btn btn-primary my-3 w-100 shadow" do %>
       <i class="bi bi-plus-square"></i><span> Добавить</span>
     <% end %>
   </div>
@@ -59,10 +59,10 @@
               </p>
               <div class="row px-0 mt-2" style="max-width:650px; min-width:600px">
                 <div class="col-2">
-                  <%= link_to "Изменить", edit_supplementary_kit_path(supplementary_kit), class: "btn btn-primary"%>
+                  <%= link_to "Изменить", edit_admin_supplementary_kit_path(supplementary_kit), class: "btn btn-primary"%>
                 </div>
                 <div class="col-2">
-                  <%= button_to "Удалить", supplementary_kit_path(supplementary_kit), method: :delete, class: "btn btn-danger"%>
+                  <%= button_to "Удалить", admin_supplementary_kit_path(supplementary_kit), method: :delete, class: "btn btn-danger"%>
                 </div>
               </div>
             </div>

@@ -44,10 +44,10 @@
     <% if can? :manage, Device %>
       <div class="row px-0" style="max-width:650px; min-width:600px">
         <div class="col-2">
-          <%= link_to "Изменить", edit_device_path(@device), class: "btn btn-primary"%>
+          <%= link_to "Изменить", edit_path, class: "btn btn-primary"%>
         </div>
         <div class="col-2">
-          <%= button_to "Удалить", device_path(@device), method: :delete, class: "btn btn-danger"%>
+          <%= button_to "Удалить", delete_path, method: :delete, class: "btn btn-danger"%>
         </div>
       </div>
     <% end %>

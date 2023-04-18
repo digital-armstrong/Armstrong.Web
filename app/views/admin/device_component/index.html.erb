@@ -1,5 +1,5 @@
 <% provide :page_title, "Компоненты" %>
-<%= render 'shared/device_bread', selected: "device_component" %>
+<%= render 'shared/admin/navbar/device_bread', selected: "device_component" %>
 <%= render 'shared/flash_alert' %>
 <div class="row">
   <div>
@@ -51,21 +51,38 @@
         <tr>
           <th scope="col">S/N</th>
           <th scope="col">Название</th>
+          <th scope="col">Набор</th>
           <th scope="col">Мин.</th>
           <th scope="col">Макс.</th>
           <th scope="col">Ед. изм</th>
           <th scope="col">Описание</th>
+          <th scope="col" style="width: 10%">Действие</th>
         </tr>
       </thead>
       <tbody>
         <% @device_components.each do |device_component| %>
-        <tr onclick="document.location = `<%=admin_device_component_path(device_component)%>`" style="cursor:pointer">
+        <tr>
             <td><%= device_component.serial_id %></td>
             <td><%= device_component.name %></td>
+            <% if device_component.supplementary_kit.nil? %>
+              <td></td>
+            <% else %>
+              <td><%= device_component.supplementary_kit.name %></td>
+            <% end %>
             <td><%= device_component.measurement_min %></td>
             <td><%= device_component.measurement_max %></td>
             <td><%= device_component.measuring_unit %></td>
             <td><%= device_component.description %></td>
+            <td>
+             <div class="d-flex w-auto">
+                <%= link_to edit_admin_device_component_path(device_component.id), class: "btn" do %>
+                  <i class="bi bi-pen"></i>
+                <% end %>
+                <%= button_to admin_device_component_path(device_component.id), method: :delete, form: { data: { turbo_confirm: t('delete_confirm') } }, class: "btn" do %>
+                  <i class="bi bi-trash"></i>
+                <% end %>
+              </div>
+            </td>
           </tr>
         <% end %>
       </tbody>

@@ -23,7 +23,11 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: true,
             format: { with: @email_regex }
-
+  
+  def self.ransackable_attributes(auth_object = nil)
+    ["avatar_url", "created_at", "email", "encrypted_password", "first_name", "id", "last_name", "phone", "remember_created_at", "reset_password_sent_at", "reset_password_token", "role", "second_name", "tabel_id", "updated_at"]
+  end
+  
   def admin?
     role == 'admin'
   end

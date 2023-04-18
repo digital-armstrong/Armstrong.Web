@@ -15,7 +15,7 @@ class Admin::ManufacturerController < ApplicationController
   def create
     @manufacturer = Manufacturer.new(manufacturer_params)
     if @manufacturer.save
-      redirect_to(manufacturer_index_path)
+      redirect_to(admin_manufacturer_index_path)
     else
       render(:new)
     end
@@ -23,7 +23,7 @@ class Admin::ManufacturerController < ApplicationController
 
   def update
     if @manufacturer.update(manufacturer_params)
-      redirect_to(manufacturer_path)
+      redirect_to(admin_manufacturer_index_path)
     else
       render(:edit)
     end
@@ -37,7 +37,7 @@ class Admin::ManufacturerController < ApplicationController
     else
       flash[:error] = 'Ошибка! На этого производителя ссылаются модели приборов!'
     end
-    redirect_to(manufacturer_index_path)
+    redirect_to(admin_manufacturer_index_path)
   end
 
   private

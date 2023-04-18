@@ -19,9 +19,9 @@ class Ability
     end
 
     if user.engineer?
-      can(:read, :all)
-      cannot(:read, User)
-      cannot(:read, Inspection)
+      can(:manage, Device)
+      cannot(:manage, User)
+      cannot(:manage, Inspection)
     end
   end
 end

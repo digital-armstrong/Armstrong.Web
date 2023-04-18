@@ -15,7 +15,7 @@ class Admin::MeasurementClassController < ApplicationController
   def create
     @measurement_class = MeasurementClass.new(measurement_class_params)
     if @measurement_class.save
-      redirect_to(measurement_class_index_path)
+      redirect_to(admin_measurement_class_index_path)
     else
       render(:new)
     end
@@ -23,7 +23,7 @@ class Admin::MeasurementClassController < ApplicationController
 
   def update
     if @measurement_class.update(measurement_class_params)
-      redirect_to(measurement_class_path)
+      redirect_to(admin_measurement_class_path)
     else
       render(:edit)
     end
@@ -37,7 +37,7 @@ class Admin::MeasurementClassController < ApplicationController
     else
       flash[:error] = 'Ошибка! На класс измерения ссылаются модели приборов!'
     end
-    redirect_to(measurement_class_index_path)
+    redirect_to(admin_measurement_class_index_path)
   end
 
   private

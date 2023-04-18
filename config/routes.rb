@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get '', to: 'admin#index'
     resources :users
-    resources :device, :device_model, :measurement_class,  :device_component
-    resources :manufacturer, :measurement_group, :device_reg_group, :supplementary_kit, except: [:show]
+    resources :device, :device_model, :measurement_class
+    resources :manufacturer, :measurement_group, :device_reg_group, :supplementary_kit, :device_component, except: [:show]
   end
 
   devise_for :users, controllers: {

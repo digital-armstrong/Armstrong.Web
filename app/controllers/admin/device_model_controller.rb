@@ -16,7 +16,7 @@ class Admin::DeviceModelController < ApplicationController
   def create
     @device_model = DeviceModel.new(device_model_params)
     if @device_model.save
-      redirect_to(device_model_index_path)
+      redirect_to(admin_device_model_index_path)
     else
       render(:new)
     end
@@ -24,7 +24,7 @@ class Admin::DeviceModelController < ApplicationController
 
   def update
     if @device_model.update(device_model_params)
-      redirect_to(device_model_path)
+      redirect_to(admin_device_model_path)
     else
       render(:edit)
     end
@@ -35,10 +35,10 @@ class Admin::DeviceModelController < ApplicationController
 
     if assigned_devices_count.zero?
       @device_model.destroy
-      redirect_to(device_model_index_path)
+      redirect_to(admin_device_model_index_path)
     else
       flash[:error] = 'Ошибка! На модель прибора ссылаются приборы!'
-      redirect_to(device_model_path(@device_model))
+      redirect_to(admin_device_model_path(@device_model))
     end
   end
 

@@ -1,5 +1,5 @@
 <% provide :page_title, "Производители" %>
-<%= render 'shared/device_bread', selected: "manufacturer" %>
+<%= render 'shared/admin/navbar/device_bread', selected: "manufacturer" %>
 <%= render 'shared/flash_alert' %>
 <div class="row">
   <div>
@@ -11,7 +11,7 @@
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
-          <%= search_form_for(@query, url:manufacturer_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+          <%= search_form_for(@query, url:admin_manufacturer_index_path, method: :get, class: "rounded accordion-body") do |f| %>
             <div class="row">
               <div class="col">
                 <%= f.label :name, class: "mb-2" %>
@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <%= link_to new_manufacturer_path, class: "btn btn-primary my-3 w-100 shadow" do %>
+    <%= link_to new_admin_manufacturer_path, class: "btn btn-primary my-3 w-100 shadow" do %>
       <i class="bi bi-plus-square"></i><span> Добавить</span>
     <% end %>
   </div>
@@ -67,10 +67,10 @@
             <td><%= manufacturer.site_url %></td>
             <td>
               <div class="d-flex">
-                <%= link_to edit_manufacturer_path(manufacturer.id), class: "btn" do %>
+                <%= link_to edit_admin_manufacturer_path(manufacturer.id), class: "btn" do %>
                   <i class="bi bi-pen"></i>
                 <% end %>
-                <%= button_to manufacturer_path(manufacturer.id), method: :delete, class: "btn" do %>
+                <%= button_to admin_manufacturer_path(manufacturer.id), method: :delete, class: "btn" do %>
                   <i class="bi bi-trash"></i>
                 <% end %>
               </div>

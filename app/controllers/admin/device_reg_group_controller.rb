@@ -16,20 +16,15 @@ class Admin::DeviceRegGroupController < ApplicationController
   def create
     @device_reg_group = DeviceRegGroup.new(device_reg_group_params)
     if @device_reg_group.save
-      redirect_to(device_reg_group_index_path)
+      redirect_to(admin_device_reg_group_index_path)
     else
       @query = DeviceRegGroup.ransack(params[:q])
-      @device_reg_groups = @query.result.
-        order(:name).
-        page(params[:page]).
-        per(params[:per_page])
-      render(:index)
     end
   end
 
   def update
     if @device_reg_group.update(device_reg_group_params)
-      redirect_to(device_reg_group_path)
+      redirect_to(admin_device_reg_group_path)
     else
       render(:edit)
     end
@@ -43,7 +38,7 @@ class Admin::DeviceRegGroupController < ApplicationController
     else
       flash[:error] = 'Ошибка! На эту регистрационную группу ссылаются приборы.'
     end
-    redirect_to(device_reg_group_index_path)
+    redirect_to(admin_device_reg_group_index_path)
   end
 
   private
