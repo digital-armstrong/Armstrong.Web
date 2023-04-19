@@ -1,2 +1,6 @@
-<h1>Armstrong#index</h1>
-<p>Find me in app/views/armstrong/index.html.erb</p>
+<h1>Components#index</h1>
+<div id="root"></div>
+
+<%= content_tag(:div, "", id: "app", data: {
+  controller: "armstrong",
+})%>
