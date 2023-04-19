@@ -3,7 +3,7 @@
 class Ability
   include CanCan::Ability
   def initialize(user)
-    puts(user)
+    user ||= User.new
     cannot(:read, :all)
 
     if user.present?

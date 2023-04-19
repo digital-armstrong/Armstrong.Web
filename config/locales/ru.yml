@@ -81,6 +81,13 @@ ru:
     form:
       title: Заголовок поста
       body: Текст поста
+  admin:
+    users:
+      index:
+        created_at_from: Создан от
+        created_at_to: Создан до
+        updated_at_from: Обновлен от
+        updated_at_to: Обновлен до
   home:
     index:
       b_new_post: Новый пост

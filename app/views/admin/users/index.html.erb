@@ -46,8 +46,20 @@
                 <%= f.search_field :phone_cont, class: 'form-control', placeholder: '+79021234578' %>
               </div>
               <div class="col">
-                <%= f.label :created_at, class:"mb-1" %>
-                <%= f.date_field :created_at_gteq, class: 'form-control-sm' %>
+                <%= f.label t('.created_at_from'), class:"mb-1" %>
+                <%= f.date_field :created_at_gteq, class: 'form-control ' %>
+              </div>
+              <div class="col">
+                <%= f.label t('.created_at_to'), class:"mb-1" %>
+                <%= f.date_field :created_at_lteq, class: 'form-control' %>
+              </div>
+              <div class="col">
+                <%= f.label t('.updated_at_from'), class:"mb-1" %>
+                <%= f.date_field :updated_at_gteq, class: 'form-control' %>
+              </div>
+              <div class="col">
+                <%= f.label t('.updated_at_to'), class:"mb-1" %>
+                <%= f.date_field :updated_at_lteq, class: 'form-control' %>
               </div>
             </div>
             <div class="row mt-2">
@@ -57,7 +69,7 @@
               <div class="col"></div>
               <div class="col"></div>
             </div>
-              
+
           <% end %>
         </div>
       </div>
@@ -99,8 +111,10 @@
                 <%= link_to edit_admin_user_path(user), class: "btn" do %>
                   <i class="bi bi-pen"></i>
                 <% end %>
-                <%= button_to admin_user_path(user), method: :delete, class: "btn" do %>
-                  <i class="bi bi-trash"></i>
+                <% unless user.id == current_user.id %>
+                  <%= button_to admin_user_path(user), method: :delete, class: "btn" do %>
+                    <i class="bi bi-trash"></i>
+                  <% end %>
                 <% end %>
               </div>
             </td>

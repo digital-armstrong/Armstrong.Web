@@ -8,7 +8,7 @@ class Admin::DeviceController < ApplicationController
       includes(:device_model, :supplementary_kit).
       order(:tabel_id))
   end
-  
+
   def new
     @device = Device.new
   end
@@ -16,7 +16,7 @@ class Admin::DeviceController < ApplicationController
   def create
     device_create(admin_device_index_path, device_params)
   end
-  
+
   def show
     device_show(@device)
   end
@@ -29,7 +29,7 @@ class Admin::DeviceController < ApplicationController
     @device.destroy
     redirect_to(admin_device_index_path)
   end
-  
+
   private
 
   def set_device

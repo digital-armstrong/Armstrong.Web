@@ -18,7 +18,7 @@ class DeviceController < ApplicationController
   def create
     device_create(device_index_path, device_params)
   end
-  
+
   def show
     device_show(@device)
   end
