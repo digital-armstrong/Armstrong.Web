@@ -1,20 +1,39 @@
 import React from "react";
 
 export default function Table({ channels }) {
-  console.log(channels);
   return (
     <table className="table">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>Title</th>
+          <th>SC</th>
+          <th>Server</th>
+          <th>Channel</th>
+          <th>Name</th>
+          <th>Device</th>
+          <th>Room</th>
+          <th>Location</th>
+          <th>Value /s</th>
+          <th>Value /ns</th>
+          <th>Datetime</th>
+          <th>Count</th>
         </tr>
       </thead>
       <tbody>
         {channels.map((channel) => (
           <tr key={channel.id}>
-            <td>{channel.id}</td>
-            <td>{channel.title}</td>
+            <td>
+              <input type="checkbox" checked={channel.is_special_control === true ? "checked" : null} />
+            </td>
+            <td>{channel.server_id}</td>
+            <td>{channel.channel_id}</td>
+            <td>{channel.name}</td>
+            <td>{channel.device_id}</td>
+            <td>{channel.room_id}</td>
+            <td>{channel.location_description}</td>
+            <td>{channel.event_system_value}</td>
+            <td>{channel.event_not_system_value}</td>
+            <td>{channel.event_datetime}</td>
+            <td>{channel.event_count}</td>
           </tr>
         ))}
       </tbody>

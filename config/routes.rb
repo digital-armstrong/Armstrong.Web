@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1,  defaults: {format: 'json'} do
-      resources :filters, only: :index
+      resources :filters, :armstrong, only: :index
     end
   end
 

@@ -6,9 +6,11 @@ export default function ArmsTable() {
   const [data, setData] = useState({});
   async function getAllTodos() {
     let result = await ky
-      .get("https://jsonplaceholder.typicode.com/todos/")
+      .get("/api/v1/armstrong")
       .json();
     setData(result);
+
+    console.log(result);
   }
   useEffect(() => {
     getAllTodos();
