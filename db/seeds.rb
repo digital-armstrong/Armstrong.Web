@@ -266,3 +266,79 @@ end
     description: "Description #{i}"
   )
 end
+
+
+Organization.create(
+  name: "АО ГНЦ НИИАР",
+  full_address: "Западное шоссе 9",
+  zip_code: "9001",
+  phone: "5-55-55",
+  fax: "5-55-55",
+  email: "niiar@niiar.ru"
+)
+
+10.times do |i|
+  Division.create(
+    name: "Division-#{i}",
+    organization: Organization.first
+  )
+end
+
+10.times do |i|
+  Building.create(
+    name: "Build №#{i}",
+    organization: Organization.first
+  )
+end
+
+100.times do |i|
+  Room.create(
+    name: "#{i}",
+    building: Building.find_by(id: rand(1..10))
+  )
+end
+
+10.times do |i|
+  Service.create(
+    name: "Service-#{i}",
+    division: Division.find_by(id: rand(1..10)),
+    organization: Organization.first,
+    building: Building.find_by(id: rand(1..10))
+  )
+end
+
+10.times do |i|
+  Server.create(
+    name: "server-#{i}",
+    ip_adress: "192.168.20.#{i}",
+    inventory_id: i,
+    service: Service.find_by(id: rand(1..10)),
+    room: Room.find_by(id: rand(1..100))
+  )
+end
+
+200.times do |i|
+  Channel.create(
+    name: "ДКЗ-#{i}",
+    channel_id: "#{i}",
+    device: Device.find_by(id: rand(1..1000)),
+    room: Room.find_by(id: rand(1..100)),
+    server: Server.find_by(id: rand(1..10)),
+    service: Service.find_by(id: rand(1..10)),
+    location_description: "Description",
+    self_background: 1.1,
+    pre_emergency_limit: 2.2,
+    emergency_limit: 3.3,
+    consumptiom: 1.0,
+    conversion_coefficient: 0.0,
+    event_system_value: 0.0,
+    event_not_system_value: 0.0,
+    event_impulse_value: 0.0,
+    event_datetime: Time.now,
+    event_count: 0,
+    event_error_count: 0,
+    is_special_control: false,
+    is_online: true,
+    state: "normal"
+  )
+end
