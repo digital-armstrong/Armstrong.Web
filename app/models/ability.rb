@@ -4,13 +4,15 @@ class Ability
   include CanCan::Ability
   def initialize(user)
     user ||= User.new
-    cannot(:read, :all)
+
+    cannot(:manage, :device_admin)
 
     if user.present?
       can(:read, Post)
     else
       cannot(:read, :all)
     end
+
     if user.admin?
       can(:manage, :all)
     end
@@ -18,10 +20,14 @@ class Ability
     if user.dosimetrist?
     end
 
+    if user.inspector?
+      can(:manage, Inspection)
+    end
+
     if user.engineer?
       can(:manage, Device)
-      cannot(:manage, User)
-      cannot(:manage, Inspection)
+      cannot(:manage, :inspection)
+      cannot(:manage, :armstrong)
     end
   end
 end

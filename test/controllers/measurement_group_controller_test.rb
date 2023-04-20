@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class MeasurementGroupControllerTest < ActionController::TestCase
+class Admin::MeasurementGroupControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   def setup

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class SupplementaryKitControllerTest < ActionController::TestCase
+class Admin::SupplementaryKitControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
   def setup
     sign_in(users(:admin))
