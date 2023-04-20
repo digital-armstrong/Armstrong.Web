@@ -8,7 +8,7 @@ class Ability
     cannot(:manage, :device_admin)
 
     if user.present?
-      can(:read, Post)
+      can([:read, :create], Post)
     else
       cannot(:read, :all)
     end
