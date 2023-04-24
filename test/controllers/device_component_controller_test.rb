@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DeviceComponentControllerTest < ActionController::TestCase
+class Admin::DeviceComponentControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   def setup

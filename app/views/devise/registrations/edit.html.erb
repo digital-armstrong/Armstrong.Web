@@ -10,6 +10,14 @@
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
+    <%= f.input :first_name,
+                autofocus: true %>
+    <%= f.input :last_name %>
+    <%= f.input :second_name %>
+    <%= f.input :tabel_id %>
+    <%= f.input :email,
+                input_html: { autocomplete: "email" }%>
+    <%= f.input :phone %>
     <%= f.input :password,
                 hint: "leave it blank if you don't want to change it",
                 required: false,
@@ -24,12 +32,8 @@
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+      <%= f.button :submit, t("b_change"), class: "btn btn-primary" %>
+      <%= link_to "Back", :back, class: "btn btn-secondary" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>

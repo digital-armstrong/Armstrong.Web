@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ManufacturerControllerTest < ActionController::TestCase
+class Admin::ManufacturerControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   def setup

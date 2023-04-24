@@ -1,0 +1,54 @@
+<%= simple_form_for @device_model, as: :device_model, url: path, data: {turbo: false, controller: 'filter'}, class: "form-group row" do |f| %>
+  <div class="row">
+    <div class="col">
+      <%= f.input :name, placeholder: "Название устройства", input_html: {:tabindex => 1} %>
+    </div>
+    <div class="col">
+      <%= f.association :manufacturer, input_html: {:tabindex => 2}, include_blank: false %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.association :measurement_group, input_html: {:tabindex => 3, data: {'action': 'change->filter#filter' }, id: "filtrator"}, include_blank: false %>
+    </div>
+    <div class="col">
+      <%= f.association :measurement_class, input_html: {tabindex: 4, id:"filter"}, include_blank: false %>
+    </div>
+    <div class="col">
+      <%= f.input :measuring_unit, placeholder: "мЗв/ч", input_html: {:tabindex => 5} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.input :measurement_sensitivity, placeholder: "1.0", input_html: {:tabindex => 6} %>
+    </div>
+    <div class="col">
+      <%= f.input :measurement_min, placeholder: "1.0", input_html: {:tabindex => 7} %>
+    </div>
+    <div class="col">
+      <%= f.input :measurement_max, placeholder: "2.0", input_html: {:tabindex => 8} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.input :safety_class, placeholder: "3Н", input_html: {:tabindex => 9} %>
+    </div>
+    <div class="col">
+      <%= f.input :accuracy_class, placeholder: "0.25", input_html: {:tabindex => 10} %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <%= f.input :is_complete_device, input_html: {:tabindex => 11} %>
+      <%= f.input :is_tape_rolling_mechanism, input_html: {:tabindex => 12} %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div>
+    <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
+    <%= f.button :submit, "Назад", formaction: admin_device_model_index_path, formmethod: "get" %>
+  </div>
+<% end %>

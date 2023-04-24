@@ -1,6 +1,5 @@
 {
   "name": "app",
-  "private": "true",
   "dependencies": {
     "@hotwired/stimulus": "^3.2.1",
     "@hotwired/turbo-rails": "^7.2.5",
@@ -17,9 +16,11 @@
     "sass": "^1.58.3",
     "typescript": "^4.9.5"
   },
+  "license": "MIT",
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=assets --loader:.js=jsx",
     "build:css": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
     "check-types": "tsc --project tsconfig.json --noEmit --watch --preserveWatchOutput"
-  }
+  },
+  "packageManager": "yarn@3.5.0"
 }

@@ -1,0 +1,139 @@
+<% provide :page_title, "Панель администрирования" %>
+<%= render 'shared/flash_alert' %>
+<div class="row">
+  <div>
+    <div class="accordion mb-3" id="accordionFilter">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFilter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            Фильтрация
+          </button>
+        </h2>
+        <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+          <%= search_form_for(@query, url:admin_users_path, method: :get, data:{controller: "filter"}, class: "rounded accordion-body") do |f| %>
+            <div class="row">
+              <div class="col">
+                <%= f.label :tabel_id, class:"mb-1" %>
+                <%= f.search_field :tabel_id_eq, class: 'form-control', placeholder: '1' %>
+              </div>
+              <div class="col">
+                <%= f.label :first_name, class:"mb-1"%>
+                <%= f.search_field :first_name_cont, class: 'form-control', placeholder: 'Иван' %>
+              </div>
+              <div class="col">
+                <%= f.label :last_name, class:"mb-1" %>
+                <%= f.search_field :last_name_cont, class: 'form-control', placeholder: 'Иванов' %>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col">
+                <%= f.label :second_name, class:"mb-1" %>
+                <%= f.search_field :second_name_cont, class: 'form-control', placeholder: 'Иванович' %>
+              </div>
+              <div class="col">
+                <%= f.label :role, class:"mb-1" %>
+                <%= f.select(:role_eq, {:collection => User::ROLES.sort.map {|k,v| [v,k]}},
+                {:include_blank => 'Не учитывать'}, {:class =>'form-select form-select'})%>
+              </div>
+              <div class="col">
+                <%= f.label :email, class:"mb-1" %>
+                <%= f.search_field :email_cont, class: 'form-control', placeholder: 'Иванович' %>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col">
+                <%= f.label :phone, class:"mb-1" %>
+                <%= f.search_field :phone_cont, class: 'form-control', placeholder: '+79021234578' %>
+              </div>
+              <div class="col">
+                <%= f.label t('.created_at_from'), class:"mb-1" %>
+                <%= f.date_field :created_at_gteq, class: 'form-control ' %>
+              </div>
+              <div class="col">
+                <%= f.label t('.created_at_to'), class:"mb-1" %>
+                <%= f.date_field :created_at_lteq, class: 'form-control' %>
+              </div>
+              <div class="col">
+                <%= f.label t('.updated_at_from'), class:"mb-1" %>
+                <%= f.date_field :updated_at_gteq, class: 'form-control' %>
+              </div>
+              <div class="col">
+                <%= f.label t('.updated_at_to'), class:"mb-1" %>
+                <%= f.date_field :updated_at_lteq, class: 'form-control' %>
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col"></div>
+              <div class="col"></div>
+              <%= f.submit "Применить", class: 'col btn btn-primary w-100'%>
+              <div class="col"></div>
+              <div class="col"></div>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= link_to new_admin_user_path, class: "btn btn-primary my-3 w-100 shadow" do %>
+      <i class="bi bi-plus-square"></i><span> Добавить</span>
+    <% end %>
+  </div>
+  <div class="col shadow rounded">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col"><%=t('.tabel_id')%></th>
+          <th scope="col"><%=t('.last_name')%></th>
+          <th scope="col"><%=t('.first_name')%></th>
+          <th scope="col"><%=t('.second_name')%></th>
+          <th scope="col"><%=t('.role')%></th>
+          <th scope="col"><%=t('.email')%></th>
+          <th scope="col"><%=t('.phone')%></th>
+          <th scope="col"><%=t('.created_at')%></th>
+          <th scope="col"><%=t('.updated_at')%></th>
+          <th scope="col" style="width: 10%"><%=t('action')%></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.tabel_id %></td>
+            <td><%= user.last_name %></td>
+            <td><%= user.first_name %></td>
+            <td></td>
+            <td><%= user.role %></td>
+            <td><%= user.email %></td>
+            <td><%= user.phone %></td>
+            <td><%= user.created_at %></td>
+            <td><%= user.updated_at %></td>
+            <td>
+              <div class="d-flex w-auto">
+                <%= link_to edit_admin_user_path(user), class: "btn" do %>
+                  <i class="bi bi-pen"></i>
+                <% end %>
+                <% unless user.id == current_user.id %>
+                  <%= button_to admin_user_path(user), method: :delete, class: "btn" do %>
+                    <i class="bi bi-trash"></i>
+                  <% end %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row my-5">
+  <div class="col-2">
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <%= pagination @pagy %>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>

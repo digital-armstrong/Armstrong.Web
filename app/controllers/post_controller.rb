@@ -3,12 +3,22 @@ class PostController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
+  def index
+    @query = Post.ransack(params[:q])
+    @query.sorts = ['updated_at desc']
+    @pagy, @posts = pagy(@query.result)
+  end
+
   def new
     @post = Post.new
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = if current_user.admin?
+              Post.new(post_params)
+            else
+              current_user.posts.build(post_params)
+            end
 
     if @post.save
       redirect_to(post_path(@post.id))
