@@ -21,9 +21,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
+    if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
     if @user.update(user_params)
       flash[:success] = 'User was updated'
-      redirect_to(edit_admin_user_path(@user))
+      redirect_to(admin_users_path)
     else
       flash.now[:warning] = "User wasn't updated"
       render(:edit)
@@ -36,7 +40,8 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    params[:role] ||= 'engineer'
+    user_params[:role] ||= 'engineer'
+
     if @user.save
       flash[:success] = 'User was added'
       redirect_to(admin_users_path)
@@ -64,6 +69,15 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :tabel_id, :email, :name, :password, :password_confirmation, :role)
+    params.require(:user).permit(:first_name,
+                                 :last_name,
+                                 :second_name,
+                                 :tabel_id,
+                                 :email,
+                                 :name,
+                                 :phone,
+                                 :password,
+                                 :password_confirmation,
+                                 :role)
   end
 end

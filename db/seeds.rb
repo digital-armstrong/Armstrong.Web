@@ -1,5 +1,5 @@
 User.create(
-  tabel_id: 1,
+  tabel_id: 0,
   first_name: 'Admin',
   last_name: 'Admin',
   email: 'admin@admin.ru',

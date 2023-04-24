@@ -18,7 +18,8 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
   validates :tabel_id, numericality: { less_than_or_equal_to: 2147483647 }, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }
+  validate  :validate_tabel_id
+  validates :password, presence: true, length: { minimum: 6 }, unless: Proc.new { |a| a.password.blank? }
   validates :email,
             presence: true,
             uniqueness: true,
@@ -31,6 +32,12 @@ class User < ApplicationRecord
 
   def self.ransackable_associations(_auth_object = nil)
     ['inspections', 'posts']
+  end
+
+  def validate_tabel_id
+    if tabel_id.to_i.between?(1, 100) && role != 'admin'
+      errors.add(:tabel_id, 'is reserved for some group of users')
+    end
   end
 
   def admin?

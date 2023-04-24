@@ -1,31 +1,23 @@
 <div class="container text-center w-50">
   <%= image_tag "atom-logo.svg", class: "mb-4 mt-5", width: "72", height: "57" %>
-  <%= simple_form_for(@user, as: :user, url: path, data: {turbo:false}) do |f| %>
-    <%= f.error_notification %>
-    <div class="form-inputs">
+  <%= render 'shared/flash_alert' %>
+  <%= simple_form_for(@user, as: :user, url: path, data: {turbo:false}, class: "form-inputs" ) do |f| %>
       <%= f.input :first_name,
-                  required: true %>
-      <%= f.input :last_name,
-                  required: true %>
+                  autofocus: true %>
+      <%= f.input :last_name %>
       <%= f.input :second_name %>
-      <%= f.input :tabel_id,
-                  required: true %>
+      <%= f.input :tabel_id %>
       <%= f.input :email,
-                  required: true,
-                  autofocus: true,
                   input_html: { autocomplete: "email" }%>
       <%= f.input :phone %>
       <%= f.input :password,
-                  required: true,
                   hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                   input_html: { autocomplete: "new-password" } %>
       <%= f.input :password_confirmation,
-                  required: true,
                   input_html: { autocomplete: "new-password" } %>
       <div class="col">
         <%= f.input :role, :collection => User::ROLES.sort.map {|k,v| [v,k]}, include_blank: false, class:'form-select form-select' %>
       </div>
-    </div>
     <div class="form-actions">
       <%= f.button :submit, t("b_register"), class: "btn btn-primary" %>
     </div>

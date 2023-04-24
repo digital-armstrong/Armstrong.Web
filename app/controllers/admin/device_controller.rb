@@ -1,7 +1,6 @@
 class Admin::DeviceController < ApplicationController
   include DeviceConcern
   before_action :set_device, only: [:show, :edit, :update, :destroy]
-
   def index
     authorize!(:index, :device_admin)
     @query = Device.ransack(params[:q])
