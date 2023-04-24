@@ -40,7 +40,6 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    user_params[:role] ||= 'engineer'
 
     if @user.save
       flash[:success] = 'User was added'

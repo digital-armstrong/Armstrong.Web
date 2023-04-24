@@ -20,6 +20,7 @@ class User < ApplicationRecord
   validates :tabel_id, numericality: { less_than_or_equal_to: 2147483647 }, presence: true, uniqueness: true
   validate  :validate_tabel_id
   validates :password, presence: true, length: { minimum: 6 }, unless: Proc.new { |a| a.password.blank? }
+  validates :role, presence: true
   validates :email,
             presence: true,
             uniqueness: true,
@@ -35,8 +36,8 @@ class User < ApplicationRecord
   end
 
   def validate_tabel_id
-    if tabel_id.to_i.between?(1, 100) && role != 'admin'
-      errors.add(:tabel_id, 'is reserved for some group of users')
+    if tabel_id.to_i.between?(1, 100) && role != User::ROLES[:admin]
+      errors.add(:tabel_id, "is reserved for #{User::ROLES[:admin]}")
     end
   end
 
