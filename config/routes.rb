@@ -24,7 +24,14 @@ Rails.application.routes.draw do
   resources :home
   resources :armstrong, only: [:index, :show]
   resources :about, only: [:index]
-  resources :device, :inspection
+  resources :device
+  resources  :inspection do
+    post :accept_task, :to => 'inspection#accept_task', :on => :member
+    post :complete_verification, :to => 'inspection#complete_verification', :on => :member
+    post :fail_verification, :to => 'inspection#fail_verification', :on => :member
+    post :send_to_repair, :to => 'inspection#send_to_repair', :on => :member
+    post :return_from_repair, :to => 'inspection#return_from_repair', :on => :member
+  end
   resources :post
   get :armstrong, to: 'controllers#react'
 

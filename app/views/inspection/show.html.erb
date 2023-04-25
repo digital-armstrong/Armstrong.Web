@@ -1,2 +1,86 @@
-<h1>Inspection#show</h1>
-<p>Find me in app/views/inspection/show.html.erb</p>
+<% provide :page_title, "Инспекция #{@inspection.id}" %>
+<%= render 'shared/flash_alert' %>
+<div class="row my-3">
+  <div class="col p-4 shadow rounded">
+    <div class="row text-center">
+      <h1>Инспекция</h1>
+      <hr class="divider">
+    </div>
+    <p>
+      <span>
+        <strong>Прибор: </strong>
+        <%= @inspection.device.tabel_id %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Состояние: </strong>
+        <%= @inspection.state %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Создатель: </strong>
+        <%= @creator.last_name %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Выполняющий: </strong>
+        <%= @performer.last_name %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Заключение: </strong>
+        <%= @inspection.conclusion %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Дата заключения: </strong>
+        <%= @inspection.conclusion_date %>
+      </span>
+    </p>
+    <div class="row px-0 mb-2" style="max-width:650px; min-width:600px">
+      <% case @inspection.state %>
+        <% when "task_created"%>
+          <div class="col">
+            <%= button_to t('.accept_task'), accept_task_inspection_path(@inspection), 
+              method: :post, class: 'btn btn-primary'%>
+          </div>
+        <% when "task_accepted"%>
+          <div class="col-2">
+            <%= button_to t('.complete_verification'), complete_verification_inspection_path(@inspection), 
+              method: :post, class: 'btn btn-primary'%>
+          </div>
+          <div class="col-2">
+            <%= button_to t('.fail_verification'), fail_verification_inspection_path(@inspection), 
+              method: :post, class: 'btn btn-primary'%>
+          </div>
+        <% when "verification_successful"%>
+          <p><%= t('.verification_successful')%></p>
+        <% when "verification_failed"%>
+          <div class="col">
+            <%= button_to t('.send_to_repair'), send_to_repair_inspection_path(@inspection), 
+              method: :post, class: 'btn btn-primary'%>
+          </div>
+        <% when "sent_to_repair"%>
+          <div class="col">
+            <%= button_to t('.return_from_repair'), return_from_repair_inspection_path(@inspection), 
+              method: :post, class: 'btn btn-primary'%>
+          </div>
+        <% when "returned_from_repair"%>
+          <p><%= t('.returned_from_repair')%></p>
+      <% end %>
+    </div>
+    <div class="row px-0" style="max-width:650px; min-width:600px">
+      <div class="col-2">
+        <%= link_to "Изменить", edit_inspection_path(@inspection), class: "btn btn-primary"%>
+      </div>
+      <div class="col-2">
+        <%= button_to "Удалить", inspection_path(@inspection), method: :delete, class: "btn btn-danger"%>
+      </div>
+    </div>
+  </div>
+</div>
