@@ -5,6 +5,7 @@ export default function Table({ channels }) {
     <table className="table">
       <thead>
         <tr>
+          <th>State</th>
           <th>SC</th>
           <th>Server</th>
           <th>Channel</th>
@@ -22,6 +23,12 @@ export default function Table({ channels }) {
         {channels.map((channel) => (
           <tr key={channel.id}>
             <td>
+              {channel.state === "normal"
+                ? <i className="bi bi-circle-fill text-success" />
+                : <i className="bi bi-circle-fill text-danger" />
+              }
+            </td>
+            <td>
               <input type="checkbox" checked={channel.is_special_control === true ? "checked" : null} />
             </td>
             <td>{channel.server_id}</td>
@@ -30,8 +37,8 @@ export default function Table({ channels }) {
             <td>{channel.device_id}</td>
             <td>{channel.room_id}</td>
             <td>{channel.location_description}</td>
-            <td>{channel.event_system_value}</td>
-            <td>{channel.event_not_system_value}</td>
+            <td>{channel.event_system_value.toExponential(3)}</td>
+            <td>{channel.event_not_system_value.toExponential(3)}</td>
             <td>{channel.event_datetime}</td>
             <td>{channel.event_count}</td>
           </tr>
