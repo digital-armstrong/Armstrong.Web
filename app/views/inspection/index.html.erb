@@ -12,7 +12,7 @@
             <%= f.label :device, class: "mb-2" %>
             <%= f.search_field :device_id_eq, class: 'form-control', placeholder: 'Прибор' %>
             <%= f.label :performer, class: "my-2" %>
-            <%= f.search_field :performer_id_eq, class: 'form-control', placeholder: 'Дудкин' %>
+            <%= f.search_field :performer_tabel_id_eq, class: 'form-control', placeholder: 'Дудкин' %>
             <%= f.label :state, class: "my-2" %>
             <%= f.search_field :state_cont, class: 'form-control', placeholder: 'Активная' %>
             <%= f.label :conclusion, class: "my-2" %>
@@ -20,7 +20,7 @@
             <%= f.label :description, class: "my-2" %>
             <%= f.search_field :description_cont, class: 'form-control', placeholder: 'Инспекция...' %>
             <%= f.label :creator, class: "my-2" %>
-            <%= f.search_field :creator_id_eq, class: 'form-control mb-2', placeholder: 'Пупкин' %>
+            <%= f.search_field :creator_tabel_id_eq, class: 'form-control mb-2', placeholder: 'Пупкин' %>
             <%= f.submit "Применить", class: 'btn btn-primary w-100'%>
           <% end %>
         </div>
@@ -47,7 +47,11 @@
         <% @inspections.each do |inspection| %>
           <tr onclick="document.location = `<%=inspection_path(inspection)%>`" style="cursor:pointer">
             <td><%= inspection.device.serial_id %></td>
-            <td><%= inspection.performer.last_name + " " + inspection.performer.first_name %></td>
+            <% if inspection.performer.present? %>
+              <td><%= inspection.performer.last_name + " " + inspection.performer.first_name %></td>
+            <% else %>
+              <td></td>
+            <% end %>
             <td><%= inspection.state %></td>
             <td><%= inspection.conclusion %></td>
             <td><%= inspection.conclusion_date %></td>

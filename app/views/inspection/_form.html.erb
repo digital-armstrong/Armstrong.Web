@@ -7,8 +7,10 @@
         <%= f.input :conclusion_date %>
         <%= f.input :conclusion %>
       <% end %>
-      <%= f.input :description %> 
-      <%= f.association :performer, label_method: :tabel_id, collection: User.where(role: [User::ROLES[:inspector], User::ROLES[:engineer]]), include_blank: false %>
+      <%= f.input :description %>
+      <% if current_user.admin? %>  
+        <%= f.association :performer, label_method: :tabel_id, collection: User.where(role: [User::ROLES[:inspector], User::ROLES[:engineer]]), include_blank: false %>
+      <% end %>
    </div>
   </div>
   <div>

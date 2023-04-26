@@ -32,6 +32,10 @@ class DeviceController < ApplicationController
     redirect_to(device_index_path)
   end
 
+  def create_inspection
+    create_inspection_for_device(Device.find_by_id(params[:device_id]))
+  end
+
   def download
     query = Device.ransack(params[:q])
     devices = query.result.

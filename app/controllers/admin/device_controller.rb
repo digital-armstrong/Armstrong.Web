@@ -39,6 +39,10 @@ class Admin::DeviceController < ApplicationController
     redirect_to(admin_device_index_path)
   end
 
+  def create_inspection
+    create_inspection_for_device(Device.find_by_id(params[:device_id]))
+  end
+
   private
 
   def set_device

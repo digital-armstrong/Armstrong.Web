@@ -52,6 +52,7 @@ class InspectionController < ApplicationController
 
   def accept_task
     set_state(@inspection.can_accept_task?) { @inspection.accept_task }
+    @inspection.update(performer_id: current_user.id)
   end
 
   def complete_verification

@@ -1,6 +1,6 @@
 class Inspection < ApplicationRecord
   belongs_to :creator, class_name: 'User'
-  belongs_to :performer, class_name: 'User'
+  belongs_to :performer, class_name: 'User', optional: true
   belongs_to :device
 
   state_machine :state, initial: :task_created do

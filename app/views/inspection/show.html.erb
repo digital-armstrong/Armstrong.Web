@@ -24,12 +24,14 @@
         <%= @creator.last_name %>
       </span>
     </p>
-    <p>
-      <span>
-        <strong>Выполняющий: </strong>
-        <%= @performer.last_name %>
-      </span>
-    </p>
+    <% if @inspection.performer.present? %>
+      <p>
+        <span>
+          <strong>Выполняющий: </strong>
+          <%= @performer.last_name %>
+        </span>
+      </p>
+    <% end %>
     <p>
       <span>
         <strong>Заключение: </strong>

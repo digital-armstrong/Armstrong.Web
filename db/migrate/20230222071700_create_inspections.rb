@@ -7,7 +7,7 @@ class CreateInspections < ActiveRecord::Migration[7.0]
       t.string :conclusion
       t.text :description
       t.references :creator, null: false
-      t.references :performer
+      t.references :performer, null: true
 
       t.timestamps
     end

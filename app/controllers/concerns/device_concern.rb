@@ -24,5 +24,15 @@ module DeviceConcern
         render(:edit)
       end
     end
+
+    def create_inspection_for_device(device)
+      inspection = device.inspections.build(creator_id: current_user.id)
+      if inspection.save
+        redirect_to(inspection_index_path)
+      else
+        flash[:error] = 'Error...'
+        render(:show)
+      end
+    end
   end
 end

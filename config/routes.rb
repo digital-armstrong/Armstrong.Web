@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   namespace :admin do
     get '', to: 'admin#index'
     resources :users
-    resources :device, :device_model, :measurement_class
+    resources :device do
+      post :create_inspection, :to => 'device#create_inspection'
+    end
+    resources :device_model, :measurement_class
     resources :manufacturer, :measurement_group, :device_reg_group, :supplementary_kit, :device_component, except: [:show]
   end
 
@@ -24,7 +27,10 @@ Rails.application.routes.draw do
   resources :home
   resources :armstrong, only: [:index, :show]
   resources :about, only: [:index]
-  resources :device
+  resources :device do
+    post :create_inspection, :to => 'device#create_inspection'
+  end
+  
   resources  :inspection do
     post :accept_task, :to => 'inspection#accept_task', :on => :member
     post :complete_verification, :to => 'inspection#complete_verification', :on => :member
