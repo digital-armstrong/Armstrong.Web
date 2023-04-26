@@ -1,5 +1,6 @@
 import React from "react";
-import ArmsTable from "./Table/ArmsTable";
+import Table from "./Table/Table";
+import Filter from "./Filter/Filter";
 
 export default function Root() {
 
@@ -7,10 +8,10 @@ export default function Root() {
     <>
       <div className="row">
         <div className="col-2">
-
+          <Filter />
         </div>
-        <div className="col-10">
-          <ArmsTable />
+        <div className="col-10 shadow rounded">
+          <Table />
         </div>
       </div>
     </>

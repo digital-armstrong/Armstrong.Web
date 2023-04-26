@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import ky from "ky";
 
-export default function Table({ channels }) {
+export default function Table() {
+  const [channels, setChannels] = useState([]);
+
+  async function getAllChannels() {
+    let result = await ky
+      .get("/api/v1/armstrong")
+      .json();
+    setChannels(result);
+  }
+
+  const setLoop = async function () {
+    const interval = setInterval(() => {
+      getAllChannels();
+    }, 10000);
+    return () => clearInterval(interval);
+  }
+
+  useEffect(() => {
+    getAllChannels();
+    setLoop();
+  }, []);
+
   return (
-    <table className="table">
+    <table className="table table-hover">
       <thead>
         <tr>
           <th>State</th>
