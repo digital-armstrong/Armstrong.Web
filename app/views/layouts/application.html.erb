@@ -17,17 +17,17 @@
           <li><%= link_to t(".home"), root_path, class: "nav-link px-2 link-secondary" %></li>
           <% if user_signed_in? %>
             <li>
-              <% if can? :manage, :all %> 
+              <% if can? :manage, :all %>
                 <%= link_to t(".ARMS"), armstrong_index_path, class: "nav-link px-2 link-secondary" %>
               <% end %>
             </li>
             <li>
-              <% if can? :read, Device %> 
+              <% if can? :read, Device %>
                 <%= link_to t(".devices"), device_index_path, class: "nav-link px-2 link-secondary" %>
               <%end%>
             </li>
             <li>
-              <% if can? :read, Inspection %> 
+              <% if can? :read, Inspection %>
                 <%= link_to t(".inspections"), inspection_index_path, class: "nav-link px-2 link-secondary" %>
               <%end%>
             </li>
@@ -44,7 +44,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-lg-end text-small" aria-labelledby="dropdownUser1">
               <% if current_user.admin? %>
-                <li><%=link_to t('.admin_panel'), admin_path, class: "dropdown-item" %></li>
+                <li><%=link_to t('.admin_panel'), admin_users_path, class: "dropdown-item" %></li>
               <% else %>
                 <li><%=link_to t('.edit_me'), edit_user_registration_path, class: "dropdown-item" %></li>
               <% end %>
