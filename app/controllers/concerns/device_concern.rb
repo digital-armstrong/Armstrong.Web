@@ -26,7 +26,7 @@ module DeviceConcern
     end
 
     def create_inspection_for_device(device)
-      inspection = device.inspections.build(creator_id: current_user.id)
+      inspection = device.inspections.build(creator_id: current_user.id, type_target: inspection_params[:type_target])
       if inspection.save
         flash[:success] = 'Success'
         redirect_to(device_path(device))
@@ -34,6 +34,10 @@ module DeviceConcern
         flash[:error] = 'Error...'
         render(:show)
       end
+    end
+
+    def inspection_params
+      params.require(:inspection).permit(:type_target)
     end
   end
 end

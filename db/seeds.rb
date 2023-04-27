@@ -260,10 +260,10 @@ end
   Inspection.create(
     device: Device.find_by_id(rand(1..1000)),
     creator: User.find_by_id(rand(1..10)),
-    performer: User.find_by_id(rand(1..10)),
     conclusion: "Conclusion #{i}",
     conclusion_date: Time.at(rand(10.years.ago.to_f..Time.now.to_f)),
-    description: "Description #{i}"
+    description: "Description #{i}",
+    type_target: 'regular'
   )
 end
 

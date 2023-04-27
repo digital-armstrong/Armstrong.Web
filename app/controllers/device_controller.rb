@@ -20,6 +20,7 @@ class DeviceController < ApplicationController
   end
 
   def show
+    @inspection = Inspection.new
     device_show(@device)
   end
 

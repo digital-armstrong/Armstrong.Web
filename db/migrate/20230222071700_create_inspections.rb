@@ -2,6 +2,7 @@ class CreateInspections < ActiveRecord::Migration[7.0]
   def change
     create_table :inspections do |t|
       t.references :device, null: false, foreign_key: true
+      t.string :type_target, null: false
       t.string :state, null: false
       t.datetime :conclusion_date
       t.string :conclusion

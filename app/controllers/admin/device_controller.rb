@@ -21,6 +21,7 @@ class Admin::DeviceController < ApplicationController
 
   def show
     authorize!(:show, :device_admin)
+    @inspection = Inspection.new
     device_show(@device)
   end
 

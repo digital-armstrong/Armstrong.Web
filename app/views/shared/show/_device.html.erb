@@ -50,9 +50,19 @@
         <div class="col-2">
           <%= button_to "Удалить", device_path(@device), method: :delete, class: "btn btn-danger"%>
         </div>
-        <div class="col-2">
-          <%= button_to t('.create_inspection'), device_create_inspection_path(@device),
-            method: :post, class: 'btn btn-primary'%>
+        <div class="row">
+          <div class="col-4">
+            <%= simple_form_for @inspection, as: :inspection, url: device_create_inspection_path(@device), data: { turbo: false }, class: "form-group row" do |f| %>
+              <div class="row">
+                <div class="col">
+                  <%= f.input :type_target, :collection => Inspection::TYPE_TARGETS.sort.map {|k,v| [v,k]}, include_blank: false, class:'form-select form-select' %>
+                </div>
+              </div>
+              <div>
+                <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
         </div>
       <% end %>
     </div>

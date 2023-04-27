@@ -1,11 +1,24 @@
 class InspectionController < ApplicationController
   before_action :set_inspection, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
-  def index
+
+  def tasks(condition)
     @query = Inspection.ransack(params[:q])
-    @query.sorts = ['created_at desc']
-    @pagy, @inspections = pagy(@query.result.
+    @query.sorts = ['updated_at desc']
+    @pagy, @inspections = pagy(@query.result.where(condition).
       includes(:device, :creator, :performer))
+  end
+
+  def new_tasks
+    tasks(performer_id: nil)
+  end
+
+  def my_tasks
+    tasks(["performer_id = ? and state != ? and state != ?", current_user.id, 'verification_successful', 'closed'])
+  end
+
+  def complete_tasks
+    tasks({state: [:verification_successful, :closed]})
   end
 
   def new
@@ -15,7 +28,10 @@ class InspectionController < ApplicationController
   def create
     @inspection = Inspection.new(inspection_params.merge(creator_id: current_user.id))
     if @inspection.save
-      redirect_to(inspection_index_path)
+      if @inspection.performer.present?
+        @inspection.accept_task
+      end
+      redirect_to(new_tasks_inspection_index_path)
     else
       flash[:error] = inspection_params
       render(:new)
@@ -41,12 +57,14 @@ class InspectionController < ApplicationController
   end
 
   def set_state(condition)
+    pp params
     if condition
       yield
-      redirect_to(inspection_path(@inspection))
+      redirect_back(fallback_location: new_tasks_inspection_index_path)
+      return true
     else
       flash[:error] = "Can't change state"
-      redirect_to(inspection_path(@inspection))
+      redirect_back(fallback_location: new_tasks_inspection_index_path)
     end
   end
 
@@ -56,14 +74,23 @@ class InspectionController < ApplicationController
   end
 
   def complete_verification
-    set_state(@inspection.can_complete_verification?) { @inspection.complete_verification }
-    unless @inspection.update(conclusion_date: DateTime.now)
+    if set_state(@inspection.can_complete_verification?) { @inspection.complete_verification }
+      @inspection.update(conclusion_date: DateTime.now)
+    else
       flash.now[:error] = "Can't change state"
     end
   end
 
   def fail_verification
     set_state(@inspection.can_fail_verification?) { @inspection.fail_verification }
+  end
+
+  def close
+    if set_state(@inspection.can_close?) { @inspection.close }
+      @inspection.update(conclusion_date: DateTime.now)
+    else
+      flash.now[:error] = "Can't change state"
+    end
   end
 
   def send_to_repair

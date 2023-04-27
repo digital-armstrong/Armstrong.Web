@@ -21,8 +21,8 @@ class Ability
     end
 
     if user.inspector?
-      can([:read, :create, :accept_task], Inspection)
-      can([:edit, :update, :complete_verification, :fail_verification, :send_to_repair, :return_from_repair],
+      can([:read, :accept_task, :new_tasks, :my_tasks, :complete_tasks], Inspection)
+      can([:edit, :update, :complete_verification, :fail_verification, :close, :send_to_repair, :return_from_repair],
           Inspection, performer_id: user.id)
     end
 

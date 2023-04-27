@@ -120,6 +120,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_042024) do
 
   create_table "inspections", force: :cascade do |t|
     t.bigint "device_id", null: false
+    t.string "type_target", null: false
     t.string "state", null: false
     t.datetime "conclusion_date"
     t.string "conclusion"
