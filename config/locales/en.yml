@@ -11,6 +11,10 @@ en:
       profile: Profile
       logout: Logout
   post:
+    index:
+      b_new_post: New post
+      b_read: Read more
+      more: (more...)
     show:
       published: Created
       updated: Updated
@@ -19,11 +23,26 @@ en:
       title: Recipe for uranium pancakes
       body: Eat some more of these...
       category: Public or URB-106
-  home:
+  shared:
+    form:
+      device:
+        room_blank: Not selected
+    navbar:
+      inspection:
+        new_tasks: New tasks
+        my_tasks: My tasks
+        completed_tasks: Completed tasks
     index:
-      b_new_post: New post
-      b_read: Read more
-      more: (more...)
+      inspection:
+        device: Device
+        assigned_user: Inspector
+        target: Target
+        state: State
+        conclusion: Conclusion
+        conclusion_date: Date
+        description: Description
+        creator: Creator
+        text-no-new-task: No tasks yet...
   b_change: Change
   b_delete: Delete
   b_save: Save

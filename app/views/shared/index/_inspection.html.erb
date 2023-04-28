@@ -1,7 +1,7 @@
 <%= render 'shared/flash_alert' %>
-<div class="row">
+<div class="row mx-0 my-4">
   <% if @inspections.count > 0 %>
-  <div class="col-2">
+  <div class="col-2 ps-0">
     <div class="accordion mb-3" id="accordionFilter">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
@@ -28,24 +28,18 @@
         </div>
       </div>
     </div>
-    <% if can? :create, Inspection%>
-      <%= link_to new_inspection_path, class: "btn mx-2 my-3 w-100 shadow" do %>
-        <i class="bi bi-plus-square"></i><span> Добавить</span>
-      <% end %>
-    <% end %>
   </div>
   <div class="col-10 shadow rounded">
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Прибор</th>
-          <th scope="col">Выполняющий</th>
-          <th scope="col">Цель</th>
-          <th scope="col">Состояние</th>
-          <th scope="col">Заключение</th>
-          <th scope="col">Дата заключения</th>
-          <th scope="col">Описание</th>
-          <th scope="col">Создатель заявки</th>
+          <th scope="col"><%= t('.device') %></th>
+          <th scope="col"><%= t('.assigned_user') %></th>
+          <th scope="col"><%= t('.target') %></th>
+          <th scope="col"><%= t('.state') %></th>
+          <th scope="col"><%= t('.conclusion') %></th>
+          <th scope="col"><%= t('.conclusion_date') %></th>
+          <th scope="col"><%= t('.creator') %></th>
           <th scope="col"><%= t('action') %></th>
         </tr>
       </thead>
@@ -62,7 +56,6 @@
             <td><%= inspection.state %></td>
             <td><%= inspection.conclusion %></td>
             <td><%= inspection.conclusion_date %></td>
-            <td><%= inspection.description %></td>
             <td><%= inspection.creator.last_name + " " + inspection.creator.first_name %></td>
             <td>
               <div class="d-flex w-auto">
@@ -70,46 +63,46 @@
                   <% when "task_created"%>
                     <div class="col">
                       <%= button_to accept_task_inspection_path(inspection),
-                        method: :post, class: 'btn mx-2' do %>
+                        method: :post, class: 'btn' do %>
                         <i class="bi bi-person-add"></i>
                       <% end%>
                     </div>
                   <% when "task_accepted"%>
                     <div class="col">
                       <%= button_to complete_verification_inspection_path(inspection),
-                        method: :post, class: 'btn mx-2' do %>
+                        method: :post, class: 'btn' do %>
                         <i class="bi bi-check-square"></i>
                       <% end %>
                     </div>
                     <div class="col">
                       <%= button_to fail_verification_inspection_path(inspection),
-                        method: :post, class: 'btn mx-2' do %>
+                        method: :post, class: 'btn' do %>
                         <i class="bi bi-exclamation-square"></i>
                       <% end %>
                     </div>
                   <% when "verification_failed"%>
                     <div class="col">
                       <%= button_to send_to_repair_inspection_path(inspection),
-                        method: :post, class: 'btn mx-2' do %>
+                        method: :post, class: 'btn' do %>
                         <i class="bi bi-person-gear"></i>
                       <% end %>
                     </div>
                     <div class="col">
                       <%= button_to close_inspection_path(inspection),
-                        method: :post, class: 'btn mx-2' do %>
+                        method: :post, class: 'btn' do %>
                         <i class="bi bi-x-square"></i>
                       <% end %>
                     </div>
                   <% when "sent_to_repair"%>
                     <div class="col">
                       <%= button_to return_from_repair_inspection_path(inspection),
-                        method: :post, class: 'btn mx-2' do %>
+                        method: :post, class: 'btn' do %>
                         <i class="bi bi-house-gear"></i>
                       <% end %>
                     </div>
                 <% end %>
                 <div class="col">
-                  <%= link_to inspection_path(inspection), class: 'btn mx-2' do %>
+                  <%= link_to inspection_path(inspection), class: 'btn' do %>
                     <i class="bi bi-eye"></i>
                   <% end %>
                 </div>
