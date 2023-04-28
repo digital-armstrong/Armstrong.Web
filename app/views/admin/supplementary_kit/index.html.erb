@@ -1,4 +1,5 @@
 <% provide :page_title, "Наборы" %>
+<%= render 'shared/admin/navbar/admin', selected: "device" %>
 <%= render 'shared/admin/navbar/device_bread', selected: "supplementary_kit" %>
 <%= render 'shared/flash_alert' %>
 <div class="row">
@@ -37,40 +38,40 @@
       <i class="bi bi-plus-square"></i><span> Добавить</span>
     <% end %>
   </div>
-  <div class="row">
-    <% @supplementary_kits.each do |supplementary_kit| %>
-      <% sk_text = "Kit#{supplementary_kit.id}" %>
-      <div class="accordion col-4 my-2" id="accordion<%= sk_text %>">
-        <div class="accordion-item ">
-          <h2 class="accordion-header" id="heading<%= sk_text %>">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= sk_text %>" aria-expanded="true" aria-controls="collapse<%= sk_text %>">
-              <strong><%= supplementary_kit.name %></strong>, <%= supplementary_kit.serial_id %>
-            </button>
-          </h2>
-          <div id="collapse<%= sk_text %>" class="accordion-collapse collapse shadow" aria-labelledby="heading<%= sk_text %>">
-            <div class="accordion-body">
-              <% device_components_in_this_sk = supplementary_kit.device_components %>
-              <% if device_components_in_this_sk.length > 0 %>
-                <p>Компоненты:</p>
-                <%= render 'shared/show/supplementary_kit', device_components: device_components_in_this_sk %>
-              <% end %>
-              <p>
-                Описание: <%= supplementary_kit.description %>
-              </p>
-              <div class="row px-0 mt-2" style="max-width:650px; min-width:600px">
-                <div class="col-2">
-                  <%= link_to "Изменить", edit_admin_supplementary_kit_path(supplementary_kit), class: "btn btn-primary"%>
-                </div>
-                <div class="col-2">
-                  <%= button_to "Удалить", admin_supplementary_kit_path(supplementary_kit), method: :delete, class: "btn btn-danger"%>
-                </div>
+</div>
+<div class="row">
+  <% @supplementary_kits.each do |supplementary_kit| %>
+    <% sk_text = "Kit#{supplementary_kit.id}" %>
+    <div class="accordion col-4 my-2" id="accordion<%= sk_text %>">
+      <div class="accordion-item ">
+        <h2 class="accordion-header" id="heading<%= sk_text %>">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%= sk_text %>" aria-expanded="true" aria-controls="collapse<%= sk_text %>">
+            <strong><%= supplementary_kit.name %></strong>, <%= supplementary_kit.serial_id %>
+          </button>
+        </h2>
+        <div id="collapse<%= sk_text %>" class="accordion-collapse collapse shadow" aria-labelledby="heading<%= sk_text %>">
+          <div class="accordion-body">
+            <% device_components_in_this_sk = supplementary_kit.device_components %>
+            <% if device_components_in_this_sk.length > 0 %>
+              <p>Компоненты:</p>
+              <%= render 'shared/show/supplementary_kit', device_components: device_components_in_this_sk %>
+            <% end %>
+            <p>
+              Описание: <%= supplementary_kit.description %>
+            </p>
+            <div class="row px-0 mt-2" style="max-width:650px; min-width:600px">
+              <div class="col-2">
+                <%= link_to "Изменить", edit_admin_supplementary_kit_path(supplementary_kit), class: "btn btn-primary"%>
+              </div>
+              <div class="col-2">
+                <%= button_to "Удалить", admin_supplementary_kit_path(supplementary_kit), method: :delete, class: "btn btn-danger"%>
               </div>
             </div>
           </div>
         </div>
       </div>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
 <div class="row my-5">
   <div class="col-2">

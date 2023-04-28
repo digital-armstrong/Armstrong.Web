@@ -1,4 +1,4 @@
-<div class='row text-center shadow rounded mb-4 ms-0'>
+<div class='row text-center shadow rounded my-4 mx-0'>
   <% selected = local_assigns[:selected] %>
   <%= link_to 'Приборы', admin_device_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'device' }" %>
   <%= link_to 'Модели', admin_device_model_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'device_model' }" %>

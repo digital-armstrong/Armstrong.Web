@@ -93,10 +93,27 @@ ru:
       settings: Настройки
       profile: Профиль
       logout: Выйти
+      edit_me: Изм. профиль
   shared:
     form:
       device:
         room_blank: Не выбран
+    navbar:
+      inspection:
+        new_tasks: Новые задачи
+        my_tasks: Мои задачи
+        completed_tasks: Завершенные задачи
+    index:
+      inspection:
+        device: Прибор
+        assigned_user: Инспектор
+        target: Цель
+        state: Состояние
+        conclusion: Заключение
+        conclusion_date: Дата
+        description: Описание
+        creator: Направил
+        text-no-new-task: Задач пока нет...
   post:
     index:
       b_new_post: Новый пост
