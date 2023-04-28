@@ -41,8 +41,8 @@ class Inspection < ApplicationRecord
     regular: 'regular',
     calibration: 'calibration',
     technical_solution: 'technical_solution',
-    decommissioning: 'decommissioning'
-  }
+    decommissioning: 'decommissioning',
+  }.freeze
 
   def self.ransackable_attributes(_auth_object = nil)
     ['conclusion', 'conclusion_date', 'created_at', 'creator_id', 'description', 'device_id', 'id', 'performer_id', 'state', 'updated_at']

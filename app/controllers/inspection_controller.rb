@@ -14,11 +14,11 @@ class InspectionController < ApplicationController
   end
 
   def my_tasks
-    tasks(["performer_id = ? and state != ? and state != ?", current_user.id, 'verification_successful', 'closed'])
+    tasks(['performer_id = ? and state != ? and state != ?', current_user.id, 'verification_successful', 'closed'])
   end
 
-  def complete_tasks
-    tasks({state: [:verification_successful, :closed]})
+  def completed_tasks
+    tasks({ state: [:verification_successful, :closed] })
   end
 
   def new
@@ -57,11 +57,10 @@ class InspectionController < ApplicationController
   end
 
   def set_state(condition)
-    pp params
     if condition
       yield
       redirect_back(fallback_location: new_tasks_inspection_index_path)
-      return true
+      true
     else
       flash[:error] = "Can't change state"
       redirect_back(fallback_location: new_tasks_inspection_index_path)
@@ -112,6 +111,7 @@ class InspectionController < ApplicationController
       :device_id,
       :creator_id,
       :performer_id,
+      :type_target,
       :conclusion,
       :conclusion_date,
       :description,

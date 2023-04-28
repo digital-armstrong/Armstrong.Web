@@ -7,8 +7,18 @@ class InspectionControllerTest < ActionController::TestCase
     sign_in(users(:admin))
   end
 
-  test 'should get index' do
-    get :index
+  test 'should get my_tasks' do
+    get :my_tasks
+    assert_response :success
+  end
+
+  test 'should get new_tasks' do
+    get :new_tasks
+    assert_response :success
+  end
+
+  test 'should get completed_tasks' do
+    get :completed_tasks
     assert_response :success
   end
 
