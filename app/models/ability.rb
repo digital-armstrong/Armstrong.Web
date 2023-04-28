@@ -21,11 +21,14 @@ class Ability
     end
 
     if user.inspector?
-      can(:manage, Inspection)
+      can([:read, :accept_task, :new_tasks, :my_tasks, :complete_tasks], Inspection)
+      can([:edit, :update, :complete_verification, :fail_verification, :close, :send_to_repair, :return_from_repair],
+          Inspection, performer_id: user.id)
     end
 
     if user.engineer?
       can(:manage, Device)
+      can(:create_inspection, Device)
       cannot(:manage, :inspection)
       cannot(:manage, :armstrong)
     end

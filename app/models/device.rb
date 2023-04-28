@@ -9,6 +9,7 @@ class Device < ApplicationRecord
   belongs_to :device_model
   belongs_to :device_reg_group
   belongs_to :supplementary_kit, optional: true
+  belongs_to :room, optional: true
 
   has_many :inspections
   has_one :channel

@@ -20,6 +20,8 @@ ru:
         device_reg_group: Регистрационная группа
         year_of_production: Год выпуска
         year_of_commissioning: Год ввода
+        room: Расположение
+        room_id: Расположение
       device_model:
         name: Название
         manufacturer: Производитель
@@ -67,7 +69,8 @@ ru:
         title: Заголовок
         body: Текст записи
         user: Автор
-      user: 
+        category: Категория
+      user:
         tabel_id: Табельный №
         first_name: Имя
         last_name: Фамилия
@@ -90,6 +93,10 @@ ru:
       settings: Настройки
       profile: Профиль
       logout: Выйти
+  shared:
+    form:
+      device:
+        room_blank: Не выбран
   post:
     index:
       b_new_post: Новый пост
@@ -100,8 +107,9 @@ ru:
       updated: Обновлен
       author: Автор
     form:
-      title: Заголовок поста
-      body: Текст поста
+      title: Рецепт урановых оладьев
+      body: Съешь еще немного этих...
+      category: Публичный или УРБ-106
   admin:
     users:
       index:
@@ -115,4 +123,3 @@ ru:
   b_save: Сохранить
   b_back: Назад
   created_at: Создан
-

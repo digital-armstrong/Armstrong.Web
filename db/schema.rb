@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_22_042024) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_28_045158) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -104,9 +104,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_042024) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "supplementary_kit_id"
+    t.bigint "room_id"
     t.index ["device_model_id"], name: "index_devices_on_device_model_id"
     t.index ["device_reg_group_id"], name: "index_devices_on_device_reg_group_id"
     t.index ["inventory_id"], name: "index_devices_on_inventory_id", unique: true
+    t.index ["room_id"], name: "index_devices_on_room_id"
     t.index ["tabel_id"], name: "index_devices_on_tabel_id", unique: true
   end
 
@@ -120,6 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_042024) do
 
   create_table "inspections", force: :cascade do |t|
     t.bigint "device_id", null: false
+    t.string "type_target", null: false
     t.string "state", null: false
     t.datetime "conclusion_date"
     t.string "conclusion"
@@ -249,6 +252,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_22_042024) do
   add_foreign_key "device_models", "measurement_groups"
   add_foreign_key "devices", "device_models"
   add_foreign_key "devices", "device_reg_groups"
+  add_foreign_key "devices", "rooms"
   add_foreign_key "divisions", "organizations"
   add_foreign_key "inspections", "devices"
   add_foreign_key "inspections", "users", column: "creator_id"

@@ -20,6 +20,7 @@ class DeviceController < ApplicationController
   end
 
   def show
+    @inspection = Inspection.new
     device_show(@device)
   end
 
@@ -30,6 +31,10 @@ class DeviceController < ApplicationController
   def destroy
     @device.destroy
     redirect_to(device_index_path)
+  end
+
+  def create_inspection
+    create_inspection_for_device(Device.find_by_id(params[:device_id]))
   end
 
   def download
@@ -56,6 +61,7 @@ class DeviceController < ApplicationController
                                    :device_reg_group_id,
                                    :year_of_production,
                                    :year_of_commissioning,
-                                   :supplementary_kit_id)
+                                   :supplementary_kit_id,
+                                   :room_id)
   end
 end

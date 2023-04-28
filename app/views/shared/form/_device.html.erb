@@ -5,6 +5,7 @@
       <%= f.input :inventory_id, placeholder: 'Инвентарный номер устройства', input_html: {:tabindex => 3} %>
       <%= f.input :year_of_production, placeholder: 'Год выпуска производителем', input_html: {:tabindex => 5} %>
       <%= f.association :device_model, input_html: {:tabindex => 7}, include_blank: false %>
+      <%= f.association :room, input_html: {:tabindex => 9}, include_blank: t(".room_blank")%>
     </div>
     <div class="col">
       <%= f.input :serial_id, placeholder: 'S/N присвоенный производителем', input_html: {:tabindex => 2} %>

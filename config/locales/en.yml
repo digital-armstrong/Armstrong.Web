@@ -16,8 +16,9 @@ en:
       updated: Updated
       author: Author
     form:
-      title: Title
-      body: Post body
+      title: Recipe for uranium pancakes
+      body: Eat some more of these...
+      category: Public or URB-106
   home:
     index:
       b_new_post: New post

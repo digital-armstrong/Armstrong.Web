@@ -21,6 +21,7 @@ class Admin::DeviceController < ApplicationController
 
   def show
     authorize!(:show, :device_admin)
+    @inspection = Inspection.new
     device_show(@device)
   end
 
@@ -37,6 +38,10 @@ class Admin::DeviceController < ApplicationController
     authorize!(:destroy, :device_admin)
     @device.destroy
     redirect_to(admin_device_index_path)
+  end
+
+  def create_inspection
+    create_inspection_for_device(Device.find_by_id(params[:device_id]))
   end
 
   private

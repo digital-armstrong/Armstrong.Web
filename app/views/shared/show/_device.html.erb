@@ -1,4 +1,5 @@
 <% provide :page_title, "Прибор #{@device.serial_id}" %>
+<%= render 'shared/flash_alert' %>
 <div class="row my-3">
   <div class="col p-4 shadow rounded">
     <div class="row text-center">
@@ -41,16 +42,30 @@
         <%= @device.device_reg_group.name %>
       </span>
     </p>
-    <% if can? :manage, Device %>
-      <div class="row px-0" style="max-width:650px; min-width:600px">
+    <div class="row px-0" style="max-width:650px; min-width:600px">
+      <% if can? :manage, Device %>
         <div class="col-2">
-          <%= link_to "Изменить", edit_path, class: "btn btn-primary"%>
+          <%= link_to "Изменить", edit_device_path(@device), class: "btn btn-primary"%>
         </div>
         <div class="col-2">
-          <%= button_to "Удалить", delete_path, method: :delete, class: "btn btn-danger"%>
+          <%= button_to "Удалить", device_path(@device), method: :delete, class: "btn btn-danger"%>
         </div>
-      </div>
-    <% end %>
+        <div class="row">
+          <div class="col-4">
+            <%= simple_form_for @inspection, as: :inspection, url: device_create_inspection_path(@device), data: { turbo: false }, class: "form-group row" do |f| %>
+              <div class="row">
+                <div class="col">
+                  <%= f.input :type_target, :collection => Inspection::TYPE_TARGETS.sort.map {|k,v| [v,k]}, include_blank: false, class:'form-select form-select' %>
+                </div>
+              </div>
+              <div>
+                <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
   <div class="col p-4 shadow ms-3 rounded">
     <div class="row text-center">

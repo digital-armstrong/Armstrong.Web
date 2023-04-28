@@ -1,2 +1,56 @@
-<h1>Inspection#show</h1>
-<p>Find me in app/views/inspection/show.html.erb</p>
+<% provide :page_title, "Инспекция #{@inspection.id}" %>
+<%= render 'shared/flash_alert' %>
+<div class="row my-3">
+  <div class="col p-4 shadow rounded">
+    <div class="row text-center">
+      <h1>Инспекция</h1>
+      <hr class="divider">
+    </div>
+    <p>
+      <span>
+        <strong>Прибор: </strong>
+        <%= @inspection.device.tabel_id %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Состояние: </strong>
+        <%= @inspection.state %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Создатель: </strong>
+        <%= @creator.last_name %>
+      </span>
+    </p>
+    <% if @inspection.performer.present? %>
+      <p>
+        <span>
+          <strong>Выполняющий: </strong>
+          <%= @performer.last_name %>
+        </span>
+      </p>
+    <% end %>
+    <p>
+      <span>
+        <strong>Заключение: </strong>
+        <%= @inspection.conclusion %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong>Дата заключения: </strong>
+        <%= @inspection.conclusion_date %>
+      </span>
+    </p>
+    <div class="row px-0" style="max-width:650px; min-width:600px">
+      <div class="col-2">
+        <%= link_to "Изменить", edit_inspection_path(@inspection), class: "btn btn-primary"%>
+      </div>
+      <div class="col-2">
+        <%= button_to "Удалить", inspection_path(@inspection), method: :delete, class: "btn btn-danger"%>
+      </div>
+    </div>
+  </div>
+</div>

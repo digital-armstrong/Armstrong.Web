@@ -1,0 +1,12 @@
+<ul class="nav nav-tabs">
+  <% selected = local_assigns[:selected] %>
+  <li class="nav-item">
+    <%= link_to t('.new_tasks'), new_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'new_tasks' }", aria_current: 'page' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to t('.my_tasks'), my_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'my_tasks' }", aria_current: 'page' %>
+  </li>
+  <li class="nav-item">
+    <%= link_to t('.completed_tasks'), completed_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'completed_tasks' }", aria_current: 'page' %>
+  </li>
+</ul>
