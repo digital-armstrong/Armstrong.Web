@@ -61,6 +61,7 @@ class DeviceController < ApplicationController
                                    :device_reg_group_id,
                                    :year_of_production,
                                    :year_of_commissioning,
-                                   :supplementary_kit_id)
+                                   :supplementary_kit_id,
+                                   :room_id)
   end
 end

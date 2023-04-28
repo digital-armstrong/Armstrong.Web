@@ -1,4 +1,5 @@
 <%= simple_form_for @post, as: :post, url: path, data: { turbo: false }, class: "form-group row" do |f| %>
+  <%= f.input :category, placeholder: t(".category") %>
   <%= f.input :title, placeholder: t(".title") %>
   <%= f.input :body, placeholder: t(".body") %>
   <% if current_user.admin? %>
