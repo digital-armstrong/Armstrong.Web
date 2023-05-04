@@ -16,17 +16,17 @@ class Admin::DeviceComponentController < ApplicationController
   def create
     @device_component = DeviceComponent.new(device_component_params)
     if @device_component.save
-      redirect_to(admin_device_component_index_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:new)
+      render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
     if @device_component.update(device_component_params)
-      redirect_to(admin_device_component_index_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:edit)
+      render(:edit, status: :unprocessable_entity)
     end
   end
 

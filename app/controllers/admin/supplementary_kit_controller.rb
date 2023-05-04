@@ -16,17 +16,17 @@ class Admin::SupplementaryKitController < ApplicationController
   def create
     @supplementary_kit = SupplementaryKit.new(supplementary_kit_params)
     if @supplementary_kit.save
-      redirect_to(admin_supplementary_kit_index_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:new)
+      render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
     if @supplementary_kit.update(supplementary_kit_params)
-      redirect_to(admin_supplementary_kit_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:edit)
+      render(:edit, status: :unprocessable_entity)
     end
   end
 

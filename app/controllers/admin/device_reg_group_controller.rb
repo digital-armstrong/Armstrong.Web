@@ -16,17 +16,17 @@ class Admin::DeviceRegGroupController < ApplicationController
   def create
     @device_reg_group = DeviceRegGroup.new(device_reg_group_params)
     if @device_reg_group.save
-      redirect_to(admin_device_reg_group_index_path)
+      redirect_back(fallback_location: root_path)
     else
-      @query = DeviceRegGroup.ransack(params[:q])
+      render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
     if @device_reg_group.update(device_reg_group_params)
-      redirect_to(admin_device_reg_group_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:edit)
+      render(:edit, status: :unprocessable_entity)
     end
   end
 
