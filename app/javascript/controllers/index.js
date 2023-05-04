@@ -4,8 +4,11 @@
 
 import { application } from "./application"
 
+import Armstrong__ArmstrongController from "./armstrong/armstrong_controller"
+application.register("armstrong--armstrong", Armstrong__ArmstrongController)
+
 import FilterController from "./filter_controller"
 application.register("filter", FilterController)
 
-import Armstrong__ArmstrongController from "./armstrong/armstrong_controller"
-application.register("armstrong", Armstrong__ArmstrongController)
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
