@@ -1,4 +1,4 @@
-<%= simple_form_for @device_component, as: :device_component, url: path, data: { turbo: false }, class: "form-group row" do |f| %>
+<%= simple_form_for device_component, as: :device_component, url: path, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
       <%= f.input :serial_id, placeholder: '0-E250-FF', input_html: {:tabindex => 1}%>
@@ -8,7 +8,11 @@
       <%= f.input :measuring_unit, placeholder: 'мЗв/ч', input_html: {:tabindex => 5}%>
       <%= f.input :description, placeholder: 'Компонент для...', input_html: {:tabindex => 6}%>
       <%= f.association :supplementary_kit, input_html: {:tabindex => 7}, include_blank: "Не выбрано" %>
+      <%= render 'shared/modal_button_add', path: new_admin_supplementary_kit_path %>
     </div>
   </div>
-  <%= f.button :submit, "Сохранить", class: "btn btn-primary w-100" %>
+  <div>
+    <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
+    <%= render 'shared/modal_button_close' %>
+  </div>
 <% end %>

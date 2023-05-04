@@ -42,9 +42,7 @@
         </div>
       </div>
     </div>
-    <%= link_to new_admin_device_component_path, class: "btn btn-primary my-3 w-100 shadow" do %>
-      <i class="bi bi-plus-square"></i><span> Добавить</span>
-    <% end %>
+    <%= render 'shared/modal_button_add', path: new_admin_device_component_path %>
   </div>
 </div>
 <div class="row mx-0">
@@ -78,7 +76,7 @@
             <td><%= device_component.description %></td>
             <td>
              <div class="d-flex w-auto">
-                <%= link_to edit_admin_device_component_path(device_component.id), class: "btn" do %>
+                <%= link_to edit_admin_device_component_path(device_component.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
                   <i class="bi bi-pen"></i>
                 <% end %>
                 <%= button_to admin_device_component_path(device_component.id), method: :delete, form: { data: { turbo_confirm: t('delete_confirm') } }, class: "btn" do %>

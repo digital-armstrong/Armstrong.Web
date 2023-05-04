@@ -61,7 +61,8 @@
     </div>
   </header>
   <%= yield :device_bread %>
-  <body class="container">
+  <body class="container" data-controller="modal" data-action="modalClose@window->modal#close">
     <%= yield %>
+    <%= render "shared/modal" %>
   </body>
 </html>

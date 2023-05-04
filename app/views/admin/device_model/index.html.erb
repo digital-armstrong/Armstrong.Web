@@ -82,9 +82,7 @@
         </div>
       </div>
     </div>
-    <%= link_to new_admin_device_model_path, class: "btn btn-primary my-3 w-100 shadow" do %>
-      <i class="bi bi-plus-square"></i><span> Добавить</span>
-    <% end %>
+    <%= render 'shared/modal_button_add', path: new_admin_device_model_path %>
   </div>
 </div>
 <div class="row mx-0">

@@ -1,4 +1,4 @@
-<%= simple_form_for @supplementary_kit, as: :supplementary_kit, url: path, data: { turbo: false }, class: "form-group row" do |f| %>
+<%= simple_form_for supplementary_kit, as: :supplementary_kit, url: path, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
       <%= f.input :name, placeholder: 'Название', input_html: {:tabindex => 1}%>
@@ -6,5 +6,8 @@
       <%= f.input :description, placeholder: 'Набор для...', input_html: {:tabindex => 3}%>
     </div>
   </div>
-  <%= f.button :submit, "Сохранить", class: "btn btn-primary w-100" %>
+  <div>
+    <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
+    <%= render 'shared/modal_button_close' %>
+  </div>
 <% end %>

@@ -42,9 +42,7 @@
         </div>
       </div>
     </div>
-    <%= link_to new_admin_manufacturer_path, class: "btn btn-primary my-3 w-100 shadow" do %>
-      <i class="bi bi-plus-square"></i><span> Добавить</span>
-    <% end %>
+    <%= render 'shared/modal_button_add', path: new_admin_manufacturer_path %>
   </div>
 </div>
 <div class="row mx-0">
@@ -70,7 +68,7 @@
             <td><%= manufacturer.site_url %></td>
             <td>
               <div class="d-flex">
-                <%= link_to edit_admin_manufacturer_path(manufacturer.id), class: "btn" do %>
+                <%= link_to edit_admin_manufacturer_path(manufacturer.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
                   <i class="bi bi-pen"></i>
                 <% end %>
                 <%= button_to admin_manufacturer_path(manufacturer.id), method: :delete, class: "btn" do %>

@@ -19,9 +19,7 @@
         </div>
       </div>
     </div>
-    <%= link_to new_admin_measurement_group_path, class: "btn btn-primary my-3 w-100 shadow" do %>
-      <i class="bi bi-plus-square"></i><span> Добавить</span>
-    <% end %>
+    <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path %>
   </div>
   <div class="col-10 shadow rounded">
     <table class="table table-hover">
@@ -37,7 +35,7 @@
           <td><%= measurement_group.name %></td>
             <td >
               <div class="d-flex">
-                <%= link_to edit_admin_measurement_group_path(measurement_group.id), class: "btn" do %>
+                <%= link_to edit_admin_measurement_group_path(measurement_group.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
                   <i class="bi bi-pen"></i>
                 <% end %>
                 <%= button_to admin_measurement_group_path(measurement_group.id), method: :delete, class: "btn" do %>

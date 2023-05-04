@@ -40,9 +40,7 @@
         </div>
       </div>
     </div>
-    <%= link_to new_path, class: "btn btn-primary my-3 w-100 shadow" do %>
-      <i class="bi bi-plus-square"></i><span> Добавить</span>
-    <% end %>
+    <%= render 'shared/modal_button_add', path: new_path %>
     <%= button_to device_download_path(request.params.merge(format: :pdf)), data: {turbo: :false}, class: "btn btn-primary my-3 w-100 shadow" do %>
       <i class="bi bi-download"></i><span> Скачать PDF</span>
     <% end %>

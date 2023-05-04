@@ -1,8 +1,11 @@
-<%= simple_form_for @device_reg_group, as: :device_reg_group, url: path, data: { turbo: false }, class: "form-group row" do |f| %>
+<%= simple_form_for device_reg_group, as: :device_reg_group, url: path, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
       <%= f.input :name, placeholder: 'Название р. группы', input_html: {:tabindex => 1}%>
     </div>
   </div>
-  <%= f.button :submit, "Сохранить", class: "btn btn-primary w-100" %>
+  <div>
+    <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
+    <%= render 'shared/modal_button_close' %>
+  </div>
 <% end %>
