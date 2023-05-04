@@ -1,6 +1,6 @@
 module DispatchEventHelper
   def dispatch_event(name)
-    turbo_stream_action_tag :dispatch_event, name: name
+    turbo_stream_action_tag(:dispatch_event, name:)
   end
 end
 
