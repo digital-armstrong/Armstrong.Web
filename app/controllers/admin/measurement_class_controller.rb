@@ -50,6 +50,7 @@ class Admin::MeasurementClassController < ApplicationController
     params.require(:measurement_class).permit(
       :name,
       :measurement_group_id,
+      :arms_device_type
     )
   end
 end

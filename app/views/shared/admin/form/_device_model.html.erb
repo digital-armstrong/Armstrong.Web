@@ -4,20 +4,45 @@
       <%= f.input :name, placeholder: "Название устройства", input_html: {:tabindex => 1} %>
     </div>
     <div class="col">
-      <%= f.association :manufacturer, input_html: {:tabindex => 2}, include_blank: false %>
-      <%= render 'shared/modal_button_add', path: new_admin_manufacturer_path %>
+      <div class="row">
+        <%= f.label :manufacturer, class: "mb-2"%>
+      </div>
+      <div class="row">
+        <div class="col-9 pe-0">
+          <%= f.association :manufacturer, label: false, input_html: {:tabindex => 2}, include_blank: false %>
+        </div>
+        <div class="col-3 text-end">
+          <%= render 'shared/modal_button_add', path: new_admin_manufacturer_path %>
+        </div>
+      </div>
     </div>
     <div class="col"></div>
   </div>
   <div class="row">
     <div class="col">
-      <%= f.association :measurement_group, input_html: {:tabindex => 3, data: {'action': 'change->filter#filter' }, id: "filtrator"}, include_blank: false %>
-      <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path %>
+      <div class="row">
+        <%= f.label :measurement_group, class: "mb-2"%>
+      </div>
+      <div class="row">
+        <div class="col-9 pe-0">
+          <%= f.association :measurement_group, label: false, input_html: {:tabindex => 3, data: {'action': 'change->filter#filter' }, id: "filtrator"}, include_blank: false %>
+        </div>
+        <div class="col-3 text-end">
+          <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path %>
+        </div>
+      </div>
     </div>
     <div class="col">
-      <div>
-      <%= f.association :measurement_class, input_html: {tabindex: 4, id:"filter"}, include_blank: false %>
-      <%= render 'shared/modal_button_add', path: new_admin_measurement_class_path%>
+      <div class="row">
+        <%= f.label :measurement_class, class: "mb-2"%>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= f.association :measurement_class, label:false, input_html: {tabindex: 4, id:"filter"}, include_blank: false %>
+        </div>
+        <div class="col-3 text-end">
+          <%= render 'shared/modal_button_add', path: new_admin_measurement_class_path %>
+        </div>
       </div>
     </div>
     <div class="col">
@@ -52,8 +77,5 @@
     </div>
     <div class="col"></div>
   </div>
-  <div>
-    <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
-    <%= render 'shared/modal_button_close' %>
-  </div>
+  <%= render 'shared/form/actions', f:f %>
 <% end %>

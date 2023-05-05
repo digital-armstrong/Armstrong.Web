@@ -4,8 +4,5 @@
       <%= f.input :name, placeholder: 'Название р. группы', input_html: {:tabindex => 1}%>
     </div>
   </div>
-  <div>
-    <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
-    <%= render 'shared/modal_button_close' %>
-  </div>
+  <%= render 'shared/form/actions', f:f %>
 <% end %>
