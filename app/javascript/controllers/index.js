@@ -4,8 +4,8 @@
 
 import { application } from "./application"
 
-import Armstrong__ArmstrongController from "./armstrong/armstrong_controller"
-application.register("armstrong--armstrong", Armstrong__ArmstrongController)
+import Armstrong__ArmstrongController from "./armstrong_controller"
+application.register("armstrong", Armstrong__ArmstrongController)
 
 import FilterController from "./filter_controller"
 application.register("filter", FilterController)
