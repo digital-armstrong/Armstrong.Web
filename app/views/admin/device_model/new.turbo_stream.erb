@@ -1,4 +1,4 @@
 <%= turbo_stream.update "modal-title", t('.add_device_model') %>
 <%= turbo_stream.update "modal-body", partial: "shared/admin/form/device_model",
  locals: {path: admin_device_model_index_path, device_model: @device_model,
-  filtrator_class_id: "filtrator_modal", to_filter_class_id:dom_id(MeasurementClass.new) } %>
+  filtrator_class_id: "filtrator_class_modal", to_filter_class_id:dom_id(MeasurementClass.new) } %>

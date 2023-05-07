@@ -24,18 +24,18 @@ export default class extends Controller {
         type: "GET",
         url: `/api/v1/filters?id=${id}`,
         success: function (data) {
-          var $filter = $(`#${to_filter_id}`);
-          $filter.prop("disabled", true);
-          $filter.empty();
-          if ($obj.attr("data-filtrator-class") == 'filtrator-index') {
-            $filter.append($("<option/>", { value: "" }).text("Не учитывать"));
+          var $to_filter = $(`#${to_filter_id}`);
+          $to_filter.prop("disabled", true);
+          $to_filter.empty();
+          if ($obj.attr("data-filtrator-class") == 'filtrator-class-index') {
+            $to_filter.append($("<option/>", { value: "" }).text("Не учитывать"));
           }
           for (var i = 0; i < data.length; i++) {
-            $filter.append(
+            $to_filter.append(
               $("<option/>", { value: data[i].id }).text(data[i].name)
             );
           }
-          $filter.prop("disabled", false);
+          $to_filter.prop("disabled", false);
         },
         failure: function (data) {
           console.log(data);
