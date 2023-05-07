@@ -11,7 +11,8 @@
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
-          <%= search_form_for(@query, url:admin_device_model_index_path, method: :get, data:{controller: "filter"}, class: "rounded accordion-body") do |f| %>
+          <%= search_form_for(@query, url:admin_device_model_index_path, method: :get, 
+          data:{controller: "filter", 'filtrator_class': 'filtrator-index'}, class: "rounded accordion-body") do |f| %>
             <div class="row">
               <div class="col">
                 <%= f.label :name, class:"mb-1"%>
@@ -25,12 +26,12 @@
               <div class="col">
                 <%= f.label :measurement_group_id, class:"mb-1" %>
                 <%= f.collection_select(:measurement_group_id_eq, MeasurementGroup.all,
-                :id, :name, {:include_blank => 'Не учитывать'}, {:class=>'form-select form-select', id:"filtrator", data: {'action': 'onchange -> filter#filter', 'info': 'info'}}) %>
+                :id, :name, {:include_blank => 'Не учитывать'}, {:class=>'form-select form-select', id:"filtrator-index", data: {'action': 'onchange -> filter#filter', 'to_filter_class': 'filter-index', 'filtrator_class': 'filtrator-index'}}) %>
               </div>
               <div class="col">
                 <%= f.label :measurement_class_id, class:"mb-1" %>
                 <%= f.collection_select(:measurement_class_id_eq, MeasurementClass.all,
-                :id, :name, {:include_blank => 'Не учитывать'}, {:class=>'form-select form-select', id: "filter"}) %>
+                :id, :name, {:include_blank => 'Не учитывать'}, {:class=>'form-select form-select', id: "filter-index"}) %>
               </div>
               <div class="col">
                 <%= f.label :measuring_unit, class:"mb-1" %>

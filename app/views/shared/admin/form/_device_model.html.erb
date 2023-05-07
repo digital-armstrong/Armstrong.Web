@@ -1,4 +1,4 @@
-<%= simple_form_for device_model, as: :device_model, url: path, data: {controller: 'filter'}, class: "form-group row" do |f| %>
+<%= simple_form_for device_model, as: :device_model, url: path, data: {controller: 'filter', 'filtrator_class': filtrator_class_id}, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
       <%= f.input :name, placeholder: "Название устройства", input_html: {:tabindex => 1} %>
@@ -25,7 +25,8 @@
       </div>
       <div class="row">
         <div class="col-9 pe-0">
-          <%= f.association :measurement_group, label: false, input_html: {:tabindex => 3, data: {'action': 'change->filter#filter' }, id: "filtrator"}, include_blank: false %>
+          <%= f.association :measurement_group, label: false, input_html: {:tabindex => 3, data: {'action': 'change->filter#filter',
+           'to_filter_class': to_filter_class_id, 'filtrator_class': filtrator_class_id}, id: filtrator_class_id}, include_blank: false %>
         </div>
         <div class="col-3 text-end">
           <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path %>
@@ -38,7 +39,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <%= f.association :measurement_class, label:false, input_html: {tabindex: 4, id:"filter"}, include_blank: false %>
+          <%= f.association :measurement_class, label:false, input_html: {tabindex: 4, id: to_filter_class_id}, include_blank: false %>
         </div>
         <div class="col-3 text-end">
           <%= render 'shared/modal_button_add', path: new_admin_measurement_class_path %>
