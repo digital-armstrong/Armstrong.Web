@@ -10,7 +10,7 @@ export default function Root() {
         <div className="col-2 ps-0">
           <Filter />
         </div>
-        <div className="col-10 shadow rounded">
+        <div className="col-10 shadow rounded mb-4">
           <Table />
         </div>
       </div>
