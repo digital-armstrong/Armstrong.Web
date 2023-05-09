@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ky from "ky";
+import moment from "moment";
+import 'moment-timezone';
 
 export default function Table() {
   const [channels, setChannels] = useState([]);
+  const [timeZone, setTimeZone] = useState("");
 
   async function getAllChannels() {
     let result = await ky
@@ -19,6 +22,7 @@ export default function Table() {
   }
 
   useEffect(() => {
+    setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
     getAllChannels();
     setLoop();
   }, []);
@@ -61,7 +65,7 @@ export default function Table() {
             <td>{channel.location_description}</td>
             <td>{channel.event_system_value.toExponential(3)}</td>
             <td>{channel.event_not_system_value.toExponential(3)}</td>
-            <td>{channel.event_datetime}</td>
+            <td>{moment.tz(channel.event_datetime, timeZone).format('HH:mm:SS')}</td>
             <td>{channel.event_count}</td>
           </tr>
         ))}
