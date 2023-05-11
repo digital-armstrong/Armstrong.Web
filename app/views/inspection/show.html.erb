@@ -14,8 +14,14 @@
     </p>
     <p>
       <span>
+        <strong>Цель: </strong>
+        <%= t(@inspection.type_target) %>
+      </span>
+    </p>
+    <p>
+      <span>
         <strong>Состояние: </strong>
-        <%= @inspection.state %>
+        <%= t(@inspection.state) %>
       </span>
     </p>
     <p>
@@ -41,7 +47,9 @@
     <p>
       <span>
         <strong>Дата заключения: </strong>
-        <%= @inspection.conclusion_date %>
+        <% unless @inspection.conclusion_date.nil? %>
+          <%= local_time(@inspection.conclusion_date, :default) %>
+        <% end %>
       </span>
     </p>
     <div class="row px-0" style="max-width:650px; min-width:600px">

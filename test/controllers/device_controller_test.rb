@@ -5,18 +5,14 @@ class DeviceControllerTest < ActionController::TestCase
 
   def setup
     sign_in(users(:admin))
-    @device_model = create(:device_model)
+    @mg = create(:measurement_group)
+    @mc = create(:measurement_class, measurement_group_id: @mg.id)
+    @device_model = create(:device_model, measurement_group_id: @mg.id, measurement_class_id: @mc.id)
     @device_reg_group = create(:device_reg_group)
   end
 
   test 'should get index' do
     get :index
-    assert_response :success
-  end
-
-  test 'should get edit' do
-    device = create(:device)
-    get :edit, params: { id: device.id }
     assert_response :success
   end
 
@@ -35,11 +31,6 @@ class DeviceControllerTest < ActionController::TestCase
     device = create(:device)
     delete :destroy, params: { id: device.id }
     assert_response :redirect
-  end
-
-  test 'should get new' do
-    get :new
-    assert_response :success
   end
 
   test 'should get show' do

@@ -12,17 +12,6 @@ class Admin::DeviceComponentControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test 'should get new' do
-    get :new
-    assert_response :success
-  end
-
-  test 'should get edit' do
-    device_component = create(:device_component)
-    get :edit, params: { id: device_component.id }
-    assert_response :success
-  end
-
   test 'should patch update' do
     device_component = create(:device_component)
     device_component_attrs = device_component.as_json

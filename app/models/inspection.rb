@@ -44,6 +44,9 @@ class Inspection < ApplicationRecord
     decommissioning: 'decommissioning',
   }.freeze
 
+  STATES = Inspection.state_machine.states.map { |x| x.name }
+
+  validates :type_target, presence: true
   def self.ransackable_attributes(_auth_object = nil)
     ['conclusion', 'conclusion_date', 'created_at', 'creator_id', 'description', 'device_id', 'id', 'performer_id', 'state', 'updated_at']
   end
