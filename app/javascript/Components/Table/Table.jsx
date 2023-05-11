@@ -13,6 +13,7 @@ export default function Table() {
       .get("/api/v1/armstrong")
       .json();
     setChannels(result);
+    console.log(result);
   }
 
   const setLoop = async function () {
@@ -54,18 +55,19 @@ export default function Table() {
       <table className="table table-hover">
         <thead>
           <tr>
-            <th>State</th>
-            <th>SC</th>
-            <th>Server</th>
-            <th>Channel</th>
-            <th>Name</th>
-            <th>Device</th>
-            <th>Room</th>
-            <th>Location</th>
-            <th>Value /s</th>
-            <th>Value /ns</th>
-            <th>Datetime</th>
-            <th>Count</th>
+            <th>Сост.</th>
+            <th>СК</th>
+            <th>Серв.№</th>
+            <th>Кан.№</th>
+            <th>Точ. к.</th>
+            <th>Модель БД</th>
+            <th>Пом.</th>
+            <th>Описание</th>
+            <th>С.знач</th>
+            <th>Не с.знач</th>
+            <th>Время</th>
+            <th>Кол.</th>
+            <th>Имп/с</th>
           </tr>
         </thead>
         <tbody>
@@ -83,13 +85,14 @@ export default function Table() {
               <td>{item.server_id}</td>
               <td>{item.channel_id}</td>
               <td>{item.name}</td>
-              <td>{item.device_id}</td>
-              <td>{item.room_id}</td>
+              <td>{item.device.device_model.name}</td>
+              <td>{item.room.name}</td>
               <td>{item.location_description}</td>
               <td>{item.event_system_value.toExponential(3)}</td>
               <td>{item.event_not_system_value.toExponential(3)}</td>
               <td>{moment.tz(item.event_datetime, timeZone).format('HH:mm:SS')}</td>
               <td>{item.event_count}</td>
+              <td>{item.event_impulse_value.toExponential(3)}</td>
             </tr>
           ))}
         </tbody>
