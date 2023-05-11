@@ -58,14 +58,18 @@
         <% end %>
       </span>
     </p>
-    <div class="row px-0" style="max-width:650px; min-width:600px">
-      <div class="col-2">
-        <%= link_to "Изменить", edit_admin_device_model_path(@device_model), class: "btn btn-primary", data: { action: "click->modal#open", turbo_stream: "" }%>
-      </div>
-      <div class="col-2">
-        <%= button_to "Удалить", admin_device_model_path(@device_model), method: :delete, class: "btn btn-danger"%>
-      </div>
-    </div>
+    <span class="d-flex w-50 px-0" style="flex-wrap:wrap">
+      <% if can? :manage, DeviceModel %>
+        <div class="me-2">
+          <%= link_to "Изменить", edit_admin_device_model_path(@device_model), class: "btn btn-primary", 
+            data: { action: "click->modal#open", turbo_stream: "" }%>
+        </div>
+        <div>
+          <%= button_to "Удалить", admin_device_model_path(@device_model), method: :delete, 
+            class: "btn btn-danger"%>
+        </div>
+      <% end %>
+    </span>
   </div>
 </div>
 <div class="row">

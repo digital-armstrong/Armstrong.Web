@@ -1,3 +1,6 @@
 <%= turbo_stream.update "modal-title", t('.edit_device_model') %>
 <%= turbo_stream.update "modal-body", partial: "shared/admin/form/device_model",
- locals: {path: admin_device_model_path(@device_model), device_model: @device_model } %>
+  locals: {path: admin_device_model_path(@device_model), device_model: @device_model,
+  filtrator_class_id: "filtrator_class_modal", to_filter_class_id: dom_class(MeasurementClass),
+  prev_mc_val: @device_model.measurement_class.id} 
+%>
