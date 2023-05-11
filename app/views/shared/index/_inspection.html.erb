@@ -1,20 +1,22 @@
 <%= render 'shared/flash_alert' %>
 <div class="row mx-0 my-4">
-  <% if @inspections.count > 0 %>
   <div class="col-2 ps-0">
-    <div class="accordion mb-3" id="accordionFilter">
+    <div class="accordion mb-3" data-controller="mem" id="accordionFilter">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" id="rjaka"
+          data-action='click->mem#change_val' data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
             Фильтрация
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url: path, merhod: :get, class: "rounded accordion-body") do |f| %>
             <%= f.label :device, class: "mb-2" %>
-            <%= f.search_field :device_id_eq, class: 'form-control', placeholder: 'Прибор' %>
-            <%= f.label :performer, class: "my-2" %>
-            <%= f.search_field :performer_tabel_id_eq, class: 'form-control', placeholder: 'Табельный номер' %>
+            <%= f.search_field :device_serial_id_eq, class: 'form-control', placeholder: '123-123-N' %>
+            <%= f.label t('.assigned_user'), class: "my-2" %>
+            <%= f.search_field :performer_last_name_cont, class: 'form-control', placeholder: 'Иванов' %>
+            <%= f.search_field :performer_first_name_cont, class: 'form-control', placeholder: 'Иван' %>
+            <%= f.search_field :performer_second_name_cont, class: 'form-control', placeholder: 'Иванович' %>
             <%= f.label :state, class: "my-2" %>
             <%= f.collection_select :state_eq, Inspection.state_machine.states.map { |x| x.name}, 
               :to_s, Proc.new { |val| I18n.t(val) }, {:include_blank => 'Не учитывать'}, 
@@ -23,14 +25,17 @@
             <%= f.search_field :conclusion_cont, class: 'form-control', placeholder: 'Прибор инспекцию прошел...' %>
             <%= f.label :description, class: "my-2" %>
             <%= f.search_field :description_cont, class: 'form-control', placeholder: 'Инспекция...' %>
-            <%= f.label :creator, class: "my-2" %>
-            <%= f.search_field :creator_tabel_id_eq, class: 'form-control mb-2', placeholder: 'Табельный номер' %>
-            <%= f.submit "Применить", class: 'btn mx-2 w-100'%>
+            <%= f.label t('.creator'), class: "my-2" %>
+            <%= f.search_field :creator_last_name_cont, class: 'form-control', placeholder: 'Петров' %>
+            <%= f.search_field :creator_first_name_cont, class: 'form-control', placeholder: 'Петр' %>
+            <%= f.search_field :creator_second_name_cont, class: 'form-control', placeholder: 'Петрович' %>
+            <%= f.submit "Применить", class: 'btn my-2 w-100 btn-primary'%>
           <% end %>
         </div>
       </div>
     </div>
   </div>
+  <% if @inspections.count > 0 %>
   <div class="col-10 shadow rounded">
     <table class="table table-hover">
       <thead>
@@ -119,7 +124,6 @@
       </tbody>
     </table>
   </div>
-</div>
 
 <div class="row my-5">
   <div class="col-2">
@@ -134,8 +138,9 @@
     </div>
   </div>
 </div>
-<% else %>
-  <div class="m-5 text-center">
-    <h1 class="text-secondary"> <%= t('.text-no-new-task')%> </h1>
-  </div>
-<% end%>
+  <% else %>
+    <div class="col-10 text-center">
+      <h1 class="text-secondary"> <%= t('.text-no-new-task')%> </h1>
+    </div>
+  <% end%>
+</div>
