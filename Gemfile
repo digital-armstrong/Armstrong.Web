@@ -50,6 +50,7 @@ gem 'simple_form', '~> 5.2'
 
 gem 'state_machines', '~> 0.5.0'
 gem 'state_machines-activerecord', '~> 0.8.0'
+gem 'local_time'
 
 gem 'pagy', '~> 6.0'
 gem 'ransack', '~> 4.0'

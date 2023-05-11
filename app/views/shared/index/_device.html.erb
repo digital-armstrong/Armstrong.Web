@@ -62,12 +62,18 @@
         <% @devices.each do |device| %>
           <% path = "#{show_path}#{device.id}" %>
           <tr onclick="document.location = `<%= path %>`" style="cursor:pointer">
+            <% last_successful_inspection = device.inspections.where(state: "verification_successful").
+            sort {|el| el.conclusion_date}.first %>
             <th scope="row"><%= device.tabel_id %></th>
             <td><%= device.serial_id %></td>
             <td><%= device.device_model.name %></td>
             <td><%= device.year_of_production %></td>
             <td><%= device.year_of_commissioning %></td>
-            <td></td>
+            <td>
+              <% if last_successful_inspection.present? %>
+                <%= local_time(last_successful_inspection.conclusion_date, :date) %>
+              <% end %>
+            </td>
             <td><i class="bi bi-circle-fill text-danger"></i></td>
           </tr>
         <% end %>

@@ -1,4 +1,15 @@
 en:
+  time:
+    formats:
+      default: "%e %B %Y %H:%M"
+      time: "%H:%M:%S"
+      day_and_month: "%e %B"
+      date: "%e %B %Y"
+      short_full: "%d.%m.%Y %H:%M"
+      short_date: "%d.%m.%Y"
+      short_time: "%H:%M"
+      long: "%e %B %Y %H:%M"
+      full: "%e %B %Y %H:%M:%S"
   layouts:
     application:
       home: Home
