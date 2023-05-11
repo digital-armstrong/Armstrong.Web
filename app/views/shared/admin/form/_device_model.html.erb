@@ -1,4 +1,5 @@
-<%= simple_form_for device_model, as: :device_model, url: path, data: {controller: 'filter', 'filtrator_class': filtrator_class_id}, class: "form-group row" do |f| %>
+<%= simple_form_for device_model, as: :device_model, url: path, data: {controller: 'filter', 'filtrator_class': filtrator_class_id, 
+  'prev_mc_val': prev_mc_val }, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
       <%= f.input :name, placeholder: "Название устройства", input_html: {:tabindex => 1} %>
