@@ -29,6 +29,8 @@ class Ability
     if user.engineer?
       can(:manage, Device)
       can(:create_inspection, Device)
+      can(:create, [DeviceModel, SupplementaryKit, DeviceRegGroup, MeasurementClass, MeasurementGroup,
+        Manufacturer, DeviceComponent])
       cannot(:manage, :inspection)
       cannot(:manage, :armstrong)
     end
