@@ -207,8 +207,8 @@ DeviceModel.create(
 100.times do |i|
   DeviceModel.create(
     name: "Model_name_#{i}",
-    measurement_group: MeasurementGroup.find_by(id: rand(1..5)),
-    measurement_class: MeasurementClass.find_by(id: rand(1..15)),
+    measurement_group: MeasurementGroup.find_by(name: "Температурный"),
+    measurement_class: MeasurementClass.find_by(name: "Термометр"),
     measuring_unit: "мЗв/ч",
     safety_class: "#{i}Н",
     accuracy_class: i.to_f,
@@ -260,9 +260,6 @@ end
   Inspection.create(
     device: Device.find_by_id(rand(1..1000)),
     creator: User.find_by_id(rand(1..10)),
-    conclusion: "Conclusion #{i}",
-    conclusion_date: Time.at(rand(10.years.ago.to_f..Time.now.to_f)),
-    description: "Description #{i}",
     type_target: 'regular'
   )
 end

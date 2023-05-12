@@ -33,8 +33,17 @@
               </div>
               <div class="col">
                 <%= f.label :role, class:"mb-1" %>
-                <%= f.select(:role_eq, {:collection => User::ROLES.sort.map {|k,v| [v,k]}},
-                {:include_blank => 'Не учитывать'}, {:class =>'form-select form-select'})%>
+                <select class="form-select form-select" name="q[role_eq]" id="q_role_eq">
+                  <option value="">Не учитывать</option>
+                  <% User::ROLES.each do |key,value| %>
+                    <% if key == @selected_role %>
+                      <option value="<%= key %>" selected>
+                    <% else %>
+                      <option value="<%= key %>">
+                    <% end %>
+                    <%= (value) %></option>
+                  <% end %>
+                </select>
               </div>
               <div class="col">
                 <%= f.label :email, class:"mb-1" %>

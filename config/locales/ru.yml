@@ -177,11 +177,16 @@ ru:
         password: Пароль
         password_confirmation: Подтверждение пароля
         current_password: Текущий пароль
-        performer: Выполняющий
-        creator: Создатель
       inspection:
         performer_id: Выполняющий
+        performer: Выполняющий
         creator_id: Создатель
+        device_id: Прибор
+        device: Прибор
+        state: Состояние
+        conclusion: Заключение
+        conclusion_date: Дата заключения
+        type_target: Цель
   layouts:
     application:
       home: Главная
@@ -216,6 +221,8 @@ ru:
         conclusion_date: Дата заключения
         description: Описание
         creator: Направил
+        device_tabel_id: Таб.№
+        device_serial_id: Сер.№
         text-no-new-task: Задач пока нет...
   post:
     index:

@@ -11,24 +11,34 @@
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url: path, merhod: :get, class: "rounded accordion-body") do |f| %>
-            <%= f.label :device, class: "mb-2" %>
-            <%= f.search_field :device_serial_id_eq, class: 'form-control', placeholder: '123-123-N' %>
+            <%= f.label t('.device_serial_id'), class: "mb-2" %>
+            <%= f.search_field :device_serial_id_cont, class: 'form-control', placeholder: '123-123-N' %>
+            <%= f.label t('.device_tabel_id'), class: "my-2" %>
+            <%= f.search_field :device_tabel_id_cont, class: 'form-control', placeholder: '1' %>
             <%= f.label t('.assigned_user'), class: "my-2" %>
             <%= f.search_field :performer_last_name_cont, class: 'form-control', placeholder: 'Иванов' %>
-            <%= f.search_field :performer_first_name_cont, class: 'form-control', placeholder: 'Иван' %>
-            <%= f.search_field :performer_second_name_cont, class: 'form-control', placeholder: 'Иванович' %>
-            <%= f.label :state, class: "my-2" %>
-            <%= f.collection_select :state_eq, Inspection.state_machine.states.map { |x| x.name}, 
-              :to_s, Proc.new { |val| I18n.t(val) }, {:include_blank => 'Не учитывать'}, 
-              {:class=>'form-select form-select'} %>
+            <%= f.search_field :performer_first_name_cont, class: 'form-control mt-1', placeholder: 'Иван' %>
+            <%= f.search_field :performer_second_name_cont, class: 'form-control mt-1', placeholder: 'Иванович' %>
+            <% if @states_to_show.count > 1 %>
+              <%= f.label :state, class: "my-2" %>
+              <select class="form-select form-select" name="q[state_eq]" id="q_state_eq">
+                <option value="">Не учитывать</option>
+                <% @states_to_show.each do |key,value| %>
+                  <% if key == @selected_state %>
+                    <option value="<%= key %>" selected>
+                  <% else %>
+                    <option value="<%= key %>">
+                  <% end %>
+                  <%= t(value) %></option>
+                <% end %>
+              </select>
+            <% end %>
             <%= f.label :conclusion, class: "my-2" %>
             <%= f.search_field :conclusion_cont, class: 'form-control', placeholder: 'Прибор инспекцию прошел...' %>
-            <%= f.label :description, class: "my-2" %>
-            <%= f.search_field :description_cont, class: 'form-control', placeholder: 'Инспекция...' %>
             <%= f.label t('.creator'), class: "my-2" %>
             <%= f.search_field :creator_last_name_cont, class: 'form-control', placeholder: 'Петров' %>
-            <%= f.search_field :creator_first_name_cont, class: 'form-control', placeholder: 'Петр' %>
-            <%= f.search_field :creator_second_name_cont, class: 'form-control', placeholder: 'Петрович' %>
+            <%= f.search_field :creator_first_name_cont, class: 'form-control mt-1', placeholder: 'Петр' %>
+            <%= f.search_field :creator_second_name_cont, class: 'form-control mt-1', placeholder: 'Петрович' %>
             <%= f.submit "Применить", class: 'btn my-2 w-100 btn-primary'%>
           <% end %>
         </div>
@@ -40,7 +50,8 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col"><%= t('.device') %></th>
+          <th scope="col"><%= t('.device_serial_id') %></th>
+          <th scope="col"><%= t('.device_tabel_id') %></th>
           <th scope="col"><%= t('.assigned_user') %></th>
           <th scope="col"><%= t('.target') %></th>
           <th scope="col"><%= t('.state') %></th>
@@ -54,6 +65,7 @@
         <% @inspections.each do |inspection| %>
           <tr>
             <td><%= inspection.device.serial_id %></td>
+            <td><%= inspection.device.tabel_id %></td>
             <% if inspection.performer.present? %>
               <td><%= inspection.performer.last_name + " " + inspection.performer.first_name %></td>
             <% else %>

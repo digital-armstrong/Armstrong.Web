@@ -10,7 +10,9 @@ class Admin::UsersController < ApplicationController
     if params[:q][:updated_at_lteq].present?
       params[:q][:updated_at_lteq] = params[:q][:updated_at_lteq].to_date.end_of_day
     end
-
+    if params[:q][:role_eq].present?
+      @selected_role = params[:q][:role_eq].to_sym
+    end
     @query = User.ransack(params[:q])
     @pagy, @users = pagy(@query.result.
       order(:tabel_id))
