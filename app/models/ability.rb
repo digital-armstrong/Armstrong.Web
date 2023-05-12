@@ -21,9 +21,7 @@ class Ability
     end
 
     if user.inspector?
-      can([:read, :accept_task, :new_tasks, :my_tasks, :completed_tasks], Inspection)
-      can([:edit, :update, :complete_verification, :fail_verification, :close, :send_to_repair, :return_from_repair],
-          Inspection, performer_id: user.id)
+      inspector(user)
     end
 
     if user.engineer?
@@ -31,8 +29,16 @@ class Ability
       can(:create_inspection, Device)
       can(:create, [DeviceModel, SupplementaryKit, DeviceRegGroup, MeasurementClass, MeasurementGroup,
         Manufacturer, DeviceComponent])
-      cannot(:manage, :inspection)
+      inspector(user)
       cannot(:manage, :armstrong)
     end
+
+    
+  end
+
+  def inspector(user)
+    can([:read, :accept_task, :new_tasks, :my_tasks, :completed_tasks], Inspection)
+    can([:edit, :update, :complete_verification, :fail_verification, :close, :send_to_repair, :return_from_repair],
+        Inspection, performer_id: user.id)
   end
 end
