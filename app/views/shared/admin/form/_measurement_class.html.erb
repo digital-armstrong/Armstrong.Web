@@ -9,7 +9,7 @@
           <%= f.association :measurement_group, label: false, input_html: {:tabindex => 2}, include_blank: false %>
         </div>
         <div class="col-2 ps-0">
-          <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path %>
+          <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path, classes: "btn btn-ligth", text: nil %>
         </div>
       </div>
       <%= f.input :arms_device_type, placeholder: 'Тип прибора по ARMStrong', input_html: {:tabindex => 3}%>

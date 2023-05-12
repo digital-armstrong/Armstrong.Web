@@ -13,7 +13,7 @@
             <%= f.association :device_model, label:false, input_html: {tabindex: 7}, include_blank: false %>
           </div>
           <div class="col-3 text-end">
-            <%= render 'shared/modal_button_add', path: new_admin_device_model_path %>
+            <%= render 'shared/modal_button_add', path: new_admin_device_model_path, classes: "btn btn-ligth", text: nil %>
           </div>
         </div>
       </div>
@@ -30,7 +30,7 @@
             <%= f.association :device_reg_group, label: false, input_html: {:tabindex => 4}, include_blank: false %>
           </div>
           <div class="col-3 text-end">
-            <%= render 'shared/modal_button_add', path: new_admin_device_reg_group_path %>
+            <%= render 'shared/modal_button_add', path: new_admin_device_reg_group_path, classes: "btn btn-ligth", text: nil %>
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@
             <%= f.association :supplementary_kit, label:false, :include_blank => 'Не учитывать', input_html: {:tabindex => 8} %>
           </div>
           <div class="col-3 text-end">
-            <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path %>
+            <%= render 'shared/modal_button_add', path: new_admin_supplementary_kit_path, classes: "btn btn-ligth", text: nil %>
           </div>
         </div>
       </div>

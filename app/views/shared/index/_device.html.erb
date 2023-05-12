@@ -40,7 +40,8 @@
         </div>
       </div>
     </div>
-    <%= render 'shared/modal_button_add', path: new_path %>
+    <%= render 'shared/modal_button_add', path: new_path, classes: "btn btn-primary", text: " Добавить прибор" %>
+    <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-secondary my-3 w-100", text: " Добавить компонент для набора" %>
     <%= button_to device_download_path(request.params.merge(format: :pdf)), data: {turbo: :false}, class: "btn btn-primary my-3 w-100 shadow" do %>
       <i class="bi bi-download"></i><span> Скачать PDF</span>
     <% end %>

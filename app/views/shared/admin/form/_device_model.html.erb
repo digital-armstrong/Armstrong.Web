@@ -13,7 +13,7 @@
           <%= f.association :manufacturer, label: false, input_html: {:tabindex => 2}, include_blank: false %>
         </div>
         <div class="col-3 text-end">
-          <%= render 'shared/modal_button_add', path: new_admin_manufacturer_path %>
+          <%= render 'shared/modal_button_add', path: new_admin_manufacturer_path, classes: "btn btn-ligth", text: nil %>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
            'to_filter_class': to_filter_class_id, 'filtrator_class': filtrator_class_id}, id: filtrator_class_id}, include_blank: false %>
         </div>
         <div class="col-3 text-end">
-          <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path %>
+          <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path, classes: "btn btn-ligth", text: nil %>
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@
           <%= f.association :measurement_class, label:false, input_html: {tabindex: 4, id: to_filter_class_id}, include_blank: false %>
         </div>
         <div class="col-3 text-end">
-          <%= render 'shared/modal_button_add', path: new_admin_measurement_class_path %>
+          <%= render 'shared/modal_button_add', path: new_admin_measurement_class_path, classes: "btn btn-ligth", text: nil %>
         </div>
       </div>
     </div>
