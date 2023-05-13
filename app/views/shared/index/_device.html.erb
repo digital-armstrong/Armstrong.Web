@@ -6,7 +6,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
-            Фильтрация
+            <%= t('filtration') %>
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
@@ -40,8 +40,8 @@
         </div>
       </div>
     </div>
-    <%= render 'shared/modal_button_add', path: new_path, classes: "btn btn-primary", text: " Добавить прибор" %>
-    <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-secondary my-3 w-100", text: " Добавить компонент для набора" %>
+    <%= render 'shared/modal_button_add', path: new_path, classes: "btn btn-primary w-100", text: t(".add_device") %>
+    <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-secondary my-3 w-100", text: t(".add_device_component") %>
     <%= button_to device_download_path(request.params.merge(format: :pdf)), data: {turbo: :false}, class: "btn btn-primary my-3 w-100 shadow" do %>
       <i class="bi bi-download"></i><span> Скачать PDF</span>
     <% end %>

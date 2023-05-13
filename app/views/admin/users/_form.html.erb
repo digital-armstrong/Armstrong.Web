@@ -1,7 +1,7 @@
 <div class="container text-center w-50">
   <%= image_tag "atom-logo.svg", class: "mb-4 mt-5", width: "72", height: "57" %>
   <%= render 'shared/flash_alert' %>
-  <%= simple_form_for(@user, as: :user, url: path, data: {turbo:false}, class: "form-inputs" ) do |f| %>
+  <%= simple_form_for(@user, as: :user, url: path, class: "form-inputs" ) do |f| %>
       <%= f.input :first_name,
                   autofocus: true %>
       <%= f.input :last_name %>
@@ -18,6 +18,7 @@
       <div class="col">
         <%= f.input :role, :collection => User::ROLES.sort.map {|k,v| [v,k]}, include_blank: false, class:'form-select form-select' %>
       </div>
+      <%= render 'shared/timezone_field', f:f, is_new: is_new %>
     <div class="form-actions">
       <%= f.button :submit, t("b_register"), class: "btn btn-primary" %>
     </div>

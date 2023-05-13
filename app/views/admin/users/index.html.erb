@@ -115,8 +115,8 @@
             <td><%= user.role %></td>
             <td><%= user.email %></td>
             <td><%= user.phone %></td>
-            <td><%= user.created_at %></td>
-            <td><%= user.updated_at %></td>
+            <td><%= formatted_date(user.created_at, :short_full) %></td>
+            <td><%= formatted_date(user.updated_at, :short_full) %></td>
             <td>
               <div class="d-flex w-auto">
                 <%= link_to edit_admin_user_path(user), class: "btn" do %>
