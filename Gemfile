@@ -50,7 +50,6 @@ gem 'simple_form', '~> 5.2'
 
 gem 'state_machines', '~> 0.5.0'
 gem 'state_machines-activerecord', '~> 0.8.0'
-gem 'local_time'
 
 gem 'pagy', '~> 6.0'
 gem 'ransack', '~> 4.0'
@@ -61,7 +60,7 @@ gem 'prawn', '~> 2.4'
 gem 'prawn-table', '~> 0.2.2'
 gem 'devise', '~> 4.2'
 gem 'cancancan', '~> 3.5'
-
+gem 'tzinfo'
 group :development, :test do
   gem 'debug', platforms: [:mri, :mingw, :x64_mingw]
 
