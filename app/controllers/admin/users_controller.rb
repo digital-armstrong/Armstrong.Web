@@ -29,10 +29,12 @@ class Admin::UsersController < ApplicationController
     end
     if @user.update(user_params)
       flash[:success] = 'User was updated'
+      if @user.id = current_user.id
+        Time.use_zone(user_params[:timezone]) { nil }
+      end
       redirect_to(admin_users_path)
     else
-      flash.now[:warning] = "User wasn't updated"
-      render(:edit)
+      render(:edit, status: :unprocessable_entity)
     end
   end
 
@@ -47,7 +49,7 @@ class Admin::UsersController < ApplicationController
       flash[:success] = 'User was added'
       redirect_to(admin_users_path)
     else
-      render(:new)
+      render(:new, status: :unprocessable_entity)
     end
   end
 
@@ -79,6 +81,7 @@ class Admin::UsersController < ApplicationController
                                  :phone,
                                  :password,
                                  :password_confirmation,
-                                 :role)
+                                 :role,
+                                 :timezone)
   end
 end

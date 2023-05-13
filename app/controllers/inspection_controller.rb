@@ -32,7 +32,7 @@ class InspectionController < ApplicationController
     @states_to_show = Inspection::STATES
     tasks(nil)
   end
-  
+
   def new
     @inspection = Inspection.new
   end

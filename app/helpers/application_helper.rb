@@ -9,10 +9,6 @@ module ApplicationHelper
     I18n.l(param, format: type)
   end
 
-  def current_translations
-    I18n.locale
-  end
-
   def full_title(page_title = '')
     base_title = 'ARMStrong'
     if page_title.present?

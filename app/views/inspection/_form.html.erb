@@ -4,7 +4,7 @@
     <div class="col">
       <%= f.association :device, :label_method => lambda { |device| "Таб. № - #{device.tabel_id}, Сер. № - #{device.serial_id}" }, value_method: :id, include_blank: false %>
       <% if edit_params %> 
-        <%= f.input :conclusion_date %>
+        <%= f.input :conclusion_date, include_blank: true %>
         <%= f.input :conclusion %>
       <% end %>
       <%= f.input :type_target, :collection => Inspection::TYPE_TARGETS.sort.map {|k,v| [t(v),k]}, include_blank: false, class:'form-select form-select' %>

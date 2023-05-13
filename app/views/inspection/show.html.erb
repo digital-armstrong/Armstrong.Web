@@ -42,7 +42,7 @@
       <span>
         <strong>Дата заключения: </strong>
         <% unless @inspection.conclusion_date.nil? %>
-          <%= local_time(@inspection.conclusion_date, :default) %>
+          <%= formatted_date(@inspection.conclusion_date, :default) %>
         <% end %>
       </span>
     </p>

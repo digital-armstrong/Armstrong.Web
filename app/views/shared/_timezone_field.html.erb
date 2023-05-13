@@ -1,0 +1,3 @@
+<div data-controller='get-timezone' data-is-new=<%= is_new %> >
+  <%= f.input :timezone, :collection =>  TZInfo::Timezone.all_identifiers, include_blank: false, class:'form-select form-select' %>
+</div>

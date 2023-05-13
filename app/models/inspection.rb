@@ -26,12 +26,21 @@ class Inspection < ApplicationRecord
     event :send_to_repair do
       transition verification_failed: :sent_to_repair
     end
-    event :close do
-      transition verification_failed: :closed
-    end
 
     event :return_from_repair do
       transition sent_to_repair: :returned_from_repair
+    end
+
+    event :send_from_repair_to_verification do
+      transition returned_from_repair: :task_accepted
+    end
+
+    event :send_from_repair_to_close do
+      transition returned_from_repair: :closed
+    end
+
+    event :close do
+      transition verification_failed: :closed
     end
   end
 

@@ -4,11 +4,14 @@
 
 import { application } from "./application"
 
-import Armstrong__ArmstrongController from "./armstrong_controller"
-application.register("armstrong", Armstrong__ArmstrongController)
+import ArmstrongController from "./armstrong_controller"
+application.register("armstrong", ArmstrongController)
 
 import FilterController from "./filter_controller"
 application.register("filter", FilterController)
+
+import GetTimezoneController from "./get_timezone_controller"
+application.register("get-timezone", GetTimezoneController)
 
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
