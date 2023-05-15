@@ -21,11 +21,13 @@ export default function Table({data}) {
 
   return (
     <>
-      <table className="table table-hover">
-        <caption>Таблица мониторинга системы ARMStrong</caption>
-        <TableHead columns={columns} />
-        <TableBody columns={columns} data={data} />
-      </table>
+      <div className="table-responsive">
+        <table className="table table-hover">
+          <caption>Таблица мониторинга системы ARMStrong</caption>
+          <TableHead columns={columns} />
+          <TableBody columns={columns} data={data} />
+        </table>
+      </div>
     </>
   );
 }
