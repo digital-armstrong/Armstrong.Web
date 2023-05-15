@@ -23,6 +23,7 @@ class Admin::DeviceController < ApplicationController
     authorize!(:show, :device_admin)
     @inspection = Inspection.new
     device_show(@device)
+    @is_admin = true
   end
 
   def edit

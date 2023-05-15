@@ -8,7 +8,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
-            Фильтрация
+            <%= t('filtration')%>
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
@@ -36,13 +36,13 @@
               </div>
             </div>
             <div class="row">
-              <%= f.submit "Применить", class: 'btn btn-primary w-100 mt-4'%>
+              <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 mt-4'%>
             </div>
           <% end %>
         </div>
       </div>
     </div>
-    <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-primary", text: t(".add_device_component") %>
+    <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-primary", text: t("b_add") %>
   </div>
 </div>
 <div class="row mx-0">
@@ -50,14 +50,14 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">S/N</th>
-          <th scope="col">Название</th>
-          <th scope="col">Набор</th>
-          <th scope="col">Мин.</th>
-          <th scope="col">Макс.</th>
-          <th scope="col">Ед. изм</th>
-          <th scope="col">Описание</th>
-          <th scope="col" style="width: 10%">Действие</th>
+          <th scope="col"><%= t('activerecord.attributes.device_component.serial_id')%></th>
+          <th scope="col"><%= t('activerecord.attributes.device_component.name')%></th>
+          <th scope="col"><%= t('activerecord.attributes.device_component.supplementary_kit')%></th>
+          <th scope="col"><%= t('activerecord.attributes.device_component.measurement_min')%></th>
+          <th scope="col"><%= t('activerecord.attributes.device_component.measurement_max')%></th>
+          <th scope="col"><%= t('activerecord.attributes.device_component.measurement_unit')%></th>
+          <th scope="col"><%= t('activerecord.attributes.device_component.description')%></th>
+          <th scope="col" style="width: 10%"><%= t('action')%></th>
         </tr>
       </thead>
       <tbody>

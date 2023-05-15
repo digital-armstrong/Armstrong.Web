@@ -100,23 +100,26 @@ ru:
       supplementary_kit: Набор
       device: Прибор
       device_reg_group: Группа приборов
+      device_component: Компоненты
       manufacturer: Производитель
       measurement_class: Класс измерений
       measurement_group: Группа измерений
       post: Пост
       user: Пользователь
+      inspection: Инспекция
     attributes:
       device:
-        inventory_id: Инвентарный №
+        inventory_id: Инв. №
         device_model: Модель
         device_model_id: Модель
-        serial_id: Серийный №
-        tabel_id: Табельный №
-        device_reg_group: Регистрационная группа
+        serial_id: Сер. №
+        tabel_id: Таб. №
+        device_reg_group: Рег. группа
         year_of_production: Год выпуска
         year_of_commissioning: Год ввода
         room: Расположение
         room_id: Расположение
+        date_of_inspection: Дата инспекции
       device_model:
         name: Название
         manufacturer: Производитель
@@ -125,14 +128,15 @@ ru:
         measurement_group_id: Группа измерений
         measurement_class: Класс измерений
         measurement_class_id: Класс измерений
-        measuring_unit: Единица измерений
-        measurement_sensitivity: Чувствительность измерений
-        measurement_min: Минимальная величина измерений
-        measurement_max: Максимальная величина измерений
+        measuring_unit: Ед. измерений
+        measurement_sensitivity: Чувств. измерений
+        measurement_min: Мин. величина измерений
+        measurement_max: Макс. величина измерений
         safety_class: Класс безопасности
         accuracy_class: Класс точности
         is_complete_device: Полный набор?
         is_tape_rolling_mechanism: Имеет лентопротяжный механизм?
+        measurement_range: Диапазон измеренийиа
       device_reg_group:
         name: Название
       manufacturer:
@@ -166,7 +170,7 @@ ru:
         user: Автор
         category: Категория
       user:
-        tabel_id: Табельный №
+        tabel_id: Таб. №
         first_name: Имя
         last_name: Фамилия
         second_name: Отчество
@@ -187,6 +191,19 @@ ru:
         conclusion: Заключение
         conclusion_date: Дата заключения
         type_target: Цель
+        verification_successful: Проверка пройдена
+        task_created: Задача создана
+        task_accepted: Задача принята
+        verification_failed: Проверка провалена
+        sent_to_repair: Отправлено на ремонт
+        returned_from_repair: Возвращено с ремонта
+        closed: Закрыто
+        incoming: Входной контроль
+        repair: На починку
+        regular: Регулярная
+        calibration: Калибровка
+        technical_solution: Тех. решение
+        decommissioning: Упразднение
   layouts:
     application:
       home: Главная
@@ -200,9 +217,6 @@ ru:
       logout: Выйти
       edit_me: Изм. профиль
   shared:
-    form:
-      device:
-        room_blank: Не выбран
     show:
       device:
         send_to_inspection: Отправить на инспекцию
@@ -211,6 +225,7 @@ ru:
         new_tasks: Новые задачи
         my_tasks: Мои задачи
         completed_tasks: Завершенные задачи
+        all_tasks: Все задачи
     index:
       inspection:
         device: Прибор
@@ -224,6 +239,9 @@ ru:
         device_tabel_id: Таб.№
         device_serial_id: Сер.№
         text-no-new-task: Задач пока нет...
+      device:
+        b_add_device: Добавить прибор
+        b_add_device_component: Добавить компонент
   post:
     index:
       b_new_post: Новый пост
@@ -244,23 +262,17 @@ ru:
         created_at_to: Создан до
         updated_at_from: Обновлен от
         updated_at_to: Обновлен до
+  combobox_blank: Не выбрано
   b_change: Изменить
   b_delete: Удалить
   b_add: Добавить
   b_save: Сохранить
   b_back: Назад
-  action: Действия
+  b_download_pdf: Скачать PDF
+  b_accept: Применить
+  b_clear: Очистить
   created_at: Создан
-  verification_successful: Проверка пройдена
-  task_created: Задача создана
-  task_accepted: Задача принята
-  verification_failed: Проверка провалена
-  sent_to_repair: Отправлено на ремонт
-  returned_from_repair: Возвращено с ремонта
-  closed: Закрыто
-  incoming: Входной контроль
-  repair: На починку
-  regular: Регулярная
-  calibration: Калибровка
-  technical_solution: Тех. решение
-  decommissioning: Упразднение
+  updated_at: Обновлен
+  action: Действия
+  filtration: Фильтрация
+

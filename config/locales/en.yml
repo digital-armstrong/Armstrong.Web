@@ -47,15 +47,15 @@ en:
       inspection:
         device: Device
         assigned_user: Inspector
-        target: Target
-        state: State
-        conclusion: Conclusion
-        conclusion_date: Date
-        description: Description
         creator: Creator
+        device_tabel_id: Tabel
+        device_serial_id: Serial
         text-no-new-task: No tasks yet...
   b_change: Change
   b_delete: Delete
   b_save: Save
   b_add: Add
   b_back: Back
+  action: Actions
+  b_accept: "Accept"
+  b_clear: "Clear"

@@ -1,50 +1,50 @@
 <% provide :page_title, "Модель #{@device_model.name}" %>
 <%= render 'shared/flash_alert' %>
-<div class="row my-3">
+<div class="row mx-0 my-3">
   <div class="col p-4 shadow rounded">
     <div class="row text-center">
-      <h1>Модель</h1>
+      <h1><%=t('activerecord.models.device_model')%></h1>
       <hr class="divider">
     </div>
-    <p>
+       <p>
       <span>
-        <strong>Название модели: </strong>
+        <strong><%=t('activerecord.attributes.device_model.name')%>: </strong>
         <%= @device_model.name %>
       </span>
     </p>
     <p>
       <span>
-        <strong>Группа прибора: </strong>
+        <strong><%=t('activerecord.attributes.device_model.measurement_group')%>: </strong>
         <%= @device_model.measurement_group.name %>
       </span>
     </p>
     <p>
       <span>
-        <strong>Класс прибора: </strong>
+        <strong><%=t('activerecord.attributes.device_model.measurement_class')%>: </strong>
         <%= @device_model.measurement_class.name %>
       </span>
     </p>
     <p>
       <span>
-        <strong>Класс безопасности: </strong>
+        <strong><%=t('activerecord.attributes.device_model.safety_class')%>: </strong>
         <%= @device_model.safety_class %>
       </span>
     </p>
     <p>
       <span>
-        <strong>Класс точности: </strong>
+        <strong><%=t('activerecord.attributes.device_model.accuracy_class')%>: </strong>
         <%= @device_model.accuracy_class %>
       </span>
     </p>
     <p>
       <span>
-        <strong>Чувствительность: </strong>
+        <strong><%=t('activerecord.attributes.device_model.measurement_sensitivity')%>: </strong>
         <%= @device_model.measurement_sensitivity %>
       </span>
     </p>
     <p>
       <span>
-        <strong>Диапазон измерений: </strong>
+        <strong><%=t('activerecord.attributes.device_model.measurement_range')%>: </strong>
         <%= @device_model.measurement_min %> ÷ <%=
         @device_model.measurement_max %>, <%=
         @device_model.measuring_unit %>
@@ -52,7 +52,7 @@
     </p>
     <p>
       <span>
-        <strong>Документациця: </strong>
+        <strong><%=t('activerecord.attributes.device_model.doc_url')%>: </strong>
         <%= link_to device_index_path do %>
           <i class="bi bi-file-earmark-arrow-down-fill"></i>
         <% end %>
@@ -61,50 +61,48 @@
     <span class="d-flex w-50 px-0" style="flex-wrap:wrap">
       <% if can? :manage, DeviceModel %>
         <div class="me-2">
-          <%= link_to "Изменить", edit_admin_device_model_path(@device_model), class: "btn btn-primary", 
+          <%= link_to t("b_change"), edit_admin_device_model_path(@device_model), class: "btn btn-primary", 
             data: { action: "click->modal#open", turbo_stream: "" }%>
         </div>
         <div>
-          <%= button_to "Удалить", admin_device_model_path(@device_model), method: :delete, 
+          <%= button_to t("b_delete"), admin_device_model_path(@device_model), method: :delete, 
             class: "btn btn-danger"%>
         </div>
       <% end %>
     </span>
   </div>
-</div>
-<div class="row">
-  <div class="col p-4 shadow rounded">
+  <div class="col p-4 ms-2 shadow rounded">
     <div class="row text-center">
-      <h1>Производитель</h1>
+      <h1><%=t('activerecord.models.manufacturer')%></h1>
       <hr class="divider">
     </div>
-    <p>
+   <p>
       <span>
-        <strong>Производитель: </strong>
+        <strong><%=t('activerecord.attributes.manufacturer.name')%>: </strong>
         <%= @device_model.manufacturer.name %>
       </span>
     </p>
     <p>
       <span>
-        <strong>Адрес: </strong>
+        <strong><%=t('activerecord.attributes.manufacturer.adress')%>: </strong>
         <%= @device_model.manufacturer.adress %>
       </span>
     </p>
     <p>
       <span>
-        <strong>Телефон: </strong>
+        <strong><%=t('activerecord.attributes.manufacturer.phone')%>: </strong>
         <%= @device_model.manufacturer.phone %>
       </span>
     </p>
     <p>
       <span>
-        <strong>E-mail: </strong>
+        <strong><%=t('activerecord.attributes.manufacturer.email')%>: </strong>
         <%= mail_to @device_model.manufacturer.email %>
       </span>
     </p>
     <p>
       <span>
-        <strong>Сайт: </strong>
+        <strong><%=t('activerecord.attributes.manufacturer.site_url')%>: </strong>
         <%= link_to "#{@device_model.manufacturer.site_url}", @device_model.manufacturer.site_url, target: :blank %>
       </span>
     </p>

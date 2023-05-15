@@ -8,7 +8,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
-            Фильтрация
+            <%= t('filtration')%>
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
@@ -27,14 +27,14 @@
                 <%= f.search_field :description_cont, class:"form-control", placeholder:"Набор для..." %>
               </div>
               <div class="row">
-                <%= f.submit "Применить", class: 'btn btn-primary w-100 mt-4'%>
+                <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 mt-4'%>
               </div>
             </div>
           <% end %>
         </div>
       </div>
     </div>
-    <%= render 'shared/modal_button_add', path: new_admin_supplementary_kit_path, classes: "btn btn-primary", text: t(".add_supplementary_kit") %>
+    <%= render 'shared/modal_button_add', path: new_admin_supplementary_kit_path, classes: "btn btn-primary", text: t("b_add") %>
   </div>
 </div>
 <div class="row">
@@ -51,18 +51,18 @@
           <div class="accordion-body">
             <% device_components_in_this_sk = supplementary_kit.device_components %>
             <% if device_components_in_this_sk.length > 0 %>
-              <p>Компоненты:</p>
+              <p><%= t('activerecord.models.device_component')%>:</p>
               <%= render 'shared/show/supplementary_kit', device_components: device_components_in_this_sk %>
             <% end %>
             <p>
-              Описание: <%= supplementary_kit.description %>
+              <%= t('activerecord.attributes.supplementary_kit.description')%>: <%= supplementary_kit.description %>
             </p>
             <div class="row px-0 mt-2" style="max-width:650px; min-width:600px">
               <div class="col-2">
-                <%= link_to "Изменить", edit_admin_supplementary_kit_path(supplementary_kit), class: "btn btn-primary", data: { action: "click->modal#open", turbo_stream: "" }%>
+                <%= link_to t('b_change'), edit_admin_supplementary_kit_path(supplementary_kit), class: "btn btn-primary", data: { action: "click->modal#open", turbo_stream: "" }%>
               </div>
               <div class="col-2">
-                <%= button_to "Удалить", admin_supplementary_kit_path(supplementary_kit), method: :delete, class: "btn btn-danger"%>
+                <%= button_to t('b_delete'), admin_supplementary_kit_path(supplementary_kit), method: :delete, class: "btn btn-danger"%>
               </div>
             </div>
           </div>

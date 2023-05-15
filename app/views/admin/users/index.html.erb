@@ -7,7 +7,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
-            Фильтрация
+            <%= t('filtration')%>
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
@@ -34,7 +34,7 @@
               <div class="col">
                 <%= f.label :role, class:"mb-1" %>
                 <select class="form-select form-select" name="q[role_eq]" id="q_role_eq">
-                  <option value="">Не учитывать</option>
+                  <option value=""><%= t('combobox_blank')%></option>
                   <% User::ROLES.each do |key,value| %>
                     <% if key == @selected_role %>
                       <option value="<%= key %>" selected>
@@ -84,7 +84,7 @@
       </div>
     </div>
     <%= link_to new_admin_user_path, class: "btn btn-primary mb-4 w-100 shadow" do %>
-      <i class="bi bi-plus-square"></i><span> Добавить</span>
+      <i class="bi bi-plus-square"></i><span> <%= t('b_add')%></span>
     <% end %>
   </div>
 </div>
@@ -93,15 +93,15 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col"><%=t('.tabel_id')%></th>
-          <th scope="col"><%=t('.last_name')%></th>
-          <th scope="col"><%=t('.first_name')%></th>
-          <th scope="col"><%=t('.second_name')%></th>
-          <th scope="col"><%=t('.role')%></th>
-          <th scope="col"><%=t('.email')%></th>
-          <th scope="col"><%=t('.phone')%></th>
-          <th scope="col"><%=t('.created_at')%></th>
-          <th scope="col"><%=t('.updated_at')%></th>
+          <th scope="col"><%=t('activerecord.attributes.user.tabel_id')%></th>
+          <th scope="col"><%=t('activerecord.attributes.user.last_name')%></th>
+          <th scope="col"><%=t('activerecord.attributes.user.first_name')%></th>
+          <th scope="col"><%=t('activerecord.attributes.user.second_name')%></th>
+          <th scope="col"><%=t('activerecord.attributes.user.role')%></th>
+          <th scope="col"><%=t('activerecord.attributes.user.email')%></th>
+          <th scope="col"><%=t('activerecord.attributes.user.phone')%></th>
+          <th scope="col"><%=t('created_at')%></th>
+          <th scope="col"><%=t('updated_at')%></th>
           <th scope="col" style="width: 10%"><%=t('action')%></th>
         </tr>
       </thead>

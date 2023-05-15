@@ -6,7 +6,7 @@
         <h2 class="accordion-header" id="headingFilter">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
           data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
-            Фильтрация
+            <%= t('filtration')%>
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
@@ -22,14 +22,14 @@
             <% if @states_to_show.count > 1 %>
               <%= f.label :state, class: "my-2" %>
               <select class="form-select form-select" name="q[state_eq]" id="q_state_eq">
-                <option value="">Не учитывать</option>
+                <option value=""><%= t('combobox_blank') %></option>
                 <% @states_to_show.each do |key,value| %>
                   <% if key == @selected_state %>
                     <option value="<%= key %>" selected>
                   <% else %>
                     <option value="<%= key %>">
                   <% end %>
-                  <%= t(value) %></option>
+                  <%= t("activerecord.attributes.inspection.#{value}") %></option>
                 <% end %>
               </select>
             <% end %>
@@ -39,7 +39,10 @@
             <%= f.search_field :creator_last_name_cont, class: 'form-control', placeholder: 'Петров' %>
             <%= f.search_field :creator_first_name_cont, class: 'form-control mt-1', placeholder: 'Петр' %>
             <%= f.search_field :creator_second_name_cont, class: 'form-control mt-1', placeholder: 'Петрович' %>
-            <%= f.submit "Применить", class: 'btn my-2 w-100 btn-primary'%>
+            <%= f.submit t("b_accept"), class: 'btn my-2 w-100 btn-primary'%>
+            <button type="reset" class="btn w-100 btn-secondary">
+              <%= t("b_clear")%>
+            </button>
           <% end %>
         </div>
       </div>
@@ -71,8 +74,8 @@
             <% else %>
               <td></td>
             <% end %>
-            <td><%= t(inspection.type_target) %></td>
-            <td><%= t(inspection.state) %></td>
+            <td><%= t("activerecord.attributes.inspection.#{inspection.type_target}") %></td>
+            <td><%= t("activerecord.attributes.inspection.#{inspection.state}") %></td>
             <td><%= inspection.conclusion %></td>
             <% if inspection.conclusion_date%>
                 <td><%= formatted_date(inspection.conclusion_date, :default) %></td>

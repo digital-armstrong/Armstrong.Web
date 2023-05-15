@@ -2,12 +2,19 @@
 <%= simple_form_for @inspection, as: :inspection, url: path, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
-      <%= f.association :device, :label_method => lambda { |device| "Таб. № - #{device.tabel_id}, Сер. № - #{device.serial_id}" }, value_method: :id, include_blank: false %>
+      <% if @inspection.state == Inspection::STATES[:task_created] || @inspection.state = nil %>
+        <%= f.association :device, :label_method => lambda { |device| "Таб. № - #{device.tabel_id}, Сер. № - #{device.serial_id}" }, value_method: :id, include_blank: false %>
+      <% end %>
+
       <% if edit_params %> 
         <%= f.input :conclusion_date, include_blank: true %>
         <%= f.input :conclusion %>
       <% end %>
-      <%= f.input :type_target, :collection => Inspection::TYPE_TARGETS.sort.map {|k,v| [t(v),k]}, include_blank: false, class:'form-select form-select' %>
+
+      <% if @inspection.state == Inspection::STATES[:task_created] || @inspection.state = nil %>
+        <%= f.input :type_target, :collection => Inspection::TYPE_TARGETS.sort.map {|k,v| [t(v),k]}, include_blank: false, class:'form-select form-select' %>
+      <% end %>
+
       <% if current_user.admin? %>  
         <%= f.association :performer, label_method: :tabel_id, collection: User.where(role: [User::ROLES[:inspector], User::ROLES[:engineer], User::ROLES[:admin]]), include_blank: "Не выбран" %>
       <% end %>

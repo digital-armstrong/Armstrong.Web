@@ -25,20 +25,22 @@ class Ability
     end
 
     if user.engineer?
-      can(:manage, Device)
-      can(:create_inspection, Device)
+      can([:manage, :create_inspection], Device)
       can(:create, [DeviceModel, SupplementaryKit, DeviceRegGroup, MeasurementClass, MeasurementGroup,
-        Manufacturer, DeviceComponent])
+                    Manufacturer, DeviceComponent])
       inspector(user)
       cannot(:manage, :armstrong)
     end
-
-    
   end
 
   def inspector(user)
     can([:read, :accept_task, :new_tasks, :my_tasks, :completed_tasks], Inspection)
-    can([:edit, :update, :complete_verification, :fail_verification, :close, :send_to_repair, :return_from_repair],
+    can([:complete_verification, :fail_verification, :close, :send_to_repair, :return_from_repair],
         Inspection, performer_id: user.id)
+    can([:edit, :update],
+        Inspection.where(creator_id: user.id, state: Inspection::STATES[:task_created]).or(Inspection.where(performer_id: user.id)))
+    can([:destroy], Inspection.where(creator_id: user.id, state: Inspection::STATES[:task_created]))
+    cannot([:edit, :update], Inspection.where.not(state:
+      [Inspection::STATES[:task_created], Inspection::STATES[:closed], Inspection::STATES[:verification_successful]]))
   end
 end

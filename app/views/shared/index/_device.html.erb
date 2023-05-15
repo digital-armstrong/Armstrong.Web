@@ -35,27 +35,30 @@
                 <%= f.search_field :year_of_commissioning_lteq, class: 'form-control', placeholder: 'До' %>
               </div>
             </div>
-            <%= f.submit "Применить", class: 'btn btn-primary w-100'%>
+            <%= f.submit t("b_accept"), class: 'btn btn-primary w-100 my-2'%>
+            <button type="reset" class='btn btn-secondary w-100'>
+              <%= t("b_clear")%>
+            </button>
           <% end %>
         </div>
       </div>
     </div>
-    <%= render 'shared/modal_button_add', path: new_path, classes: "btn btn-primary w-100", text: t(".add_device") %>
-    <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-secondary my-3 w-100", text: t(".add_device_component") %>
-    <%= button_to device_download_path(request.params.merge(format: :pdf)), data: {turbo: :false}, class: "btn btn-primary my-3 w-100 shadow" do %>
-      <i class="bi bi-download"></i><span> Скачать PDF</span>
+    <%= render 'shared/modal_button_add', path: new_path, classes: "btn btn-primary w-100", text: t(".b_add_device") %>
+    <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-primary mt-2 w-100", text: t(".b_add_device_component") %>
+    <%= button_to device_download_path(request.params.merge(format: :pdf)), data: {turbo: :false}, class: "btn btn-primary my-2 w-100 shadow" do %>
+      <i class="bi bi-download"></i><span> <%=t('b_download_pdf')%></span>
     <% end %>
   </div>
   <div class="col-10 shadow rounded">
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Таб. №</th>
-          <th scope="col">Сер. №</th>
-          <th scope="col">Модель</th>
-          <th scope="col">Год выпуска</th>
-          <th scope="col">Год ввода</th>
-          <th scope="col">Дата инспекции</th>
+          <th scope="col"><%=t('activerecord.attributes.device.tabel_id')%></th>
+          <th scope="col"><%=t('activerecord.attributes.device.serial_id')%></th>
+          <th scope="col"><%=t('activerecord.attributes.device.device_model')%></th>
+          <th scope="col"><%=t('activerecord.attributes.device.year_of_production')%></th>
+          <th scope="col"><%=t('activerecord.attributes.device.year_of_commissioning')%></th>
+          <th scope="col"><%=t('activerecord.attributes.device.date_of_inspection')%></th>
           <th scope="col"><i class="bi bi-circle"></th>
         </tr>
       </thead>
@@ -92,3 +95,6 @@
     </div>
   </div>
 </div>
+<script>
+
+</script>

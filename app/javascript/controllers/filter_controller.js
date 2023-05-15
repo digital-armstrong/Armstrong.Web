@@ -5,10 +5,8 @@ import ky from "ky";
 export default class extends Controller {
   connect() {
     let $filtrator = $(this.element).attr("data-filtrator-class");
-    this.doFilter(`#${$filtrator}`, $(this.element));
+    if ($filtrator != null) this.doFilter(`#${$filtrator}`, $(this.element));
   }
-
-  disconnect() {}
 
   filter(obj) {
     this.doFilter($(obj.target), obj);

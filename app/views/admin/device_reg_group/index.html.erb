@@ -8,7 +8,7 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
-            Фильтрация
+            <%= t('filtration')%>
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div>
-      <%= render 'shared/modal_button_add', path: new_admin_device_reg_group_path, classes: "btn btn-primary", text: t(".add_device_reg_group") %>
+      <%= render 'shared/modal_button_add', path: new_admin_device_reg_group_path, classes: "btn btn-primary", text: t("b_add") %>
     </div>
   </div>
   <div class="col-10 shadow rounded">
