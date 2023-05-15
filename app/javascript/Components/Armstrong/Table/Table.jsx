@@ -2,7 +2,7 @@ import React from "react";
 import TableBody from "./TableBody";
 import TableHead from "./TableHead";
 
-export default function Table({tableData}) {
+export default function Table({data}) {
   const columns = [
     { label: "State", accessor: "state" },
     { label: "SC", accessor: "specialControl" },
@@ -24,7 +24,7 @@ export default function Table({tableData}) {
       <table className="table table-hover">
         <caption>Таблица мониторинга системы ARMStrong</caption>
         <TableHead columns={columns} />
-        <TableBody columns={columns} tableData={tableData} />
+        <TableBody columns={columns} data={data} />
       </table>
     </>
   );

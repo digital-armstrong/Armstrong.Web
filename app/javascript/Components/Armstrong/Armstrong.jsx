@@ -7,12 +7,24 @@ import Table from "./Table/Table";
 import Filter from "./Filter/Filter";
 
 export default function Armstrong() {
-  const [tableData, setTableData] = useState([]);
+  const [data, setData] = useState([]);
+  const [filter, setFilter] = useState("");
   const [timeZone, setTimeZone] = useState("");
+
+  useEffect(() => {
+    setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+    getData();
+    setLoop();
+
+    return () => {
+      console.log("call returned");
+      clearInterval(interval);
+    };
+  }, []);
 
   async function getData() {
     let result = await ky.get("/api/v1/armstrong").json();
-    setTableData(normalizeData(sortBy(result, ["server_id", "channel_id"])));
+    setData(normalizeData(sortBy(result, ["server_id", "channel_id"])));
     console.log(result);
   }
 
@@ -58,25 +70,25 @@ export default function Armstrong() {
     return () => clearInterval(interval);
   };
 
-  useEffect(() => {
-    setTimeZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
-    getData();
-    setLoop();
+  const handleFilterChange = (event) => {
+    setFilter(event.target.value);
+  };
 
-    return () => {
-      console.log("call returned");
-      clearInterval(interval);
-    };
-  }, []);
+  const filteredData = data.filter(
+    (item) =>
+      item.name.toLowerCase().includes(filter.toLowerCase()) ||
+      item.deviceModel.toLowerCase().includes(filter.toLowerCase()) ||
+      String(item.serverId).toLowerCase().includes(filter.toLowerCase())
+  );
 
   return (
     <>
       <div className="row mx-0">
         <div className="col-2 ps-0">
-          <Filter tableData={tableData} />
+          <Filter filter={filter} onFilterChange={handleFilterChange} />
         </div>
         <div className="col-10 shadow rounded mb-4">
-          <Table tableData={tableData} />
+          <Table data={filteredData} />
         </div>
       </div>
     </>

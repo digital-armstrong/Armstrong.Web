@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-export default function TableBody({ columns, tableData }) {
+export default function TableBody({ columns, data }) {
   return (
     <tbody>
-      {tableData.map((data) => {
+      {data.map((data) => {
         return (
           <tr key={data.id}>
             {columns.map(({ accessor }) => {
