@@ -15,17 +15,17 @@ class Admin::ManufacturerController < ApplicationController
   def create
     @manufacturer = Manufacturer.new(manufacturer_params)
     if @manufacturer.save
-      redirect_to(admin_manufacturer_index_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:new)
+      render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
     if @manufacturer.update(manufacturer_params)
-      redirect_to(admin_manufacturer_index_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:edit)
+      render(:edit, status: :unprocessable_entity)
     end
   end
 

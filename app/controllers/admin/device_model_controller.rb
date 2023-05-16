@@ -16,17 +16,17 @@ class Admin::DeviceModelController < ApplicationController
   def create
     @device_model = DeviceModel.new(device_model_params)
     if @device_model.save
-      redirect_to(admin_device_model_index_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:new)
+      render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
     if @device_model.update(device_model_params)
-      redirect_to(admin_device_model_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:edit)
+      render(:edit, status: :unprocessable_entity)
     end
   end
 

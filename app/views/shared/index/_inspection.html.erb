@@ -1,39 +1,60 @@
 <%= render 'shared/flash_alert' %>
 <div class="row mx-0 my-4">
-  <% if @inspections.count > 0 %>
   <div class="col-2 ps-0">
     <div class="accordion mb-3" id="accordionFilter">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
-            Фильтрация
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            <%= t('filtration')%>
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url: path, merhod: :get, class: "rounded accordion-body") do |f| %>
-            <%= f.label :device, class: "mb-2" %>
-            <%= f.search_field :device_id_eq, class: 'form-control', placeholder: 'Прибор' %>
-            <%= f.label :performer, class: "my-2" %>
-            <%= f.search_field :performer_tabel_id_eq, class: 'form-control', placeholder: 'Дудкин' %>
-            <%= f.label :state, class: "my-2" %>
-            <%= f.search_field :state_cont, class: 'form-control', placeholder: 'Активная' %>
+            <%= f.label t('.device_serial_id'), class: "mb-2" %>
+            <%= f.search_field :device_serial_id_cont, class: 'form-control', placeholder: '123-123-N' %>
+            <%= f.label t('.device_tabel_id'), class: "my-2" %>
+            <%= f.search_field :device_tabel_id_cont, class: 'form-control', placeholder: '1' %>
+            <%= f.label t('.assigned_user'), class: "my-2" %>
+            <%= f.search_field :performer_last_name_cont, class: 'form-control', placeholder: 'Иванов' %>
+            <%= f.search_field :performer_first_name_cont, class: 'form-control mt-1', placeholder: 'Иван' %>
+            <%= f.search_field :performer_second_name_cont, class: 'form-control mt-1', placeholder: 'Иванович' %>
+            <% if @states_to_show.count > 1 %>
+              <%= f.label :state, class: "my-2" %>
+              <select class="form-select form-select" name="q[state_eq]" id="q_state_eq">
+                <option value=""><%= t('combobox_blank') %></option>
+                <% @states_to_show.each do |key,value| %>
+                  <% if key == @selected_state %>
+                    <option value="<%= key %>" selected>
+                  <% else %>
+                    <option value="<%= key %>">
+                  <% end %>
+                  <%= t("activerecord.attributes.inspection.#{value}") %></option>
+                <% end %>
+              </select>
+            <% end %>
             <%= f.label :conclusion, class: "my-2" %>
             <%= f.search_field :conclusion_cont, class: 'form-control', placeholder: 'Прибор инспекцию прошел...' %>
-            <%= f.label :description, class: "my-2" %>
-            <%= f.search_field :description_cont, class: 'form-control', placeholder: 'Инспекция...' %>
-            <%= f.label :creator, class: "my-2" %>
-            <%= f.search_field :creator_tabel_id_eq, class: 'form-control mb-2', placeholder: 'Пупкин' %>
-            <%= f.submit "Применить", class: 'btn mx-2 w-100'%>
+            <%= f.label t('.creator'), class: "my-2" %>
+            <%= f.search_field :creator_last_name_cont, class: 'form-control', placeholder: 'Петров' %>
+            <%= f.search_field :creator_first_name_cont, class: 'form-control mt-1', placeholder: 'Петр' %>
+            <%= f.search_field :creator_second_name_cont, class: 'form-control mt-1', placeholder: 'Петрович' %>
+            <%= f.submit t("b_accept"), class: 'btn my-2 w-100 btn-primary'%>
+            <button type="reset" class="btn w-100 btn-secondary">
+              <%= t("b_clear")%>
+            </button>
           <% end %>
         </div>
       </div>
     </div>
   </div>
+  <% if @inspections.count > 0 %>
   <div class="col-10 shadow rounded">
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col"><%= t('.device') %></th>
+          <th scope="col"><%= t('.device_serial_id') %></th>
+          <th scope="col"><%= t('.device_tabel_id') %></th>
           <th scope="col"><%= t('.assigned_user') %></th>
           <th scope="col"><%= t('.target') %></th>
           <th scope="col"><%= t('.state') %></th>
@@ -47,65 +68,85 @@
         <% @inspections.each do |inspection| %>
           <tr>
             <td><%= inspection.device.serial_id %></td>
+            <td><%= inspection.device.tabel_id %></td>
             <% if inspection.performer.present? %>
               <td><%= inspection.performer.last_name + " " + inspection.performer.first_name %></td>
             <% else %>
               <td></td>
             <% end %>
-            <td><%= inspection.type_target %></td>
-            <td><%= inspection.state %></td>
+            <td><%= t("activerecord.attributes.inspection.#{inspection.type_target}") %></td>
+            <td><%= t("activerecord.attributes.inspection.#{inspection.state}") %></td>
             <td><%= inspection.conclusion %></td>
-            <td><%= inspection.conclusion_date %></td>
+            <% if inspection.conclusion_date%>
+                <td><%= formatted_date(inspection.conclusion_date, :default) %></td>
+              <% else %>
+                <td></td>
+              <% end %>
             <td><%= inspection.creator.last_name + " " + inspection.creator.first_name %></td>
             <td>
               <div class="d-flex w-auto">
-                <% case inspection.state %>
-                  <% when "task_created"%>
-                    <div class="col">
-                      <%= button_to accept_task_inspection_path(inspection),
-                        method: :post, class: 'btn' do %>
-                        <i class="bi bi-person-add"></i>
-                      <% end%>
-                    </div>
-                  <% when "task_accepted"%>
-                    <div class="col">
-                      <%= button_to complete_verification_inspection_path(inspection),
-                        method: :post, class: 'btn' do %>
-                        <i class="bi bi-check-square"></i>
-                      <% end %>
-                    </div>
-                    <div class="col">
-                      <%= button_to fail_verification_inspection_path(inspection),
-                        method: :post, class: 'btn' do %>
-                        <i class="bi bi-exclamation-square"></i>
-                      <% end %>
-                    </div>
-                  <% when "verification_failed"%>
-                    <div class="col">
-                      <%= button_to send_to_repair_inspection_path(inspection),
-                        method: :post, class: 'btn' do %>
-                        <i class="bi bi-person-gear"></i>
-                      <% end %>
-                    </div>
-                    <div class="col">
-                      <%= button_to close_inspection_path(inspection),
-                        method: :post, class: 'btn' do %>
-                        <i class="bi bi-x-square"></i>
-                      <% end %>
-                    </div>
-                  <% when "sent_to_repair"%>
-                    <div class="col">
-                      <%= button_to return_from_repair_inspection_path(inspection),
-                        method: :post, class: 'btn' do %>
-                        <i class="bi bi-house-gear"></i>
-                      <% end %>
-                    </div>
-                <% end %>
                 <div class="col">
                   <%= link_to inspection_path(inspection), class: 'btn' do %>
                     <i class="bi bi-eye"></i>
                   <% end %>
                 </div>
+                <% unless path == all_tasks_inspection_index_path %>
+                  <% case inspection.state %>
+                    <% when "task_created"%>
+                      <div class="col" title="Взять задачу на себя">
+                        <%= button_to accept_task_inspection_path(inspection),
+                          method: :post, class: 'btn' do %>
+                          <i class="bi bi-person-add"></i>
+                        <% end%>
+                      </div>
+                    <% when "task_accepted"%>
+                      <div class="col" title="Проверка успешна">
+                        <%= button_to complete_verification_inspection_path(inspection),
+                          method: :post, class: 'btn' do %>
+                          <i class="bi bi-check-square"></i>
+                        <% end %>
+                      </div>
+                      <div class="col" title="Проверка провалена">
+                        <%= button_to fail_verification_inspection_path(inspection),
+                          method: :post, class: 'btn' do %>
+                          <i class="bi bi-exclamation-square"></i>
+                        <% end %>
+                      </div>
+                    <% when "verification_failed"%>
+                      <div class="col" title="Отправить прибор на ремонт">
+                        <%= button_to send_to_repair_inspection_path(inspection),
+                          method: :post, class: 'btn' do %>
+                          <i class="bi bi-person-gear"></i>
+                        <% end %>
+                      </div>
+                      <div class="col" title="Закрыть инспекцию">
+                        <%= button_to close_inspection_path(inspection),
+                          method: :post, class: 'btn' do %>
+                          <i class="bi bi-x-square"></i>
+                        <% end %>
+                      </div>
+                    <% when "sent_to_repair"%>
+                      <div class="col" title="Вернуть прибор с ремнота">
+                        <%= button_to return_from_repair_inspection_path(inspection),
+                          method: :post, class: 'btn' do %>
+                          <i class="bi bi-house-gear"></i>
+                        <% end %>
+                      </div>
+                    <% when "returned_from_repair"%>
+                      <div class="col" title="Отправить прибор на повторную проверку">
+                        <%= button_to send_from_repair_to_verification_inspection_path(inspection),
+                          method: :post, class: 'btn' do %>
+                          <i class="bi bi-arrow-repeat"></i>
+                        <% end %>
+                      </div>
+                      <div class="col" title="Закрыть инспекцию после ремонта">
+                        <%= button_to send_from_repair_to_close_inspection_path(inspection),
+                          method: :post, class: 'btn' do %>
+                          <i class="bi bi-x-square"></i>
+                        <% end %>
+                      </div>
+                  <% end %>
+                <% end %>
               </div>
             </td>
           </tr>
@@ -113,7 +154,6 @@
       </tbody>
     </table>
   </div>
-</div>
 
 <div class="row my-5">
   <div class="col-2">
@@ -128,8 +168,9 @@
     </div>
   </div>
 </div>
-<% else %>
-  <div class="m-5 text-center">
-    <h1 class="text-secondary"> <%= t('.text-no-new-task')%> </h1>
-  </div>
-<% end%>
+  <% else %>
+    <div class="col-10 text-center">
+      <h1 class="text-secondary"> <%= t('.text-no-new-task')%> </h1>
+    </div>
+  <% end%>
+</div>

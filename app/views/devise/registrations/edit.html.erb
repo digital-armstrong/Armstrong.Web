@@ -14,9 +14,6 @@
                 autofocus: true %>
     <%= f.input :last_name %>
     <%= f.input :second_name %>
-    <%= f.input :tabel_id %>
-    <%= f.input :email,
-                input_html: { autocomplete: "email" }%>
     <%= f.input :phone %>
     <%= f.input :password,
                 hint: "leave it blank if you don't want to change it",
@@ -29,6 +26,7 @@
                 hint: "we need your current password to confirm your changes",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
+    <%= render 'shared/timezone_field', f:f, is_new: false%>
   </div>
 
   <div class="form-actions">

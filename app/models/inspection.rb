@@ -26,12 +26,21 @@ class Inspection < ApplicationRecord
     event :send_to_repair do
       transition verification_failed: :sent_to_repair
     end
-    event :close do
-      transition verification_failed: :closed
-    end
 
     event :return_from_repair do
       transition sent_to_repair: :returned_from_repair
+    end
+
+    event :send_from_repair_to_verification do
+      transition returned_from_repair: :task_accepted
+    end
+
+    event :send_from_repair_to_close do
+      transition returned_from_repair: :closed
+    end
+
+    event :close do
+      transition verification_failed: :closed
     end
   end
 
@@ -43,6 +52,10 @@ class Inspection < ApplicationRecord
     technical_solution: 'technical_solution',
     decommissioning: 'decommissioning',
   }.freeze
+
+  STATES = Inspection.state_machine.states.map { |x| x.name }.to_h { |state| [state, state.to_s] }
+
+  validates :type_target, presence: true
 
   def self.ransackable_attributes(_auth_object = nil)
     ['conclusion', 'conclusion_date', 'created_at', 'creator_id', 'description', 'device_id', 'id', 'performer_id', 'state', 'updated_at']

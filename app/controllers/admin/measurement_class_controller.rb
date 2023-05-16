@@ -15,17 +15,17 @@ class Admin::MeasurementClassController < ApplicationController
   def create
     @measurement_class = MeasurementClass.new(measurement_class_params)
     if @measurement_class.save
-      redirect_to(admin_measurement_class_index_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:new)
+      render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
     if @measurement_class.update(measurement_class_params)
-      redirect_to(admin_measurement_class_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:edit)
+      render(:edit, status: :unprocessable_entity)
     end
   end
 
@@ -50,6 +50,7 @@ class Admin::MeasurementClassController < ApplicationController
     params.require(:measurement_class).permit(
       :name,
       :measurement_group_id,
+      :arms_device_type,
     )
   end
 end

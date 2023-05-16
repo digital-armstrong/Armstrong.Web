@@ -1,14 +1,20 @@
-<%= simple_form_for @measurement_class, as: :measurement_class, url: path, data: { turbo: false }, class: "form-group row" do |f| %>
+<%= simple_form_for measurement_class, as: :measurement_class, url: path,
+  class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
       <%= f.input :name, placeholder: 'Название класса измерений', input_html: {:tabindex => 1}%>
-      <%= f.association :measurement_group, input_html: {:tabindex => 2}, include_blank: false %>
+      <%= f.label :measurement_group, class: "mb-2" %>
+      <div class="row">
+        <div class="col">
+          <%= f.association :measurement_group, label: false, input_html: {:tabindex => 2}, include_blank: false %>
+        </div>
+        <div class="col-2 ps-0">
+          <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path, classes: "btn btn-ligth", text: nil %>
+        </div>
+      </div>
       <%= f.input :arms_device_type, placeholder: 'Тип прибора по ARMStrong', input_html: {:tabindex => 3}%>
     </div>
   </div>
 
-  <div>
-    <%= f.button :submit, "Сохранить", class: "btn btn-primary" %>
-    <%= f.button :submit, "Назад", formaction: admin_measurement_class_index_path, formmethod: "get" %>
-  </div>
+  <%= render 'shared/form/actions', f:f %>
 <% end %>

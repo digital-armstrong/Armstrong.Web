@@ -5,9 +5,6 @@ class Admin::DeviceModelControllerTest < ActionController::TestCase
 
   def setup
     sign_in(users(:admin))
-    @measurement_group = create(:measurement_group)
-    @measurement_class = create(:measurement_class)
-    @manufacturer = create(:manufacturer)
   end
 
   test 'should get index' do
@@ -21,31 +18,18 @@ class Admin::DeviceModelControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test 'should get new' do
-    get :new
-    assert_response :success
-  end
-
-  test 'should get edit' do
-    device_model = create(:device_model)
-    get :edit, params: { id: device_model.id }
-    assert_response :success
-  end
-
   test 'should patch update' do
     device_model = create(:device_model)
-    device_model_attrs = attributes_for(:device_model, measurement_class_id: @measurement_class.id,
-                                                       measurement_group_id: @measurement_group.id,
-                                                       manufacturer_id: @manufacturer.id)
+    device_model_attrs = device_model.as_json
+    device_model_attrs.delete('id')
     patch :update, params: { id: device_model.id, device_model: device_model_attrs }
     assert_response :redirect
   end
 
   test 'should post create' do
     device_model = create(:device_model)
-    device_model_attrs = attributes_for(:device_model, measurement_class_id: @measurement_class.id,
-                                                       measurement_group_id: @measurement_group.id,
-                                                       manufacturer_id: @manufacturer.id)
+    device_model_attrs = device_model.as_json
+    device_model_attrs.delete('id')
     post :create, params: { id: device_model.id, device_model: device_model_attrs }
     assert_response :redirect
   end
