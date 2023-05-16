@@ -21,6 +21,7 @@ en:
       settings: Settings
       profile: Profile
       logout: Logout
+      edit_me: Edit profile
   post:
     index:
       b_new_post: New post
@@ -35,27 +36,41 @@ en:
       body: Eat some more of these...
       category: Public or URB-106
   shared:
-    form:
+    show:
       device:
-        room_blank: Not selected
+        send_to_inspection: Send to inspection
     navbar:
       inspection:
         new_tasks: New tasks
         my_tasks: My tasks
         completed_tasks: Completed tasks
+        all_tasks: All tasks
     index:
       inspection:
         device: Device
         assigned_user: Inspector
+        target: Target
+        state: State
+        conclusion: Conclustion
+        conclusion_date: Conclustion date
+        description: Description
         creator: Creator
         device_tabel_id: Tabel
         device_serial_id: Serial
         text-no-new-task: No tasks yet...
+      device:
+        b_add_device: Add device
+        b_add_device_component: Add device
+  combobox_blank: Do not include
   b_change: Change
   b_delete: Delete
   b_save: Save
   b_add: Add
   b_back: Back
-  action: Actions
+  b_download_pdf: Download PDF
   b_accept: "Accept"
   b_clear: "Clear"
+  created_at: Created at
+  updated_at: Updated at
+  action: Actions
+  filtration: Filtration

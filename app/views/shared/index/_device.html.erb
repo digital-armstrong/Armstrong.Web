@@ -11,34 +11,36 @@
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url:device_index_path, method: :get, class: "rounded accordion-body") do |f| %>
-            <%= f.label :tabel_id, class:"mb-2"%>
-            <%= f.search_field :tabel_id_eq, class: 'form-control', placeholder: 'Номер' %>
-            <%= f.label :serial_id, class:"my-2" %>
-            <%= f.search_field :serial_id_cont, class: 'form-control ', placeholder: 'Номер' %>
-            <%= f.label :device_model_id, class:"my-2" %>
-            <%= f.search_field :device_model_name_cont, class: 'form-control', placeholder: 'Название' %>
-            <%= f.label :year_of_production, class:"my-2" %>
-            <div class="row px-2">
-              <div class="col px-1">
-                <%= f.search_field :year_of_production_gteq, class: 'form-control', placeholder: 'От' %>
+            <div id="for-clear">
+              <%= f.label :tabel_id, class:"mb-2"%>
+              <%= f.search_field :tabel_id_eq, class: 'form-control', placeholder: 'Номер' %>
+              <%= f.label :serial_id, class:"my-2" %>
+              <%= f.search_field :serial_id_cont, class: 'form-control ', placeholder: 'Номер' %>
+              <%= f.label :device_model_id, class:"my-2" %>
+              <%= f.search_field :device_model_name_cont, class: 'form-control', placeholder: 'Название' %>
+              <%= f.label :year_of_production, class:"my-2" %>
+              <div class="row px-2">
+                <div class="col px-1">
+                  <%= f.search_field :year_of_production_gteq, class: 'form-control', placeholder: 'От' %>
+                </div>
+                <div class="col px-1">
+                  <%= f.search_field :year_of_production_lteq, class: 'form-control', placeholder: 'До' %>
+                </div>
               </div>
-              <div class="col px-1">
-                <%= f.search_field :year_of_production_lteq, class: 'form-control', placeholder: 'До' %>
-              </div>
-            </div>
-            <%= f.label :year_of_commissioning, class:"my-2" %>
-            <div class="row px-2 mb-2">
-              <div class="col px-1">
-                <%= f.search_field :year_of_commissioning_gteq, class: 'form-control', placeholder: 'От' %>
-              </div>
-              <div class="col px-1">
-                <%= f.search_field :year_of_commissioning_lteq, class: 'form-control', placeholder: 'До' %>
+              <%= f.label :year_of_commissioning, class:"my-2" %>
+              <div class="row px-2 mb-2">
+                <div class="col px-1">
+                  <%= f.search_field :year_of_commissioning_gteq, class: 'form-control', placeholder: 'От' %>
+                </div>
+                <div class="col px-1">
+                  <%= f.search_field :year_of_commissioning_lteq, class: 'form-control', placeholder: 'До' %>
+                </div>
               </div>
             </div>
             <%= f.submit t("b_accept"), class: 'btn btn-primary w-100 my-2'%>
-            <button type="reset" class='btn btn-secondary w-100'>
+            <div id="b_clear" onclick="formClear()" class='btn btn-secondary w-100'>
               <%= t("b_clear")%>
-            </button>
+            </div>
           <% end %>
         </div>
       </div>
@@ -96,5 +98,11 @@
   </div>
 </div>
 <script>
-
+  function formClear(){
+    let form = document.getElementById('for-clear')
+    let inputs = Array.from(form.getElementsByTagName("input"))
+    inputs.forEach((input) =>{
+      input.value = null
+    })
+  }
 </script>

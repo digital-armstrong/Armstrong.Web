@@ -262,7 +262,7 @@ ru:
         created_at_to: Создан до
         updated_at_from: Обновлен от
         updated_at_to: Обновлен до
-  combobox_blank: Не выбрано
+  combobox_blank: Не учитывать
   b_change: Изменить
   b_delete: Удалить
   b_add: Добавить

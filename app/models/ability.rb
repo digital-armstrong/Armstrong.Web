@@ -35,7 +35,8 @@ class Ability
 
   def inspector(user)
     can([:read, :accept_task, :new_tasks, :my_tasks, :completed_tasks], Inspection)
-    can([:complete_verification, :fail_verification, :close, :send_to_repair, :return_from_repair],
+    can([:complete_verification, :fail_verification, :close, :send_to_repair, :return_from_repair,
+         :send_from_repair_to_verification, :send_from_repair_to_close],
         Inspection, performer_id: user.id)
     can([:edit, :update],
         Inspection.where(creator_id: user.id, state: Inspection::STATES[:task_created]).or(Inspection.where(performer_id: user.id)))

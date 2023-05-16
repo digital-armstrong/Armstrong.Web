@@ -13,36 +13,43 @@
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url:admin_device_component_index_path, method: :get, class: "rounded accordion-body") do |f| %>
-            <div class="row">
-              <div class="col">
-                <%= f.label :serial_id %>
-                <%= f.search_field :serial_id_cont, class:"form-control", placeholder:"0-123-N" %>
-              </div>
-              <div class="col">
-                <%= f.label :name %>
-                <%= f.search_field :name_cont, class:"form-control", placeholder:"БДЗБ" %>
-              </div>
-              <div class="col">
-                <%= f.label :measurement_min %>
-                <%= f.search_field :measurement_min_eq, class:"form-control", placeholder:"1.0" %>
-              </div>
-              <div class="col">
-                <%= f.label :measurement_max %>
-                <%= f.search_field :measurement_max_eq, class:"form-control", placeholder:"2.0" %>
-              </div>
-              <div class="col">
-                <%= f.label :measuring_unit %>
-                <%= f.search_field :measuring_unit_cont, class:"form-control", placeholder:"мЗв/ч" %>
+            <div id="for-clear">
+              <div class="row">
+                <div class="col">
+                  <%= f.label :serial_id %>
+                  <%= f.search_field :serial_id_cont, class:"form-control", placeholder:"0-123-N" %>
+                </div>
+                <div class="col">
+                  <%= f.label :name %>
+                  <%= f.search_field :name_cont, class:"form-control", placeholder:"БДЗБ" %>
+                </div>
+                <div class="col">
+                  <%= f.label :measurement_min %>
+                  <%= f.search_field :measurement_min_eq, class:"form-control", placeholder:"1.0" %>
+                </div>
+                <div class="col">
+                  <%= f.label :measurement_max %>
+                  <%= f.search_field :measurement_max_eq, class:"form-control", placeholder:"2.0" %>
+                </div>
+                <div class="col">
+                  <%= f.label :measuring_unit %>
+                  <%= f.search_field :measuring_unit_cont, class:"form-control", placeholder:"мЗв/ч" %>
+                </div>
               </div>
             </div>
-            <div class="row">
-              <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 mt-4'%>
+            <div class="row mt-2">
+              <div class="col"></div>
+              <%= f.submit t('b_accept'), class: 'col btn btn-primary w-100'%>
+              <div id="b_clear" onclick="formClear()" class="ms-2 col btn btn-secondary w-100">
+                <%= t("clear")%>
+              </div>
+              <div class="col"></div>
             </div>
           <% end %>
         </div>
       </div>
     </div>
-    <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-primary", text: t("b_add") %>
+    <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-primary w-100 mb-3", text: t("b_add") %>
   </div>
 </div>
 <div class="row mx-0">
@@ -104,3 +111,12 @@
     </div>
   </div>
 </div>
+<script>
+  function formClear(){
+    let form = document.getElementById('for-clear')
+    let inputs = Array.from(form.getElementsByTagName("input"))
+    inputs.forEach((input) =>{
+      input.value = null
+    })
+  }
+</script>

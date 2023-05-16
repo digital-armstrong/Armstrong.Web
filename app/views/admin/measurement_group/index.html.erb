@@ -13,8 +13,14 @@
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url:admin_measurement_group_index_path, method: :get, class: "rounded accordion-body") do |f| %>
-            <%= f.label :name, class: "mb-2" %>
-            <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
+            <div id="for-clear">
+              <%= f.label :name, class: "mb-2" %>
+              <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
+            </div>
+            <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 my-2'%>
+            <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
+              <%= t("clear")%>
+            </div>
           <% end %>
         </div>
       </div>
@@ -25,8 +31,8 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Название</th>
-          <th scope="col" style="width: 10%">Действие</th>
+          <th scope="col"><%= t('activerecord.attributes.measurement_group.name') %></th>
+          <th scope="col" style="width: 10%"><%= t('action') %></th>
         </tr>
       </thead>
       <tbody>
@@ -63,3 +69,12 @@
     </div>
   </div>
 </div>
+<script>
+  function formClear(){
+    let form = document.getElementById('for-clear')
+    let inputs = Array.from(form.getElementsByTagName("input"))
+    inputs.forEach((input) =>{
+      input.value = null
+    })
+  }
+</script>

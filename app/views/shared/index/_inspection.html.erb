@@ -93,43 +93,56 @@
                 <% unless path == all_tasks_inspection_index_path %>
                   <% case inspection.state %>
                     <% when "task_created"%>
-                      <div class="col">
+                      <div class="col" title="Взять задачу на себя">
                         <%= button_to accept_task_inspection_path(inspection),
                           method: :post, class: 'btn' do %>
                           <i class="bi bi-person-add"></i>
                         <% end%>
                       </div>
                     <% when "task_accepted"%>
-                      <div class="col">
+                      <div class="col" title="Проверка успешна">
                         <%= button_to complete_verification_inspection_path(inspection),
                           method: :post, class: 'btn' do %>
                           <i class="bi bi-check-square"></i>
                         <% end %>
                       </div>
-                      <div class="col">
+                      <div class="col" title="Проверка провалена">
                         <%= button_to fail_verification_inspection_path(inspection),
                           method: :post, class: 'btn' do %>
                           <i class="bi bi-exclamation-square"></i>
                         <% end %>
                       </div>
                     <% when "verification_failed"%>
-                      <div class="col">
+                      <div class="col" title="Отправить прибор на ремонт">
                         <%= button_to send_to_repair_inspection_path(inspection),
                           method: :post, class: 'btn' do %>
                           <i class="bi bi-person-gear"></i>
                         <% end %>
                       </div>
-                      <div class="col">
+                      <div class="col" title="Закрыть инспекцию">
                         <%= button_to close_inspection_path(inspection),
                           method: :post, class: 'btn' do %>
                           <i class="bi bi-x-square"></i>
                         <% end %>
                       </div>
                     <% when "sent_to_repair"%>
-                      <div class="col">
+                      <div class="col" title="Вернуть прибор с ремнота">
                         <%= button_to return_from_repair_inspection_path(inspection),
                           method: :post, class: 'btn' do %>
                           <i class="bi bi-house-gear"></i>
+                        <% end %>
+                      </div>
+                    <% when "returned_from_repair"%>
+                      <div class="col" title="Отправить прибор на повторную проверку">
+                        <%= button_to send_from_repair_to_verification_inspection_path(inspection),
+                          method: :post, class: 'btn' do %>
+                          <i class="bi bi-arrow-repeat"></i>
+                        <% end %>
+                      </div>
+                      <div class="col" title="Закрыть инспекцию после ремонта">
+                        <%= button_to send_from_repair_to_close_inspection_path(inspection),
+                          method: :post, class: 'btn' do %>
+                          <i class="bi bi-x-square"></i>
                         <% end %>
                       </div>
                   <% end %>

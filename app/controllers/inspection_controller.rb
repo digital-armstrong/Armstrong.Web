@@ -114,6 +114,18 @@ class InspectionController < ApplicationController
     set_state(@inspection.can_return_from_repair?) { @inspection.return_from_repair }
   end
 
+  def send_from_repair_to_verification
+    set_state(@inspection.can_send_from_repair_to_verification?) { @inspection.send_from_repair_to_verification }
+  end
+
+  def send_from_repair_to_close
+    if set_state(@inspection.can_send_from_repair_to_close?) { @inspection.send_from_repair_to_close }
+      @inspection.update(conclusion_date: DateTime.now)
+    else
+      flash.now[:error] = "Can't change state"
+    end
+  end
+
   private
 
   def set_inspection
