@@ -314,6 +314,7 @@ DEPENDENCIES
   state_machines-activerecord (~> 0.8.0)
   stimulus-rails
   turbo-rails
+  tzinfo
   tzinfo-data
   web-console
   webdrivers
@@ -322,4 +323,4 @@ RUBY VERSION
    ruby 3.2.0p0
 
 BUNDLED WITH
-   2.4.5
+   2.4.1

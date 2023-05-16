@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :device_model do
     name
-    measurement_group { association :measurement_group }
-    measurement_class { association :measurement_class }
+    measurement_group { association :measurement_group, name: 'mg-test' }
+    measurement_class { association :measurement_class, name: 'mc-test', measurement_group: MeasurementGroup.find_by(name: 'mg-test') }
     measuring_unit { 'MyString' }
     safety_class { 'MyString' }
     accuracy_class { 1.5 }

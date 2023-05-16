@@ -9,4 +9,9 @@
   <li class="nav-item">
     <%= link_to t('.completed_tasks'), completed_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'completed_tasks' }", aria_current: 'page' %>
   </li>
+  <% if can? :all_tasks, Inspection%>
+    <li class="nav-item">
+      <%= link_to t('.all_tasks'), all_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'all_tasks' }", aria_current: 'page' %>
+    </li>
+  <% end %>
 </ul>

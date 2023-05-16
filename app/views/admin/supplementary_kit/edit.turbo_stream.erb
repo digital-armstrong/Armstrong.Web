@@ -1,0 +1,3 @@
+<%= turbo_stream.update "modal-title", t('.edit_supplementary_kit') %>
+<%= turbo_stream.update "modal-body", partial: "shared/admin/form/supplementary_kit",
+ locals: {path: admin_supplementary_kit_path(@supplementary_kit), supplementary_kit: @supplementary_kit } %>

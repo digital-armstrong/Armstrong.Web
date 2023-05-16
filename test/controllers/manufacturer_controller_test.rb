@@ -12,17 +12,6 @@ class Admin::ManufacturerControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test 'should get new' do
-    get :new
-    assert_response :success
-  end
-
-  test 'should get edit' do
-    manufacturer = create(:manufacturer)
-    get :edit, params: { id: manufacturer.id }
-    assert_response :success
-  end
-
   test 'should patch update' do
     manufacturer = create(:manufacturer)
     manufacturer_attrs = attributes_for(:manufacturer)

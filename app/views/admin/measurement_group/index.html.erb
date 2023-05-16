@@ -8,27 +8,31 @@
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
-            Фильтрация
+            <%= t('filtration')%>
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url:admin_measurement_group_index_path, method: :get, class: "rounded accordion-body") do |f| %>
-            <%= f.label :name, class: "mb-2" %>
-            <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
+            <div id="for-clear">
+              <%= f.label :name, class: "mb-2" %>
+              <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
+            </div>
+            <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 my-2'%>
+            <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
+              <%= t("clear")%>
+            </div>
           <% end %>
         </div>
       </div>
     </div>
-    <%= link_to new_admin_measurement_group_path, class: "btn btn-primary my-3 w-100 shadow" do %>
-      <i class="bi bi-plus-square"></i><span> Добавить</span>
-    <% end %>
+    <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path, classes: "btn btn-primary", text: t("b_add") %>
   </div>
   <div class="col-10 shadow rounded">
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Название</th>
-          <th scope="col" style="width: 10%">Действие</th>
+          <th scope="col"><%= t('activerecord.attributes.measurement_group.name') %></th>
+          <th scope="col" style="width: 10%"><%= t('action') %></th>
         </tr>
       </thead>
       <tbody>
@@ -37,7 +41,7 @@
           <td><%= measurement_group.name %></td>
             <td >
               <div class="d-flex">
-                <%= link_to edit_admin_measurement_group_path(measurement_group.id), class: "btn" do %>
+                <%= link_to edit_admin_measurement_group_path(measurement_group.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
                   <i class="bi bi-pen"></i>
                 <% end %>
                 <%= button_to admin_measurement_group_path(measurement_group.id), method: :delete, class: "btn" do %>
@@ -65,3 +69,12 @@
     </div>
   </div>
 </div>
+<script>
+  function formClear(){
+    let form = document.getElementById('for-clear')
+    let inputs = Array.from(form.getElementsByTagName("input"))
+    inputs.forEach((input) =>{
+      input.value = null
+    })
+  }
+</script>

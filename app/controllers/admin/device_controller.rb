@@ -16,13 +16,14 @@ class Admin::DeviceController < ApplicationController
 
   def create
     authorize!(:create, :device_admin)
-    device_create(admin_device_index_path, device_params)
+    device_create(device_params)
   end
 
   def show
     authorize!(:show, :device_admin)
     @inspection = Inspection.new
     device_show(@device)
+    @is_admin = true
   end
 
   def edit
@@ -31,7 +32,7 @@ class Admin::DeviceController < ApplicationController
 
   def update
     authorize!(:update, :device_admin)
-    device_update(@device, device_params, admin_device_path)
+    device_update(@device, device_params)
   end
 
   def destroy

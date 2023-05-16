@@ -8,20 +8,20 @@ module DeviceConcern
       end
     end
 
-    def device_create(path, params)
-      device = Device.new(params)
-      if device.save
-        redirect_to(path)
+    def device_create(params)
+      @device = Device.new(params)
+      if @device.save
+        redirect_back(fallback_location: root_path)
       else
-        render(:new)
+        render(:new, status: :unprocessable_entity)
       end
     end
 
-    def device_update(device, params, path)
+    def device_update(device, params)
       if device.update(params)
-        redirect_to(path)
+        redirect_back(fallback_location: root_path)
       else
-        render(:edit)
+        render(:edit, status: :unprocessable_entity)
       end
     end
 

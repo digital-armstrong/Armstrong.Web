@@ -15,17 +15,17 @@ class Admin::MeasurementGroupController < ApplicationController
   def create
     @measurement_group = MeasurementGroup.new(measurement_group_params)
     if @measurement_group.save
-      redirect_to(admin_measurement_group_index_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:new)
+      render(:new, status: :unprocessable_entity)
     end
   end
 
   def update
     if @measurement_group.update(measurement_group_params)
-      redirect_to(admin_measurement_group_path)
+      redirect_back(fallback_location: root_path)
     else
-      render(:edit)
+      render(:edit, status: :unprocessable_entity)
     end
   end
 

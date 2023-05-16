@@ -16,7 +16,7 @@ class DeviceController < ApplicationController
   end
 
   def create
-    device_create(device_index_path, device_params)
+    device_create(device_params)
   end
 
   def show
@@ -25,7 +25,7 @@ class DeviceController < ApplicationController
   end
 
   def update
-    device_update(@device, device_params, device_path)
+    device_update(@device, device_params)
   end
 
   def destroy
