@@ -20,7 +20,6 @@ class User < ApplicationRecord
   validates :tabel_id, numericality: { less_than_or_equal_to: 2147483647 }, presence: true, uniqueness: true
   validate  :validate_tabel_id
   validates :password, presence: true, length: { minimum: 6 }, unless: Proc.new { |a| a.password.blank? }
-  validates :role, presence: true
   validates :email,
             presence: true,
             uniqueness: true,

@@ -4,10 +4,17 @@
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= f.error_notification %>
     <div class="form-inputs">
-      <%= f.input :first_name,
-                  required: true %>
-      <%= f.input :last_name,
-                  required: true %>
+      <div class="row">
+        <div class="col">
+          <%= f.input :last_name,
+                      required: true %>
+        </div>
+        <div class="col">
+          <%= f.input :first_name,
+                      required: true %>
+        </div>
+      </div>
+      <div class="row">
       <%= f.input :tabel_id,
                   required: true %>
       <%= f.input :email,
@@ -23,6 +30,7 @@
                   input_html: { autocomplete: "new-password" } %>
       <%= f.input :role, label: false, input_html: {hidden: true, value: "default"} %>
       <%= render 'shared/timezone_field', f:f, is_new: true%>
+      </div>
     </div>
     <div class="form-actions">
       <%= f.button :submit, t("b_register"), class: "btn btn-primary" %>
