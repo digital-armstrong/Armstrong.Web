@@ -19,13 +19,13 @@
             </div>
             <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 my-2'%>
             <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
-              <%= t("clear")%>
+              <%= t("b_clear")%>
             </div>
           <% end %>
         </div>
       </div>
     </div>
-    <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path, classes: "btn btn-primary", text: t("b_add") %>
+    <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path, classes: "btn btn-primary w-100", text: t("b_add") %>
   </div>
   <div class="col-10 shadow rounded">
     <table class="table table-hover">

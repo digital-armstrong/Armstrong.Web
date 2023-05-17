@@ -198,7 +198,7 @@ ru:
         name: Название
         measurement_group: Группа измерений
         measurement_group_id: Группа измерений
-        arms_device_type: Тип
+        arms_device_type: ARMS-тип
       measurement_group:
         name: Название
       device_component:
@@ -206,7 +206,7 @@ ru:
         name: Название
         measurement_min: Мин. величина измерений
         measurement_max: Макс. величина измерений
-        measuring_unit: Единица измерений
+        measurement_unit: Единица измерений
         description: Описание
         supplementary_kit: Набор
       supplementary_kit:
