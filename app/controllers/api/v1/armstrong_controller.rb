@@ -5,10 +5,10 @@ module Api
       result = channels.sort { |a, b| a[:server_id] <=> b[:server_id] }
 
       render(json: result,
-        include: [
-          :device => { include: [:device_model => { :only => [ :name ] }] },
-          :room => { :only => [ :name ] }
-        ])
+             include: [
+               device: { include: [device_model: { only: [:name] }] },
+               room: { only: [:name] },
+             ])
     end
   end
 end

@@ -234,13 +234,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "tabel_id"
+    t.integer "tabel_id", null: false
     t.string "first_name"
     t.string "second_name"
     t.string "last_name"
     t.string "phone"
     t.string "avatar_url"
-    t.string "email", default: "", null: false
+    t.string "email", default: ""
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -249,8 +249,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
     t.datetime "updated_at", null: false
     t.string "timezone", default: "UTC", null: false
     t.string "role", default: "default", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["tabel_id"], name: "index_users_on_tabel_id", unique: true
   end
 
   add_foreign_key "buildings", "organizations"

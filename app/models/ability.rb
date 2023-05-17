@@ -38,10 +38,7 @@ class Ability
     can([:complete_verification, :fail_verification, :close, :send_to_repair, :return_from_repair,
          :send_from_repair_to_verification, :send_from_repair_to_close],
         Inspection, performer_id: user.id)
-    can([:edit, :update],
-        Inspection.where(creator_id: user.id, state: Inspection::STATES[:task_created]).or(Inspection.where(performer_id: user.id)))
-    can([:destroy], Inspection.where(creator_id: user.id, state: Inspection::STATES[:task_created]))
-    cannot([:edit, :update], Inspection.where.not(state:
-      [Inspection::STATES[:task_created], Inspection::STATES[:closed], Inspection::STATES[:verification_successful]]))
+    can(:update, Inspection.where(performer_id: user.id))
+    cannot(:edit, Inspection)
   end
 end

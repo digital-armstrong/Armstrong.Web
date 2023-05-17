@@ -46,7 +46,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:success] = 'User was added'
+      flash[:notice] = 'User was added'
       redirect_to(admin_users_path)
     else
       render(:new, status: :unprocessable_entity)

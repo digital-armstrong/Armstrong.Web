@@ -25,7 +25,7 @@ class InspectionController < ApplicationController
 
   def completed_tasks
     @states_to_show = Inspection::STATES.select { |s| s.in?([:verification_successful, :closed]) }
-    tasks({ state: @states_to_show.keys, performer_id: current_user.id })
+    tasks({ state: @states_to_show.keys })
   end
 
   def all_tasks
