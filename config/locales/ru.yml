@@ -247,12 +247,12 @@ ru:
         sent_to_repair: Отправлено на ремонт
         returned_from_repair: Возвращено с ремонта
         closed: Закрыто
-        incoming: Входной контроль
-        repair: На починку
-        regular: Регулярная
+        incoming: Вх. контроль
+        repair: Ремонт
+        regular: Поверка
         calibration: Калибровка
         technical_solution: Тех. решение
-        decommissioning: Упразднение
+        decommissioning: Списание
   layouts:
     application:
       home: Главная
@@ -289,8 +289,8 @@ ru:
         device_serial_id: Сер.№
         text-no-new-task: Задач пока нет...
       device:
-        b_add_device: Добавить прибор
-        b_add_device_component: Добавить компонент
+        b_add_device: Прибор
+        b_add_device_component: Компонент
   device:
     new:
       add_device: Добавить прибор
