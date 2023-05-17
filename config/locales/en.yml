@@ -22,6 +22,14 @@ en:
       profile: Profile
       logout: Logout
       edit_me: Edit profile
+  device:
+    new:
+      add_device: Add device
+    edit:
+      edit_device: Edit device
+  device_component:
+    new:
+      add_device_component: Add device
   post:
     index:
       b_new_post: New post
@@ -61,6 +69,42 @@ en:
       device:
         b_add_device: Add device
         b_add_device_component: Add device
+    admin:
+      device_component:
+        new:
+          add_device_component: Add component
+        edit:
+          edit_device_component: Edit component
+      device_reg_group:
+        new:
+          add_device_reg_group: Add reg. group
+        edig:
+          edit_device_reg_group: Edit reg. group
+      device_model:
+        new:
+          add_device_model: Add model
+        edit:
+          edit_device_model: Edit model
+      supplementary_kit:
+        new:
+          add_supplementary_kit: Add supp. kit
+        edit:
+          edit_supplementury_kit: Edit supp. kit
+      manufacturer:
+        new:
+          add_manufacturer: Add manufacturer
+        edit:
+          edit_manufacturer: Edit manufacturer
+      measurement_group:
+        new:
+          add_measurement_group: Add meas. group
+        edit:
+          edit_measurement_group: Edit meas. group
+      measurement_class:
+        new:
+          add_measurement_class: Add meas. class
+        edit:
+          edit_measurement_class: Edit meas. class
   combobox_blank: Do not include
   b_change: Change
   b_delete: Delete

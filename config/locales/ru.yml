@@ -4,13 +4,61 @@ ru:
       default: "%d.%m.%Y"
       short: "%d %b"
       long: "%d %B %Y"
-    day_names: [воскресенье, понедельник, вторник, среда, четверг, пятница, суббота]
-    standalone_day_names: [Воскресенье, Понедельник, Вторник, Среда, Четверг, Пятница, Суббота]
+    day_names:
+      [воскресенье, понедельник, вторник, среда, четверг, пятница, суббота]
+    standalone_day_names:
+      [Воскресенье, Понедельник, Вторник, Среда, Четверг, Пятница, Суббота]
     abbr_day_names: [Вс, Пн, Вт, Ср, Чт, Пт, Сб]
-    month_names: [~, января, февраля, марта, апреля, мая, июня, июля, августа, сентября, октября, ноября, декабря]
-    standalone_month_names: [~, Январь, Февраль, Март, Апрель, Май, Июнь, Июль, Август, Сентябрь, Октябрь, Ноябрь, Декабрь]
-    abbr_month_names: [~, янв, фев, мар, апр, мая, июн, июл, авг, сен, окт, ноя, дек]
-    standalone_abbr_month_names: [~, янв., февр., март, апр., май, июнь, июль, авг., сент., окт., нояб., дек.]
+    month_names:
+      [
+        ~,
+        января,
+        февраля,
+        марта,
+        апреля,
+        мая,
+        июня,
+        июля,
+        августа,
+        сентября,
+        октября,
+        ноября,
+        декабря,
+      ]
+    standalone_month_names:
+      [
+        ~,
+        Январь,
+        Февраль,
+        Март,
+        Апрель,
+        Май,
+        Июнь,
+        Июль,
+        Август,
+        Сентябрь,
+        Октябрь,
+        Ноябрь,
+        Декабрь,
+      ]
+    abbr_month_names:
+      [~, янв, фев, мар, апр, мая, июн, июл, авг, сен, окт, ноя, дек]
+    standalone_abbr_month_names:
+      [
+        ~,
+        янв.,
+        февр.,
+        март,
+        апр.,
+        май,
+        июнь,
+        июль,
+        авг.,
+        сент.,
+        окт.,
+        нояб.,
+        дек.,
+      ]
     order:
       - :day
       - :month
@@ -30,7 +78,7 @@ ru:
     pm: "вечера"
   datetime:
     distance_in_words:
-      ago: 'назад'
+      ago: "назад"
       about_x_hours:
         few: около %{count} часов
         many: около %{count} часов
@@ -68,25 +116,25 @@ ru:
         one: больше %{count} года
         other: больше %{count} лет
       x_days:
-        few: ! '%{count} дня'
-        many: ! '%{count} дней'
-        one: ! '%{count} день'
-        other: ! '%{count} дней'
+        few: ! "%{count} дня"
+        many: ! "%{count} дней"
+        one: ! "%{count} день"
+        other: ! "%{count} дней"
       x_minutes:
-        few: ! '%{count} минуты'
-        many: ! '%{count} минут'
-        one: ! '%{count} минуту'
-        other: ! '%{count} минуты'
+        few: ! "%{count} минуты"
+        many: ! "%{count} минут"
+        one: ! "%{count} минуту"
+        other: ! "%{count} минуты"
       x_months:
-        few: ! '%{count} месяца'
-        many: ! '%{count} месяцев'
-        one: ! '%{count} месяц'
-        other: ! '%{count} месяца'
+        few: ! "%{count} месяца"
+        many: ! "%{count} месяцев"
+        one: ! "%{count} месяц"
+        other: ! "%{count} месяца"
       x_seconds:
-        few: ! '%{count} секунды'
-        many: ! '%{count} секунд'
-        one: ! '%{count} секундy'
-        other: ! '%{count} секунды'
+        few: ! "%{count} секунды"
+        many: ! "%{count} секунд"
+        one: ! "%{count} секундy"
+        other: ! "%{count} секунды"
     prompts:
       day: День
       hour: Часов
@@ -120,6 +168,7 @@ ru:
         room: Расположение
         room_id: Расположение
         date_of_inspection: Дата инспекции
+        supplementary_kit: Набор
       device_model:
         name: Название
         manufacturer: Производитель
@@ -242,6 +291,14 @@ ru:
       device:
         b_add_device: Добавить прибор
         b_add_device_component: Добавить компонент
+  device:
+    new:
+      add_device: Добавить прибор
+    edit:
+      edit_device: Изменить прибор
+  device_component:
+    new:
+      add_device_component: Добавить компонент
   post:
     index:
       b_new_post: Новый пост
@@ -262,6 +319,41 @@ ru:
         created_at_to: Создан до
         updated_at_from: Обновлен от
         updated_at_to: Обновлен до
+    device_component:
+      new:
+        add_device_component: Добавить компонент
+      edit:
+        edit_device_component: Изменить компонент
+    device_reg_group:
+      new:
+        add_device_reg_group: Добавить рег. группу
+      edit:
+        edit_device_reg_group: Изменить рег. группу
+    device_model:
+      new:
+        add_device_model: Добавить модель
+      edit:
+        edit_device_model: Изменить модель
+    supplementary_kit:
+      new:
+        add_supplementary_kit: Добавить набор
+      edit:
+        edit_supplementary_kit: Изменить набор
+    manufacturer:
+      new:
+        add_manufacturer: Добавить производителя
+      edit:
+        edit_manufacturer: Изменить производителя
+    measurement_group:
+      new:
+        add_measurement_group: Добавить группу изм.
+      edit:
+        edit_measurement_group: Изменить группу изм.
+    measurement_class:
+      new:
+        add_measurement_class: Добавить класс изм.
+      edit:
+        edit_measurement_class: Изменить класс изм.
   combobox_blank: Не учитывать
   b_change: Изменить
   b_delete: Удалить
@@ -275,4 +367,3 @@ ru:
   updated_at: Обновлен
   action: Действия
   filtration: Фильтрация
-
