@@ -142,6 +142,11 @@ ru:
       month: Месяц
       second: Секунд
       year: Год
+  message:
+    user:
+      delete:
+        success: Пользователь успешно удален.
+        error: Ошибка! Пользователь не удален! На пользователя ссылаются инспекции.
   activerecord:
     models:
       device_model: Модель

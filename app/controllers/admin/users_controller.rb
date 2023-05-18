@@ -28,7 +28,7 @@ class Admin::UsersController < ApplicationController
       params[:user].delete(:password_confirmation)
     end
     if @user.update(user_params)
-      flash[:success] = 'User was updated'
+      flash[:notice] = 'User was updated'
       if @user.id = current_user.id
         Time.use_zone(user_params[:timezone]) { nil }
       end
@@ -46,7 +46,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:notice] = 'User was added'
+      flash[:success] = 'User was added'
       redirect_to(admin_users_path)
     else
       render(:new, status: :unprocessable_entity)
@@ -59,8 +59,9 @@ class Admin::UsersController < ApplicationController
 
     if assigned_inspections_count.zero?
       @user.destroy
+      flash[:success] = t("message.user.delete.success")
     else
-      flash[:error] = 'Ошибка! На пользователя ссылаются инспекции!'
+      flash[:error] = t("message.user.delete.error")
     end
     redirect_to(admin_users_path)
   end

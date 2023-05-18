@@ -10,6 +10,11 @@ en:
       short_time: "%H:%M"
       long: "%e %B %Y %H:%M"
       full: "%e %B %Y %H:%M:%S"
+  message:
+    user:
+      delete:
+        success: User was deleted.
+        error: User wasn't deleted! The user has inspections.
   layouts:
     application:
       home: Home
