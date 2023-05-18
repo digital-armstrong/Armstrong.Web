@@ -8,7 +8,7 @@ class CreateDevices < ActiveRecord::Migration[7.0]
       t.references :device_reg_group, null: false, foreign_key: true
       t.integer :year_of_production
       t.integer :year_of_commissioning
-
+      t.references :supplementary_kit, null: true, foreign_key: true
       t.timestamps
     end
     add_index :devices, :inventory_id, unique: true

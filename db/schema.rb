@@ -101,14 +101,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
     t.bigint "device_reg_group_id", null: false
     t.integer "year_of_production"
     t.integer "year_of_commissioning"
+    t.bigint "supplementary_kit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "supplementary_kit_id"
     t.bigint "room_id"
     t.index ["device_model_id"], name: "index_devices_on_device_model_id"
     t.index ["device_reg_group_id"], name: "index_devices_on_device_reg_group_id"
     t.index ["inventory_id"], name: "index_devices_on_inventory_id", unique: true
     t.index ["room_id"], name: "index_devices_on_room_id"
+    t.index ["supplementary_kit_id"], name: "index_devices_on_supplementary_kit_id"
     t.index ["tabel_id"], name: "index_devices_on_tabel_id", unique: true
   end
 
@@ -265,6 +266,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
   add_foreign_key "devices", "device_models"
   add_foreign_key "devices", "device_reg_groups"
   add_foreign_key "devices", "rooms"
+  add_foreign_key "devices", "supplementary_kits"
   add_foreign_key "divisions", "organizations"
   add_foreign_key "histories", "channels"
   add_foreign_key "inspections", "devices"
