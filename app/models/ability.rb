@@ -39,6 +39,5 @@ class Ability
          :send_from_repair_to_verification, :send_from_repair_to_close],
         Inspection, performer_id: user.id)
     can(:update, Inspection.where(performer_id: user.id))
-    cannot(:edit, Inspection)
   end
 end

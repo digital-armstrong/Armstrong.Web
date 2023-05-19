@@ -1,7 +1,8 @@
 User.create(
   tabel_id: 0,
   first_name: 'Admin',
-  last_name: 'Admin',
+  last_name: 'Adminov',
+  second_name: 'Adminovich',
   email: 'admin@admin.ru',
   password: '12345678',
   role: 'admin'
@@ -261,6 +262,18 @@ end
     device: Device.find_by_id(rand(1..1000)),
     creator: User.find_by_id(rand(1..10)),
     type_target: 'regular'
+  )
+end
+
+100.times do |i|
+  Inspection.create(
+    device: Device.find_by_id(rand(1..20)),
+    creator: User.find_by_id(rand(1..20)),
+    performer: User.find_by_id(rand(1..20)),
+    type_target: 'regular',
+    state: 'verification_successful',
+    conclusion_date: rand(1.year.ago..Time.now),
+    conclusion: "Всё прекрасно! №#{i}"
   )
 end
 

@@ -68,7 +68,7 @@ ru:
       default: "%e %B %Y, %H:%M"
       time: "%H:%M:%S"
       day_and_month: "%e %B"
-      date: "%e.%m.%Y"
+      date: "%d.%m.%Y"
       short_full: "%d.%m.%Y %H:%M"
       short_date: "%d.%m.%Y"
       short_time: "%H:%M"
@@ -258,6 +258,13 @@ ru:
         calibration: Калибровка
         technical_solution: Тех. решение
         decommissioning: Списание
+  devise:
+    registrations:
+      destroyed: До свидания! Ваша учетная запись удалена. Надеемся снова увидеть вас.
+      edit:
+        leave_blank_if_you_don_t_want_to_change_it: оставьте поле пустым, если не хотите его менять
+        title: Страница редактирования %{resource}
+        we_need_your_current_password_to_confirm_your_changes: введите текущий пароль для подтверждения изменений
   layouts:
     application:
       home: Главная
@@ -293,6 +300,13 @@ ru:
         device_tabel_id: Таб.№
         device_serial_id: Сер.№
         text-no-new-task: Задач пока нет...
+        performer_last_name: Иванов
+        performer_first_name: Иван
+        performer_second_name: Иванович
+        inspection_description: Прибор был поверен...
+        creator_last_name: Петров
+        creator_first_name: Петр
+        creator_second_name: Петрович
       device:
         b_add_device: Прибор
         b_add_device_component: Компонент
@@ -358,7 +372,7 @@ ru:
       new:
         add_measurement_class: Добавить класс изм.
       edit:
-        edit_measurement_class: Изменить класс изм.
+        edit_measurement_class: Изменить класс изм. 
   combobox_blank: Не учитывать
   b_change: Изменить
   b_delete: Удалить

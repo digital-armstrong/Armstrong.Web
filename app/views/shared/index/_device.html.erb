@@ -77,7 +77,11 @@
               <td>
                 <%= device.last_successful_inspection %>
               </td>
-              <td><i class="bi bi-circle-fill text-danger"></i></td>
+              <% if device.last_successful_inspection.present? %>
+                <td><i class="bi bi-circle-fill text-success"></i></td>
+              <% else %>
+                <td><i class="bi bi-circle-fill text-danger"></i></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

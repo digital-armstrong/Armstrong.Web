@@ -71,6 +71,13 @@ en:
         device_tabel_id: Tabel
         device_serial_id: Serial
         text-no-new-task: No tasks yet...
+        performer_last_name: Ivanov
+        performer_first_name: Ivan
+        performer_second_name: Ivanovich
+        inspection_conclusion: Nice device, man!
+        creator_last_name: Petrov
+        creator_first_name: Petr
+        creator_second_name: Petrovich
       device:
         b_add_device: Add device
         b_add_device_component: Add device
