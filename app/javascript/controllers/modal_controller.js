@@ -1,12 +1,12 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
-static targets = ['container'];
+  static targets = ['container'];
 
   connect() {
     this.toggleClass = 'hidden';
     this.backgroundId = 'modal-background';
-    this.backgroundHtml = this._backgroundHTML();
+    this.backgroundHtml = this.modalBackgroundHTML();
   }
 
   disconnect() {
@@ -14,26 +14,30 @@ static targets = ['container'];
   }
 
   open() {
-    document.getElementById("modal").classList.remove('d-none');
-    document.getElementById("modal").classList.add('d-flex');
+    document.getElementById('modal').classList.remove('d-none');
+    document.getElementById('modal').classList.add('d-flex');
     document.body.classList.add('fixed', 'inset-x-0', 'overflow-hidden');
     this.containerTarget.classList.remove(this.toggleClass);
-    if (this.background) { this.background.remove() }
+    if (this.background) {
+      this.background.remove();
+    }
     document.body.insertAdjacentHTML('beforeend', this.backgroundHtml);
     this.background = document.querySelector(`#${this.backgroundId}`);
   }
 
-  close() {
+  close(event) {
     if (typeof event !== 'undefined') {
-      event.preventDefault()
+      event.preventDefault();
     }
     this.containerTarget.classList.add(this.toggleClass);
-    if (this.background) { this.background.remove() }
-    document.getElementById("modal").classList.remove('d-flex');
-    document.getElementById("modal").classList.add('d-none');
+    if (this.background) {
+      this.background.remove();
+    }
+    document.getElementById('modal').classList.remove('d-flex');
+    document.getElementById('modal').classList.add('d-none');
   }
 
-  _backgroundHTML() {
+  modalBackgroundHTML() {
     return `<div id="${this.backgroundId}" style="position:fixed;
     left: 0;
     right: 0;

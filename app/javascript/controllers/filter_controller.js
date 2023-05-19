@@ -1,10 +1,9 @@
-import { Controller } from "@hotwired/stimulus";
-import $ from "jquery";
-import ky from "ky";
+import { Controller } from '@hotwired/stimulus';
+import $ from 'jquery';
 
 export default class extends Controller {
   connect() {
-    let $filtrator = $(this.element).attr("data-filtrator-class");
+    const $filtrator = $(this.element).attr('data-filtrator-class');
     if ($filtrator != null) this.doFilter(`#${$filtrator}`, $(this.element));
   }
 
@@ -12,36 +11,32 @@ export default class extends Controller {
     this.doFilter($(obj.target), obj);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async doFilter(obj, fullObj) {
-    let $obj = $(obj);
-    let id = $($obj).val();
-    let to_filter_id = $obj.attr("data-to-filter-class");
+    const $obj = $(obj);
+    const id = $($obj).val();
+    const toFilterId = $obj.attr('data-to-filter-class');
     $.ajax({
-      type: "GET",
+      type: 'GET',
       url: `/api/v1/filters?id=${id}`,
-      success: function (data) {
-        var $to_filter = $(`#${to_filter_id}`);
-        $to_filter.prop("disabled", true);
-        $to_filter.empty();
-        
-        if ($obj.attr("data-filtrator-class") == "filtrator-class-index") {
-          $to_filter.append($("<option/>", { value: "" }).text("Не учитывать"));
+      success(data) {
+        const $toFilter = $(`#${toFilterId}`);
+        $toFilter.prop('disabled', true);
+        $toFilter.empty();
+
+        if ($obj.attr('data-filtrator-class') === 'filtrator-class-index') {
+          $toFilter.append($('<option/>', { value: '' }).text('Не учитывать'));
         }
-        for (var i = 0; i < data.length; i++) {
-          $to_filter.append(
-            $("<option/>", { value: data[i].id }).text(data[i].name)
-          );
+        for (let i = 0; i < data.length; i += 1) {
+          $toFilter.append($('<option/>', { value: data[i].id }).text(data[i].name));
         }
 
-        let prevMeasurementClassVal = $(fullObj).attr("data-prev-mc-val");
+        const prevMeasurementClassVal = $(fullObj).attr('data-prev-mc-val');
         if (prevMeasurementClassVal != null) {
-          $to_filter.val(prevMeasurementClassVal);
+          $toFilter.val(prevMeasurementClassVal);
         }
 
-        $to_filter.prop("disabled", false);
-      },
-      failure: function (data) {
-        console.log(data);
+        $toFilter.prop('disabled', false);
       },
     });
   }
