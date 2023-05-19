@@ -39,6 +39,7 @@
   "packageManager": "yarn@3.5.0",
   "devDependencies": {
     "@babel/core": "^7.21.8",
-    "@babel/eslint-parser": "^7.21.8"
+    "@babel/eslint-parser": "^7.21.8",
+    "@babel/preset-react": "^7.18.6"
   }
 }
