@@ -14,7 +14,7 @@ class Device < ApplicationRecord
   has_many :inspections
   has_one :channel
 
-  validates :inventory_id, numericality: { less_than_or_equal_to: 2147483647 }, presence: true, uniqueness: true
+  validates :inventory_id, numericality: { less_than_or_equal_to: 2147483647 }, uniqueness: true, allow_nil: true
   validates :serial_id, :tabel_id, presence: true, uniqueness: true
   validates :year_of_commissioning, :year_of_production, numericality: { in: 1900..current_year, message: year_error_msg }, allow_nil: true
   validates :year_of_production, presence: true

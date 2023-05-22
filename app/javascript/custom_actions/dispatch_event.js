@@ -1,9 +1,10 @@
-import { StreamActions } from '@hotwired/turbo'
+import { StreamActions } from '@hotwired/turbo';
 
-StreamActions.dispatch_event = function() {
-  const name = this.getAttribute('name')
-  const event = new Event(name)
-  window.dispatchEvent(event)
+// eslint-disable-next-line func-names
+StreamActions.dispatch_event = function () {
+  const name = this.getAttribute('name');
+  const event = new Event(name);
+  window.dispatchEvent(event);
   // If you want to send the event somewhere besides the window
-  // document.getElementById(this.target).dispatchEvent(event) 
-}
+  // document.getElementById(this.target).dispatchEvent(event)
+};

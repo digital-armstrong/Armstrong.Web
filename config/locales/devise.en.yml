@@ -64,6 +64,7 @@ en:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
   b_register: Sign Up
+  b_save: Save
   b_login: Login
   b_logout: Logout
   b_forgot_password: Forgot Your Password?

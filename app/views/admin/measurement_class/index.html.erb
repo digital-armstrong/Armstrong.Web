@@ -24,20 +24,20 @@
             </div>
             <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 my-2'%>
             <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
-              <%= t("clear")%>
+              <%= t("b_clear")%>
             </div>
           <% end %>
         </div>
       </div>
     </div>
-    <%= render 'shared/modal_button_add', path: new_admin_measurement_class_path, classes: "btn btn-primary", text: t("b_add") %>
+    <%= render 'shared/modal_button_add', path: new_admin_measurement_class_path, classes: "btn btn-primary w-100", text: t("b_add") %>
   </div>
   <div class="col-10 shadow rounded">
     <table class="table table-hover">
       <thead>
         <tr>
           <th scope="col"><%= t('activerecord.attributes.measurement_class.name') %></th>
-          <th scope="col"><%= t('activerecord.attributes.measurement_class.arms_type') %></th>
+          <th scope="col"><%= t('activerecord.attributes.measurement_class.arms_device_type') %></th>
           <th scope="col"><%= t('activerecord.attributes.measurement_class.measuremnt_group') %></th>
           <th scope="col" style="width: 10%"><%= t('action') %></th>
         </tr>

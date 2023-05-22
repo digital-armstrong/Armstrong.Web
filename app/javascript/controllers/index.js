@@ -2,16 +2,20 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from './application';
 
-import ArmstrongController from "./armstrong_controller"
-application.register("armstrong", ArmstrongController)
+import ArmstrongController from './armstrong_controller';
 
-import FilterController from "./filter_controller"
-application.register("filter", FilterController)
+application.register('armstrong', ArmstrongController);
 
-import GetTimezoneController from "./get_timezone_controller"
-application.register("get-timezone", GetTimezoneController)
+import FilterController from './filter_controller';
 
-import ModalController from "./modal_controller"
-application.register("modal", ModalController)
+application.register('filter', FilterController);
+
+import GetTimezoneController from './get_timezone_controller';
+
+application.register('get-timezone', GetTimezoneController);
+
+import ModalController from './modal_controller';
+
+application.register('modal', ModalController);

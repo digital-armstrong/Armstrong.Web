@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_223703) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -101,14 +101,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_223703) do
     t.bigint "device_reg_group_id", null: false
     t.integer "year_of_production"
     t.integer "year_of_commissioning"
+    t.bigint "supplementary_kit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "supplementary_kit_id"
     t.bigint "room_id"
     t.index ["device_model_id"], name: "index_devices_on_device_model_id"
     t.index ["device_reg_group_id"], name: "index_devices_on_device_reg_group_id"
     t.index ["inventory_id"], name: "index_devices_on_inventory_id", unique: true
     t.index ["room_id"], name: "index_devices_on_room_id"
+    t.index ["supplementary_kit_id"], name: "index_devices_on_supplementary_kit_id"
     t.index ["tabel_id"], name: "index_devices_on_tabel_id", unique: true
   end
 
@@ -234,14 +235,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_223703) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "tabel_id"
+    t.integer "tabel_id", null: false
     t.string "first_name"
     t.string "second_name"
     t.string "last_name"
     t.string "phone"
-    t.string "role"
     t.string "avatar_url"
-    t.string "email", default: "", null: false
+    t.string "email", default: ""
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -249,8 +249,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_223703) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "timezone", default: "UTC", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.string "role", default: "default", null: false
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["tabel_id"], name: "index_users_on_tabel_id", unique: true
   end
 
   add_foreign_key "buildings", "organizations"
@@ -265,6 +266,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_223703) do
   add_foreign_key "devices", "device_models"
   add_foreign_key "devices", "device_reg_groups"
   add_foreign_key "devices", "rooms"
+  add_foreign_key "devices", "supplementary_kits"
   add_foreign_key "divisions", "organizations"
   add_foreign_key "histories", "channels"
   add_foreign_key "inspections", "devices"
