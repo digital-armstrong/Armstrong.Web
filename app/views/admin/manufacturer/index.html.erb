@@ -1,0 +1,113 @@
+<% provide :page_title, "Производители" %>
+<%= render 'shared/admin/navbar/admin', selected: "device" %>
+<%= render 'shared/admin/navbar/device_bread', selected: "manufacturer" %>
+<%= render 'shared/flash_alert' %>
+<div class="row">
+  <div>
+    <div class="accordion mb-3" id="accordionFilter">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFilter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            <%= t('filtration')%>
+          </button>
+        </h2>
+        <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+          <%= search_form_for(@query, url:admin_manufacturer_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+            <div id="for-clear">
+              <div class="row">
+                <div class="col">
+                  <%= f.label :name, class: "mb-2" %>
+                  <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
+                </div>
+                <div class="col">
+                  <%= f.label :adress, class: "my-2" %>
+                  <%= f.search_field :adress_cont, class:"form-control", placeholder:"г. Димитровград, Победы 12" %>
+                </div>
+                <div class="col">
+                  <%= f.label :phone, class: "my-2" %>
+                  <%= f.search_field :phone_cont, class:"form-control", placeholder:"+7 (999) 123-01-02" %>
+                </div>
+                <div class="col">
+                  <%= f.label :email, class: "my-2" %>
+                  <%= f.search_field :email_cont, class:"form-control", placeholder:"niiar@example.ru" %>
+                </div>
+                <div class="col">
+                  <%= f.label :site_url, class: "my-2" %>
+                  <%= f.search_field :site_url_cont, class:"form-control", placeholder:"example.ru" %>
+                </div>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col"></div>
+              <%= f.submit "Применить", class: 'col btn btn-primary w-100'%>
+              <div id="b_clear" onclick="formClear()" class="ms-2 col btn btn-secondary w-100">
+                <%= t("b_clear")%>
+              </div>
+              <div class="col"></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= render 'shared/modal_button_add', path: new_admin_manufacturer_path, classes: "btn btn-primary w-100 mb-3", text: t("b_add") %>
+  </div>
+</div>
+<div class="row mx-0">
+  <div class="shadow rounded">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col"><%= t('activerecord.attributes.manufacturer.name') %></th>
+          <th scope="col" style="width: 30%"><%= t('activerecord.attributes.manufacturer.adress') %></th>
+          <th scope="col"><%= t('activerecord.attributes.manufacturer.phone') %></th>
+          <th scope="col"><%= t('activerecord.attributes.manufacturer.email') %></th>
+          <th scope="col"><%= t('activerecord.attributes.manufacturer.site_url') %></th>
+          <th scope="col" style="width: 10%"><%= t('action') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @manufacturers.each do |manufacturer| %>
+        <tr>
+            <td><%= manufacturer.name %></td>
+            <td><%= manufacturer.adress %></td>
+            <td><%= manufacturer.phone %></td>
+            <td><%= manufacturer.email %></td>
+            <td><%= manufacturer.site_url %></td>
+            <td>
+              <div class="d-flex">
+                <%= link_to edit_admin_manufacturer_path(manufacturer.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
+                  <i class="bi bi-pen"></i>
+                <% end %>
+                <%= button_to admin_manufacturer_path(manufacturer.id), method: :delete, class: "btn" do %>
+                  <i class="bi bi-trash"></i>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row my-5">
+  <div class="col-2">
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <%= pagination @pagy %>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>
+<script>
+  function formClear(){
+    let form = document.getElementById('for-clear')
+    let inputs = Array.from(form.getElementsByTagName("input"))
+    inputs.forEach((input) =>{
+      input.value = null
+    })
+  }
+</script>

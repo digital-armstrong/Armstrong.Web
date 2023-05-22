@@ -1,33 +1,132 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 en:
-  hello: "Hello world"
+  time:
+    formats:
+      default: "%e %B %Y %H:%M"
+      time: "%H:%M:%S"
+      day_and_month: "%e %B"
+      date: "%e %B %Y"
+      short_full: "%d.%m.%Y %H:%M"
+      short_date: "%d.%m.%Y"
+      short_time: "%H:%M"
+      long: "%e %B %Y %H:%M"
+      full: "%e %B %Y %H:%M:%S"
+  message:
+    user:
+      delete:
+        success: User was deleted.
+        error: User wasn't deleted! The user has inspections.
+  layouts:
+    application:
+      home: Home
+      ARMS: ARMS
+      devices: Devices
+      inspections: Inspections
+      about: About us
+      admin_panel: Admin. panel
+      settings: Settings
+      profile: Profile
+      logout: Logout
+      edit_me: Edit profile
+  device:
+    new:
+      add_device: Add device
+    edit:
+      edit_device: Edit device
+  device_component:
+    new:
+      add_device_component: Add device
+  post:
+    index:
+      b_new_post: New post
+      b_read: Read more
+      more: (more...)
+    show:
+      published: Created
+      updated: Updated
+      author: Author
+    form:
+      title: Recipe for uranium pancakes
+      body: Eat some more of these...
+      category: Public or URB-106
+  shared:
+    show:
+      device:
+        send_to_inspection: Send to inspection
+    navbar:
+      inspection:
+        new_tasks: New tasks
+        my_tasks: My tasks
+        completed_tasks: Completed tasks
+        all_tasks: All tasks
+    index:
+      inspection:
+        device: Device
+        assigned_user: Inspector
+        target: Target
+        state: State
+        conclusion: Conclustion
+        conclusion_date: Conclustion date
+        description: Description
+        creator: Creator
+        device_tabel_id: Tabel
+        device_serial_id: Serial
+        text-no-new-task: No tasks yet...
+        performer_last_name: Ivanov
+        performer_first_name: Ivan
+        performer_second_name: Ivanovich
+        inspection_conclusion: Nice device, man!
+        creator_last_name: Petrov
+        creator_first_name: Petr
+        creator_second_name: Petrovich
+      device:
+        b_add_device: Add device
+        b_add_device_component: Add device
+    admin:
+      device_component:
+        new:
+          add_device_component: Add component
+        edit:
+          edit_device_component: Edit component
+      device_reg_group:
+        new:
+          add_device_reg_group: Add reg. group
+        edig:
+          edit_device_reg_group: Edit reg. group
+      device_model:
+        new:
+          add_device_model: Add model
+        edit:
+          edit_device_model: Edit model
+      supplementary_kit:
+        new:
+          add_supplementary_kit: Add supp. kit
+        edit:
+          edit_supplementury_kit: Edit supp. kit
+      manufacturer:
+        new:
+          add_manufacturer: Add manufacturer
+        edit:
+          edit_manufacturer: Edit manufacturer
+      measurement_group:
+        new:
+          add_measurement_group: Add meas. group
+        edit:
+          edit_measurement_group: Edit meas. group
+      measurement_class:
+        new:
+          add_measurement_class: Add meas. class
+        edit:
+          edit_measurement_class: Edit meas. class
+  combobox_blank: Do not include
+  b_change: Change
+  b_delete: Delete
+  b_save: Save
+  b_add: Add
+  b_back: Back
+  b_download_pdf: Download PDF
+  b_accept: "Accept"
+  b_clear: "Clear"
+  created_at: Created at
+  updated_at: Updated at
+  action: Actions
+  filtration: Filtration

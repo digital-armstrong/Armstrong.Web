@@ -1,0 +1,10 @@
+<%= simple_form_for measurement_group, as: :measurement_group, url: path, id:"measurement-group-form",
+  class: "form-group row" do |f| %>
+  <div class="row">
+    <div class="col">
+      <%= f.input :name, placeholder: 'Название группы измерений', input_html: {:tabindex => 1}%>
+    </div>
+  </div>
+
+  <%= render 'shared/form/actions', f:f %>
+<% end %>

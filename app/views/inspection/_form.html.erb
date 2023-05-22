@@ -1,0 +1,26 @@
+<%= render 'shared/flash_alert'%>
+<%= simple_form_for @inspection, as: :inspection, url: path, class: "form-group row" do |f| %>
+  <div class="row">
+    <div class="col">
+      <% if @inspection.state == Inspection::STATES[:task_created]%>
+        <%= f.association :device, :label_method => lambda { |device| "Таб. № - #{device.tabel_id}, Сер. № - #{device.serial_id}" }, value_method: :id, include_blank: false %>
+      <% end %>
+      <% if edit_params && (@inspection.state == Inspection::STATES[:verification_successful] || @inspection.state == Inspection::STATES[:closed])%> 
+        <%= f.input :conclusion %>
+      <% end %>
+
+      <% if @inspection.state == Inspection::STATES[:task_created] %>
+        <%= f.input :type_target, :collection => Inspection::TYPE_TARGETS.sort.map {|k,v| [t("activerecord.attributes.inspection.#{v}"),k]}, include_blank: false, class:'form-select form-select' %>
+      <% end %>
+
+      <% if current_user.admin? %>  
+        <%= f.input :conclusion_date, include_blank: true %>
+        <%= f.association :performer, label_method: :tabel_id, collection: User.where(role: [User::ROLES[:inspector], User::ROLES[:engineer], User::ROLES[:admin]]), include_blank: "Не выбран" %>
+      <% end %>
+   </div>
+  </div>
+  <div>
+    <%= f.button :submit, t("b_save"), class: "btn btn-primary" %>
+    <%= f.button :submit, t("b_back"), formaction: new_tasks_inspection_index_path, formmethod: "get" %>
+  </div>
+<% end %>

@@ -1,35 +1,14 @@
 class DeviceController < ApplicationController
-  def show
-    @device = Device.find(params[:id])
-    supplementary_kit_id = SupplementaryKit.find(@device.device_model.supplementary_kit_id)
-    @devices = DeviceModel.where(supplementary_kit_id:)
-  end
+  include DeviceConcern
+  before_action :authenticate_user!
+  before_action :set_device, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
 
   def index
     @query = Device.ransack(params[:q])
-    @devices = @query.result.
-      order(:tabel_id).
-      page(params[:page]).
-      per(params[:per_page])
-  end
-
-  def update
-    @device = Device.find(params[:id])
-    if @device.update(device_params)
-      redirect_to(device_path)
-    else
-      render(:edit)
-    end
-  end
-
-  def destroy
-    @device = Device.find(params[:id])
-    @device.destroy
-    redirect_to(device_index_path)
-  end
-
-  def edit
-    @device = Device.find(params[:id])
+    @pagy, @devices = pagy(@query.result.
+      includes(:device_model, :supplementary_kit).
+      order(:tabel_id))
   end
 
   def new
@@ -37,15 +16,42 @@ class DeviceController < ApplicationController
   end
 
   def create
-    @device = Device.new(device_params)
-    if @device.save
-      redirect_to(device_index_path)
-    else
-      render(:new)
+    device_create(device_params)
+  end
+
+  def show
+    @inspection = Inspection.new
+    device_show(@device)
+  end
+
+  def update
+    device_update(@device, device_params)
+  end
+
+  def destroy
+    @device.destroy
+    redirect_to(device_index_path)
+  end
+
+  def create_inspection
+    create_inspection_for_device(Device.find_by_id(params[:device_id]))
+  end
+
+  def download
+    query = Device.ransack(params[:q])
+    devices = query.result.
+      includes(:device_model).
+      order(:tabel_id)
+    respond_to do |format|
+      format.pdf { send_data(devices.to_pdf, filename: "table-#{Date.today}.pdf") }
     end
   end
 
   private
+
+  def set_device
+    @device = Device.find(params[:id])
+  end
 
   def device_params
     params.require(:device).permit(:inventory_id,
@@ -54,6 +60,8 @@ class DeviceController < ApplicationController
                                    :device_model_id,
                                    :device_reg_group_id,
                                    :year_of_production,
-                                   :year_of_commissioning)
+                                   :year_of_commissioning,
+                                   :supplementary_kit_id,
+                                   :room_id)
   end
 end

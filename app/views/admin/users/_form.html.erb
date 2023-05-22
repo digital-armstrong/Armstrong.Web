@@ -1,0 +1,51 @@
+<div class="container text-center w-50 mb-5">
+  <%= image_tag "atom-logo.svg", class: "mb-4 mt-5", width: "72", height: "57" %>
+  <%= render 'shared/flash_alert' %>
+  <%= simple_form_for(@user, as: :user, url: path, class: "form-inputs" ) do |f| %>
+    <div class="row">
+      <div class="col">
+        <%= f.input :last_name, autofocus: true %>
+      </div>
+      <div class="col">
+        <%= f.input :first_name %>
+      </div>
+      <div class="col">
+        <%= f.input :second_name %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <%= f.input :tabel_id %>
+      </div>
+      <div class="col">
+        <%= f.input :email,
+                  input_html: { autocomplete: "email" }%>
+      </div>
+      <div class="col">
+        <%= f.input :phone %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <%= f.input :password,
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    input_html: { autocomplete: "new-password" } %>
+      </div>
+      <div class="col">
+        <%= f.input :password_confirmation,
+                    input_html: { autocomplete: "new-password" } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <%= f.input :role, :collection => User::ROLES.sort.map {|k,v| [v,k]}, include_blank: false, class:'form-select form-select' %>
+      </div>
+      <div class="col">
+        <%= render 'shared/timezone_field', f:f, is_new: is_new %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, t("b_save"), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

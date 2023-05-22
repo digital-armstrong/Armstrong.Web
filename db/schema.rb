@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
     t.index ["service_id"], name: "index_channels_on_service_id"
   end
 
+  create_table "device_components", force: :cascade do |t|
+    t.bigint "supplementary_kit_id"
+    t.string "serial_id"
+    t.string "name"
+    t.float "measurement_min"
+    t.float "measurement_max"
+    t.string "measuring_unit"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["supplementary_kit_id"], name: "index_device_components_on_supplementary_kit_id"
+  end
+
   create_table "device_models", force: :cascade do |t|
     t.string "name"
     t.bigint "measurement_group_id", null: false
@@ -63,7 +76,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
     t.float "measurement_min"
     t.float "measurement_max"
     t.bigint "manufacturer_id", null: false
-    t.bigint "supplementary_kit_id", null: false
     t.boolean "is_complete_device"
     t.boolean "is_tape_rolling_mechanism"
     t.string "doc_url"
@@ -73,7 +85,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
     t.index ["manufacturer_id"], name: "index_device_models_on_manufacturer_id"
     t.index ["measurement_class_id"], name: "index_device_models_on_measurement_class_id"
     t.index ["measurement_group_id"], name: "index_device_models_on_measurement_group_id"
-    t.index ["supplementary_kit_id"], name: "index_device_models_on_supplementary_kit_id"
   end
 
   create_table "device_reg_groups", force: :cascade do |t|
@@ -90,11 +101,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
     t.bigint "device_reg_group_id", null: false
     t.integer "year_of_production"
     t.integer "year_of_commissioning"
+    t.bigint "supplementary_kit_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "room_id"
     t.index ["device_model_id"], name: "index_devices_on_device_model_id"
     t.index ["device_reg_group_id"], name: "index_devices_on_device_reg_group_id"
     t.index ["inventory_id"], name: "index_devices_on_inventory_id", unique: true
+    t.index ["room_id"], name: "index_devices_on_room_id"
+    t.index ["supplementary_kit_id"], name: "index_devices_on_supplementary_kit_id"
     t.index ["tabel_id"], name: "index_devices_on_tabel_id", unique: true
   end
 
@@ -106,16 +121,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
     t.index ["organization_id"], name: "index_divisions_on_organization_id"
   end
 
-  create_table "inspections", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "device_id", null: false
-    t.datetime "inspection_date"
-    t.string "inspection_conclusion"
-    t.text "description"
+  create_table "histories", force: :cascade do |t|
+    t.bigint "channel_id", null: false
+    t.float "event_impulse_value"
+    t.float "event_system_value"
+    t.float "event_not_system_value"
+    t.datetime "event_datetime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_histories_on_channel_id"
+  end
+
+  create_table "inspections", force: :cascade do |t|
+    t.bigint "device_id", null: false
+    t.string "type_target", null: false
+    t.string "state", null: false
+    t.datetime "conclusion_date"
+    t.string "conclusion"
+    t.text "description"
+    t.bigint "creator_id", null: false
+    t.bigint "performer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_inspections_on_creator_id"
     t.index ["device_id"], name: "index_inspections_on_device_id"
-    t.index ["user_id"], name: "index_inspections_on_user_id"
+    t.index ["performer_id"], name: "index_inspections_on_performer_id"
   end
 
   create_table "manufacturers", force: :cascade do |t|
@@ -152,6 +182,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.text "body"
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -195,18 +235,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "tabel_id"
+    t.integer "tabel_id", null: false
     t.string "first_name"
     t.string "second_name"
     t.string "last_name"
-    t.string "email"
     t.string "phone"
-    t.string "password_digest"
     t.string "avatar_url"
-    t.string "type"
+    t.string "email", default: ""
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.string "timezone", default: "UTC", null: false
+    t.string "role", default: "default", null: false
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["tabel_id"], name: "index_users_on_tabel_id", unique: true
   end
 
   add_foreign_key "buildings", "organizations"
@@ -214,16 +259,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_27_080803) do
   add_foreign_key "channels", "rooms"
   add_foreign_key "channels", "servers"
   add_foreign_key "channels", "services"
+  add_foreign_key "device_components", "supplementary_kits"
   add_foreign_key "device_models", "manufacturers"
   add_foreign_key "device_models", "measurement_classes"
   add_foreign_key "device_models", "measurement_groups"
-  add_foreign_key "device_models", "supplementary_kits"
   add_foreign_key "devices", "device_models"
   add_foreign_key "devices", "device_reg_groups"
+  add_foreign_key "devices", "rooms"
+  add_foreign_key "devices", "supplementary_kits"
   add_foreign_key "divisions", "organizations"
+  add_foreign_key "histories", "channels"
   add_foreign_key "inspections", "devices"
-  add_foreign_key "inspections", "users"
+  add_foreign_key "inspections", "users", column: "creator_id"
+  add_foreign_key "inspections", "users", column: "performer_id"
   add_foreign_key "measurement_classes", "measurement_groups"
+  add_foreign_key "posts", "users"
   add_foreign_key "rooms", "buildings"
   add_foreign_key "servers", "rooms"
   add_foreign_key "servers", "services"

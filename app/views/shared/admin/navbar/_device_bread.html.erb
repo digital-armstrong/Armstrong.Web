@@ -1,0 +1,11 @@
+<div class='row text-center shadow rounded my-4 mx-0'>
+  <% selected = local_assigns[:selected] %>
+  <%= link_to 'Приборы', admin_device_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'device' }" %>
+  <%= link_to 'Модели', admin_device_model_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'device_model' }" %>
+  <%= link_to 'Компоненты', admin_device_component_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'device_component' }" %>
+  <%= link_to 'Наборы', admin_supplementary_kit_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'supplementary_kit' }" %>
+  <%= link_to 'Рег.группы', admin_device_reg_group_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'device_reg_group' }" %>
+  <%= link_to 'Производители', admin_manufacturer_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'manufacturer' }" %>
+  <%= link_to 'Классы измерений', admin_measurement_class_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'measurement_class' }" %>
+  <%= link_to 'Группы измерений', admin_measurement_group_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'measurement_group' }" %>
+</div>

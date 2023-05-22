@@ -1,0 +1,114 @@
+<% provide :page_title, "Приборы" %>
+<% show_path = show_path.from(0).to(show_path.length-2) %>
+<div class="row mx-0">
+  <div class="col-2 ps-0">
+    <div class="accordion mb-3" id="accordionFilter">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFilter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            <%= t('filtration') %>
+          </button>
+        </h2>
+        <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+          <%= search_form_for(@query, url:device_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+            <div id="for-clear">
+              <%= f.label :tabel_id, class:"mb-2"%>
+              <%= f.search_field :tabel_id_eq, class: 'form-control', placeholder: 'Номер' %>
+              <%= f.label :serial_id, class:"my-2" %>
+              <%= f.search_field :serial_id_cont, class: 'form-control ', placeholder: 'Номер' %>
+              <%= f.label :device_model_id, class:"my-2" %>
+              <%= f.search_field :device_model_name_cont, class: 'form-control', placeholder: 'Название' %>
+              <%= f.label :year_of_production, class:"my-2" %>
+              <div class="row px-2">
+                <div class="col px-1">
+                  <%= f.search_field :year_of_production_gteq, class: 'form-control', placeholder: 'От' %>
+                </div>
+                <div class="col px-1">
+                  <%= f.search_field :year_of_production_lteq, class: 'form-control', placeholder: 'До' %>
+                </div>
+              </div>
+              <%= f.label :year_of_commissioning, class:"my-2" %>
+              <div class="row px-2 mb-2">
+                <div class="col px-1">
+                  <%= f.search_field :year_of_commissioning_gteq, class: 'form-control', placeholder: 'От' %>
+                </div>
+                <div class="col px-1">
+                  <%= f.search_field :year_of_commissioning_lteq, class: 'form-control', placeholder: 'До' %>
+                </div>
+              </div>
+            </div>
+            <%= f.submit t("b_accept"), class: 'btn btn-primary w-100 my-2'%>
+            <div id="b_clear" onclick="formClear()" class='btn btn-secondary w-100'>
+              <%= t("b_clear")%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= render 'shared/modal_button_add', path: new_path, classes: "btn btn-primary w-100", text: t(".b_add_device") %>
+    <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-primary mt-2 w-100", text: t(".b_add_device_component") %>
+    <%= button_to device_download_path(request.params.merge(format: :pdf)), data: {turbo: :false}, class: "btn btn-primary my-2 w-100 shadow" do %>
+      <i class="bi bi-download"></i><span> <%=t('b_download_pdf')%></span>
+    <% end %>
+  </div>
+  <div class="col-10 shadow rounded">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col"><%=t('activerecord.attributes.device.tabel_id')%></th>
+            <th scope="col"><%=t('activerecord.attributes.device.serial_id')%></th>
+            <th scope="col"><%=t('activerecord.attributes.device.device_model')%></th>
+            <th scope="col"><%=t('activerecord.attributes.device.year_of_production')%></th>
+            <th scope="col"><%=t('activerecord.attributes.device.year_of_commissioning')%></th>
+            <th scope="col"><%=t('activerecord.attributes.device.date_of_inspection')%></th>
+            <th scope="col"><i class="bi bi-circle"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @devices.each do |device| %>
+            <% path = "#{show_path}#{device.id}" %>
+            <tr onclick="document.location = `<%= path %>`" style="cursor:pointer">
+              <th scope="row"><%= device.tabel_id %></th>
+              <td><%= device.serial_id %></td>
+              <td><%= device.device_model.name %></td>
+              <td><%= device.year_of_production %></td>
+              <td><%= device.year_of_commissioning %></td>
+              <td>
+                <%= device.last_successful_inspection %>
+              </td>
+              <% if device.last_successful_inspection.present? %>
+                <td><i class="bi bi-circle-fill text-success"></i></td>
+              <% else %>
+                <td><i class="bi bi-circle-fill text-danger"></i></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="row my-5">
+  <div class="col-2">
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <%= pagination @pagy %>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>
+<script>
+  function formClear(){
+    let form = document.getElementById('for-clear')
+    let inputs = Array.from(form.getElementsByTagName("input"))
+    inputs.forEach((input) =>{
+      input.value = null
+    })
+  }
+</script>

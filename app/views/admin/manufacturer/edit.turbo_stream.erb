@@ -1,0 +1,3 @@
+<%= turbo_stream.update "modal-title", t('.edit_manufacturer') %>
+<%= turbo_stream.update "modal-body", partial: "shared/admin/form/manufacturer",
+ locals: {path: admin_manufacturer_path(@manufacturer), manufacturer: @manufacturer } %>

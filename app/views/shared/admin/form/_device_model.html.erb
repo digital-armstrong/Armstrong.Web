@@ -1,0 +1,83 @@
+<%= simple_form_for device_model, as: :device_model, url: path, data: {controller: 'filter', 'filtrator_class': filtrator_class_id, 
+  'prev_mc_val': prev_mc_val }, class: "form-group row" do |f| %>
+  <div class="row">
+    <div class="col">
+      <%= f.input :name, placeholder: "Название устройства", input_html: {:tabindex => 1} %>
+    </div>
+    <div class="col">
+      <div class="row">
+        <%= f.label :manufacturer, class: "mb-2"%>
+      </div>
+      <div class="row">
+        <div class="col-9 pe-0">
+          <%= f.association :manufacturer, label: false, input_html: {:tabindex => 2}, include_blank: false %>
+        </div>
+        <div class="col-3 text-end">
+          <%= render 'shared/modal_button_add', path: new_admin_manufacturer_path, classes: "btn btn-ligth", text: nil %>
+        </div>
+      </div>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <%= f.label :measurement_group, class: "mb-2"%>
+      </div>
+      <div class="row">
+        <div class="col-9 pe-0">
+          <%= f.association :measurement_group, label: false, input_html: {:tabindex => 3, data: {'action': 'change->filter#filter',
+           'to_filter_class': to_filter_class_id, 'filtrator_class': filtrator_class_id}, id: filtrator_class_id}, include_blank: false %>
+        </div>
+        <div class="col-3 text-end">
+          <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path, classes: "btn btn-ligth", text: nil %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        <%= f.label :measurement_class, class: "mb-2"%>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= f.association :measurement_class, label:false, input_html: {tabindex: 4, id: to_filter_class_id}, include_blank: false %>
+        </div>
+        <div class="col-3 text-end">
+          <%= render 'shared/modal_button_add', path: new_admin_measurement_class_path, classes: "btn btn-ligth", text: nil %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <%= f.input :measuring_unit, placeholder: "мЗв/ч", input_html: {:tabindex => 5} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.input :measurement_sensitivity, placeholder: "1.0", input_html: {:tabindex => 6} %>
+    </div>
+    <div class="col">
+      <%= f.input :measurement_min, placeholder: "1.0", input_html: {:tabindex => 7} %>
+    </div>
+    <div class="col">
+      <%= f.input :measurement_max, placeholder: "2.0", input_html: {:tabindex => 8} %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <%= f.input :safety_class, placeholder: "3Н", input_html: {:tabindex => 9} %>
+    </div>
+    <div class="col">
+      <%= f.input :accuracy_class, placeholder: "0.25", input_html: {:tabindex => 10} %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col">
+      <%= f.input :is_complete_device, input_html: {:tabindex => 11} %>
+      <%= f.input :is_tape_rolling_mechanism, input_html: {:tabindex => 12} %>
+    </div>
+    <div class="col"></div>
+  </div>
+  <%= render 'shared/form/actions', f:f %>
+<% end %>
