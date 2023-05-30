@@ -37,7 +37,7 @@ module DeviceConcern
         redirect_to(path_failure)
       end
     end
-    
+
     def create_inspection_for_device(device)
       inspection = device.inspections.build(creator_id: current_user.id, type_target: inspection_params[:type_target])
       if inspection.save

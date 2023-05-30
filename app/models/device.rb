@@ -2,7 +2,7 @@ require 'date'
 
 class Device < ApplicationRecord
   include ExportPdf
-  
+
   current_year = Date.today.year
   year_error_msg = "должен быть больше 1900 и меньше или равен #{current_year}"
 
