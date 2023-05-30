@@ -17,7 +17,7 @@
           <li><%= link_to t(".home"), root_path, class: "nav-link px-2 link-secondary" %></li>
           <% if user_signed_in? %>
             <li>
-              <% if can? :manage, :all %>
+              <% if can? :read, :armstrong %>
                 <%= link_to t(".ARMS"), armstrong_index_path, class: "nav-link px-2 link-secondary" %>
               <% end %>
             </li>

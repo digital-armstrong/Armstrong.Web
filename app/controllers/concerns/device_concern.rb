@@ -8,8 +8,8 @@ module DeviceConcern
       end
     end
 
-    def device_create(params)
-      @device = Device.new(params)
+    def device_create
+      @device = Device.new(device_params)
       if @device.save
         redirect_back(fallback_location: root_path)
       else
@@ -17,8 +17,8 @@ module DeviceConcern
       end
     end
 
-    def device_update(device, params)
-      if device.update(params)
+    def device_update(device)
+      if device.update(device_params)
         redirect_back(fallback_location: root_path)
       else
         render(:edit, status: :unprocessable_entity)
@@ -38,6 +38,19 @@ module DeviceConcern
 
     def inspection_params
       params.require(:inspection).permit(:type_target)
+    end
+
+    def device_params
+      params.require(:device).permit(:inventory_id,
+                                     :tabel_id,
+                                     :serial_id,
+                                     :device_model_id,
+                                     :device_reg_group_id,
+                                     :year_of_production,
+                                     :year_of_commissioning,
+                                     :supplementary_kit_id,
+                                     :room_id,
+                                     :service_id)
     end
   end
 end

@@ -14,11 +14,11 @@
                       required: true %>
         </div>
       </div>
+      <%= f.association :service, include_blank: false %>
       <div class="row">
       <%= f.input :tabel_id,
                   required: true %>
       <%= f.input :email,
-                  required: true,
                   autofocus: true,
                   input_html: { autocomplete: "email" }%>
       <%= f.input :password,

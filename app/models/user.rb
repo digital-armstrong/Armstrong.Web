@@ -2,6 +2,9 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :recoverable, :rememberable
+
+  belongs_to :service
+
   has_many :inspections
   has_many :posts
 
@@ -25,7 +28,7 @@ class User < ApplicationRecord
 
   def self.ransackable_attributes(_auth_object = nil)
     ['avatar_url', 'created_at', 'email', 'encrypted_password', 'first_name', 'id', 'last_name', 'phone', 'remember_created_at',
-     'reset_password_sent_at', 'reset_password_token', 'role', 'second_name', 'tabel_id', 'updated_at']
+     'reset_password_sent_at', 'reset_password_token', 'role', 'second_name', 'tabel_id', 'updated_at', 'service_id']
   end
 
   def self.ransackable_associations(_auth_object = nil)

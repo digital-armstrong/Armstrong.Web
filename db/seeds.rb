@@ -1,45 +1,3 @@
-User.create(
-  tabel_id: 0,
-  first_name: 'Admin',
-  last_name: 'Adminov',
-  second_name: 'Adminovich',
-  email: 'admin@admin.ru',
-  password: '12345678',
-  role: 'admin'
-)
-
-10.times do |i|
-  User.create(
-    tabel_id: 72000 + i,
-    first_name: "First#{i}",
-    last_name: "Last#{i}",
-    email: "engineer#{i}@email.ru",
-    password: "123456789#{i}",
-    role: 'engineer'
-  )
-end
-
-10.times do |i|
-  User.create(
-    tabel_id: 82000 + i,
-    first_name: "First#{i}",
-    last_name: "Last#{i}",
-    email: "inspector#{i}@email.ru",
-    password: "123456789#{i}",
-    role: 'inspector'
-  )
-end
-
-10.times do |i|
-  User.create(
-    tabel_id: 92000 + i,
-    first_name: "First#{i}",
-    last_name: "Last#{i}",
-    email: "dosimetrist#{i}@email.ru",
-    password: "123456789#{i}",
-    role: 'dosimetrist'
-  )
-end
 # seed Manufacturers
 
 Manufacturer.create(
@@ -224,6 +182,116 @@ DeviceModel.create(
   )
 end
 
+# seed Organization
+
+Organization.create(
+  name: "АО ГНЦ НИИАР",
+  full_address: "Западное шоссе 9",
+  zip_code: "9001",
+  phone: "5-55-55",
+  fax: "5-55-55",
+  email: "niiar@niiar.ru"
+)
+
+# seed Division
+
+10.times do |i|
+  Division.create(
+    name: "Division-#{i}",
+    organization: Organization.first
+  )
+end
+
+# seed Building
+
+10.times do |i|
+  Building.create(
+    name: "Build №#{i}",
+    organization: Organization.first
+  )
+end
+
+# seed Room
+
+100.times do |i|
+  Room.create(
+    name: "#{i}",
+    building: Building.find_by(id: rand(1..10))
+  )
+end
+
+# seed Server
+
+10.times do |i|
+  Server.create(
+    name: "server-#{i}",
+    ip_adress: "192.168.20.#{i}",
+    inventory_id: i,
+    service: Service.find_by(id: rand(1..10)),
+    room: Room.find_by(id: rand(1..100))
+  )
+end
+
+# seed Service
+
+10.times do |i|
+  Service.create(
+    name: "Service-#{i}",
+    division: Division.find_by(id: rand(1..10)),
+    organization: Organization.first,
+    building: Building.find_by(id: rand(1..10))
+  )
+end
+
+# seed User
+
+User.create(
+  tabel_id: 0,
+  first_name: 'Admin',
+  last_name: 'Adminov',
+  second_name: 'Adminovich',
+  email: 'admin@admin.ru',
+  password: '12345678',
+  role: 'admin',
+  service: Service.find_by(id: rand(1..10))
+)
+
+10.times do |i|
+  User.create(
+    tabel_id: 72000 + i,
+    first_name: "First#{i}",
+    last_name: "Last#{i}",
+    email: "engineer#{i}@email.ru",
+    password: "123456789#{i}",
+    role: 'engineer',
+    service: Service.find_by(id: rand(1..10))
+  )
+end
+
+10.times do |i|
+  User.create(
+    tabel_id: 82000 + i,
+    first_name: "First#{i}",
+    last_name: "Last#{i}",
+    email: "inspector#{i}@email.ru",
+    password: "123456789#{i}",
+    role: 'inspector',
+    service: Service.find_by(id: rand(1..10))
+  )
+end
+
+10.times do |i|
+  User.create(
+    tabel_id: 92000 + i,
+    first_name: "First#{i}",
+    last_name: "Last#{i}",
+    email: "dosimetrist#{i}@email.ru",
+    password: "123456789#{i}",
+    role: 'dosimetrist',
+    service: Service.find_by(id: rand(1..10))
+  )
+end
+
 # seed Device
 
 1000.times do |i|
@@ -236,8 +304,11 @@ end
     year_of_production: 1990,
     year_of_commissioning: 1991,
     supplementary_kit: SupplementaryKit.find_by(id: rand(1..20)),
+    service: Service.find_by(id: rand(1..10))
   )
 end
+
+# seed Post
 
 10.times do |i|
   Post.create(
@@ -256,6 +327,8 @@ end
     category: "УРБ-106"
   )
 end
+
+# seed Inspection
 
 20.times do |i|
   Inspection.create(
@@ -277,55 +350,7 @@ end
   )
 end
 
-
-Organization.create(
-  name: "АО ГНЦ НИИАР",
-  full_address: "Западное шоссе 9",
-  zip_code: "9001",
-  phone: "5-55-55",
-  fax: "5-55-55",
-  email: "niiar@niiar.ru"
-)
-
-10.times do |i|
-  Division.create(
-    name: "Division-#{i}",
-    organization: Organization.first
-  )
-end
-
-10.times do |i|
-  Building.create(
-    name: "Build №#{i}",
-    organization: Organization.first
-  )
-end
-
-100.times do |i|
-  Room.create(
-    name: "#{i}",
-    building: Building.find_by(id: rand(1..10))
-  )
-end
-
-10.times do |i|
-  Service.create(
-    name: "Service-#{i}",
-    division: Division.find_by(id: rand(1..10)),
-    organization: Organization.first,
-    building: Building.find_by(id: rand(1..10))
-  )
-end
-
-10.times do |i|
-  Server.create(
-    name: "server-#{i}",
-    ip_adress: "192.168.20.#{i}",
-    inventory_id: i,
-    service: Service.find_by(id: rand(1..10)),
-    room: Room.find_by(id: rand(1..100))
-  )
-end
+# seed Channel
 
 200.times do |i|
   Channel.create(

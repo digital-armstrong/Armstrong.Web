@@ -28,7 +28,7 @@
                 </div>
               </div>
               <%= f.label :year_of_commissioning, class:"my-2" %>
-              <div class="row px-2 mb-2">
+              <div class="row px-2">
                 <div class="col px-1">
                   <%= f.search_field :year_of_commissioning_gteq, class: 'form-control', placeholder: 'От' %>
                 </div>
@@ -36,6 +36,11 @@
                   <%= f.search_field :year_of_commissioning_lteq, class: 'form-control', placeholder: 'До' %>
                 </div>
               </div>
+              <% if current_user.admin? %>
+                <%= f.label :service, class:"my-2" %>
+                <%= f.collection_select(:service_id_eq, Service.all,
+                :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select mb-2'}) %>
+              <% end %>
             </div>
             <%= f.submit t("b_accept"), class: 'btn btn-primary w-100 my-2'%>
             <div id="b_clear" onclick="formClear()" class='btn btn-secondary w-100'>
@@ -61,6 +66,9 @@
             <th scope="col"><%=t('activerecord.attributes.device.device_model')%></th>
             <th scope="col"><%=t('activerecord.attributes.device.year_of_production')%></th>
             <th scope="col"><%=t('activerecord.attributes.device.year_of_commissioning')%></th>
+            <% if current_user.admin? %>
+              <th scope="col"><%=t('activerecord.attributes.device.service')%></th>
+            <% end %>
             <th scope="col"><%=t('activerecord.attributes.device.date_of_inspection')%></th>
             <th scope="col"><i class="bi bi-circle"></th>
           </tr>
@@ -74,6 +82,9 @@
               <td><%= device.device_model.name %></td>
               <td><%= device.year_of_production %></td>
               <td><%= device.year_of_commissioning %></td>
+              <% if current_user.admin? %>
+                <td><%= device.service.name %></td>
+              <% end %>
               <td>
                 <%= device.last_successful_inspection %>
               </td>

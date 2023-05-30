@@ -59,9 +59,9 @@ class Admin::UsersController < ApplicationController
 
     if assigned_inspections_count.zero?
       @user.destroy
-      flash[:success] = t("message.user.delete.success")
+      flash[:success] = t('message.user.delete.success')
     else
-      flash[:error] = t("message.user.delete.error")
+      flash[:error] = t('message.user.delete.error')
     end
     redirect_to(admin_users_path)
   end
@@ -83,6 +83,7 @@ class Admin::UsersController < ApplicationController
                                  :password,
                                  :password_confirmation,
                                  :role,
-                                 :timezone)
+                                 :timezone,
+                                 :service_id)
   end
 end

@@ -24,6 +24,9 @@
       <div class="col">
         <%= f.input :phone %>
       </div>
+      <div class="col">
+        <%= f.association :service, include_blank: false %>
+      </div>
     </div>
     <div class="row">
       <div class="col">
