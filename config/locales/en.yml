@@ -130,3 +130,5 @@ en:
   updated_at: Updated at
   action: Actions
   filtration: Filtration
+  access_denied: Access Denied
+  access_denied_message: Sorry, but you don't have permission to access this page.

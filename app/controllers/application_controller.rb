@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do
-    flash[:error] = 'Access denied!'
-    redirect_to root_url
+    render partial: 'shared/403'
   end
 
   def current_ability
@@ -15,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
+  
   def set_time_zone(&block)
     timezone = ''
     timezone = if current_user.nil?

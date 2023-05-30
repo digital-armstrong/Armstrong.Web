@@ -18,14 +18,15 @@
         <%= f.input :tabel_id %>
       </div>
       <div class="col">
-        <%= f.input :email,
-                  input_html: { autocomplete: "email" }%>
+        <%= f.association :service, include_blank: false %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <%= f.input :email, input_html: { autocomplete: "email" }%>
       </div>
       <div class="col">
         <%= f.input :phone %>
-      </div>
-      <div class="col">
-        <%= f.association :service, include_blank: false %>
       </div>
     </div>
     <div class="row">

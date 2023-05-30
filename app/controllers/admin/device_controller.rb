@@ -37,8 +37,7 @@ class Admin::DeviceController < ApplicationController
 
   def destroy
     authorize!(:destroy, :device_admin)
-    @device.destroy
-    redirect_to(admin_device_index_path)
+    device_destroy(@device, admin_device_index_path, admin_device_path(@device))
   end
 
   def create_inspection

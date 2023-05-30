@@ -33,8 +33,7 @@ class DeviceController < ApplicationController
   end
 
   def destroy
-    @device.destroy
-    redirect_to(device_index_path)
+    device_destroy(@device, device_index_path, device_path(@device))
   end
 
   def create_inspection

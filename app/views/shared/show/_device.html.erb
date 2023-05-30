@@ -78,13 +78,15 @@
           <%= link_to t('b_change'), edit_path, class: "btn btn-primary", data: { action: "click->modal#open", turbo_stream: "" }%>
         </div>
         <div>
-          <% delete_path = if @is_admin
-                          admin_device_path(@device)
-                        else
-                          device_path(@device)
-                        end
-          %>
-          <%= button_to t('b_delete'), delete_path, method: :delete, class: "btn btn-danger"%>
+          <% if can? :destroy, Device %>
+            <% delete_path = if @is_admin
+                            admin_device_path(@device)
+                          else
+                            device_path(@device)
+                          end
+            %>
+            <%= button_to t('b_delete'), delete_path, method: :delete, class: "btn btn-danger"%>
+          <% end %>
         </div>
       <% end %>
     </span>

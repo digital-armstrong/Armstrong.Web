@@ -2,7 +2,7 @@ require 'date'
 
 class Device < ApplicationRecord
   include ExportPdf
-
+  
   current_year = Date.today.year
   year_error_msg = "должен быть больше 1900 и меньше или равен #{current_year}"
 
@@ -22,8 +22,8 @@ class Device < ApplicationRecord
 
   def last_successful_inspection
     inspection = inspections.where(state: 'verification_successful').
-      sort { |el| el.conclusion_date }.first
-    return I18n.l(inspection.conclusion_date, format: :date) if inspection.present?
+      order(:conclusion_date).last
+    return formatted_date(inspection.conclusion_date, :date) unless inspection.nil?
   end
 
   def self.ransackable_attributes(_auth_object = nil)
