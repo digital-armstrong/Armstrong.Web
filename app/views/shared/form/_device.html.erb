@@ -17,7 +17,6 @@
           </div>
         </div>
       </div>
-      <%= f.association :room, input_html: {:tabindex => 9}, include_blank: t('combobox_blank')%>
     </div>
     <div class="col">
       <%= f.input :serial_id, placeholder: 'S/N присвоенный производителем', input_html: {:tabindex => 2} %>
@@ -48,6 +47,18 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+      <% if current_user.admin? %>
+        <div class="col">
+          <%= f.association :service, input_html: {:tabindex => 9}, include_blank: false %>
+        </div>
+      <% else %>
+        <%= f.input :service_id, label: false, input_html: {hidden: true, value: current_user.service_id} %>
+      <% end %>
+    <div class="col">
+      <%= f.association :room, input_html: {:tabindex => 10}, include_blank: t('combobox_blank')%>
     </div>
   </div>
 

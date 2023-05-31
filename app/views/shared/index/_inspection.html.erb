@@ -14,7 +14,7 @@
             <%= f.label t('.device_serial_id'), class: "mb-2" %>
             <%= f.search_field :device_serial_id_cont, class: 'form-control', placeholder: '123-123-N' %>
             <%= f.label t('.device_tabel_id'), class: "my-2" %>
-            <%= f.search_field :device_tabel_id_cont, class: 'form-control', placeholder: '1' %>
+            <%= f.search_field :device_tabel_id_eq, class: 'form-control', placeholder: '1' %>
             <% unless is_new_tasks %>
               <%= f.label t('.assigned_user'), class: "my-2" %>
               <%= f.search_field :performer_last_name_cont, class: 'form-control', placeholder: t('.performer_last_name') %>

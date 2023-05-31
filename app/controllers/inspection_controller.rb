@@ -87,10 +87,13 @@ class InspectionController < ApplicationController
   end
 
   def complete_verification
-    if set_state(@inspection.can_complete_verification?) { @inspection.complete_verification }
+    if @inspection.can_complete_verification?
+      @inspection.complete_verification
       @inspection.update(conclusion_date: DateTime.now)
+      redirect_to(edit_inspection_path(@inspection))
     else
       flash.now[:error] = "Can't change state"
+      redirect_back(fallback_location: new_tasks_inspection_index_path)
     end
   end
 
@@ -99,10 +102,13 @@ class InspectionController < ApplicationController
   end
 
   def close
-    if set_state(@inspection.can_close?) { @inspection.close }
+    if @inspection.can_close?
+      @inspection.close
       @inspection.update(conclusion_date: DateTime.now)
+      redirect_to(edit_inspection_path(@inspection))
     else
       flash.now[:error] = "Can't change state"
+      redirect_back(fallback_location: new_tasks_inspection_index_path)
     end
   end
 

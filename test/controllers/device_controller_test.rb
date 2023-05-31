@@ -7,6 +7,7 @@ class DeviceControllerTest < ActionController::TestCase
     sign_in(users(:admin))
     @mg = create(:measurement_group)
     @mc = create(:measurement_class, measurement_group_id: @mg.id)
+    @service = create(:service)
     @device_model = create(:device_model, measurement_group_id: @mg.id, measurement_class_id: @mc.id)
     @device_reg_group = create(:device_reg_group)
   end
@@ -22,6 +23,7 @@ class DeviceControllerTest < ActionController::TestCase
       :device,
       device_model_id: @device_model.id,
       device_reg_group_id: @device_reg_group.id,
+      service_id: @service.id,
     )
     patch :update, params: { id: device.id, device: device_attrs }
     assert_response :redirect
@@ -45,6 +47,7 @@ class DeviceControllerTest < ActionController::TestCase
       :device,
       device_model_id: @device_model.id,
       device_reg_group_id: @device_reg_group.id,
+      service_id: @service.id,
     )
     post :create, params: { id: device.id, device: device_attrs }
     assert_response :redirect

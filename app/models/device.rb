@@ -10,6 +10,7 @@ class Device < ApplicationRecord
   belongs_to :device_reg_group
   belongs_to :supplementary_kit, optional: true
   belongs_to :room, optional: true
+  belongs_to :service
 
   has_many :inspections
   has_one :channel
@@ -21,13 +22,13 @@ class Device < ApplicationRecord
 
   def last_successful_inspection
     inspection = inspections.where(state: 'verification_successful').
-      sort { |el| el.conclusion_date }.first
-    return I18n.l(inspection.conclusion_date, format: :date) if inspection.present?
+      order(:conclusion_date).last
+    return formatted_date(inspection.conclusion_date, :date) unless inspection.nil?
   end
 
   def self.ransackable_attributes(_auth_object = nil)
     ['created_at', 'device_model_id', 'device_reg_group_id', 'id', 'inventory_id', 'serial_id', 'tabel_id', 'updated_at',
-     'year_of_commissioning', 'year_of_production', 'supplementary_kit_id']
+     'year_of_commissioning', 'year_of_production', 'supplementary_kit_id', 'service_id']
   end
 
   def self.ransackable_associations(_auth_object = nil)

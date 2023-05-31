@@ -25,7 +25,8 @@ class Ability
     end
 
     if user.engineer?
-      can([:manage, :create_inspection], Device)
+      can([:manage, :create_inspection], Device, service_id: user.service_id)
+      cannot(:destroy, Device)
       can(:create, [DeviceModel, SupplementaryKit, DeviceRegGroup, MeasurementClass, MeasurementGroup,
                     Manufacturer, DeviceComponent])
       inspector(user)

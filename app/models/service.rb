@@ -4,5 +4,6 @@ class Service < ApplicationRecord
   belongs_to :building
 
   has_many :devices
+  has_many :users
   has_many :servers
 end

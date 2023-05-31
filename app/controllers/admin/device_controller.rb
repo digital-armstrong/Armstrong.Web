@@ -16,7 +16,7 @@ class Admin::DeviceController < ApplicationController
 
   def create
     authorize!(:create, :device_admin)
-    device_create(device_params)
+    device_create
   end
 
   def show
@@ -32,13 +32,12 @@ class Admin::DeviceController < ApplicationController
 
   def update
     authorize!(:update, :device_admin)
-    device_update(@device, device_params)
+    device_update(@device)
   end
 
   def destroy
     authorize!(:destroy, :device_admin)
-    @device.destroy
-    redirect_to(admin_device_index_path)
+    device_destroy(@device, admin_device_index_path, admin_device_path(@device))
   end
 
   def create_inspection
@@ -49,16 +48,5 @@ class Admin::DeviceController < ApplicationController
 
   def set_device
     @device = Device.find(params[:id])
-  end
-
-  def device_params
-    params.require(:device).permit(:inventory_id,
-                                   :tabel_id,
-                                   :serial_id,
-                                   :device_model_id,
-                                   :device_reg_group_id,
-                                   :year_of_production,
-                                   :year_of_commissioning,
-                                   :supplementary_kit_id)
   end
 end

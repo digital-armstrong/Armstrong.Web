@@ -25,12 +25,12 @@
                 <%= f.label :last_name, class:"mb-1" %>
                 <%= f.search_field :last_name_cont, class: 'form-control', placeholder: 'Иванов' %>
               </div>
-            </div>
-            <div class="row mt-2">
               <div class="col">
                 <%= f.label :second_name, class:"mb-1" %>
                 <%= f.search_field :second_name_cont, class: 'form-control', placeholder: 'Иванович' %>
               </div>
+            </div>
+            <div class="row mt-2">
               <div class="col">
                 <%= f.label :role, class:"mb-1" %>
                 <select class="form-select form-select" name="q[role_eq]" id="q_role_eq">
@@ -49,12 +49,17 @@
                 <%= f.label :email, class:"mb-1" %>
                 <%= f.search_field :email_cont, class: 'form-control', placeholder: 'Иванович' %>
               </div>
-            </div>
-            <div class="row mt-2">
               <div class="col">
                 <%= f.label :phone, class:"mb-1" %>
                 <%= f.search_field :phone_cont, class: 'form-control', placeholder: '+79021234578' %>
               </div>
+              <div class="col">
+                <%= f.label :service, class:"mb-1" %>
+                <%= f.collection_select(:service_id_eq, Service.all,
+                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select'}) %>
+              </div>
+            </div>
+            <div class="row mt-2">
               <div class="col">
                 <%= f.label t('.created_at_from'), class:"mb-1" %>
                 <%= f.date_field :created_at_gteq, class: 'form-control ' %>
@@ -100,6 +105,7 @@
           <th scope="col"><%=t('activerecord.attributes.user.role')%></th>
           <th scope="col"><%=t('activerecord.attributes.user.email')%></th>
           <th scope="col"><%=t('activerecord.attributes.user.phone')%></th>
+          <th scope="col"><%=t('activerecord.attributes.user.service')%></th>
           <th scope="col"><%=t('created_at')%></th>
           <th scope="col"><%=t('updated_at')%></th>
           <th scope="col" style="width: 10%"><%=t('action')%></th>
@@ -115,6 +121,7 @@
             <td><%= user.role %></td>
             <td><%= user.email %></td>
             <td><%= user.phone %></td>
+            <td><%= user.service.name %></td>
             <td><%= formatted_date(user.created_at, :short_full) %></td>
             <td><%= formatted_date(user.updated_at, :short_full) %></td>
             <td>

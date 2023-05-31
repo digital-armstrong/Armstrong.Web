@@ -1,0 +1,5 @@
+service:
+  name: "Service-#{i}"
+  division: division
+  organization: organization
+  building: building

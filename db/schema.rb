@@ -102,6 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
     t.integer "year_of_production"
     t.integer "year_of_commissioning"
     t.bigint "supplementary_kit_id"
+    t.bigint "service_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "room_id"
@@ -109,6 +110,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
     t.index ["device_reg_group_id"], name: "index_devices_on_device_reg_group_id"
     t.index ["inventory_id"], name: "index_devices_on_inventory_id", unique: true
     t.index ["room_id"], name: "index_devices_on_room_id"
+    t.index ["service_id"], name: "index_devices_on_service_id"
     t.index ["supplementary_kit_id"], name: "index_devices_on_supplementary_kit_id"
     t.index ["tabel_id"], name: "index_devices_on_tabel_id", unique: true
   end
@@ -241,6 +243,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
     t.string "last_name"
     t.string "phone"
     t.string "avatar_url"
+    t.bigint "service_id", null: false
     t.string "email", default: ""
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -251,6 +254,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
     t.string "timezone", default: "UTC", null: false
     t.string "role", default: "default", null: false
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["service_id"], name: "index_users_on_service_id"
     t.index ["tabel_id"], name: "index_users_on_tabel_id", unique: true
   end
 
@@ -266,6 +270,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
   add_foreign_key "devices", "device_models"
   add_foreign_key "devices", "device_reg_groups"
   add_foreign_key "devices", "rooms"
+  add_foreign_key "devices", "services"
   add_foreign_key "devices", "supplementary_kits"
   add_foreign_key "divisions", "organizations"
   add_foreign_key "histories", "channels"
@@ -280,4 +285,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
   add_foreign_key "services", "buildings"
   add_foreign_key "services", "divisions"
   add_foreign_key "services", "organizations"
+  add_foreign_key "users", "services"
 end
