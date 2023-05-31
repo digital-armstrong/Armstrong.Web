@@ -1,0 +1,3 @@
+<%= turbo_stream.update "modal-title", t('admin.device_component.new.add_device_component') %>
+<%= turbo_stream.update "modal-body", partial: "shared/admin/form/device_component",
+ locals: {path: device_component_index_path, device_component: @device_component } %>

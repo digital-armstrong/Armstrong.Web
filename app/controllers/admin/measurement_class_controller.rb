@@ -1,6 +1,7 @@
 class Admin::MeasurementClassController < ApplicationController
-  before_action :set_measurement_class, only: [:show, :edit, :update, :destroy]
+  include MeasurementClassConcern
   load_and_authorize_resource
+  before_action :set_measurement_class, only: [:show, :edit, :update, :destroy]
 
   def index
     @query = MeasurementClass.ransack(params[:q])
@@ -9,16 +10,13 @@ class Admin::MeasurementClassController < ApplicationController
   end
 
   def new
+    authorize!(:new, :measurement_class_admin)
     @measurement_class = MeasurementClass.new
   end
 
   def create
-    @measurement_class = MeasurementClass.new(measurement_class_params)
-    if @measurement_class.save
-      redirect_back(fallback_location: root_path)
-    else
-      render(:new, status: :unprocessable_entity)
-    end
+    authorize!(:create, :measurement_class_admin)
+    measurement_class_create
   end
 
   def update

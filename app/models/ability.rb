@@ -6,6 +6,13 @@ class Ability
     user ||= User.new
 
     cannot(:manage, :device_admin)
+    cannot(:manage, :device_model_admin)
+    cannot(:manage, :device_reg_group_admin)
+    cannot(:manage, :manufacturer_admin)
+    cannot(:manage, :measurement_class_admin)
+    cannot(:manage, :device_component_admin)
+    cannot(:manage, :measurement_group_admin)
+    cannot(:manage, :supplementary_kit_admin)
 
     if user.present?
       can([:read, :create], Post)

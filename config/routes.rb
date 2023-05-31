@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   resources :device do
     post :create_inspection, :to => 'device#create_inspection'
   end
+  resources :device_model, :measurement_class,
+   :manufacturer, :measurement_group, :device_reg_group, :supplementary_kit, :device_component, only: [:create, :new]
 
   resources :inspection do
     get :new_tasks, :to => 'inspection#new_tasks', :on => :collection

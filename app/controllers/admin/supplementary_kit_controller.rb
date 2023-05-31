@@ -1,6 +1,7 @@
 class Admin::SupplementaryKitController < ApplicationController
-  before_action :set_supplementary_kit, only: [:edit, :update, :destroy]
+  include SupplementaryKitConcern
   load_and_authorize_resource
+  before_action :set_supplementary_kit, only: [:edit, :update, :destroy]
 
   def index
     @query = SupplementaryKit.ransack(params[:q])
@@ -10,16 +11,13 @@ class Admin::SupplementaryKitController < ApplicationController
   end
 
   def new
+    authorize!(:new, :supplementary_kit_admin)
     @supplementary_kit = SupplementaryKit.new
   end
 
   def create
-    @supplementary_kit = SupplementaryKit.new(supplementary_kit_params)
-    if @supplementary_kit.save
-      redirect_back(fallback_location: root_path)
-    else
-      render(:new, status: :unprocessable_entity)
-    end
+    authorize!(:create, :supplementary_kit_admin)
+    supplementary_kit_create
   end
 
   def update

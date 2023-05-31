@@ -4,7 +4,7 @@ class DeviceModel < ApplicationRecord
   belongs_to :manufacturer
   has_many :devices
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :measurement_min, :measurement_max, :accuracy_class, :measurement_sensitivity, numericality: true, allow_nil: true
   validate :validate_measurement_group_belongs_to_measurement_class
 

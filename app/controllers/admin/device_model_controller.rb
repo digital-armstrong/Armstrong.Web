@@ -1,6 +1,7 @@
 class Admin::DeviceModelController < ApplicationController
-  before_action :set_device_model, only: [:show, :edit, :update, :destroy]
+  include DeviceModelConcern
   load_and_authorize_resource
+  before_action :set_device_model, only: [:show, :edit, :update, :destroy]
 
   def index
     @query = DeviceModel.ransack(params[:q])
@@ -10,16 +11,13 @@ class Admin::DeviceModelController < ApplicationController
   end
 
   def new
+    authorize!(:new, :device_model_admin)
     @device_model = DeviceModel.new
   end
 
   def create
-    @device_model = DeviceModel.new(device_model_params)
-    if @device_model.save
-      redirect_back(fallback_location: root_path)
-    else
-      render(:new, status: :unprocessable_entity)
-    end
+    authorize!(:create, :device_model_admin)
+    device_model_create
   end
 
   def update
