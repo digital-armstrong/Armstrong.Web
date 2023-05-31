@@ -41,10 +41,10 @@ module DeviceConcern
     def create_inspection_for_device(device)
       inspection = device.inspections.build(creator_id: current_user.id, type_target: inspection_params[:type_target])
       if inspection.save
-        flash[:success] = 'Success'
+        flash[:success] = t('message.inspection.create_from_device.success')
         redirect_to(device_path(device))
       else
-        flash.now[:error] = 'Error...'
+        flash.now[:error] = t('message.inspection.create_from_device.error')
         render(:show)
       end
     end

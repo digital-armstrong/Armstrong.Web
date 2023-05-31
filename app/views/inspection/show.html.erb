@@ -1,5 +1,6 @@
 <% provide :page_title, "Инспекция #{@inspection.id}" %>
 <%= render 'shared/flash_alert' %>
+<input value=<%= @previous_action %> hidden="hidden">
 <div class="row mx-0 my-3">
   <div class="col p-4 shadow rounded">
     <div class="row text-center">
@@ -32,7 +33,7 @@
         </span>
       </p>
     <% end %>
-    <% if @inspection.state == Inspection::STATES[:verification_successful] || @inspection.state == Inspection::STATES[:close] %>
+    <% if @inspection.state == Inspection::STATES[:verification_successful] || @inspection.state == Inspection::STATES[:closed] %>
       <p>
         <span>
           <strong><%= t('activerecord.attributes.inspection.conclusion')%>: </strong>
@@ -53,7 +54,7 @@
         </div>
         <% if can? :destroy, @inspection %>
           <div>
-            <%= button_to t("b_delete"), inspection_path(@inspection), method: :delete, class: "btn btn-danger"%>
+            <%= button_to t("b_delete"), inspection_path(id: @inspection.id, previous_action: @previous_action), method: :delete, class: "btn btn-danger"%>
           </div>
         <% end %>
       <% end %>

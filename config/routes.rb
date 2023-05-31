@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     get :my_tasks, :to => 'inspection#my_tasks', :on => :collection
     get :completed_tasks, :to => 'inspection#completed_tasks', :on => :collection
     get :all_tasks, :to => 'inspection#all_tasks', :on => :collection
+    get :service_tasks, :to => 'inspection#service_tasks', :on => :collection
     post :accept_task, :to => 'inspection#accept_task', :on => :member
     post :complete_verification, :to => 'inspection#complete_verification', :on => :member
     post :fail_verification, :to => 'inspection#fail_verification', :on => :member

@@ -147,6 +147,10 @@ ru:
       delete:
         success: Пользователь успешно удален.
         error: Ошибка! Пользователь не удален! На пользователя ссылаются инспекции.
+    inspection:
+      create_from_device:
+        success: Инспекция создана
+        error: Ошибка! Инспекция не создана
   activerecord:
     models:
       device_model: Модель
@@ -311,6 +315,8 @@ ru:
         creator_last_name: Петров
         creator_first_name: Петр
         creator_second_name: Петрович
+        conclusion_date_from: Дата заключения от
+        conclusion_date_to: Дата заключения до
       device:
         b_add_device: Прибор
         b_add_device_component: Компонент

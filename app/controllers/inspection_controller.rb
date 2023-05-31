@@ -2,35 +2,51 @@ class InspectionController < ApplicationController
   before_action :set_inspection, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
-  def tasks(condition)
+  def tasks(condition, method_name)
     params[:q] ||= {}
-    @query = Inspection.ransack(params[:q])
-    @query.sorts = ['updated_at desc']
+
+    if params[:q][:conclusion_date_lteq].present?
+      params[:q][:conclusion_date_lteq] = params[:q][:conclusion_date_lteq].to_date.end_of_day
+    end
+
     if params[:q][:state_eq].present?
       @selected_state = params[:q][:state_eq].to_sym
     end
-    @pagy, @inspections = pagy(@query.result.where(condition).
+    @query = Inspection.ransack(params[:q])
+    @query.sorts = ['updated_at desc']
+    @previous_action = method_name
+    if method_name != :service_tasks
+      @pagy, @inspections = pagy(@query.result.where(condition).
+        includes(:device, :creator, :performer))
+    else
+      @pagy, @inspections = pagy(@query.result.joins(:device).where(condition).
       includes(:device, :creator, :performer))
+    end
   end
 
   def new_tasks
     @states_to_show = Inspection::STATES.select { |s| s.in?([:task_created]) }
-    tasks(performer_id: nil, state: @states_to_show.keys)
+    tasks({ performer_id: nil, state: @states_to_show.keys }, __callee__)
   end
 
   def my_tasks
     @states_to_show = Inspection::STATES.excluding(:verification_successful, :closed, :task_created)
-    tasks({ performer_id: current_user.id, state: @states_to_show.keys })
+    tasks({ performer_id: current_user.id, state: @states_to_show.keys }, __callee__)
   end
 
   def completed_tasks
     @states_to_show = Inspection::STATES.select { |s| s.in?([:verification_successful, :closed]) }
-    tasks({ state: @states_to_show.keys })
+    tasks({ state: @states_to_show.keys }, __callee__)
   end
 
   def all_tasks
     @states_to_show = Inspection::STATES
-    tasks(nil)
+    tasks(nil, __callee__)
+  end
+
+  def service_tasks
+    @states_to_show = Inspection::STATES
+    tasks({ devices: { service_id: current_user.service_id } }, __callee__)
   end
 
   def new
@@ -52,6 +68,7 @@ class InspectionController < ApplicationController
   def show
     @creator = User.find_by_id(@inspection.creator_id)
     @performer = User.find_by_id(@inspection.performer_id)
+    @previous_action = params[:previous_action]
   end
 
   def update
@@ -64,7 +81,8 @@ class InspectionController < ApplicationController
 
   def destroy
     @inspection.destroy
-    redirect_to(new_tasks_inspection_index_path)
+    action = params[:previous_action]
+    redirect_to(action:)
   end
 
   def set_state(condition)

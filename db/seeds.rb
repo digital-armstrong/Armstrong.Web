@@ -220,6 +220,17 @@ end
   )
 end
 
+# seed Service
+
+10.times do |i|
+  Service.create(
+    name: "Service-#{i}",
+    division: Division.find_by(id: rand(1..10)),
+    organization: Organization.first,
+    building: Building.find_by(id: rand(1..10))
+  )
+end
+
 # seed Server
 
 10.times do |i|
@@ -229,17 +240,6 @@ end
     inventory_id: i,
     service: Service.find_by(id: rand(1..10)),
     room: Room.find_by(id: rand(1..100))
-  )
-end
-
-# seed Service
-
-10.times do |i|
-  Service.create(
-    name: "Service-#{i}",
-    division: Division.find_by(id: rand(1..10)),
-    organization: Organization.first,
-    building: Building.find_by(id: rand(1..10))
   )
 end
 

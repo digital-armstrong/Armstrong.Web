@@ -29,7 +29,7 @@ class Ability
       cannot(:destroy, Device)
       can(:create, [DeviceModel, SupplementaryKit, DeviceRegGroup, MeasurementClass, MeasurementGroup,
                     Manufacturer, DeviceComponent])
-      inspector(user)
+      can([:read, :service_tasks], Inspection)
       cannot(:manage, :armstrong)
     end
   end

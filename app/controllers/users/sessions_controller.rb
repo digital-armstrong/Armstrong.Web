@@ -12,12 +12,14 @@ class Users::SessionsController < Devise::SessionsController
   def create
     super
     flash.delete(:notice)
+    flash.delete(:success)
   end
 
   # DELETE /resource/sign_out
   def destroy
     super
     flash.delete(:notice)
+    flash.delete(:success)
   end
 
   # protected

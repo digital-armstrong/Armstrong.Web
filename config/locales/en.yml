@@ -15,6 +15,10 @@ en:
       delete:
         success: User was deleted.
         error: User wasn't deleted! The user has inspections.
+      inspection:
+        create_from_device:
+          success: Inspection was created
+          error: Error! Inspection wasn't created
   layouts:
     application:
       home: Home
@@ -78,6 +82,8 @@ en:
         creator_last_name: Petrov
         creator_first_name: Petr
         creator_second_name: Petrovich
+        conclusion_date_from: Сonclusion date from
+        conclusion_date_to: Сonclusion date to
       device:
         b_add_device: Add device
         b_add_device_component: Add device
