@@ -82,10 +82,10 @@ class InspectionController < ApplicationController
   def destroy
     @inspection.destroy
     action = if params[:previous_action].present?
-                        params[:previous_action]
-                      else
-                        'new_tasks'
-                      end
+               params[:previous_action]
+             else
+               'new_tasks'
+             end
     redirect_to(action:)
   end
 
