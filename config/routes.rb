@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   resources :device_model, :measurement_class,
    :manufacturer, :measurement_group, :device_reg_group, :supplementary_kit, :device_component, only: [:create, :new]
 
-  resources :inspection do
+  resources :inspection, except: [:index] do
     get :new_tasks, :to => 'inspection#new_tasks', :on => :collection
     get :my_tasks, :to => 'inspection#my_tasks', :on => :collection
     get :completed_tasks, :to => 'inspection#completed_tasks', :on => :collection
