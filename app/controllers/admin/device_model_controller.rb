@@ -35,7 +35,7 @@ class Admin::DeviceModelController < ApplicationController
       @device_model.destroy
       redirect_to(admin_device_model_index_path)
     else
-      flash[:error] = 'Ошибка! На модель прибора ссылаются приборы!'
+      flash[:error] = t('message.device_model.delete.error')
       redirect_to(admin_device_model_path(@device_model))
     end
   end

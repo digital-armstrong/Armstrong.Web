@@ -33,7 +33,7 @@ module DeviceConcern
         device.destroy
         redirect_to(path_success)
       else
-        flash[:error] = 'Ошибка! На этот прибор ссылаются инспекции или каналы!'
+        flash[:error] = t('message.device.delete.error')
         redirect_to(path_failure)
       end
     end

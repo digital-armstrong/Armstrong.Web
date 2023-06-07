@@ -25,6 +25,7 @@ class Ability
     end
 
     if user.dosimetrist?
+      can(:read, :armstrong)
     end
 
     if user.inspector?

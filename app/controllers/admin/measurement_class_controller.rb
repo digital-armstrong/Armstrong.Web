@@ -33,7 +33,7 @@ class Admin::MeasurementClassController < ApplicationController
     if assigned_device_models_count.zero?
       @measurement_class.destroy
     else
-      flash[:error] = 'Ошибка! На класс измерения ссылаются модели приборов!'
+      flash[:error] = t('message.measurement_class.delete.error')
     end
     redirect_to(admin_measurement_class_index_path)
   end

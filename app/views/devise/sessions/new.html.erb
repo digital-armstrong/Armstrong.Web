@@ -1,7 +1,7 @@
 <div class="container text-center w-50">
   <%= image_tag "atom-logo.svg", class: "mb-4 mt-5", width: "72", height: "57" %>
     <h1 class="h3 mb-3 fw-normal">Форма входа</h1>
-
+    <%= render 'shared/flash_alert'%>
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="form-inputs">
         <%= f.input :tabel_id,

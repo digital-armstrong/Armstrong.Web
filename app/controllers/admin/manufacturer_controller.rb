@@ -33,7 +33,7 @@ class Admin::ManufacturerController < ApplicationController
     if assigned_device_models_count.zero?
       @manufacturer.destroy
     else
-      flash[:error] = 'Ошибка! На этого производителя ссылаются модели приборов!'
+      flash[:error] = t('message.manufacturer.delete.error')
     end
     redirect_to(admin_manufacturer_index_path)
   end

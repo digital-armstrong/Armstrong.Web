@@ -144,13 +144,40 @@ ru:
       year: Год
   message:
     user:
+      create:
+        success: Пользователь создан.
+      update:
+        success: Пользователь обновлен.
       delete:
         success: Пользователь успешно удален.
-        error: Ошибка! Пользователь не удален! На пользователя ссылаются инспекции.
+        error: Пользователь не удален! На пользователя ссылаются инспекции!
+    device:
+      delete:
+        error: Прибор не удален! На этот прибор ссылаются инспекции или каналы!
+    device_model:
+      delete:
+        error: Модель прибора не удалена! На модель прибора ссылаются приборы!
+    device_reg_group:
+      delete:
+        error: Рег. группа не удалена! На эту рег. группу ссылаются приборы!
+    manufacturer:
+      delete:
+        error: Производитель не удален! На этого производителя ссылаются модели приборов!
+    measurement_class:
+      delete:
+        error: Класс измерений не удален! На этот класс измерений ссылаются модели приборов!
+    measurement_group:
+      delete:
+        error: Группа измерений не удалена! На группу измерений ссылаются классы измерений!
+    supplementary_kit:
+      delete:
+        error: Набор не удален! На этот набор ссылаются приборы или компоненты!
     inspection:
       create_from_device:
-        success: Инспекция создана
-        error: Ошибка! Инспекция не создана
+        success: Инспекция создана.
+        error: Инспекция не создана!
+      change_state:
+        error: Состояние не изменено!
   activerecord:
     models:
       device_model: Модель
@@ -243,6 +270,7 @@ ru:
         current_password: Текущий пароль
         service: Служба
         service_id: Служба
+        timezone: Часовой пояс
       inspection:
         performer_id: Выполняющий
         performer: Выполняющий

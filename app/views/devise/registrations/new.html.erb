@@ -2,7 +2,6 @@
   <%= image_tag "atom-logo.svg", class: "mb-4 mt-5", width: "72", height: "57" %>
     <h1 class="h3 mb-3 fw-normal">Форма регистрации</h1>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= f.error_notification %>
     <div class="form-inputs">
       <div class="row">
         <div class="col">

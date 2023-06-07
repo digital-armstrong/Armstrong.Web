@@ -34,7 +34,7 @@ class Admin::DeviceRegGroupController < ApplicationController
     if assigned_devices_count.zero?
       @device_reg_group.destroy
     else
-      flash[:error] = 'Ошибка! На эту регистрационную группу ссылаются приборы.'
+      flash[:error] = t('message.device_reg_group.delete.error')
     end
     redirect_to(admin_device_reg_group_index_path)
   end

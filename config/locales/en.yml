@@ -12,13 +12,40 @@ en:
       full: "%e %B %Y %H:%M:%S"
   message:
     user:
+      create:
+        success: User was created.
+      update:
+        success: User was updated.
       delete:
         success: User was deleted.
         error: User wasn't deleted! The user has inspections.
+      device:
+        delete:
+          error: Device wasn't deleted! This device has inspections and channels!
+      device_model:
+        delete:
+          error: Device model wasn't deleted! This model has devices!
+      device_reg_group:
+        delete:
+          error: Reg. group wasn't deleted! This reg. group has devices!
+      manufacturer:
+        delete:
+          error: Manufacturer wasn't deleted! This manufacturer has device models!
+      measurement_class:
+        delete:
+          error: Measurement class wasn't deleted! This measurement class has device models!
+      measurement_group:
+        delete:
+          error: Measurement group wasn't deleted! This measurement group has measurement classess!
+      supplementary_kit:
+        delete:
+          error: Kit wasn't deleted! This kit has приборы или компоненты!
       inspection:
         create_from_device:
-          success: Inspection was created
-          error: Error! Inspection wasn't created
+          success: Inspection was created.
+          error: Inspection wasn't created!
+      change_state:
+        error: State wasn't changed!
   layouts:
     application:
       home: Home

@@ -32,7 +32,7 @@ class Admin::UsersController < ApplicationController
       params[:user].delete(:password_confirmation)
     end
     if @user.update(user_params)
-      flash[:notice] = 'User was updated'
+      flash[:notice] = t('message.user.update.success')
       if @user.id = current_user.id
         Time.use_zone(user_params[:timezone]) { nil }
       end
@@ -50,7 +50,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:success] = 'User was added'
+      flash[:success] = t('message.user.create.success')
       redirect_to(admin_users_path)
     else
       render(:new, status: :unprocessable_entity)

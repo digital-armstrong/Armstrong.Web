@@ -35,7 +35,7 @@ class Admin::SupplementaryKitController < ApplicationController
     if assigned_devices_count.zero? && assigned_device_components_count.zero?
       @supplementary_kit.destroy
     else
-      flash[:error] = 'Ошибка! На этот набор ссылаются приборы или компоненты!'
+      flash[:error] = t('message.supplementary_kit.delete.error')
     end
     redirect_to(admin_supplementary_kit_index_path)
   end

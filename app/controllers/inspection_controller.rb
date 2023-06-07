@@ -95,7 +95,7 @@ class InspectionController < ApplicationController
       redirect_back(fallback_location: new_tasks_inspection_index_path)
       true
     else
-      flash[:error] = "Can't change state"
+      flash[:error] = t('message.inspection.change_state.error')
       redirect_back(fallback_location: new_tasks_inspection_index_path)
     end
   end
@@ -104,7 +104,7 @@ class InspectionController < ApplicationController
     if set_state(@inspection.can_accept_task?) { @inspection.accept_task }
       @inspection.update(performer_id: current_user.id)
     else
-      flash.now[:error] = "Can't change state"
+      flash.now[:error] = t('message.inspection.change_state.error')
     end
   end
 

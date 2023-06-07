@@ -1,5 +1,5 @@
 <% flash.each do |type, msg| %>
-  <% flash_class = if type == 'error'
+  <% flash_class = if type == 'error' || 'alert'
                     "danger"
                    elsif type == 'notice'
                     "info"

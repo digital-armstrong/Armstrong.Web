@@ -33,7 +33,7 @@ class Admin::MeasurementGroupController < ApplicationController
     if assigned_measurement_classes_count.zero?
       @measurement_group.destroy
     else
-      flash[:error] = 'Ошибка! На этот группу измерений ссылаются классы измерений!'
+      flash[:error] = t('message.measurement_group.delete.error')
     end
     redirect_to(admin_measurement_group_index_path)
   end
