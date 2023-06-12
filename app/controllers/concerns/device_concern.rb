@@ -39,7 +39,17 @@ module DeviceConcern
     end
 
     def create_inspection_for_device(device)
-      inspection = device.inspections.build(creator_id: current_user.id, type_target: inspection_params[:type_target])
+      if inspection_params[:is_admin]
+        inspection = device.inspections.build(creator_id: current_user.id,
+                                              performer_id: current_user.id,
+                                              type_target: inspection_params[:type_target],
+                                              conclusion_date: inspection_params[:conclusion_date].to_datetime + 12.hours,
+                                              conclusion: t('message.inspection.create_from_device.generated'),
+                                              state: Inspection::STATES[:verification_successful]
+                                            )
+      else
+        inspection = device.inspections.build(creator_id: current_user.id, type_target: inspection_params[:type_target])
+      end
       if inspection.save
         flash[:success] = t('message.inspection.create_from_device.success')
         redirect_to(device_path(device))
@@ -50,7 +60,7 @@ module DeviceConcern
     end
 
     def inspection_params
-      params.require(:inspection).permit(:type_target)
+      params.require(:inspection).permit(:type_target, :conclusion_date, :is_admin)
     end
 
     def device_params

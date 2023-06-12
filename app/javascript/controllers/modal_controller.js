@@ -16,7 +16,7 @@ export default class extends Controller {
   open() {
     document.getElementById('modal').classList.remove('d-none');
     document.getElementById('modal').classList.add('d-flex');
-    document.body.classList.add('fixed', 'inset-x-0', 'overflow-hidden');
+    document.body.classList.add('inset-x-0', 'overflow-hidden');
     this.containerTarget.classList.remove(this.toggleClass);
     if (this.background) {
       this.background.remove();
@@ -35,6 +35,7 @@ export default class extends Controller {
     }
     document.getElementById('modal').classList.remove('d-flex');
     document.getElementById('modal').classList.add('d-none');
+    document.body.classList.remove('inset-x-0', 'overflow-hidden');
   }
 
   modalBackgroundHTML() {

@@ -1,4 +1,3 @@
-<%= render 'shared/flash_alert'%>
 <%= simple_form_for @inspection, as: :inspection, url: path, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
@@ -14,7 +13,7 @@
       <% end %>
 
       <% if current_user.admin? %>  
-        <%= f.input :conclusion_date, include_blank: true %>
+        <%= f.input :conclusion_date, as: :datetime, html5: true, include_blank: true %>
         <%= f.association :performer, label_method: :tabel_id, collection: User.where(role: [User::ROLES[:inspector], User::ROLES[:engineer], User::ROLES[:admin]]), include_blank: "Не выбран" %>
       <% end %>
    </div>

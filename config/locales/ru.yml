@@ -176,6 +176,7 @@ ru:
       create_from_device:
         success: Инспекция создана.
         error: Инспекция не создана!
+        generated: Эта инспекция была создана администратором.
       change_state:
         error: Состояние не изменено!
   activerecord:
@@ -317,6 +318,7 @@ ru:
     show:
       device:
         send_to_inspection: Отправить на инспекцию
+        admin_send_to_inspection: Отправить на инспекцию (админ)
     navbar:
       inspection:
         new_tasks: Новые задачи
