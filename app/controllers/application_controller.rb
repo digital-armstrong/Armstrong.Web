@@ -16,7 +16,6 @@ class ApplicationController < ActionController::Base
   private
 
   def set_time_zone(&block)
-    timezone = ''
     timezone = if current_user.nil?
                  'UTC'
                else

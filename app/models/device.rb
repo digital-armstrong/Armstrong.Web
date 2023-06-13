@@ -28,14 +28,14 @@ class Device < ApplicationRecord
     in_stock: 'in_stock',
     sended_to_inspection: 'sended_to_inspection',
     removed: 'removed',
-    in_storage: 'in_storage'
-  }
+    in_storage: 'in_storage',
+  }.freeze
 
   INSPECTION_EXPIRATION_STATUS = {
     verified: 'verified',
     prepare_to_inspection: 'prepare_to_inspection',
-    expired: 'expired'
-  }
+    expired: 'expired',
+  }.freeze
 
   def last_successful_inspection
     inspection = inspections.where(state: 'verification_successful').
