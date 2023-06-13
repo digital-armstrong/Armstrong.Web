@@ -2,6 +2,21 @@ module DeviceConcern
   extend ActiveSupport::Concern
 
   included do
+    def device_index
+      params[:q] ||= {}
+      @query = Device.ransack(params[:q])
+      condition = unless current_user.admin?
+                    { service_id: current_user.service_id }
+                  end
+      if params[:q][:inspection_expiration_status_eq].present?
+        @selected_status = params[:q][:inspection_expiration_status_eq].to_sym
+      end
+      @pagy, @devices = pagy(@query.result.
+        includes(:device_model, :supplementary_kit).
+        order(:tabel_id).
+        where(condition))
+    end
+    
     def device_show(device)
       unless device.supplementary_kit_id.nil?
         @device_components = DeviceComponent.where(supplementary_kit_id: @device.supplementary_kit_id)

@@ -51,7 +51,7 @@ class Device < ApplicationRecord
 
   def self.ransackable_attributes(_auth_object = nil)
     ['created_at', 'device_model_id', 'device_reg_group_id', 'id', 'inventory_id', 'serial_id', 'tabel_id', 'updated_at',
-     'year_of_commissioning', 'year_of_production', 'supplementary_kit_id', 'service_id']
+     'year_of_commissioning', 'year_of_production', 'supplementary_kit_id', 'service_id', 'inspection_expiration_status']
   end
 
   def self.ransackable_associations(_auth_object = nil)

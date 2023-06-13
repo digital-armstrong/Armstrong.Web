@@ -207,7 +207,12 @@ ru:
         date_of_inspection: Дата инспекции
         supplementary_kit: Набор
         service: Служба
-        service_id: Служба
+        status: Статус
+        status_names:
+          service_id: Служба
+          verified: Поверен
+          prepare_to_inspection: Подготовить
+          expired: Просрочен
       device_model:
         name: Название
         manufacturer: Производитель
