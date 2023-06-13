@@ -20,6 +20,23 @@ class Device < ApplicationRecord
   validates :year_of_commissioning, :year_of_production, numericality: { in: 1900..current_year, message: year_error_msg }, allow_nil: true
   validates :year_of_production, presence: true
 
+  STATUS = {
+    verified: 'verified',
+    expired: 'expired',
+    on_repair: 'on_repair',
+    mounted: 'mounted',
+    in_stock: 'in_stock',
+    sended_to_inspection: 'sended_to_inspection',
+    removed: 'removed',
+    in_storage: 'in_storage'
+  }
+
+  INSPECTION_EXPIRATION_STATUS = {
+    verified: 'verified',
+    prepare_to_inspection: 'prepare_to_inspection',
+    expired: 'expired'
+  }
+
   def last_successful_inspection
     inspection = inspections.where(state: 'verification_successful').
       order(:conclusion_date).last
