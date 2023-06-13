@@ -51,14 +51,14 @@
     </p>
     <span class="d-flex px-0  align-items-start" style="flex-wrap:wrap; align-items:center">
       <% if can? :manage, Device %>
-        <div class="accordion me-2" id="accordionFilter">
+        <div class="accordion me-2" id="accordionCreateInspection">
           <div class="accordion-item">
-            <h2 class="accordion-header" id="headingFilter">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            <h2 class="accordion-header" id="headingCreateInspection">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCreateInspection" aria-expanded="true" aria-controls="collapseCreateInspection">
                 <%= t('.send_to_inspection')%>
               </button>
             </h2>
-            <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+            <div id="collapseCreateInspection" class="accordion-collapse collapse shadow" aria-labelledby="headingCreateInspection" data-bs-parent="#accordionCreateInspection">
               <%= simple_form_for @inspection, as: :inspection, url: device_create_inspection_path(@device), class: "rounded accordion-body" do |f| %>
                 <div class="m-2 mb-0">
                   <%= f.input :type_target, :collection => Inspection::TYPE_TARGETS.sort.map {|k,v| [t("activerecord.attributes.inspection.#{v}"),k]}, include_blank: false, class:'form-select form-select' %>
@@ -90,7 +90,30 @@
         </div>
       <% end %>
     </span>
+    <span class="d-flex px-0 align-items-start mt-2" style="flex-wrap:wrap; align-items:center">
+      <% if can? :manage, :all %>
+        <div class="accordion" id="accordionAdminCreateInspection">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingAdminCreateInspection">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdminCreateInspection" aria-expanded="true" aria-controls="collapseAdminCreateInspection">
+                <%= t('.admin_send_to_inspection')%>
+              </button>
+            </h2>
+            <div id="collapseAdminCreateInspection" class="accordion-collapse collapse shadow" aria-labelledby="headingAdminCreateInspection" data-bs-parent="#accordionAdminCreateInspection">
+              <%= simple_form_for @inspection, as: :inspection, url: device_create_inspection_path(@device), class: "rounded accordion-body" do |f| %>
+                <div class="m-2 mb-0">
+                  <%= f.input :type_target, :collection => Inspection::TYPE_TARGETS.sort.map {|k,v| [t("activerecord.attributes.inspection.#{v}"),k]}, include_blank: false, class:'form-select form-select' %>
+                  <%= f.input :conclusion_date, as: :date, html5: true, include_blank: true %>
+                  <%= f.input :is_admin, label: false, input_html: {hidden: true, value: true} %>
+                  <%= f.button :submit, t('.send_to_inspection'), class: "btn btn-primary w-100 mb-2" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
 
+      <% end %>
+    </span>
   </div>
   <div class="col p-4 shadow ms-3 rounded">
     <div class="row text-center">
