@@ -85,9 +85,19 @@
               <% if current_user.admin? %>
                 <td><%= device.service.name %></td>
               <% end %>
-              <td>
-                <%= device.last_successful_inspection %>
-              </td>
+              <% if device.inspection_expiration_status == Device::INSPECTION_EXPIRATION_STATUS[:verified] %>
+                <td class="text-success">
+                  <%= device.last_successful_inspection %>
+                </td>
+              <% elsif device.inspection_expiration_status ==  Device::INSPECTION_EXPIRATION_STATUS[:prepare_to_inspection] %>
+                <td class="text-warning">
+                  <%= device.last_successful_inspection %>
+                </td>
+              <% else %>
+                <td class="text-danger">
+                  <%= device.last_successful_inspection %>
+                </td>
+              <% end %>
               <% if device.last_successful_inspection.present? %>
                 <td><i class="bi bi-circle-fill text-success"></i></td>
               <% else %>

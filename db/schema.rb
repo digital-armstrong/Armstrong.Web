@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_13_081032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -106,6 +106,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_16_082015) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "room_id"
+    t.string "inspection_expiration_status", default: "prepare_to_inspection", null: false
+    t.string "status", default: "in_stock", null: false
     t.index ["device_model_id"], name: "index_devices_on_device_model_id"
     t.index ["device_reg_group_id"], name: "index_devices_on_device_reg_group_id"
     t.index ["inventory_id"], name: "index_devices_on_inventory_id", unique: true

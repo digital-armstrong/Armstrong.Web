@@ -49,6 +49,7 @@
             <ul class="dropdown-menu dropdown-menu-lg-end text-small" aria-labelledby="dropdownUser1">
               <% if current_user.admin? %>
                 <li><%=link_to t('.admin_panel'), admin_users_path, class: "dropdown-item" %></li>
+                <li><%= link_to 'SidekiQ', sidekiq_web_path, class: "dropdown-item" %></li>
               <% else %>
                 <li><%=link_to t('.edit_me'), edit_user_registration_path, class: "dropdown-item" %></li>
               <% end %>

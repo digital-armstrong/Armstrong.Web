@@ -20,10 +20,33 @@ class Device < ApplicationRecord
   validates :year_of_commissioning, :year_of_production, numericality: { in: 1900..current_year, message: year_error_msg }, allow_nil: true
   validates :year_of_production, presence: true
 
+  STATUS = {
+    verified: 'verified',
+    expired: 'expired',
+    on_repair: 'on_repair',
+    mounted: 'mounted',
+    in_stock: 'in_stock',
+    sended_to_inspection: 'sended_to_inspection',
+    removed: 'removed',
+    in_storage: 'in_storage',
+  }.freeze
+
+  INSPECTION_EXPIRATION_STATUS = {
+    verified: 'verified',
+    prepare_to_inspection: 'prepare_to_inspection',
+    expired: 'expired',
+  }.freeze
+
   def last_successful_inspection
     inspection = inspections.where(state: 'verification_successful').
       order(:conclusion_date).last
     return formatted_date(inspection.conclusion_date, :date) unless inspection.nil?
+  end
+
+  def last_successful_inspection_raw
+    inspection = inspections.where(state: 'verification_successful').
+      order(:conclusion_date).last
+    return inspection.conclusion_date unless inspection.nil?
   end
 
   def self.ransackable_attributes(_auth_object = nil)

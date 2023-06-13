@@ -51,6 +51,11 @@ gem 'simple_form', '~> 5.2'
 gem 'state_machines', '~> 0.5.0'
 gem 'state_machines-activerecord', '~> 0.8.0'
 
+# bg jobs
+gem 'sidekiq', '~> 7.1', '>= 7.1.1'
+gem 'sidekiq-cron', '~> 1.10', '>= 1.10.1'
+gem 'sidekiq-failures', '~> 1.0', '>= 1.0.4'
+
 gem 'pagy', '~> 6.0'
 gem 'ransack', '~> 4.0'
 gem 'responders', '~> 3.1'
