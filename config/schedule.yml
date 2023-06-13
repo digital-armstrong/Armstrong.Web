@@ -1,0 +1,4 @@
+CheckDeviceStatusJob:
+  cron: "*/2 * * * *"
+  class: "CheckDeviceStatusJob"
+  queue: default

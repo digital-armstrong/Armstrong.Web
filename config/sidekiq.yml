@@ -2,7 +2,3 @@
 :verbose: true
 :queues:
   - default
-:shedule:
-  cron: "*/2 * * * *"
-  class: "CheckDeviceStatusJob"
-  queue: default
