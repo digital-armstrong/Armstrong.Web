@@ -3,11 +3,14 @@ class CheckDeviceStatusJob
 
   def perform
     Device.find_each do |device|
+      seporator = Date.today + 1.month
+      current_date = Date.today
+
       unless device.last_successful_inspection_raw.nil?
-        next_verification_date = device.last_successful_inspection_raw + 1.year
-        status = if next_verification_date > Date.today
+        next_inspection_date = device.last_successful_inspection_raw + 1.year
+        status = if next_inspection_date > seporator
                   Device::INSPECTION_EXPIRATION_STATUS[:verified]
-                elsif next_verification_date <= Date.today && next_verification_date > Date.today - 1.month
+                elsif next_inspection_date <= seporator && next_inspection_date > current_date
                   Device::INSPECTION_EXPIRATION_STATUS[:prepare_to_inspection]
                 else
                   Device::INSPECTION_EXPIRATION_STATUS[:expired]
