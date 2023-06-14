@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import TableBody from './TableBody';
 import TableHead from './TableHead';
 
-export default function Table({ data }) {
+export default function Table({ data, openModal }) {
   const columns = [
+    { label: 'Chart', accessor: 'chart' },
     { label: 'State', accessor: 'state' },
     { label: 'SC', accessor: 'specialControl' },
     { label: 'Server', accessor: 'serverId' },
@@ -25,7 +26,7 @@ export default function Table({ data }) {
       <table className="table table-hover">
         <caption>Таблица мониторинга системы ARMStrong</caption>
         <TableHead columns={columns} />
-        <TableBody columns={columns} data={data} />
+        <TableBody columns={columns} data={data} openModal={openModal} />
       </table>
     </div>
   );
@@ -48,4 +49,5 @@ Table.propTypes = {
       eventImpulseValue: PropTypes.string,
     }),
   ).isRequired,
+  openModal: PropTypes.func.isRequired,
 };

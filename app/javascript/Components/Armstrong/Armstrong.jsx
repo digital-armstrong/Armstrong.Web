@@ -5,11 +5,19 @@ import 'moment-timezone';
 import { sortBy } from 'lodash';
 import Table from './Table/Table';
 import Filter from './Filter/Filter';
+import Modal from './Modal/Modal';
 
 export default function Armstrong() {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState('');
   const [timeZone, setTimeZone] = useState('');
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    console.log('Open modal function called');
+    setModalOpen(true);
+  };
+  const closeModal = () => setModalOpen(false);
 
   const normalizeData = (rawData) => {
     const normAndSortedDate = [];
@@ -81,7 +89,8 @@ export default function Armstrong() {
         <Filter filter={filter} onFilterChange={handleFilterChange} />
       </div>
       <div className="col-10 shadow rounded mb-4">
-        <Table data={filteredData} />
+        <Table data={filteredData} openModal={openModal} closeModal={closeModal} />
+        {isModalOpen && <Modal closeModal={closeModal} />}
       </div>
     </div>
   );
