@@ -16,7 +16,7 @@ export default function Modal({ closeModal }) {
     >
       <h2>Modal Window</h2>
       <p>This is a modal window.</p>
-      <button type="button" onClick={closeModal}>
+      <button type="button" className="btn btn-light" onClick={closeModal}>
         Close
       </button>
     </div>
