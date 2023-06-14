@@ -2,14 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function TableBody({ columns, data, openModal }) {
-  const chartButton = (
-    <td>
-      <button type="button" onClick={openModal} className="btn btn-light">
-        <i className="bi bi-graph-up" />
-      </button>
-    </td>
-  );
-
   return (
     <tbody>
       {data.map((row) => (
@@ -17,7 +9,11 @@ export default function TableBody({ columns, data, openModal }) {
           {columns.map(({ accessor }) => {
             let tData = row[accessor] ? row[accessor] : '——';
             if (accessor === 'chart') {
-              tData = chartButton;
+              tData = (
+                <button type="button" onClick={openModal} className="btn btn-light" data-channelid={row.id}>
+                  <i className="bi bi-graph-up" />
+                </button>
+              );
             }
             return <td key={accessor}>{tData}</td>;
           })}

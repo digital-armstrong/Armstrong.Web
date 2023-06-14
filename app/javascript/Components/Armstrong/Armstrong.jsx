@@ -12,12 +12,23 @@ export default function Armstrong() {
   const [filter, setFilter] = useState('');
   const [timeZone, setTimeZone] = useState('');
   const [isModalOpen, setModalOpen] = useState(false);
+  const [isChartOpen, setChartOpen] = useState(false);
+  const [selectedChannelId, setSelectedChannelId] = useState(0);
 
-  const openModal = () => {
-    console.log('Open modal function called');
+  const openModal = (event) => {
+    const channelId = event.target.dataset.channelid;
+    setSelectedChannelId(channelId);
     setModalOpen(true);
   };
-  const closeModal = () => setModalOpen(false);
+  const closeModal = () => {
+    setModalOpen(false);
+    setChartOpen(true);
+  };
+
+  const hindleConfirm = () => {
+    setChartOpen(true);
+  };
+  const closeChart = () => setChartOpen(false);
 
   const normalizeData = (rawData) => {
     const normAndSortedDate = [];
@@ -88,7 +99,8 @@ export default function Armstrong() {
       <div className="shadow rounded mb-4 pt-3">
         <Filter className="ps-0 pe-0 mb-3" filter={filter} onFilterChange={handleFilterChange} />
         <Table data={filteredData} openModal={openModal} closeModal={closeModal} />
-        {isModalOpen && <Modal closeModal={closeModal} />}
+        {isModalOpen && <Modal closeModal={closeModal} onClose={() => setModalOpen(false)} onConfirm={hindleConfirm} />}
+        {isChartOpen && <Modal closeChart={closeChart} channelId={selectedChannelId} onClose={() => setChartOpen(false)} />}
       </div>
     </div>
   );
