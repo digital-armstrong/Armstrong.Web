@@ -5,14 +5,7 @@ class DeviceController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @query = Device.ransack(params[:q])
-    condition = unless current_user.admin?
-                  { service_id: current_user.service_id }
-                end
-    @pagy, @devices = pagy(@query.result.
-      includes(:device_model, :supplementary_kit).
-      order(:tabel_id).
-      where(condition))
+    device_index
   end
 
   def new

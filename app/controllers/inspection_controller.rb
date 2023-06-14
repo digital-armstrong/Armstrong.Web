@@ -1,6 +1,7 @@
 class InspectionController < ApplicationController
   before_action :set_inspection, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
+  include DeviceHelper
 
   def tasks(condition, method_name)
     params[:q] ||= {}
@@ -112,6 +113,8 @@ class InspectionController < ApplicationController
     if @inspection.can_complete_verification?
       @inspection.complete_verification
       @inspection.update(conclusion_date: DateTime.now)
+      set_inspection_status(Device.find_by_id(@inspection.device_id))
+
       redirect_to(edit_inspection_path(@inspection))
     else
       flash.now[:error] = "Can't change state"

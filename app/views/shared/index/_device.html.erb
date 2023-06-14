@@ -10,7 +10,7 @@
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
-          <%= search_form_for(@query, url:device_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+          <%= search_form_for(@query, url:search_path, method: :get, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
               <%= f.label :tabel_id, class:"mb-2"%>
               <%= f.search_field :tabel_id_eq, class: 'form-control', placeholder: 'Номер' %>
@@ -36,6 +36,18 @@
                   <%= f.search_field :year_of_commissioning_lteq, class: 'form-control', placeholder: 'До' %>
                 </div>
               </div>
+              <%= f.label :status, class: "my-2" %>
+              <select class="form-select form-select" name="q[inspection_expiration_status_eq]" id="q_inspection_expiration_status_eq">
+                <option value=""><%= t('combobox_blank') %></option>
+                <% Device::INSPECTION_EXPIRATION_STATUS.each do |key,value| %>
+                  <% if key == @selected_status %>
+                    <option value="<%= key %>" selected>
+                  <% else %>
+                    <option value="<%= key %>">
+                  <% end %>
+                  <%= t("activerecord.attributes.device.status_names.#{value}") %></option>
+                <% end %>
+              </select>
               <% if current_user.admin? %>
                 <%= f.label :service, class:"my-2" %>
                 <%= f.collection_select(:service_id_eq, Service.all,

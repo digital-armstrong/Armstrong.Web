@@ -1,7 +1,23 @@
 module DeviceConcern
   extend ActiveSupport::Concern
+  include DeviceHelper
 
   included do
+    def device_index
+      params[:q] ||= {}
+      @query = Device.ransack(params[:q])
+      condition = unless current_user.admin?
+                    { service_id: current_user.service_id }
+                  end
+      if params[:q][:inspection_expiration_status_eq].present?
+        @selected_status = params[:q][:inspection_expiration_status_eq].to_sym
+      end
+      @pagy, @devices = pagy(@query.result.
+        includes(:device_model, :supplementary_kit).
+        order(:tabel_id).
+        where(condition))
+    end
+
     def device_show(device)
       unless device.supplementary_kit_id.nil?
         @device_components = DeviceComponent.where(supplementary_kit_id: @device.supplementary_kit_id)
@@ -51,6 +67,7 @@ module DeviceConcern
         inspection = device.inspections.build(creator_id: current_user.id, type_target: inspection_params[:type_target])
       end
       if inspection.save
+        set_inspection_status(device)
         flash[:success] = t('message.inspection.create_from_device.success')
         redirect_to(device_path(device))
       else
