@@ -229,7 +229,9 @@ ru:
         accuracy_class: Класс точности
         is_complete_device: Полный набор?
         is_tape_rolling_mechanism: Имеет лентопротяжный механизм?
-        measurement_range: Диапазон измеренийиа
+        measurement_range: Диапазон измерений
+        calibration_max: Макс. калибр.
+        calibration_min: Мин. калибр.
       device_reg_group:
         name: Название
       manufacturer:
@@ -417,7 +419,7 @@ ru:
       new:
         add_measurement_class: Добавить класс изм.
       edit:
-        edit_measurement_class: Изменить класс изм. 
+        edit_measurement_class: Изменить класс изм.
   combobox_blank: Не учитывать
   b_change: Изменить
   b_delete: Удалить
