@@ -54,39 +54,41 @@
 </div>
 <div class="row mx-0">
   <div class="shadow rounded">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col"><%= t('activerecord.attributes.manufacturer.name') %></th>
-          <th scope="col" style="width: 30%"><%= t('activerecord.attributes.manufacturer.adress') %></th>
-          <th scope="col"><%= t('activerecord.attributes.manufacturer.phone') %></th>
-          <th scope="col"><%= t('activerecord.attributes.manufacturer.email') %></th>
-          <th scope="col"><%= t('activerecord.attributes.manufacturer.site_url') %></th>
-          <th scope="col" style="width: 10%"><%= t('action') %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @manufacturers.each do |manufacturer| %>
-        <tr>
-            <td><%= manufacturer.name %></td>
-            <td><%= manufacturer.adress %></td>
-            <td><%= manufacturer.phone %></td>
-            <td><%= manufacturer.email %></td>
-            <td><%= manufacturer.site_url %></td>
-            <td>
-              <div class="d-flex">
-                <%= link_to edit_admin_manufacturer_path(manufacturer.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
-                  <i class="bi bi-pen"></i>
-                <% end %>
-                <%= button_to admin_manufacturer_path(manufacturer.id), method: :delete, class: "btn" do %>
-                  <i class="bi bi-trash"></i>
-                <% end %>
-              </div>
-            </td>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col"><%= t('activerecord.attributes.manufacturer.name') %></th>
+            <th scope="col" style="width: 30%"><%= t('activerecord.attributes.manufacturer.adress') %></th>
+            <th scope="col"><%= t('activerecord.attributes.manufacturer.phone') %></th>
+            <th scope="col"><%= t('activerecord.attributes.manufacturer.email') %></th>
+            <th scope="col"><%= t('activerecord.attributes.manufacturer.site_url') %></th>
+            <th scope="col" style="width: 10%"><%= t('action') %></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @manufacturers.each do |manufacturer| %>
+          <tr>
+              <td><%= manufacturer.name %></td>
+              <td><%= manufacturer.adress %></td>
+              <td><%= manufacturer.phone %></td>
+              <td><%= manufacturer.email %></td>
+              <td><%= manufacturer.site_url %></td>
+              <td>
+                <div class="d-flex">
+                  <%= link_to edit_admin_manufacturer_path(manufacturer.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
+                    <i class="bi bi-pen"></i>
+                  <% end %>
+                  <%= button_to admin_manufacturer_path(manufacturer.id), method: :delete, class: "btn" do %>
+                    <i class="bi bi-trash"></i>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 <div class="row my-5">

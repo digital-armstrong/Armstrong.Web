@@ -28,31 +28,33 @@
     <%= render 'shared/modal_button_add', path: new_admin_measurement_group_path, classes: "btn btn-primary w-100", text: t("b_add") %>
   </div>
   <div class="col-10 shadow rounded">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col"><%= t('activerecord.attributes.measurement_group.name') %></th>
-          <th scope="col" style="width: 10%"><%= t('action') %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @measurement_groupes.each do |measurement_group| %>
-        <tr>
-          <td><%= measurement_group.name %></td>
-            <td >
-              <div class="d-flex">
-                <%= link_to edit_admin_measurement_group_path(measurement_group.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
-                  <i class="bi bi-pen"></i>
-                <% end %>
-                <%= button_to admin_measurement_group_path(measurement_group.id), method: :delete, class: "btn" do %>
-                  <i class="bi bi-trash"></i>
-                <% end %>
-              </div>
-            </td>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col"><%= t('activerecord.attributes.measurement_group.name') %></th>
+            <th scope="col" style="width: 10%"><%= t('action') %></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @measurement_groupes.each do |measurement_group| %>
+          <tr>
+            <td><%= measurement_group.name %></td>
+              <td >
+                <div class="d-flex">
+                  <%= link_to edit_admin_measurement_group_path(measurement_group.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
+                    <i class="bi bi-pen"></i>
+                  <% end %>
+                  <%= button_to admin_measurement_group_path(measurement_group.id), method: :delete, class: "btn" do %>
+                    <i class="bi bi-trash"></i>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
   </div>
