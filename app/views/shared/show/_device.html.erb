@@ -158,6 +158,18 @@
     </p>
     <p>
       <span>
+        <strong><%=t('activerecord.attributes.device_model.calibration_min')%>: </strong>
+        <%= @device.device_model.calibration_min %>
+      </span>
+    </p>
+    <p>
+      <span>
+        <strong><%=t('activerecord.attributes.device_model.calibration_max')%>: </strong>
+        <%= @device.device_model.calibration_max %>
+      </span>
+    </p>
+    <p>
+      <span>
         <strong><%=t('activerecord.attributes.device_model.measurement_range')%>: </strong>
         <%= @device.device_model.measurement_min %> ÷ <%=
         @device.device_model.measurement_max %>, <%=
