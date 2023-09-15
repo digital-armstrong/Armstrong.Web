@@ -54,47 +54,49 @@
 </div>
 <div class="row mx-0">
   <div class="shadow rounded">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col"><%= t('activerecord.attributes.device_component.serial_id')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_component.name')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_component.supplementary_kit')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_component.measurement_min')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_component.measurement_max')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_component.measurement_unit')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_component.description')%></th>
-          <th scope="col" style="width: 10%"><%= t('action')%></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @device_components.each do |device_component| %>
-        <tr>
-            <td><%= device_component.serial_id %></td>
-            <td><%= device_component.name %></td>
-            <% if device_component.supplementary_kit.nil? %>
-              <td></td>
-            <% else %>
-              <td><%= device_component.supplementary_kit.name %></td>
-            <% end %>
-            <td><%= device_component.measurement_min %></td>
-            <td><%= device_component.measurement_max %></td>
-            <td><%= device_component.measuring_unit %></td>
-            <td><%= device_component.description %></td>
-            <td>
-             <div class="d-flex w-auto">
-                <%= link_to edit_admin_device_component_path(device_component.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
-                  <i class="bi bi-pen"></i>
-                <% end %>
-                <%= button_to admin_device_component_path(device_component.id), method: :delete, form: { data: { turbo_confirm: t('delete_confirm') } }, class: "btn" do %>
-                  <i class="bi bi-trash"></i>
-                <% end %>
-              </div>
-            </td>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col"><%= t('activerecord.attributes.device_component.serial_id')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_component.name')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_component.supplementary_kit')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_component.measurement_min')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_component.measurement_max')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_component.measurement_unit')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_component.description')%></th>
+            <th scope="col" style="width: 10%"><%= t('action')%></th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <% @device_components.each do |device_component| %>
+          <tr>
+              <td><%= device_component.serial_id %></td>
+              <td><%= device_component.name %></td>
+              <% if device_component.supplementary_kit.nil? %>
+                <td></td>
+              <% else %>
+                <td><%= device_component.supplementary_kit.name %></td>
+              <% end %>
+              <td><%= device_component.measurement_min %></td>
+              <td><%= device_component.measurement_max %></td>
+              <td><%= device_component.measuring_unit %></td>
+              <td><%= device_component.description %></td>
+              <td>
+              <div class="d-flex w-auto">
+                  <%= link_to edit_admin_device_component_path(device_component.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
+                    <i class="bi bi-pen"></i>
+                  <% end %>
+                  <%= button_to admin_device_component_path(device_component.id), method: :delete, form: { data: { turbo_confirm: t('delete_confirm') } }, class: "btn" do %>
+                    <i class="bi bi-trash"></i>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
   </div>
