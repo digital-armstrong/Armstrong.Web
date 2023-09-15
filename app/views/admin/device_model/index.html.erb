@@ -11,7 +11,7 @@
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
-          <%= search_form_for(@query, url:admin_device_model_index_path, method: :get, 
+          <%= search_form_for(@query, url:admin_device_model_index_path, method: :get,
           data:{controller: "filter", 'filtrator_class': 'filtrator-class-index'}, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
               <div class="row">
@@ -91,38 +91,44 @@
 </div>
 <div class="row mx-0">
   <div class="col shadow rounded">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col"><%= t('activerecord.attributes.device_model.name')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.manufacturer')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measurement_group')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measurement_class')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measuring_unit')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measurement_sensitivity')%>.</th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measurement_min')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measurement_max')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.safety_class')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.accuracy_class')%></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @device_models.each do |device_model| %>
-          <tr onclick="document.location = `<%=admin_device_model_path(device_model)%>`" style="cursor:pointer">
-            <td><%= device_model.name %></td>
-            <td><%= device_model.manufacturer.name %></td>
-            <td><%= device_model.measurement_group.name %></td>
-            <td><%= device_model.measurement_class.name %></td>
-            <td><%= device_model.measuring_unit %></td>
-            <td><%= device_model.measurement_sensitivity %></td>
-            <td><%= device_model.measurement_min %></td>
-            <td><%= device_model.measurement_max %></td>
-            <td><%= device_model.safety_class %></td>
-            <td><%= device_model.accuracy_class %></td>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col"><%= t('activerecord.attributes.device_model.name')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_model.manufacturer')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_model.measurement_group')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_model.measurement_class')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_model.measuring_unit')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_model.measurement_sensitivity')%>.</th>
+            <th scope="col"><%= t('activerecord.attributes.device_model.measurement_min')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_model.measurement_max')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_model.calibration_min')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_model.calibration_max')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_model.safety_class')%></th>
+            <th scope="col"><%= t('activerecord.attributes.device_model.accuracy_class')%></th>
           </tr>
-        <% end %>
-      </tbody>
+        </thead>
+        <tbody>
+          <% @device_models.each do |device_model| %>
+            <tr onclick="document.location = `<%=admin_device_model_path(device_model)%>`" style="cursor:pointer">
+              <td><%= device_model.name %></td>
+              <td><%= device_model.manufacturer.name %></td>
+              <td><%= device_model.measurement_group.name %></td>
+              <td><%= device_model.measurement_class.name %></td>
+              <td><%= device_model.measuring_unit %></td>
+              <td><%= device_model.measurement_sensitivity %></td>
+              <td><%= device_model.measurement_min %></td>
+              <td><%= device_model.measurement_max %></td>
+              <td><%= device_model.calibration_min %></td>
+              <td><%= device_model.calibration_max %></td>
+              <td><%= device_model.safety_class %></td>
+              <td><%= device_model.accuracy_class %></td>
+            </tr>
+          <% end %>
+        </tbody>
     </table>
+    </div>
   </div>
 </div>
 <div class="row my-5">
