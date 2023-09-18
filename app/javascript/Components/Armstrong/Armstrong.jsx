@@ -30,17 +30,25 @@ export default function Armstrong() {
   };
   const closeChart = () => setChartOpen(false);
 
+  const setChannelColor = (state) => {
+    switch (state) {
+      case 'normal':
+        return <i className="bi bi-circle-fill text-success" />;
+      case 'warning':
+        return <i className="bi bi-circle-warning" />;
+      case 'danger':
+        return <i className="bi bi-circle-fill text-danger" />;
+      default:
+        return <i className="bi bi-circle-fill text-primary" />;
+    }
+  };
+
   const normalizeData = (rawData) => {
     const normAndSortedDate = [];
 
     rawData.forEach((channel) => {
       normAndSortedDate.push({
-        state:
-          channel.state === 'normal' ? (
-            <i className="bi bi-circle-fill text-success" />
-          ) : (
-            <i className="bi bi-circle-fill text-danger" />
-          ),
+        state: setChannelColor(channel.state),
         specialControl: <input type="checkbox" checked={channel.is_special_control === true ? 'checked' : null} />,
         id: channel.id,
         serverId: channel.server_id,
