@@ -1,0 +1,24 @@
+<!-- app/views/licenses/show.html.erb -->
+<% provide :page_title, "Лицензия" %>
+
+<div class="container rounded shadow mt-2 p-5">
+  <div class="row">
+    <div class="col">
+      <%= link_to :back, class: "btn btn-light" do %>
+        <i class="bi bi-arrow-bar-left"></i> <%= t("b_back") %>
+      <% end %>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%= link_to "Руc", license_path(locale: 'ru'), class: "btn btn-light mx-2" %>
+      <%= link_to "Eng", license_path(locale: 'en'), class: "btn btn-light" %>
+    </div>
+  </div>
+
+  <% if @locale == 'ru' %>
+    <%= render "ru" %>
+  <% elsif @locale == 'en' %>
+    <%= render "en" %>
+  <% else %>
+    <!-- Здесь можно добавить обработку других языков -->
+  <% end %>
+</div>

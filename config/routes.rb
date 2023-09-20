@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'post#index'
 
   post 'device/download', to: 'device#download'
+  get '/licenses/:locale', to: 'licenses#show', as: 'license'
 
   namespace :api do
     namespace :v1,  defaults: {format: 'json'} do
@@ -27,7 +28,6 @@ Rails.application.routes.draw do
 
   resources :home
   resources :armstrong, only: [:index, :show]
-  resources :about, only: [:index]
   resources :device do
     post :create_inspection, :to => 'device#create_inspection'
   end
