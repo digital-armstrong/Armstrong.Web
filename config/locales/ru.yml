@@ -212,6 +212,7 @@ ru:
           verified: Поверен
           prepare_to_inspection: Подготовить
           expired: Просрочен
+          sent_to_omit: Отправлен в ЦСМИТ
         service_id: Служба
       device_model:
         name: Название
@@ -289,13 +290,13 @@ ru:
         conclusion: Заключение
         conclusion_date: Дата заключения
         type_target: Цель
-        verification_successful: Проверка пройдена
+        verification_successful: Поверка выполнена
         task_created: Задача создана
-        task_accepted: Задача принята
-        verification_failed: Проверка провалена
+        task_accepted: Задача в работе
+        verification_failed: Поверка не выполнена
         sent_to_repair: Отправлено на ремонт
         returned_from_repair: Возвращено с ремонта
-        closed: Закрыто
+        closed: Поверка прервана
         incoming: Вх. контроль
         repair: Ремонт
         regular: Поверка

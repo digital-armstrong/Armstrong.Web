@@ -113,20 +113,20 @@
                     <% unless path == all_tasks_inspection_index_path %>
                       <% case inspection.state %>
                         <% when "task_created"%>
-                          <div class="col" title="Взять задачу на себя">
+                          <div class="col" title="Принять задачу">
                             <%= button_to accept_task_inspection_path(inspection),
                               method: :post, class: 'btn p-0' do %>
                               <i class="bi bi-person-add"></i>
                             <% end%>
                           </div>
                         <% when "task_accepted"%>
-                          <div class="col" title="Проверка успешна">
+                          <div class="col" title="Поверка выполнена">
                             <%= button_to complete_verification_inspection_path(inspection),
                               method: :post, class: 'btn p-0' do %>
                               <i class="bi bi-check-square"></i>
                             <% end %>
                           </div>
-                          <div class="col" title="Проверка провалена">
+                          <div class="col" title="Проверка не выполнена">
                             <%= button_to fail_verification_inspection_path(inspection),
                               method: :post, class: 'btn p-0' do %>
                               <i class="bi bi-exclamation-square"></i>
@@ -153,7 +153,7 @@
                             <% end %>
                           </div>
                         <% when "returned_from_repair"%>
-                          <div class="col" title="Отправить прибор на повторную проверку">
+                          <div class="col" title="Отправить прибор на повторную поверку">
                             <%= button_to send_from_repair_to_verification_inspection_path(inspection),
                               method: :post, class: 'btn p-0' do %>
                               <i class="bi bi-arrow-repeat"></i>
