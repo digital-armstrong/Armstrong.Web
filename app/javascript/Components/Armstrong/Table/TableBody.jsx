@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
+import * as Icon from 'react-bootstrap-icons';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function TableBody({ columns, data, openModal }) {
   return (
@@ -10,9 +13,9 @@ export default function TableBody({ columns, data, openModal }) {
             let tData = row[accessor] ? row[accessor] : '——';
             if (accessor === 'chart') {
               tData = (
-                <button type="button" onClick={openModal} className="btn btn-light" data-channelid={row.id}>
-                  <i className="bi bi-graph-up" />
-                </button>
+                <Button type="button" onClick={openModal} className="btn btn-light" data-id={row.id} data-pointname={row.name}>
+                  <Icon.GraphUp />
+                </Button>
               );
             }
             return <td key={accessor}>{tData}</td>;
