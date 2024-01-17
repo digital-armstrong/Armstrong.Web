@@ -40,7 +40,7 @@ export default function ChartComponent({ chartData, pointName }) {
     },
     xAxis: {
       type: 'category',
-      data: chartData.map((data) => new Date(data.source_time).toLocaleDateString('en-GB', dataoptions)),
+      data: chartData.map((data) => new Date(data.event_datetime).toLocaleDateString('en-GB', dataoptions)),
     },
     yAxis: {
       type: 'value',
@@ -66,7 +66,7 @@ export default function ChartComponent({ chartData, pointName }) {
             },
           ]),
         },
-        data: chartData.map((data) => data.value),
+        data: chartData.map((data) => data.event_system_value),
       },
     ],
     toolbox: {
@@ -108,8 +108,13 @@ export default function ChartComponent({ chartData, pointName }) {
 ChartComponent.propTypes = {
   chartData: PropTypes.arrayOf(
     PropTypes.shape({
-      key1: PropTypes.Date,
-      key2: PropTypes.number,
+      channel_id: PropTypes.number,
+      event_impulse_value: PropTypes.number,
+      event_system_value: PropTypes.number,
+      event_not_system_value: PropTypes.number,
+      event_datetime: PropTypes.string,
+      created_at: PropTypes.string,
+      updated_at: PropTypes.string,
     }),
   ).isRequired,
   pointName: PropTypes.string.isRequired,
