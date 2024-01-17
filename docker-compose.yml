@@ -9,9 +9,7 @@ services:
       - ~/.bash_history:/root/.bash_history
       - &bundle-cache-volume bundle_cache:/bundle_cache
     ports:
-      - 3000:3000
-      - 3001:3001
-      - 3002:3002
+      - 80:3000
     depends_on:
       - db
       - redis
