@@ -434,5 +434,5 @@ ru:
   updated_at: Обновлен
   action: Действия
   filtration: Фильтрация
-  access_denied: Доступ запрещен
-  access_denied_message: Извините, но у вас нет прав для просмотра данной страницы.
+  access_denied: "403: Доступ запрещен"
+  access_denied_message: У вас нет прав для просмотра данной страницы.
