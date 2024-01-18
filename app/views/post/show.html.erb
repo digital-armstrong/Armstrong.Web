@@ -16,11 +16,13 @@
     <%= "#{@post.user.first_name} #{@post.user.last_name}" %></p>
   </span>
 <p><%= @post.body %></p>
-<div class="row px-0" style="max-width:650px; min-width:600px">
-  <div class="col-2">
-    <%= link_to t('b_change'), edit_post_path(@post), class: "btn btn-primary"%>
-  </div>
-  <div class="col-2">
-    <%= button_to t('b_delete'), post_path(@post), method: :delete, class: "btn btn-danger"%>
-  </div>
+<% if can? :manage, Post %>
+  <div class="row px-0" style="max-width:650px; min-width:600px">
+    <div class="col-2">
+      <%= link_to t('b_change'), edit_post_path(@post), class: "btn btn-primary"%>
+    </div>
+    <div class="col-2">
+      <%= button_to t('b_delete'), post_path(@post), method: :delete, class: "btn btn-danger"%>
+    </div>
+  <% end %>
 </div>

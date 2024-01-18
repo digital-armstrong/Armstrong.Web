@@ -62,8 +62,10 @@
         </div>
       </div>
     </div>
-    <%= render 'shared/modal_button_add', path: new_path, classes: "btn btn-primary w-100", text: t(".b_add_device") %>
-    <%= render 'shared/modal_button_add', path: new_device_component_path, classes: "btn btn-primary mt-2 w-100", text: t(".b_add_device_component") %>
+    <% if can? :manage, Device %>
+      <%= render 'shared/modal_button_add', path: new_path, classes: "btn btn-primary w-100", text: t(".b_add_device") %>
+      <%= render 'shared/modal_button_add', path: new_device_component_path, classes: "btn btn-primary mt-2 w-100", text: t(".b_add_device_component") %>
+    <% end %>
     <%= button_to device_download_path(request.params.merge(format: :pdf)), data: {turbo: :false}, class: "btn btn-primary my-2 w-100 shadow" do %>
       <i class="bi bi-download"></i><span> <%=t('b_download_pdf')%></span>
     <% end %>

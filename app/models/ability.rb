@@ -40,6 +40,11 @@ class Ability
       can([:read, :service_tasks], Inspection)
       cannot(:manage, :armstrong)
     end
+
+    if user.engineer_observer?
+      can(:read, :armstrong)
+      can([:read], Device, service_id: user.service_id)
+    end
   end
 
   def inspector(user)

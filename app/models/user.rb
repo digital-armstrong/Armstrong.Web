@@ -14,6 +14,8 @@ class User < ApplicationRecord
     admin: 'admin',
     default: 'default',
     engineer: 'engineer',
+    engineer_observer: 'engineer_observer',
+    responsible_for_measuring_instruments: 'responsible_for_measuring_instruments',
     inspector: 'inspector',
     dosimetrist: 'dosimetrist',
   }.freeze
@@ -27,8 +29,23 @@ class User < ApplicationRecord
   validate :validate_email
 
   def self.ransackable_attributes(_auth_object = nil)
-    ['avatar_url', 'created_at', 'email', 'encrypted_password', 'first_name', 'id', 'last_name', 'phone', 'remember_created_at',
-     'reset_password_sent_at', 'reset_password_token', 'role', 'second_name', 'tabel_id', 'updated_at', 'service_id']
+    [
+      'avatar_url',
+      'created_at',
+      'email',
+      'encrypted_password',
+      'first_name',
+      'id',
+      'last_name',
+      'phone',
+      'remember_created_at',
+      'reset_password_sent_at',
+      'reset_password_token',
+      'role',
+      'second_name',
+      'tabel_id',
+      'updated_at',
+      'service_id']
   end
 
   def self.ransackable_associations(_auth_object = nil)
@@ -36,23 +53,31 @@ class User < ApplicationRecord
   end
 
   def admin?
-    role == 'admin'
+    role == ROLES[:admin]
   end
 
   def default?
-    role == 'default'
+    role == ROLES[:default]
   end
 
   def engineer?
-    role == 'engineer'
+    role == ROLES[:engineer]
+  end
+
+  def engineer_observer?
+    role == ROLES[:engineer_observer]
+  end
+
+  def responsible_for_measuring_instruments?
+    role == ROLES[:responsible_for_measuring_instruments]
   end
 
   def inspector?
-    role == 'inspector'
+    role == ROLES[:inspector]
   end
 
   def dosimetrist?
-    role == 'dosimetrist'
+    role == ROLES[:dosimetrist]
   end
 
   protected
