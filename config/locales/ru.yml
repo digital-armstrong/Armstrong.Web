@@ -333,6 +333,7 @@ ru:
         my_tasks: Мои задачи
         completed_tasks: Завершенные задачи
         all_tasks: Все задачи
+        service_tasks: Задачи службы
     index:
       inspection:
         device: Прибор
