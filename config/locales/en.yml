@@ -91,6 +91,7 @@ en:
         my_tasks: My tasks
         completed_tasks: Completed tasks
         all_tasks: All tasks
+        service_tasks: Service tasks
     index:
       inspection:
         device: Device

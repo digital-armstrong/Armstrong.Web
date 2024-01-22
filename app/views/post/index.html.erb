@@ -1,6 +1,8 @@
 <% if user_signed_in? %>
-  <%= link_to new_post_path, class: "btn btn-primary my-3 w-100" do %>
-    <i class="bi bi-plus-square"></i><span> <%= t('.b_new_post') %></span>
+  <% if can? :manage, Post %>
+    <%= link_to new_post_path, class: "btn btn-primary my-3 w-100" do %>
+      <i class="bi bi-plus-square"></i><span> <%= t('.b_new_post') %></span>
+    <% end %>
   <% end %>
 <% end %>
 <% @posts.each do |post| %>
