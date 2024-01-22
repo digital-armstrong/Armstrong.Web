@@ -38,12 +38,21 @@ class Ability
       can(:create, [DeviceModel, SupplementaryKit, DeviceRegGroup, MeasurementClass, MeasurementGroup,
                     Manufacturer, DeviceComponent])
       can([:read, :service_tasks], Inspection)
-      cannot(:manage, :armstrong)
+      can(:manage, :armstrong)
     end
 
     if user.engineer_observer?
       can(:read, :armstrong)
       can([:read], Device, service_id: user.service_id)
+    end
+
+    if user.responsible_for_measuring_instruments?
+      can([:manage, :create_inspection], Device, service_id: user.service_id)
+      cannot(:destroy, Device)
+      can(:create, [DeviceModel, SupplementaryKit, DeviceRegGroup, MeasurementClass, MeasurementGroup,
+                    Manufacturer, DeviceComponent])
+      can([:read, :service_tasks], Inspection)
+      cannot(:manage, :armstrong)
     end
   end
 
