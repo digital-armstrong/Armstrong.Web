@@ -13,6 +13,7 @@ class Device < ApplicationRecord
   belongs_to :service
 
   has_many :inspections
+  has_many :control_points
   has_one :channel
 
   validates :inventory_id, numericality: { less_than_or_equal_to: 2147483647 }, uniqueness: true, allow_nil: true
