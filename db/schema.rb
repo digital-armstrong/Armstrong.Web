@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_15_043035) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_24_055906) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_043035) do
     t.index ["room_id"], name: "index_channels_on_room_id"
     t.index ["server_id"], name: "index_channels_on_server_id"
     t.index ["service_id"], name: "index_channels_on_service_id"
+  end
+
+  create_table "control_points", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.bigint "room_id", null: false
+    t.bigint "channel_id", null: false
+    t.bigint "device_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_id"], name: "index_control_points_on_channel_id"
+    t.index ["device_id"], name: "index_control_points_on_device_id"
+    t.index ["room_id"], name: "index_control_points_on_room_id"
   end
 
   create_table "device_components", force: :cascade do |t|
@@ -205,6 +218,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_043035) do
     t.bigint "building_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "level"
     t.index ["building_id"], name: "index_rooms_on_building_id"
   end
 
@@ -267,6 +281,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_043035) do
   add_foreign_key "channels", "rooms"
   add_foreign_key "channels", "servers"
   add_foreign_key "channels", "services"
+  add_foreign_key "control_points", "channels"
+  add_foreign_key "control_points", "devices"
+  add_foreign_key "control_points", "rooms"
   add_foreign_key "device_components", "supplementary_kits"
   add_foreign_key "device_models", "manufacturers"
   add_foreign_key "device_models", "measurement_classes"

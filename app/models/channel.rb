@@ -3,5 +3,7 @@ class Channel < ApplicationRecord
   belongs_to :room
   belongs_to :server
   belongs_to :service
+
   has_many :history
+  has_many :control_points
 end
