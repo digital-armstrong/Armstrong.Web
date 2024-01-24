@@ -1,0 +1,7 @@
+<div class='row text-center shadow rounded my-4 mx-0'>
+  <% selected = local_assigns[:selected] %>
+  <%= link_to 'Пользователи', admin_users_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'user' }" %>
+  <%= link_to 'Службы', admin_users_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'service' }" %>
+  <%= link_to 'Подразделения', admin_users_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'division' }" %>
+  <%= link_to 'Организации', admin_users_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'organization' }" %>
+</div>

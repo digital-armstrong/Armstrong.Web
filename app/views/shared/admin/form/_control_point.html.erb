@@ -1,0 +1,38 @@
+<%= simple_form_for control_point, as: :control_point, url: path,
+  class: "form-group row" do |f| %>
+  <div class="row">
+    <div class="col">
+      <%= f.input :name, placeholder: 'Название точки контроля', input_html: {:tabindex => 1}%>
+      <%= f.label :room, class: "mb-2" %>
+      <div class="row">
+        <div class="col">
+          <%= f.association :room, label: false, input_html: {:tabindex => 2} %>
+        </div>
+        <div class="col-2 ps-0">
+          <%= render 'shared/modal_button_add', path: new_admin_control_point_path, classes: "btn btn-ligth", text: nil %>
+        </div>
+      </div>
+      <%= f.label :channel, class: "mb-2" %>
+      <div class="row">
+        <div class="col">
+          <%= f.association :channel, label: false, input_html: {:tabindex => 2} %>
+        </div>
+        <div class="col-2 ps-0">
+          <%= render 'shared/modal_button_add', path: new_admin_control_point_path, classes: "btn btn-ligth", text: nil %>
+        </div>
+      </div>
+      <%= f.label :device, class: "mb-2" %>
+      <div class="row">
+        <div class="col">
+          <%= f.association :device, label: false, input_html: {:tabindex => 2} %>
+        </div>
+        <div class="col-2 ps-0">
+          <%= render 'shared/modal_button_add', path: new_admin_control_point_path, classes: "btn btn-ligth", text: nil %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <%= render 'shared/form/actions', f:f %>
+<% end %>
