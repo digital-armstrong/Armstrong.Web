@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_24_095819) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_25_082316) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,10 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_095819) do
   end
 
   create_table "channels", force: :cascade do |t|
-    t.string "name"
     t.integer "channel_id"
-    t.bigint "device_id", null: false
-    t.bigint "room_id", null: false
     t.bigint "server_id", null: false
     t.bigint "service_id", null: false
     t.text "location_description"
@@ -46,8 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_095819) do
     t.string "state", default: "normal"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["device_id"], name: "index_channels_on_device_id"
-    t.index ["room_id"], name: "index_channels_on_room_id"
+    t.bigint "control_point_id"
+    t.index ["control_point_id"], name: "index_channels_on_control_point_id"
     t.index ["server_id"], name: "index_channels_on_server_id"
     t.index ["service_id"], name: "index_channels_on_service_id"
   end
@@ -56,11 +53,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_095819) do
     t.string "name"
     t.string "description"
     t.bigint "room_id"
-    t.bigint "channel_id"
     t.bigint "device_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["channel_id"], name: "index_control_points_on_channel_id"
     t.index ["device_id"], name: "index_control_points_on_device_id"
     t.index ["room_id"], name: "index_control_points_on_room_id"
   end
@@ -277,11 +272,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_24_095819) do
   end
 
   add_foreign_key "buildings", "organizations"
-  add_foreign_key "channels", "devices"
-  add_foreign_key "channels", "rooms"
+  add_foreign_key "channels", "control_points"
   add_foreign_key "channels", "servers"
   add_foreign_key "channels", "services"
-  add_foreign_key "control_points", "channels"
   add_foreign_key "control_points", "devices"
   add_foreign_key "control_points", "rooms"
   add_foreign_key "device_components", "supplementary_kits"

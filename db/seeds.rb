@@ -216,7 +216,8 @@ end
 100.times do |i|
   Room.create(
     name: "#{i}",
-    building: Building.find_by(id: rand(1..10))
+    building: Building.find_by(id: rand(1..10)),
+    level: rand(0.0..10.0)
   )
 end
 
@@ -350,14 +351,22 @@ end
   )
 end
 
+# seed ControlPoints
+200.times do |i|
+  ControlPoint.create(
+    name: "Точка контроля #{i}",
+    description: "Возможное описание",
+    room: Room.find_by(id: rand(1..99)),
+    device: Device.find_by(id: rand(1..100)),
+  )
+end
+
 # seed Channel
 
 200.times do |i|
   Channel.create(
-    name: "ДКЗ-#{i}",
     channel_id: "#{i}",
-    device: Device.find_by(id: rand(1..1000)),
-    room: Room.find_by(id: rand(1..100)),
+    control_point: ControlPoint.find_by(id: rand(1..100)),
     server: Server.find_by(id: rand(1..10)),
     service: Service.find_by(id: rand(1..10)),
     location_description: "Description",

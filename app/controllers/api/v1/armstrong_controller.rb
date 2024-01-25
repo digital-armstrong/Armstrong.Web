@@ -3,14 +3,19 @@ module Api
     after_action :set_csp_header
 
     def index
-      channels = Channel.all
+      channels = Channel.joins(:control_point, :server, :service)
       result = channels.sort { |a, b| a[:server_id] <=> b[:server_id] }
 
       render(json: result,
              include: [
-               device: { include: [device_model: { only: [:name] }] },
-               room: { only: [:name] },
-             ])
+              :server,
+              :service,
+              control_point: {
+                include: [
+                  :room,
+                  device: { include: :device_model }
+                ]},
+            ])
     end
 
     private

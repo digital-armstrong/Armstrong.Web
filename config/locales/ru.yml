@@ -193,6 +193,11 @@ ru:
       user: Пользователь
       inspection: Инспекция
     attributes:
+      control_point:
+        name: Название
+        room: Помещение
+        description: Описание
+        device: Устройство
       device:
         inventory_id: Инв. №
         device_model: Модель
@@ -253,7 +258,7 @@ ru:
         name: Название
         measurement_min: Мин. величина измерений
         measurement_max: Макс. величина измерений
-        measurement_unit: Единица измерений
+        measuring_unit: Единица измерений
         description: Описание
         supplementary_kit: Набор
       supplementary_kit:
@@ -387,6 +392,11 @@ ru:
         created_at_to: Создан до
         updated_at_from: Обновлен от
         updated_at_to: Обновлен до
+    control_points:
+      new:
+        add_control_point: Добавить т. контроля
+      edit:
+        edit_add_control_point: Изменить т. контроля
     device_component:
       new:
         add_device_component: Добавить компонент

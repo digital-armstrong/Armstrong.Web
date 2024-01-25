@@ -1,6 +1,18 @@
-<div class='row text-center shadow rounded my-4 mx-0'>
+<div class='card shadow rounded border-0 mb-4 p-0'>
   <% selected = local_assigns[:selected] %>
-  <%= link_to 'Точки контроля', admin_control_point_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'control_point' }" %>
-  <%= link_to 'Помещения', admin_control_point_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'room' }" %>
-  <%= link_to 'Здания', admin_control_point_index_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'building' }" %>
+  <div>
+    <%= link_to admin_control_point_index_path, class: "btn w-100 #{ 'btn-primary' if selected == 'control_point' }" do %>
+      <i class="bi bi-geo"></i><span> <%= 'Точки контроля' %></span>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to admin_control_point_index_path, class: "btn w-100 #{ 'btn-primary' if selected == 'room' }" do %>
+      <i class="bi bi-door-open"></i><span> <%= 'Помещения' %></span>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to admin_control_point_index_path, class: "btn w-100 #{ 'btn-primary' if selected == 'building' }" do %>
+      <i class="bi bi-building"></i><span> <%= 'Здания' %></span>
+    <% end %>
+  </div>
 </div>
