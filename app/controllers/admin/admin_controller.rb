@@ -1,4 +1,6 @@
 class Admin::AdminController < ApplicationController
   load_and_authorize_resource
-  def index; end
+  def index
+    redirect_to(admin_users_path)
+  end
 end

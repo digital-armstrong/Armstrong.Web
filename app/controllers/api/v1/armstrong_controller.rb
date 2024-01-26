@@ -8,14 +8,15 @@ module Api
 
       render(json: result,
              include: [
-              :server,
-              :service,
-              control_point: {
-                include: [
-                  :room,
-                  device: { include: :device_model }
-                ]},
-            ])
+               :server,
+               :service,
+               { control_point: {
+                 include: [
+                   :room,
+                   { device: { include: :device_model } },
+                 ],
+               } },
+             ])
     end
 
     private

@@ -43,7 +43,7 @@ module DeviceConcern
 
     def device_destroy(device, path_success, path_failure)
       assigned_inspections_count = Inspection.where(device_id: device.id).count
-      assigned_channels_count = Channel.where(device_id: device.id).count
+      assigned_channels_count = ControlPoint.where(device_id: device.id).count
 
       if assigned_inspections_count.zero? && assigned_channels_count.zero?
         device.destroy
@@ -55,17 +55,16 @@ module DeviceConcern
     end
 
     def create_inspection_for_device(device)
-      if inspection_params[:is_admin]
-        inspection = device.inspections.build(creator_id: current_user.id,
+      inspection = if inspection_params[:is_admin]
+                     device.inspections.build(creator_id: current_user.id,
                                               performer_id: current_user.id,
                                               type_target: inspection_params[:type_target],
                                               conclusion_date: inspection_params[:conclusion_date].to_datetime + 12.hours,
                                               conclusion: t('message.inspection.create_from_device.generated'),
-                                              state: Inspection::STATES[:verification_successful]
-                                            )
-      else
-        inspection = device.inspections.build(creator_id: current_user.id, type_target: inspection_params[:type_target])
-      end
+                                              state: Inspection::STATES[:verification_successful])
+                   else
+                     device.inspections.build(creator_id: current_user.id, type_target: inspection_params[:type_target])
+                   end
       if inspection.save
         set_inspection_status(device)
         flash[:success] = t('message.inspection.create_from_device.success')

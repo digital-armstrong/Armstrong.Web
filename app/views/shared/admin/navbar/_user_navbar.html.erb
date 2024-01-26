@@ -1,15 +1,23 @@
-<div class='row text-center shadow rounded my-4 mx-0'>
+<div class='card shadow rounded border-0 mb-4 p-0'>
   <% selected = local_assigns[:selected] %>
-  <%= link_to admin_users_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'user' }" do %>
-    <i class="bi bi-person"></i><span> <%= 'Пользователи' %></span>
-  <% end %>
-  <%= link_to admin_users_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'service' }" do %>
-    <i class="bi bi-people"></i><span> <%= 'Службы' %></span>
-  <% end %>
-  <%= link_to admin_users_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'division' }" do %>
-    <i class="bi bi-flag"></i><span> <%= 'Подразделения' %></span>
-  <% end %>
-  <%= link_to admin_users_path, class: "px-0 col btn #{ 'btn-primary' if selected == 'organization' }" do %>
-    <i class="bi bi-buildings"></i><span> <%= 'Организации' %></span>
-  <% end %>
+  <div>
+    <%= link_to admin_users_path, class: "btn btn-sm w-100 #{ 'btn-primary' if selected == 'user' } text-start" do %>
+      <i class="bi bi-person"></i><span> <%= 'Пользователи' %></span>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to admin_users_path, class: "btn btn-sm w-100 #{ 'btn-primary' if selected == 'service' } text-start" do %>
+      <i class="bi bi-people"></i><span> <%= 'Службы' %></span>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to admin_users_path, class: "btn btn-sm w-100 #{ 'btn-primary' if selected == 'division' } text-start" do %>
+      <i class="bi bi-flag"></i><span> <%= 'Подразделения' %></span>
+    <% end %>
+  </div>
+  <div>
+    <%= link_to admin_users_path, class: "btn btn-sm w-100 #{ 'btn-primary' if selected == 'organization' } text-start" do %>
+      <i class="bi bi-buildings"></i><span> <%= 'Организации' %></span>
+    <% end %>
+  </div>
 </div>

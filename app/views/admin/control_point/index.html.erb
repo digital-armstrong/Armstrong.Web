@@ -55,7 +55,7 @@
                 <td><%= "——" %></td>
               <% else %>
                 <td>
-                  <%= button_to "(#{sprintf("%05d", control_point.device.tabel_id)}) #{control_point.device.device_model.name}", admin_device_path(control_point.device.id), method: :get, class: "btn btn-light" %>
+                  <%= button_to "(#{sprintf("%05d", control_point.device.tabel_id)}) #{control_point.device.device_model.name}", admin_device_path(control_point.device.id), method: :get, class: "btn btn-light btn-sm" %>
                 </td>
               <% end %>
               <% if control_point.description.nil? %>

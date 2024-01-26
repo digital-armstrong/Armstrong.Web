@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    attributes_sign_up = [:first_name, :last_name, :tabel_id, :role, :email,:service_id, :timezone]
+    attributes_sign_up = [:first_name, :last_name, :tabel_id, :role, :email, :service_id, :timezone]
     attributes_update = [*attributes_sign_up.excluding(:service_id), :second_name, :email, :phone]
     devise_parameter_sanitizer.permit(:sign_up, keys: attributes_sign_up)
     devise_parameter_sanitizer.permit(:account_update, keys: attributes_update)
