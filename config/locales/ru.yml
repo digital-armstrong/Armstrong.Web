@@ -248,8 +248,8 @@ ru:
         site_url: Ссылка на сайт
       measurement_class:
         name: Название
-        measurement_group: Группа измерений
-        measurement_group_id: Группа измерений
+        measurement_group: Группа изм.
+        measurement_group_id: Группа изм.
         arms_device_type: ARMS-тип
       measurement_group:
         name: Название

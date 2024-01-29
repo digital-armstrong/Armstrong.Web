@@ -14,13 +14,13 @@
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url: admin_measurement_class_index_path, method: :get, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
-              <%= f.label :name, class: "mb-2" %>
-              <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
-              <%= f.label :measurement_group_id, class:"mb-1" %>
-                  <%= f.collection_select(:measurement_group_id_eq, MeasurementGroup.all,
-                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select'}) %>
-              <%= f.label :arms_device_type, class: "my-2" %>
-              <%= f.search_field :arms_device_type_eq, class:"form-control", placeholder:"1" %>
+              <%= f.label :name %>
+              <%= f.search_field :name_cont, class:"form-control mb-2", placeholder:"Название" %>
+              <%= f.label :measurement_group_id %>
+              <%= f.collection_select(:measurement_group_id_eq, MeasurementGroup.all,
+                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select mb-2'}) %>
+              <%= f.label :arms_device_type %>
+              <%= f.search_field :arms_device_type_eq, class:"form-control mb-2", placeholder:"1" %>
             </div>
             <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 my-2'%>
             <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
@@ -39,7 +39,7 @@
           <tr>
             <th scope="col"><%= t('activerecord.attributes.measurement_class.name') %></th>
             <th scope="col"><%= t('activerecord.attributes.measurement_class.arms_device_type') %></th>
-            <th scope="col"><%= t('activerecord.attributes.measurement_class.measuremnt_group') %></th>
+            <th scope="col"><%= t('activerecord.attributes.measurement_class.measurement_group') %></th>
             <th scope="col" style="width: 10%"><%= t('action') %></th>
           </tr>
         </thead>
