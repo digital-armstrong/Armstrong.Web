@@ -4,6 +4,7 @@ module ControlPointConcern
   included do
     def control_point_create
       @control_point = ControlPoint.new(control_point_params)
+
       if @control_point.save
         redirect_back(fallback_location: root_path)
       else
@@ -17,6 +18,8 @@ module ControlPointConcern
         :device_id,
         :room_id,
         :channel_id,
+        :description,
+        :service_id,
       )
     end
   end

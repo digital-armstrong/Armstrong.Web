@@ -53,6 +53,8 @@ class Admin::ControlPointController < ApplicationController
       :room_id,
       :device_id,
       :channel_id,
+      :description,
+      :service_id,
     )
   end
 end

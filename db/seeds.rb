@@ -358,6 +358,7 @@ end
     description: "Возможное описание",
     room: Room.find_by(id: rand(1..99)),
     device: Device.find_by(id: rand(1..100)),
+    service: Service.find_by(id: rand(1..10)),
   )
 end
 

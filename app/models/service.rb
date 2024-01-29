@@ -6,4 +6,5 @@ class Service < ApplicationRecord
   has_many :devices
   has_many :users
   has_many :servers
+  has_many :control_points
 end
