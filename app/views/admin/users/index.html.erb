@@ -14,73 +14,45 @@
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url:admin_users_path, method: :get, data:{controller: "filter"}, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
-              <div class="col">
-                <%= f.label :tabel_id, class:"mb-1" %>
-                <%= f.search_field :tabel_id_eq, class: 'form-control', placeholder: '1' %>
-              </div>
-              <div class="col">
-                <%= f.label :first_name, class:"mb-1"%>
-                <%= f.search_field :first_name_cont, class: 'form-control', placeholder: 'Иван' %>
-              </div>
-              <div class="col">
-                <%= f.label :last_name, class:"mb-1" %>
-                <%= f.search_field :last_name_cont, class: 'form-control', placeholder: 'Иванов' %>
-              </div>
-              <div class="col">
-                <%= f.label :second_name, class:"mb-1" %>
-                <%= f.search_field :second_name_cont, class: 'form-control', placeholder: 'Иванович' %>
-              </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col">
-                <%= f.label :role, class:"mb-1" %>
-                <select class="form-select form-select" name="q[role_eq]" id="q_role_eq">
-                  <option value=""><%= t('combobox_blank')%></option>
-                  <% User::ROLES.each do |key,value| %>
-                    <% if key == @selected_role %>
-                      <option value="<%= key %>" selected>
-                    <% else %>
-                      <option value="<%= key %>">
-                    <% end %>
-                    <%= (value) %></option>
+              <%= f.label :tabel_id %>
+              <%= f.search_field :tabel_id_eq, class: 'form-control mb-2', placeholder: '1' %>
+              <%= f.label :first_name%>
+              <%= f.search_field :first_name_cont, class: 'form-control mb-2', placeholder: 'Иван' %>
+              <%= f.label :last_name %>
+              <%= f.search_field :last_name_cont, class: 'form-control mb-2', placeholder: 'Иванов' %>
+              <%= f.label :second_name %>
+              <%= f.search_field :second_name_cont, class: 'form-control mb-2', placeholder: 'Иванович' %>
+              <%= f.label :role %>
+              <select class="form-select mb-2" name="q[role_eq]" id="q_role_eq">
+                <option value=""><%= t('combobox_blank')%></option>
+                <% User::ROLES.each do |key,value| %>
+                  <% if key == @selected_role %>
+                    <option value="<%= key %>" selected>
+                  <% else %>
+                    <option value="<%= key %>">
                   <% end %>
-                </select>
+                  <%= (value) %></option>
+                <% end %>
+              </select>
+              <%= f.label :email %>
+              <%= f.search_field :email_cont, class: 'form-control mb-2', placeholder: 'Иванович' %>
+              <%= f.label :phone %>
+              <%= f.search_field :phone_cont, class: 'form-control mb-2', placeholder: '+79021234578' %>
+              <%= f.label :service %>
+              <%= f.collection_select(:service_id_eq, Service.all,
+                :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select'}) %>
+              <%= f.label t('.created_at_from') %>
+              <%= f.date_field :created_at_gteq, class: 'form-control mb-2 ' %>
+              <%= f.label t('.created_at_to') %>
+              <%= f.date_field :created_at_lteq, class: 'form-control mb-2' %>
+              <%= f.label t('.updated_at_from') %>
+              <%= f.date_field :updated_at_gteq, class: 'form-control mb-2' %>
+              <%= f.label t('.updated_at_to') %>
+              <%= f.date_field :updated_at_lteq, class: 'form-control mb-2' %>
+              <%= f.submit t("b_accept"), class: 'btn btn-primary w-100 my-2'%>
+              <div id="b_clear" onclick="formClear()" class='btn btn-secondary w-100'>
+                <%= t("b_clear")%>
               </div>
-              <div class="col">
-                <%= f.label :email, class:"mb-1" %>
-                <%= f.search_field :email_cont, class: 'form-control', placeholder: 'Иванович' %>
-              </div>
-              <div class="col">
-                <%= f.label :phone, class:"mb-1" %>
-                <%= f.search_field :phone_cont, class: 'form-control', placeholder: '+79021234578' %>
-              </div>
-              <div class="col">
-                <%= f.label :service, class:"mb-1" %>
-                <%= f.collection_select(:service_id_eq, Service.all,
-                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select'}) %>
-              </div>
-            </div>
-            <div class="row mt-2">
-              <div class="col">
-                <%= f.label t('.created_at_from'), class:"mb-1" %>
-                <%= f.date_field :created_at_gteq, class: 'form-control ' %>
-              </div>
-              <div class="col">
-                <%= f.label t('.created_at_to'), class:"mb-1" %>
-                <%= f.date_field :created_at_lteq, class: 'form-control' %>
-              </div>
-              <div class="col">
-                <%= f.label t('.updated_at_from'), class:"mb-1" %>
-                <%= f.date_field :updated_at_gteq, class: 'form-control' %>
-              </div>
-              <div class="col">
-                <%= f.label t('.updated_at_to'), class:"mb-1" %>
-                <%= f.date_field :updated_at_lteq, class: 'form-control' %>
-              </div>
-            </div>
-            <%= f.submit t("b_accept"), class: 'btn btn-primary w-100 my-2'%>
-            <div id="b_clear" onclick="formClear()" class='btn btn-secondary w-100'>
-              <%= t("b_clear")%>
             </div>
           <% end %>
         </div>
@@ -94,7 +66,7 @@
     <div class="table-responsive">
       <table class="table table-hover">
         <thead>
-          <tr>
+          <tr class="text-nowrap">
             <th scope="col"><%=t('activerecord.attributes.user.tabel_id')%></th>
             <th scope="col"><%=t('activerecord.attributes.user.last_name')%></th>
             <th scope="col"><%=t('activerecord.attributes.user.first_name')%></th>
@@ -116,9 +88,9 @@
               <td><%= user.first_name %></td>
               <td><%= user.second_name %></td>
               <td><%= user.role %></td>
-              <td><%= user.email %></td>
-              <td><%= user.phone %></td>
-              <td><%= user.service.name %></td>
+              <td class="text-nowrap"><%= user.email %></td>
+              <td class="text-nowrap"><%= user.phone %></td>
+              <td class="text-nowrap"><%= user.service.name %></td>
               <td><%= formatted_date(user.created_at, :short_full) %></td>
               <td><%= formatted_date(user.updated_at, :short_full) %></td>
               <td>
