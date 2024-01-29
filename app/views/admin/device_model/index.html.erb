@@ -14,73 +14,40 @@
           <%= search_form_for(@query, url:admin_device_model_index_path, method: :get,
           data:{controller: "filter", 'filtrator_class': 'filtrator-class-index'}, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
-              <div class="row">
-                <div class="col">
-                  <%= f.label :name, class:"mb-1"%>
-                  <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Название' %>
-                </div>
-                <div class="col">
-                  <%= f.label :manufacturer_id, class:"mb-1" %>
-                  <%= f.collection_select(:manufacturer_id_eq, Manufacturer.all,
+              <%= f.label :name, class:"mb-2"%>
+              <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Название' %>
+              <%= f.label :manufacturer_id, class:"mb-2" %>
+              <%= f.collection_select(:manufacturer_id_eq, Manufacturer.all,
                   :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select'}) %>
-                </div>
-                <div class="col">
-                  <%= f.label :measurement_group_id, class:"mb-1" %>
-                  <%= f.collection_select(:measurement_group_id_eq, MeasurementGroup.all,
+              <%= f.label :measurement_group_id, class:"mb-2" %>
+              <%= f.collection_select(:measurement_group_id_eq, MeasurementGroup.all,
                   :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select', id:"filtrator-class-index", data: {'action': 'onchange -> filter#filter', 'to_filter_class': 'filter-class-index', 'filtrator_class': 'filtrator-class-index'}}) %>
-                </div>
-                <div class="col">
-                  <%= f.label :measurement_class_id, class:"mb-1" %>
-                  <%= f.collection_select(:measurement_class_id_eq, MeasurementClass.all,
+              <%= f.label :measurement_class_id, class:"mb-2" %>
+              <%= f.collection_select(:measurement_class_id_eq, MeasurementClass.all,
                   :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select', id: "filter-class-index"}) %>
-                </div>
-                <div class="col">
-                  <%= f.label :measuring_unit, class:"mb-1" %>
-                  <%= f.search_field :measuring_unit_cont, class: 'form-control', placeholder: 'мЗв/ч' %>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <%= f.label :measurement_sensitivity, class:"mb-1" %>
-                  <%= f.search_field :measurement_sensitivity_eq, class: 'form-control', placeholder: '1.0' %>
-                </div>
-                <div class="col">
-                  <%= f.label :measurement_min, class:"mb-1" %>
-                  <%= f.search_field :measurement_min_eq, class: 'form-control', placeholder: '1.0' %>
-                </div>
-                <div class="col">
-                  <%= f.label :measurement_max, class:"mb-1" %>
-                  <%= f.search_field :measurement_max_eq, class: 'form-control', placeholder: '1.0' %>
-                </div>
-                <div class="col">
-                  <%= f.label :safety_class, class:"mb-1" %>
-                  <%= f.search_field :safety_class_cont, class: 'form-control', placeholder: '3Н' %>
-                </div>
-              </div>
-              <div class="row mt-2 mb-3">
-                <div class="col">
-                  <%= f.label :accuracy_class, class:"mb-1" %>
-                  <%= f.search_field :accuracy_class_eq, class: 'form-control', placeholder: '1.0' %>
-                </div>
-                <div class="col">
-                  <%= f.label :is_complete_device, class:"mb-1" %>
-                  <%= f.select(:is_complete_device_eq, [['Да', true], ['Нет', false]],
+              <%= f.label :measuring_unit, class:"mb-2" %>
+              <%= f.search_field :measuring_unit_cont, class: 'form-control', placeholder: 'мЗв/ч' %>
+              <%= f.label :measurement_sensitivity, class:"mb-2" %>
+              <%= f.search_field :measurement_sensitivity_eq, class: 'form-control', placeholder: '1.0' %>
+              <%= f.label :measurement_min, class:"mb-2" %>
+              <%= f.search_field :measurement_min_eq, class: 'form-control', placeholder: '1.0' %>
+              <%= f.label :measurement_max, class:"mb-2" %>
+              <%= f.search_field :measurement_max_eq, class: 'form-control', placeholder: '1.0' %>
+              <%= f.label :safety_class, class:"mb-2" %>
+              <%= f.search_field :safety_class_cont, class: 'form-control', placeholder: '3Н' %>
+              <%= f.label :accuracy_class, class:"mb-2" %>
+              <%= f.search_field :accuracy_class_eq, class: 'form-control', placeholder: '1.0' %>
+              <%= f.label :is_complete_device, class:"mb-2" %>
+              <%= f.select(:is_complete_device_eq, [['Да', true], ['Нет', false]],
                   {:include_blank => t('combobox_blank')}, {:class =>'form-select form-select'})%>
-                </div>
-                <div class="col">
-                  <%= f.label :is_tape_rolling_mechanism, class:"mb-1" %>
+                  <%= f.label :is_tape_rolling_mechanism, class:"mb-2" %>
                   <%= f.select(:is_tape_rolling_mechanism_eq, [['Да', true], ['Нет', false]],
-                  {:include_blank => t('combobox_blank')}, {:class =>'form-select form-select'})%>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col"></div>
-              <%= f.submit t('b_accept'), class: 'col btn btn-primary w-100'%>
-              <div id="b_clear" onclick="formClear()" class="ms-2 col btn btn-secondary w-100">
+                  {:include_blank => t('combobox_blank')}, {:class =>'form-select form-select mb-2'})%>
+
+              <%= f.submit t('b_accept'), class: 'col btn btn-primary w-100 my-2'%>
+              <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
                 <%= t("b_clear")%>
               </div>
-              <div class="col"></div>
             </div>
           <% end %>
         </div>
@@ -92,7 +59,7 @@
       <div class="table-responsive">
         <table class="table table-hover">
           <thead>
-            <tr>
+            <tr class="text-nowrap">
               <th scope="col"><%= t('activerecord.attributes.device_model.name')%></th>
               <th scope="col"><%= t('activerecord.attributes.device_model.manufacturer')%></th>
               <th scope="col"><%= t('activerecord.attributes.device_model.measurement_group')%></th>

@@ -223,19 +223,19 @@ ru:
         name: Название
         manufacturer: Производитель
         manufacturer_id: Производитель
-        measurement_group: Группа измерений
-        measurement_group_id: Группа измерений
-        measurement_class: Класс измерений
-        measurement_class_id: Класс измерений
-        measuring_unit: Ед. измерений
-        measurement_sensitivity: Чувств. измерений
-        measurement_min: Мин. величина измерений
-        measurement_max: Макс. величина измерений
-        safety_class: Класс безопасности
-        accuracy_class: Класс точности
+        measurement_group: Группа изм.
+        measurement_group_id: Группа изм.
+        measurement_class: Класс изм.
+        measurement_class_id: Класс изм.
+        measuring_unit: Ед. изм.
+        measurement_sensitivity: Чувств. изм.
+        measurement_min: Мин. вел. изм.
+        measurement_max: Макс. вел. изм.
+        safety_class: Класс без-ти
+        accuracy_class: Класс точ-ти
         is_complete_device: Полный набор?
-        is_tape_rolling_mechanism: Имеет лентопротяжный механизм?
-        measurement_range: Диапазон измерений
+        is_tape_rolling_mechanism: ЛП механизм?
+        measurement_range: Диапазон изм.
         calibration_max: Макс. калибр.
         calibration_min: Мин. калибр.
       device_reg_group:
