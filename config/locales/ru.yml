@@ -254,11 +254,11 @@ ru:
       measurement_group:
         name: Название
       device_component:
-        serial_id: Серийный номер
+        serial_id: Сер. номер
         name: Название
-        measurement_min: Мин. величина измерений
-        measurement_max: Макс. величина измерений
-        measuring_unit: Единица измерений
+        measurement_min: Мин. вел. изм.
+        measurement_max: Макс. величина изм.
+        measuring_unit: Ед. изм.
         description: Описание
         supplementary_kit: Набор
       supplementary_kit:
