@@ -14,28 +14,16 @@
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url:admin_supplementary_kit_index_path, method: :get, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
-              <div class="row">
-                <div class="col">
-                  <%= f.label :name %>
-                  <%= f.search_field :name_cont, class:"form-control", placeholder:"БДЗБ" %>
-                </div>
-                <div class="col">
-                  <%= f.label :serial_id %>
-                  <%= f.search_field :serial_id_cont, class:"form-control", placeholder:"0-123-N" %>
-                </div>
-                <div class="col">
-                  <%= f.label :description %>
-                  <%= f.search_field :description_cont, class:"form-control", placeholder:"Набор для..." %>
-                </div>
+              <%= f.label :name %>
+              <%= f.search_field :name_cont, class:"form-control mb-2", placeholder:"БДЗБ" %>
+              <%= f.label :serial_id %>
+              <%= f.search_field :serial_id_cont, class:"form-control mb-2", placeholder:"0-123-N" %>
+              <%= f.label :description %>
+              <%= f.search_field :description_cont, class:"form-control mb-2", placeholder:"Набор для..." %>
+              <%= f.submit t('b_accept'), class: 'my-2 btn btn-primary w-100'%>
+              <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
+                <%= t("b_clear")%>
               </div>
-              <div class="row">
-                <div class="col"></div>
-                <%= f.submit t('b_accept'), class: 'col btn btn-primary w-100'%>
-                <div id="b_clear" onclick="formClear()" class="ms-2 col btn btn-secondary w-100">
-                  <%= t("b_clear")%>
-                </div>
-                <div class="col"></div>
-            </div>
             </div>
           <% end %>
         </div>
