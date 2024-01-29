@@ -14,10 +14,10 @@
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url:admin_device_reg_group_index_path, method: :get, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
-              <%= f.label :name, class: "mb-2" %>
-              <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
+              <%= f.label :name %>
+              <%= f.search_field :name_cont, class:"form-control mb-2", placeholder:"Название" %>
             </div>
-            <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 my-2'%>
+            <%= f.submit t('b_accept'), class: 'my-2 btn btn-primary w-100 my-2'%>
             <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
               <%= t("b_clear")%>
             </div>
