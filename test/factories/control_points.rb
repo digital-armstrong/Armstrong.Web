@@ -5,5 +5,6 @@ FactoryBot.define do
     room { nil }
     channel { nil }
     device { nil }
+    service { association :service }
   end
 end

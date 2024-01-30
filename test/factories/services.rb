@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :service do
-    name { 'MyStr2222isng' }
+    name
     division { association :division }
     organization { association :organization }
     building { association :building }

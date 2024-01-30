@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :channel do
     channel_id { 1 }
-    control_point { association :control_point}
+    control_point { association :control_point }
     server { association :server }
     service { association :service }
     location_description { 'MyText' }
