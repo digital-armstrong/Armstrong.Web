@@ -46,7 +46,6 @@ class Admin::ServiceController < ApplicationController
     redirect_to(admin_service_index_path)
   end
 
-
   private
 
   def set_service

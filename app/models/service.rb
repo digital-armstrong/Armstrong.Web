@@ -11,11 +11,11 @@ class Service < ApplicationRecord
   validates :name, :organization, :division, :building, presence: true
   validates :name, uniqueness: true
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["building_id", "created_at", "division_id", "id", "name", "organization_id", "updated_at"]
+  def self.ransackable_attributes(_auth_object = nil)
+    ['building_id', 'created_at', 'division_id', 'id', 'name', 'organization_id', 'updated_at']
   end
 
-  def self.ransackable_associations(auth_object = nil)
-    ["building", "control_points", "devices", "division", "organization", "servers", "users"]
+  def self.ransackable_associations(_auth_object = nil)
+    ['building', 'control_points', 'devices', 'division', 'organization', 'servers', 'users']
   end
 end
