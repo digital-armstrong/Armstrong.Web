@@ -38,6 +38,10 @@ module DivisionConcern
 
     private
 
+    def set_division
+      @division = Division.find(params[:id])
+    end
+
     def division_params
       params.require(:division).permit(
         :name,

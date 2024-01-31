@@ -26,10 +26,4 @@ class Admin::DivisionController < ApplicationController
     authorize!(:destroy, :division_admin)
     division_destroy
   end
-
-  private
-
-  def set_division
-    @division = Division.find(params[:id])
-  end
 end

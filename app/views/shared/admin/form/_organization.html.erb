@@ -1,0 +1,13 @@
+<%= simple_form_for organization, as: :organization, url: path,
+  class: "form-group row" do |f| %>
+  <div class="row">
+      <%= f.input :name, placeholder: 'Название рганизации', input_html: {:tabindex => 1}%>
+      <%= f.input :full_address, placeholder: 'Адрес', input_html: {:tabindex => 1}%>
+      <%= f.input :zip_code, placeholder: 'Индекс', input_html: {:tabindex => 1}%>
+      <%= f.input :phone, placeholder: 'Телефон', input_html: {:tabindex => 1}%>
+      <%= f.input :fax, placeholder: 'Факс', input_html: {:tabindex => 1}%>
+      <%= f.input :email, placeholder: 'E-mail', input_html: {:tabindex => 1}%>
+  </div>
+
+  <%= render 'shared/form/actions', f:f %>
+<% end %>
