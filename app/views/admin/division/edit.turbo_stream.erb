@@ -1,0 +1,3 @@
+<%= turbo_stream.update "modal-title", t('admin.division.edit.edit_division') %>
+<%= turbo_stream.update "modal-body", partial: "shared/admin/form/division",
+ locals: { path: admin_division_path(@division), division: @division } %>
