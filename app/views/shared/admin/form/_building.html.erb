@@ -1,0 +1,9 @@
+<%= simple_form_for building, as: :building, url: path,
+  class: "form-group row" do |f| %>
+  <div class="row">
+      <%= f.input :name, placeholder: t('.placeholders.name'), input_html: {:tabindex => 1}%>
+      <%= f.association :organization, input_html: {:tabindex => 2} %>
+  </div>
+
+  <%= render 'shared/form/actions', f:f %>
+<% end %>
