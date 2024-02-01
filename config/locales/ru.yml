@@ -142,6 +142,12 @@ ru:
       month: Месяц
       second: Секунд
       year: Год
+  placeholders:
+    organization:
+      add_edit_form:
+        name: Название организации
+        full_address: Адрес
+
   message:
     user:
       create:
@@ -193,6 +199,11 @@ ru:
       user: Пользователь
       inspection: Инспекция
     attributes:
+      building:
+        id: ID
+        name: Название
+        organization_id: Организация
+        organization: Организация
       control_point:
         name: Название
         room: Помещение
@@ -265,6 +276,12 @@ ru:
         serial_id: Серийный номер
         name: Название
         description: Описание
+      room:
+        id: ID
+        name: Название
+        building: Здание
+        building_id: Здание
+        level: Уровень
       post:
         title: Заголовок
         body: Текст записи
@@ -315,6 +332,34 @@ ru:
         leave_blank_if_you_don_t_want_to_change_it: оставьте поле пустым, если не хотите его менять
         title: Страница редактирования %{resource}
         we_need_your_current_password_to_confirm_your_changes: введите текущий пароль для подтверждения изменений
+  shared:
+    admin:
+      form:
+        building:
+          labels:
+            name: Название
+            organization: Организация
+          placeholders:
+            name: "106"
+        room:
+          placeholders:
+            name: "112"
+            level: "-0.8"
+        organization:
+          labels:
+            name: Название
+            full_address: Адрес
+            zip_code: Индекс
+            phone: Телефон
+            fax: Факс
+            email: E-mail
+          placeholders:
+            name: АО ГНЦ НИИАР
+            full_address: Западное шоссе, 9
+            zip_code: "433019"
+            phone: 7-55-25
+            fax: 7-55-25
+            email: info@niiar.ru
   layouts:
     application:
       home: Главная
@@ -327,7 +372,6 @@ ru:
       profile: Профиль
       logout: Выйти
       edit_me: Изм. профиль
-  shared:
     show:
       device:
         send_to_inspection: Отправить на инспекцию
@@ -392,7 +436,10 @@ ru:
         created_at_to: Создан до
         updated_at_from: Обновлен от
         updated_at_to: Обновлен до
-    control_points:
+    building:
+      new: Добавить здание
+      edit: Изменить здание
+    control_point:
       new:
         add_control_point: Добавить т. контроля
       edit:
@@ -432,6 +479,12 @@ ru:
         add_measurement_class: Добавить класс изм.
       edit:
         edit_measurement_class: Изменить класс изм.
+    room:
+      new: Добавить пом.
+      edit: Изменить пом.
+    organization:
+      new: Добавить орг.
+      edit: Изменить орг.
   combobox_blank: Не учитывать
   b_change: Изменить
   b_delete: Удалить

@@ -18,13 +18,13 @@
               <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Название' %>
               <%= f.label :manufacturer_id, class:"mb-2" %>
               <%= f.collection_select(:manufacturer_id_eq, Manufacturer.all,
-                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select'}) %>
+                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select'}) %>
               <%= f.label :measurement_group_id, class:"mb-2" %>
               <%= f.collection_select(:measurement_group_id_eq, MeasurementGroup.all,
-                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select', id:"filtrator-class-index", data: {'action': 'onchange -> filter#filter', 'to_filter_class': 'filter-class-index', 'filtrator_class': 'filtrator-class-index'}}) %>
+                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select', id:"filtrator-class-index", data: {'action': 'onchange -> filter#filter', 'to_filter_class': 'filter-class-index', 'filtrator_class': 'filtrator-class-index'}}) %>
               <%= f.label :measurement_class_id, class:"mb-2" %>
               <%= f.collection_select(:measurement_class_id_eq, MeasurementClass.all,
-                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select', id: "filter-class-index"}) %>
+                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select', id: "filter-class-index"}) %>
               <%= f.label :measuring_unit, class:"mb-2" %>
               <%= f.search_field :measuring_unit_cont, class: 'form-control', placeholder: 'мЗв/ч' %>
               <%= f.label :measurement_sensitivity, class:"mb-2" %>

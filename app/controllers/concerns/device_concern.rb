@@ -2,7 +2,7 @@ module DeviceConcern
   extend ActiveSupport::Concern
   include DeviceHelper
 
-  included do
+  included do # rubocop:disable Metrics/BlockLength
     def device_index
       params[:q] ||= {}
       @query = Device.ransack(params[:q])
