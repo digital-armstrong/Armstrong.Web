@@ -1,9 +1,9 @@
 class ControlPoint < ApplicationRecord
   belongs_to :room, optional: true
-  belongs_to :device, optional: true
   belongs_to :service
 
   has_one :channel
+  has_one :device
 
   validates :name, presence: true
 

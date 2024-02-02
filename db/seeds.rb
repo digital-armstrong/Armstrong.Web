@@ -293,6 +293,17 @@ end
   )
 end
 
+
+# seed ControlPoints
+200.times do |i|
+  ControlPoint.create(
+    name: "Точка контроля #{i}",
+    description: "Возможное описание",
+    room: Room.find_by(id: rand(1..99)),
+    service: Service.find_by(id: rand(1..10)),
+  )
+end
+
 # seed Device
 
 1000.times do |i|
@@ -305,7 +316,8 @@ end
     year_of_production: 1990,
     year_of_commissioning: 1991,
     supplementary_kit: SupplementaryKit.find_by(id: rand(1..20)),
-    service: Service.find_by(id: rand(1..10))
+    service: Service.find_by(id: rand(1..10)),
+    control_point: ControlPoint.find_by(id: rand(1..10)),
   )
 end
 
@@ -348,17 +360,6 @@ end
     state: 'verification_successful',
     conclusion_date: rand(1.year.ago..Time.now),
     conclusion: "Всё прекрасно! №#{i}"
-  )
-end
-
-# seed ControlPoints
-200.times do |i|
-  ControlPoint.create(
-    name: "Точка контроля #{i}",
-    description: "Возможное описание",
-    room: Room.find_by(id: rand(1..99)),
-    device: Device.find_by(id: rand(1..100)),
-    service: Service.find_by(id: rand(1..10)),
   )
 end
 
