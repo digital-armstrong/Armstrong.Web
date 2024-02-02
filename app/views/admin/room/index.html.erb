@@ -41,6 +41,7 @@
             <th scope="col"><%= t('activerecord.attributes.room.name') %></th>
             <th scope="col"><%= t('activerecord.attributes.room.building') %></th>
             <th scope="col"><%= t('activerecord.attributes.room.level') %></th>
+            <th scope="col"><%= t('activerecord.attributes.room.description') %></th>
             <th scope="col" style="width: 10%"><%= t('action') %></th>
           </tr>
         </thead>
@@ -54,6 +55,11 @@
                 <td><%= "——" %></td>
               <% else %>
                 <td><%= room.level %></td>
+              <% end %>
+              <% if room.description.nil? %>
+                <td><%= "——" %></td>
+              <% else %>
+                <td><%= room.description %></td>
               <% end %>
               <td>
                 <div class="d-flex">

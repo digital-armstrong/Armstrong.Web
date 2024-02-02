@@ -204,6 +204,7 @@ ru:
         name: Название
         organization_id: Организация
         organization: Организация
+        description: Описание
       control_point:
         name: Название
         room: Помещение
@@ -282,6 +283,7 @@ ru:
         building: Здание
         building_id: Здание
         level: Уровень
+        description: Описание
       post:
         title: Заголовок
         body: Текст записи
@@ -341,10 +343,12 @@ ru:
             organization: Организация
           placeholders:
             name: "106"
+            description: "Здание СМ-3 и РБТ-6"
         room:
           placeholders:
             name: "112"
-            level: "-0.8"
+            level: "-4.8"
+            description: "Кобальтовый участок"
         organization:
           labels:
             name: Название

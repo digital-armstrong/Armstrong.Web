@@ -48,6 +48,7 @@ module BuildingConcern
       params.require(:building).permit(
         :name,
         :organization_id,
+        :description,
       )
     end
   end

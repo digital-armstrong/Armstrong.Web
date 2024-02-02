@@ -47,6 +47,7 @@ module RoomConsern
         :name,
         :building_id,
         :level,
+        :description,
       )
     end
   end

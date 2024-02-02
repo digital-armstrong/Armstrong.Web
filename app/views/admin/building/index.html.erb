@@ -38,6 +38,7 @@
             <th scope="col"><%= t('activerecord.attributes.building.id') %></th>
             <th scope="col"><%= t('activerecord.attributes.building.name') %></th>
             <th scope="col"><%= t('activerecord.attributes.building.organization') %></th>
+            <th scope="col"><%= t('activerecord.attributes.building.description') %></th>
             <th scope="col" style="width: 10%"><%= t('action') %></th>
           </tr>
         </thead>
@@ -50,6 +51,11 @@
                 <td><%= "——" %></td>
               <% else %>
                 <td><%= building.organization.name %></td>
+              <% end %>
+              <% if building.description.nil? %>
+                <td><%= "——" %></td>
+              <% else %>
+                <td><%= building.description %></td>
               <% end %>
               <td>
                 <div class="d-flex">
