@@ -45,7 +45,7 @@ export default function Armstrong() {
         serverId: channel.server.id,
         channelId: channel.channel_id,
         name: channel.control_point.name,
-        deviceModel: channel.control_point.device.device_model.name,
+        deviceModel: channel.control_point.device ? channel.control_point.device.device_model.name : '——',
         location: channel.control_point.room.name,
         locationDescription: channel.control_point.description,
         eventSystemValue: channel.event_system_value.toExponential(3),
