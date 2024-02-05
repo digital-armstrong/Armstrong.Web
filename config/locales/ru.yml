@@ -364,6 +364,42 @@ ru:
             phone: 7-55-25
             fax: 7-55-25
             email: info@niiar.ru
+    show:
+      device:
+        send_to_inspection: Отправить на инспекцию
+        admin_send_to_inspection: Отправить на инспекцию (админ)
+    index:
+      inspection:
+        device: Прибор
+        assigned_user: Инспектор
+        target: Цель
+        state: Состояние
+        conclusion: Заключение
+        conclusion_date: Дата заключения
+        description: Описание
+        creator: Направил
+        device_tabel_id: Таб.№
+        device_serial_id: Сер.№
+        text-no-new-task: Задач пока нет...
+        performer_last_name: Иванов
+        performer_first_name: Иван
+        performer_second_name: Иванович
+        inspection_description: Прибор был поверен...
+        creator_last_name: Петров
+        creator_first_name: Петр
+        creator_second_name: Петрович
+        conclusion_date_from: Дата заключения от
+        conclusion_date_to: Дата заключения до
+      device:
+        b_add_device: Прибор
+        b_add_device_component: Компонент
+    navbar:
+      inspection:
+        new_tasks: Новые задачи
+        my_tasks: Мои задачи
+        completed_tasks: Завершенные задачи
+        all_tasks: Все задачи
+        service_tasks: Задачи службы
   layouts:
     application:
       home: Главная
@@ -376,10 +412,6 @@ ru:
       profile: Профиль
       logout: Выйти
       edit_me: Изм. профиль
-    show:
-      device:
-        send_to_inspection: Отправить на инспекцию
-        admin_send_to_inspection: Отправить на инспекцию (админ)
     navbar:
       inspection:
         new_tasks: Новые задачи
