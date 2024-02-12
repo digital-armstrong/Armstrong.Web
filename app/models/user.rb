@@ -45,7 +45,8 @@ class User < ApplicationRecord
       'second_name',
       'tabel_id',
       'updated_at',
-      'service_id']
+      'service_id',
+    ]
   end
 
   def self.ransackable_associations(_auth_object = nil)

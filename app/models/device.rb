@@ -11,9 +11,9 @@ class Device < ApplicationRecord
   belongs_to :supplementary_kit, optional: true
   belongs_to :room, optional: true
   belongs_to :service
+  belongs_to :control_point, optional: true
 
   has_many :inspections
-  has_one :channel
 
   validates :inventory_id, numericality: { less_than_or_equal_to: 2147483647 }, uniqueness: true, allow_nil: true
   validates :serial_id, :tabel_id, presence: true, uniqueness: true

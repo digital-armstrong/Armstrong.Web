@@ -1,9 +1,9 @@
 <% provide :page_title, "Производители" %>
 <%= render 'shared/admin/navbar/admin', selected: "device" %>
-<%= render 'shared/admin/navbar/device_bread', selected: "manufacturer" %>
 <%= render 'shared/flash_alert' %>
-<div class="row">
-  <div>
+<div class="row mx-0">
+  <div class="col-2 ps-0 my-4">
+    <%= render 'shared/admin/navbar/device_bread', selected: "manufacturer" %>
     <div class="accordion mb-3" id="accordionFilter">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
@@ -14,36 +14,20 @@
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url:admin_manufacturer_index_path, method: :get, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
-              <div class="row">
-                <div class="col">
-                  <%= f.label :name, class: "mb-2" %>
-                  <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
-                </div>
-                <div class="col">
-                  <%= f.label :adress, class: "my-2" %>
-                  <%= f.search_field :adress_cont, class:"form-control", placeholder:"г. Димитровград, Победы 12" %>
-                </div>
-                <div class="col">
-                  <%= f.label :phone, class: "my-2" %>
-                  <%= f.search_field :phone_cont, class:"form-control", placeholder:"+7 (999) 123-01-02" %>
-                </div>
-                <div class="col">
-                  <%= f.label :email, class: "my-2" %>
-                  <%= f.search_field :email_cont, class:"form-control", placeholder:"niiar@example.ru" %>
-                </div>
-                <div class="col">
-                  <%= f.label :site_url, class: "my-2" %>
-                  <%= f.search_field :site_url_cont, class:"form-control", placeholder:"example.ru" %>
-                </div>
-              </div>
-            </div>
-            <div class="row mt-4">
-              <div class="col"></div>
-              <%= f.submit "Применить", class: 'col btn btn-primary w-100'%>
-              <div id="b_clear" onclick="formClear()" class="ms-2 col btn btn-secondary w-100">
+              <%= f.label :name %>
+              <%= f.search_field :name_cont, class:"form-control mb-2", placeholder:"Название" %>
+              <%= f.label :adress %>
+              <%= f.search_field :adress_cont, class:"form-control mb-2", placeholder:"г. Димитровград, Победы 12" %>
+              <%= f.label :phone %>
+              <%= f.search_field :phone_cont, class:"form-control mb-2", placeholder:"+7 (999) 123-01-02" %>
+              <%= f.label :email %>
+              <%= f.search_field :email_cont, class:"form-control mb-2", placeholder:"niiar@example.ru" %>
+              <%= f.label :site_url %>
+              <%= f.search_field :site_url_cont, class:"form-control mb-2", placeholder:"example.ru" %>
+              <%= f.submit "Применить", class: 'my-2 btn btn-primary w-100'%>
+              <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
                 <%= t("b_clear")%>
               </div>
-              <div class="col"></div>
             </div>
           <% end %>
         </div>
@@ -51,9 +35,7 @@
     </div>
     <%= render 'shared/modal_button_add', path: new_admin_manufacturer_path, classes: "btn btn-primary w-100 mb-3", text: t("b_add") %>
   </div>
-</div>
-<div class="row mx-0">
-  <div class="shadow rounded">
+  <div class="col-10 my-4 shadow rounded">
     <div class="table-responsive">
       <table class="table table-hover">
         <thead>
@@ -71,8 +53,8 @@
           <tr>
               <td><%= manufacturer.name %></td>
               <td><%= manufacturer.adress %></td>
-              <td><%= manufacturer.phone %></td>
-              <td><%= manufacturer.email %></td>
+              <td class="text-nowrap"><%= manufacturer.phone %></td>
+              <td class="text-nowrap"><%= manufacturer.email %></td>
               <td><%= manufacturer.site_url %></td>
               <td>
                 <div class="d-flex">

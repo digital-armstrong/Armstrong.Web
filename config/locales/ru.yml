@@ -142,6 +142,12 @@ ru:
       month: Месяц
       second: Секунд
       year: Год
+  placeholders:
+    organization:
+      add_edit_form:
+        name: Название организации
+        full_address: Адрес
+
   message:
     user:
       create:
@@ -193,6 +199,18 @@ ru:
       user: Пользователь
       inspection: Инспекция
     attributes:
+      building:
+        id: ID
+        name: Название
+        organization_id: Организация
+        organization: Организация
+        description: Описание
+      control_point:
+        name: Название
+        room: Помещение
+        room_id: Помещение
+        description: Описание
+        device: Устройство
       device:
         inventory_id: Инв. №
         device_model: Модель
@@ -218,19 +236,19 @@ ru:
         name: Название
         manufacturer: Производитель
         manufacturer_id: Производитель
-        measurement_group: Группа измерений
-        measurement_group_id: Группа измерений
-        measurement_class: Класс измерений
-        measurement_class_id: Класс измерений
-        measuring_unit: Ед. измерений
-        measurement_sensitivity: Чувств. измерений
-        measurement_min: Мин. величина измерений
-        measurement_max: Макс. величина измерений
-        safety_class: Класс безопасности
-        accuracy_class: Класс точности
+        measurement_group: Группа изм.
+        measurement_group_id: Группа изм.
+        measurement_class: Класс изм.
+        measurement_class_id: Класс изм.
+        measuring_unit: Ед. изм.
+        measurement_sensitivity: Чувств. изм.
+        measurement_min: Мин. вел. изм.
+        measurement_max: Макс. вел. изм.
+        safety_class: Класс без-ти
+        accuracy_class: Класс точ-ти
         is_complete_device: Полный набор?
-        is_tape_rolling_mechanism: Имеет лентопротяжный механизм?
-        measurement_range: Диапазон измерений
+        is_tape_rolling_mechanism: ЛП механизм?
+        measurement_range: Диапазон изм.
         calibration_max: Макс. калибр.
         calibration_min: Мин. калибр.
       device_reg_group:
@@ -243,28 +261,57 @@ ru:
         site_url: Ссылка на сайт
       measurement_class:
         name: Название
-        measurement_group: Группа измерений
-        measurement_group_id: Группа измерений
+        measurement_group: Группа изм.
+        measurement_group_id: Группа изм.
         arms_device_type: ARMS-тип
       measurement_group:
         name: Название
-      device_component:
-        serial_id: Серийный номер
+      organization:
+        id: ID
         name: Название
-        measurement_min: Мин. величина измерений
-        measurement_max: Макс. величина измерений
-        measurement_unit: Единица измерений
+        full_address: Адрес
+        zip_code: Индекс
+        phone: Телефон
+        fax: Факс
+        email: E-mail
+      device_component:
+        serial_id: Сер. номер
+        name: Название
+        measurement_min: Мин. вел. изм.
+        measurement_max: Макс. величина изм.
+        measuring_unit: Ед. изм.
         description: Описание
         supplementary_kit: Набор
+      division:
+        id: ID
+        name: Название
+        organization: Организация
+        organization_id: Организация
       supplementary_kit:
         serial_id: Серийный номер
         name: Название
+        description: Описание
+      room:
+        id: ID
+        name: Название
+        building: Здание
+        building_id: Здание
+        level: Уровень
         description: Описание
       post:
         title: Заголовок
         body: Текст записи
         user: Автор
         category: Категория
+      service:
+        id: ID
+        name: Название
+        division: Подразделение
+        division_id: Подразделение
+        organization: Организация
+        organization_id: Организация
+        building: Здание
+        building_id: Здание
       user:
         tabel_id: Таб. №
         first_name: Имя
@@ -310,6 +357,81 @@ ru:
         leave_blank_if_you_don_t_want_to_change_it: оставьте поле пустым, если не хотите его менять
         title: Страница редактирования %{resource}
         we_need_your_current_password_to_confirm_your_changes: введите текущий пароль для подтверждения изменений
+  shared:
+    admin:
+      form:
+        division:
+          labels:
+            name: Название
+            division: Подразделение
+            organization: Организация
+            building: Здание
+        building:
+          labels:
+            name: Название
+            organization: Организация
+          placeholders:
+            name: "106"
+            description: "Здание СМ-3 и РБТ-6"
+        room:
+          placeholders:
+            name: "112"
+            level: "-4.8"
+            description: "Кобальтовый участок"
+        organization:
+          labels:
+            name: Название
+            full_address: Адрес
+            zip_code: Индекс
+            phone: Телефон
+            fax: Факс
+            email: E-mail
+          placeholders:
+            name: АО ГНЦ НИИАР
+            full_address: Западное шоссе, 9
+            zip_code: "433019"
+            phone: 7-55-25
+            fax: 7-55-25
+            email: info@niiar.ru
+    show:
+      device:
+        send_to_inspection: Отправить на инспекцию
+        admin_send_to_inspection: Отправить на инспекцию (админ)
+    index:
+      division:
+        id: ID
+        name: Название
+      inspection:
+        device: Прибор
+        assigned_user: Инспектор
+        target: Цель
+        state: Состояние
+        conclusion: Заключение
+        conclusion_date: Дата заключения
+        description: Описание
+        creator: Направил
+        device_tabel_id: Таб.№
+        device_serial_id: Сер.№
+        text-no-new-task: Задач пока нет...
+        performer_last_name: Иванов
+        performer_first_name: Иван
+        performer_second_name: Иванович
+        inspection_description: Прибор был поверен...
+        creator_last_name: Петров
+        creator_first_name: Петр
+        creator_second_name: Петрович
+        conclusion_date_from: Дата заключения от
+        conclusion_date_to: Дата заключения до
+      device:
+        b_add_device: Прибор
+        b_add_device_component: Компонент
+    navbar:
+      inspection:
+        new_tasks: Новые задачи
+        my_tasks: Мои задачи
+        completed_tasks: Завершенные задачи
+        all_tasks: Все задачи
+        service_tasks: Задачи службы
   layouts:
     application:
       home: Главная
@@ -322,11 +444,6 @@ ru:
       profile: Профиль
       logout: Выйти
       edit_me: Изм. профиль
-  shared:
-    show:
-      device:
-        send_to_inspection: Отправить на инспекцию
-        admin_send_to_inspection: Отправить на инспекцию (админ)
     navbar:
       inspection:
         new_tasks: Новые задачи
@@ -387,6 +504,14 @@ ru:
         created_at_to: Создан до
         updated_at_from: Обновлен от
         updated_at_to: Обновлен до
+    building:
+      new: Добавить здание
+      edit: Изменить здание
+    control_point:
+      new:
+        add_control_point: Добавить т. контроля
+      edit:
+        edit_add_control_point: Изменить т. контроля
     device_component:
       new:
         add_device_component: Добавить компонент
@@ -422,6 +547,12 @@ ru:
         add_measurement_class: Добавить класс изм.
       edit:
         edit_measurement_class: Изменить класс изм.
+    room:
+      new: Добавить пом.
+      edit: Изменить пом.
+    organization:
+      new: Добавить орг.
+      edit: Изменить орг.
   combobox_blank: Не учитывать
   b_change: Изменить
   b_delete: Удалить

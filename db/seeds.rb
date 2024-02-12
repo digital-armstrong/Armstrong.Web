@@ -216,7 +216,8 @@ end
 100.times do |i|
   Room.create(
     name: "#{i}",
-    building: Building.find_by(id: rand(1..10))
+    building: Building.find_by(id: rand(1..10)),
+    level: rand(0.0..10.0)
   )
 end
 
@@ -292,9 +293,21 @@ end
   )
 end
 
+
+# seed ControlPoints
+200.times do |i|
+  ControlPoint.create(
+    name: "Точка контроля #{i}",
+    description: "Возможное описание",
+    room: Room.find_by(id: rand(1..99)),
+    service: Service.find_by(id: rand(1..10)),
+  )
+end
+
 # seed Device
 
-1000.times do |i|
+100.times do |i|
+  puts ControlPoint.find_by(id: i + 1).name
   Device.create(
     inventory_id: i,
     serial_id: "#{i}-123-N",
@@ -304,7 +317,8 @@ end
     year_of_production: 1990,
     year_of_commissioning: 1991,
     supplementary_kit: SupplementaryKit.find_by(id: rand(1..20)),
-    service: Service.find_by(id: rand(1..10))
+    service: Service.find_by(id: rand(1..10)),
+    control_point: ControlPoint.find_by(id: i + 1),
   )
 end
 
@@ -352,12 +366,10 @@ end
 
 # seed Channel
 
-200.times do |i|
+100.times do |i|
   Channel.create(
-    name: "ДКЗ-#{i}",
     channel_id: "#{i}",
-    device: Device.find_by(id: rand(1..1000)),
-    room: Room.find_by(id: rand(1..100)),
+    control_point: ControlPoint.find_by(id: rand(1..100)),
     server: Server.find_by(id: rand(1..10)),
     service: Service.find_by(id: rand(1..10)),
     location_description: "Description",
@@ -375,5 +387,15 @@ end
     is_special_control: false,
     is_online: true,
     state: "normal"
+  )
+end
+
+100.times do |i|
+  History.create(
+    channel_id: Channel.first,
+    event_impulse_value: rand(0.0..100.0),
+    event_system_value: Time.now,
+    event_not_system_value: rand(0.0..100.0),
+    event_datetime: Time.now,
   )
 end

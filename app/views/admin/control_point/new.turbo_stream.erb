@@ -1,0 +1,3 @@
+<%= turbo_stream.update "modal-title", t('admin.control_points.new.add_control_point') %>
+<%= turbo_stream.update "modal-body", partial: "shared/admin/form/control_point",
+ locals: {path: admin_control_point_index_path, control_point: @control_point } %>

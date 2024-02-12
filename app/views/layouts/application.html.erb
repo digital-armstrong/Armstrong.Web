@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="-ms-overflow-style: none; scrollbar-width: none">
   <head>
     <title><%= full_title(yield(:page_title))%></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,6 +8,12 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <style>
+      /* Disabling scrollbars for Chrome, Opera, and Safari */
+      body::-webkit-scrollbar {
+          display: none;
+      }
+    </style>
   </head>
 
   <header class="p-3 mb-3 border-bottom">
@@ -18,7 +24,13 @@
           <% if user_signed_in? %>
             <li>
               <% if can? :read, :armstrong %>
-                <%= link_to t(".ARMS"), armstrong_index_path, class: "nav-link px-2 link-secondary" %>
+                <%= link_to armstrong_index_path, class: "nav-link px-2 link-secondary position-relative" do %>
+                  <%= t(".ARMS") %>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info ">
+                    β
+                    <span class="visually-hidden">Этот раздел в разработке</span>
+                  </span>
+                <% end %>
               <% end %>
             </li>
             <li>
@@ -39,6 +51,11 @@
         </ul>
 
         <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <%= button_to admin_users_path, method: :get, class: "btn btn-light me-2" do %>
+              <i class="bi bi-gear"></i><span> <%= t('.admin_panel') %></span>
+            <% end %>
+          <% end %>
           <div class="dropdown text-end">
             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
               <%= image_tag "atom-logo.svg", class: "mx-1", width: "32", height: "32", alt: "avatar" %>
