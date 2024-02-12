@@ -24,7 +24,13 @@
           <% if user_signed_in? %>
             <li>
               <% if can? :read, :armstrong %>
-                <%= link_to t(".ARMS"), armstrong_index_path, class: "nav-link px-2 link-secondary" %>
+                <%= link_to armstrong_index_path, class: "nav-link px-2 link-secondary position-relative" do %>
+                  <%= t(".ARMS") %>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info ">
+                    β
+                    <span class="visually-hidden">Этот раздел в разработке</span>
+                  </span>
+                <% end %>
               <% end %>
             </li>
             <li>

@@ -208,6 +208,7 @@ ru:
       control_point:
         name: Название
         room: Помещение
+        room_id: Помещение
         description: Описание
         device: Устройство
       device:
@@ -265,6 +266,14 @@ ru:
         arms_device_type: ARMS-тип
       measurement_group:
         name: Название
+      organization:
+        id: ID
+        name: Название
+        full_address: Адрес
+        zip_code: Индекс
+        phone: Телефон
+        fax: Факс
+        email: E-mail
       device_component:
         serial_id: Сер. номер
         name: Название
@@ -273,6 +282,11 @@ ru:
         measuring_unit: Ед. изм.
         description: Описание
         supplementary_kit: Набор
+      division:
+        id: ID
+        name: Название
+        organization: Организация
+        organization_id: Организация
       supplementary_kit:
         serial_id: Серийный номер
         name: Название
@@ -289,6 +303,15 @@ ru:
         body: Текст записи
         user: Автор
         category: Категория
+      service:
+        id: ID
+        name: Название
+        division: Подразделение
+        division_id: Подразделение
+        organization: Организация
+        organization_id: Организация
+        building: Здание
+        building_id: Здание
       user:
         tabel_id: Таб. №
         first_name: Имя
@@ -337,6 +360,12 @@ ru:
   shared:
     admin:
       form:
+        division:
+          labels:
+            name: Название
+            division: Подразделение
+            organization: Организация
+            building: Здание
         building:
           labels:
             name: Название
@@ -369,6 +398,9 @@ ru:
         send_to_inspection: Отправить на инспекцию
         admin_send_to_inspection: Отправить на инспекцию (админ)
     index:
+      division:
+        id: ID
+        name: Название
       inspection:
         device: Прибор
         assigned_user: Инспектор
