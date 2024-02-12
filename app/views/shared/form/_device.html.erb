@@ -58,7 +58,7 @@
         <%= f.input :service_id, label: false, input_html: {hidden: true, value: current_user.service_id} %>
       <% end %>
     <div class="col">
-      <%= f.association :room, input_html: {:tabindex => 10}, include_blank: t('combobox_blank')%>
+      <%= f.association :control_point, input_html: {:tabindex => 10}, include_blank: t('combobox_blank')%>
     </div>
   </div>
 

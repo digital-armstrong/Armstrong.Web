@@ -213,6 +213,7 @@ ru:
         device: Устройство
       device:
         inventory_id: Инв. №
+        control_point: Точка контроля
         device_model: Модель
         device_model_id: Модель
         serial_id: Сер. №
