@@ -75,14 +75,16 @@
   </div>
   <div class="col-10 shadow rounded my-4">
     <div class="table-responsive">
-      <table class="table table-hover">
+      <table class="table table-hover text-nowrap">
         <thead>
-          <tr>
+          <tr class="text-nowrap">
             <th scope="col"><%=t('activerecord.attributes.device.tabel_id')%></th>
             <th scope="col"><%=t('activerecord.attributes.device.serial_id')%></th>
             <th scope="col"><%=t('activerecord.attributes.device.device_model')%></th>
             <th scope="col"><%=t('activerecord.attributes.device.year_of_production')%></th>
             <th scope="col"><%=t('activerecord.attributes.device.year_of_commissioning')%></th>
+            <th scope="col"><%=t('activerecord.attributes.device.room')%></th>
+            <th scope="col"><%=t('activerecord.attributes.device.control_point')%></th>
             <% if current_user.admin? %>
               <th scope="col"><%=t('activerecord.attributes.device.service')%></th>
             <% end %>
@@ -99,6 +101,13 @@
               <td><%= device.device_model.name %></td>
               <td><%= device.year_of_production %></td>
               <td><%= device.year_of_commissioning %></td>
+              <% if device.control_point_id? %>
+                <td><%= device.control_point.room.name %></td>
+                <td><%= device.control_point.name %></td>
+              <% else %>
+                <td><%= "——" %></td>
+                <td><%= "——" %></td>
+              <% end %>
               <% if current_user.admin? %>
                 <td><%= device.service.name %></td>
               <% end %>

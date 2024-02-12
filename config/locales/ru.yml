@@ -221,8 +221,8 @@ ru:
         device_reg_group: Рег. группа
         year_of_production: Год выпуска
         year_of_commissioning: Год ввода
-        room: Расположение
-        room_id: Расположение
+        room: Помещение
+        room_id: Помещение
         date_of_inspection: Дата инспекции
         supplementary_kit: Набор
         service: Служба
