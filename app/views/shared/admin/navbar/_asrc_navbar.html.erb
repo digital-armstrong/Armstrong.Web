@@ -1,0 +1,13 @@
+<div class='card shadow rounded border-0 mb-4 p-0'>
+  <% selected = local_assigns[:selected] %>
+  <div>
+    <%= link_to admin_channel_index_path, class: "btn btn-sm w-100 #{ 'btn-primary' if selected == 'channel' } text-start" do %>
+      <i class="bi bi-geo"></i><span> <%= 'Каналы' %></span>
+    <% end %>
+  </div>
+  <div class="text-left">
+    <%= link_to admin_channel_index_path, class: "btn btn-sm w-100 #{ 'btn-primary' if selected == 'server' } text-start" do %>
+      <i class="bi bi-door-open"></i><span> <%= 'Серверы' %></span>
+    <% end %>
+  </div>
+</div>

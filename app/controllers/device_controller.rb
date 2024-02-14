@@ -4,6 +4,8 @@ class DeviceController < ApplicationController
   before_action :set_device, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
+  @seporator = ','
+
   def index
     device_index
   end

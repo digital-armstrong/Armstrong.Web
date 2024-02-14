@@ -87,7 +87,7 @@ module DeviceConcern
                                      :year_of_production,
                                      :year_of_commissioning,
                                      :supplementary_kit_id,
-                                     :control_point_id,
+                                     :control_point_ids,
                                      :service_id)
     end
   end

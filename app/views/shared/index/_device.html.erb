@@ -78,6 +78,7 @@
       <table class="table table-hover text-nowrap">
         <thead>
           <tr class="text-nowrap">
+            <th scope="col"><i class="bi bi-circle"></th>
             <th scope="col"><%=t('activerecord.attributes.device.tabel_id')%></th>
             <th scope="col"><%=t('activerecord.attributes.device.serial_id')%></th>
             <th scope="col"><%=t('activerecord.attributes.device.device_model')%></th>
@@ -89,24 +90,45 @@
               <th scope="col"><%=t('activerecord.attributes.device.service')%></th>
             <% end %>
             <th scope="col"><%=t('activerecord.attributes.device.date_of_inspection')%></th>
-            <th scope="col"><i class="bi bi-circle"></th>
           </tr>
         </thead>
         <tbody>
           <% @devices.each do |device| %>
             <% path = "#{show_path}#{device.id}" %>
             <tr onclick="document.location = `<%= path %>`" style="cursor:pointer">
+              <% if device.status == Device::STATUS[:in_storage] %>
+                <td><i class="bi bi-circle-fill text-success"></i></td>
+              <% elsif device.status == Device::STATUS[:expired] %>
+                <td><i class="bi bi-circle-fill text-danger"></i></td>
+              <% elsif device.status == Device::STATUS[:on_repair] %>
+                <td><i class="bi bi-circle-fill text-info"></i></td>
+              <% elsif device.status == Device::STATUS[:in_stock] %>
+                <td><i class="bi bi-circle-fill text-success"></i></td>
+              <% elsif device.status == Device::STATUS[:sended_to_inspection] %>
+                <td><i class="bi bi-circle-fill text-primary"></i></td>
+              <% end %>
+
               <th scope="row"><%= device.tabel_id %></th>
               <td><%= device.serial_id %></td>
               <td><%= device.device_model.name %></td>
               <td><%= device.year_of_production %></td>
               <td><%= device.year_of_commissioning %></td>
-              <% if device.control_point_id? %>
-                <td><%= device.control_point.room.name %></td>
-                <td><%= device.control_point.name %></td>
+              <% if device.control_point.nil? %>
+                <td><%= "——" %></td>
+                <td><%= "——" %></td>
               <% else %>
-                <td><%= "——" %></td>
-                <td><%= "——" %></td>
+                <td>
+                  <span>
+                  <% device.control_point.each do |e| %>
+                    <%= content_tag(:span, e.room.name, class: "btn btn-light btn-sm") %>
+                  <% end %>
+                  </span>
+                </td>
+                <td>
+                  <% device.control_point.each do |e| %>
+                    <%= content_tag(:span, e.name, class: "btn btn-light btn-sm") %>
+                  <% end %>
+                </td>
               <% end %>
               <% if current_user.admin? %>
                 <td><%= device.service.name %></td>
@@ -123,11 +145,6 @@
                 <td class="text-danger">
                   <%= device.last_successful_inspection %>
                 </td>
-              <% end %>
-              <% if device.last_successful_inspection.present? %>
-                <td><i class="bi bi-circle-fill text-success"></i></td>
-              <% else %>
-                <td><i class="bi bi-circle-fill text-danger"></i></td>
               <% end %>
             </tr>
           <% end %>

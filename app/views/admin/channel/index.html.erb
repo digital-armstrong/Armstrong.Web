@@ -1,0 +1,114 @@
+<% provide :page_title, "Точки контроля" %>
+<%= render 'shared/admin/navbar/admin', selected: "asrc" %>
+<%= render 'shared/flash_alert' %>
+<div class="row mx-0">
+  <div class="col-2 ps-0 my-4">
+    <%= render 'shared/admin/navbar/asrc_navbar', selected: "channel" %>
+    <div class="accordion mb-3" id="accordionFilter">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFilter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            <%= t('filtration')%>
+          </button>
+        </h2>
+        <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+          <%= search_form_for(@query, url: admin_channel_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+            <div id="for-clear">
+              <%= f.label :id, class: "mb-2" %>
+              <%= f.search_field :id_cont, class:"form-control", placeholder:"ID" %>
+            </div>
+            <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 my-2'%>
+            <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
+              <%= t("b_clear")%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-10 my-4 shadow rounded">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="text-nowrap">
+          <tr>
+            <th scope="col"><%= t('activerecord.attributes.channel.id') %></th>
+            <th scope="col"><%= t('activerecord.attributes.channel.channel_id')%></th>
+            <th scope="col"><%= t('activerecord.attributes.channel.server')%></th>
+            <th scope="col"><%= t('activerecord.attributes.channel.control_point.name')%></th>
+
+            <th scope="col"><%= t('activerecord.attributes.channel.location_description')%></th>
+            <th scope="col"><%= t('activerecord.attributes.channel.self_background')%></th>
+            <th scope="col"><%= t('activerecord.attributes.channel.pre_emergency_limit')%></th>
+            <th scope="col"><%= t('activerecord.attributes.channel.emergency_limit')%></th>
+            <th scope="col"><%= t('activerecord.attributes.channel.consumption')%></th>
+            <th scope="col"><%= t('activerecord.attributes.channel.conversion_coefficient')%></th>
+            <th scope="col"><%= t('activerecord.attributes.channel.service')%></th>
+
+            <th scope="col" style="width: 10%"><%= t('action') %></th>
+          </tr>
+        </thead>
+        <tbody class="text-nowrap">
+          <% @channels.each do |channel| %>
+          <tr class="align-middle">
+            <td><%= channel.id %></td>
+            <td><%= channel.channel_id%></td>
+            <td><%= channel.server_id%></td>
+            <% if channel.control_point.nil? %>
+              <td><%= "——" %></td>
+            <% else %>
+              <td><%= channel.control_point.name %>
+            <% end %>
+            <td><%= channel.location_description %></td>
+            <td><%= channel.self_background %></td>
+            <td><%= channel.pre_emergency_limit %></td>
+            <td><%= channel.emergency_limit %></td>
+            <td><%= channel.consumption %></td>
+            <td><%= channel.conversion_coefficient %></td>
+            <td><%= channel.service.name %></td>
+
+
+            <td>
+              <div class="d-flex">
+                <%= link_to edit_admin_channel_path(channel.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
+                  <i class="bi bi-pen"></i>
+                <% end %>
+                <%= button_to admin_channel_path(channel.id), method: :delete, class: "btn" do %>
+                  <i class="bi bi-trash"></i>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+  </div>
+<div class="row my-5">
+  <div class="col-2">
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <%= pagination @pagy %>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>
+<script>
+  function formClear(){
+    let form = document.getElementById('for-clear')
+    let inputs = Array.from(form.getElementsByTagName("input"))
+    let selects = Array.from(form.getElementsByTagName("select"))
+    inputs.forEach((input) =>{
+      input.value = null
+    })
+    selects.forEach((select) =>{
+      select.value = ""
+    })
+  }
+</script>

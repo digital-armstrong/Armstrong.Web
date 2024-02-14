@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       post :create_inspection, :to => 'device#create_inspection'
     end
     resources :device_model, :measurement_class
-    resources :room, :building, :organization, :division, :service, :control_point, :manufacturer, :measurement_group, :device_reg_group,
+    resources :server, :channel, :room, :building, :organization, :division, :service, :control_point, :manufacturer, :measurement_group, :device_reg_group,
               :supplementary_kit, :device_component, except: [:show]
   end
 
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   resources :device do
     post :create_inspection, :to => 'device#create_inspection'
   end
-  resources :room, :building, :organization, :division, :service, :control_point, :device_model, :measurement_class,
+  resources :server, :channel, :room, :building, :organization, :division, :service, :control_point, :device_model, :measurement_class,
    :manufacturer, :measurement_group, :device_reg_group, :supplementary_kit, :device_component, only: [:create, :new]
 
   resources :inspection, except: [:index] do

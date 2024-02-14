@@ -49,7 +49,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-2">
       <% if current_user.admin? %>
         <div class="col">
           <%= f.association :service, input_html: {:tabindex => 9}, include_blank: false %>
@@ -58,7 +58,12 @@
         <%= f.input :service_id, label: false, input_html: {hidden: true, value: current_user.service_id} %>
       <% end %>
     <div class="col">
-      <%= f.association :control_point, input_html: {:tabindex => 10}, include_blank: t('combobox_blank')%>
+      <%= f.label :control_point %>
+      <div>
+        <% ControlPoint.where(device_id: device.id).each do |e| %>
+          <%= content_tag(:span, e.name, class: "btn btn-light btn-sm") %>
+        <% end %>
+      </div>
     </div>
   </div>
 

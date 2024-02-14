@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_02_104526) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_14_111919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_104526) do
     t.float "self_background", default: 0.0
     t.float "pre_emergency_limit", default: 1.0
     t.float "emergency_limit", default: 2.0
-    t.float "consumptiom", default: 1.0
+    t.float "consumption", default: 1.0
     t.float "conversion_coefficient", default: 0.0
     t.float "event_system_value", default: 0.0
     t.float "event_not_system_value", default: 0.0
@@ -57,6 +57,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_104526) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "service_id"
+    t.bigint "device_id"
+    t.string "control_point_type"
+    t.index ["device_id"], name: "index_control_points_on_device_id"
     t.index ["room_id"], name: "index_control_points_on_room_id"
     t.index ["service_id"], name: "index_control_points_on_service_id"
   end
@@ -119,8 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_104526) do
     t.bigint "room_id"
     t.string "inspection_expiration_status", default: "prepare_to_inspection", null: false
     t.string "status", default: "in_stock", null: false
-    t.bigint "control_point_id"
-    t.index ["control_point_id"], name: "index_devices_on_control_point_id"
+    t.float "inspection_interval", default: 1.0, null: false
     t.index ["device_model_id"], name: "index_devices_on_device_model_id"
     t.index ["device_reg_group_id"], name: "index_devices_on_device_reg_group_id"
     t.index ["inventory_id"], name: "index_devices_on_inventory_id", unique: true
@@ -279,13 +281,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_104526) do
   add_foreign_key "channels", "control_points"
   add_foreign_key "channels", "servers"
   add_foreign_key "channels", "services"
+  add_foreign_key "control_points", "devices"
   add_foreign_key "control_points", "rooms"
   add_foreign_key "control_points", "services"
   add_foreign_key "device_components", "supplementary_kits"
   add_foreign_key "device_models", "manufacturers"
   add_foreign_key "device_models", "measurement_classes"
   add_foreign_key "device_models", "measurement_groups"
-  add_foreign_key "devices", "control_points"
   add_foreign_key "devices", "device_models"
   add_foreign_key "devices", "device_reg_groups"
   add_foreign_key "devices", "rooms"
