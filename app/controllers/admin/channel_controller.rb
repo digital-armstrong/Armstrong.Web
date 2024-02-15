@@ -15,7 +15,12 @@ class Admin::ChannelController < ApplicationController
     channel_create
   end
 
-  def update; end
+  def update
+    channel_update
+  end
 
-  def destroy; end
+  def destroy
+    authorize!(:destroy, :channel_admin)
+    channel_destroy
+  end
 end

@@ -83,7 +83,7 @@
 
   <% if current_user.admin? %>
     <div class="row">
-      <%= f.association :service, input_html: { :tabindex => 10} %>
+      <%= f.association :service, input_html: { :tabindex => 10 }, include_blank: false %>
     </div>
   <% end %>
 

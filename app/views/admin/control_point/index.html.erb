@@ -17,8 +17,8 @@
               <%= f.label :name, class: "mb-2" %>
               <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
               <%= f.label :room_id, class:"mb-1" %>
-                  <%= f.collection_select(:room_id_eq, Room.all,
-                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select'}) %>
+              <%= f.collection_select(:room_id_eq, Room.all,
+              :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select'}) %>
             </div>
             <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 my-2'%>
             <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">

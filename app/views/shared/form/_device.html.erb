@@ -57,14 +57,7 @@
       <% else %>
         <%= f.input :service_id, label: false, input_html: {hidden: true, value: current_user.service_id} %>
       <% end %>
-    <div class="col">
-      <%= f.label :control_point %>
-      <div>
-        <% ControlPoint.where(device_id: device.id).each do |e| %>
-          <%= content_tag(:span, e.name, class: "btn btn-light btn-sm") %>
-        <% end %>
-      </div>
-    </div>
+
   </div>
 
   <%= render 'shared/form/actions', f:f %>

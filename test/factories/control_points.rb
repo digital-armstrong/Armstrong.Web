@@ -6,5 +6,6 @@ FactoryBot.define do
     channel { nil }
     device { nil }
     service { association :service }
+    device_id { association :device }
   end
 end

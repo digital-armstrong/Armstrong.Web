@@ -44,7 +44,7 @@ module DeviceConcern
     def device_destroy(device, path_success, path_failure)
       assigned_inspections_count = Inspection.where(device_id: device.id).count
 
-      if assigned_inspections_count.zero? && device.control_point_id?
+      if assigned_inspections_count.zero? && device.control_point.nil?
         device.destroy
         redirect_to(path_success)
       else

@@ -14,8 +14,23 @@
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url: admin_channel_index_path, method: :get, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
-              <%= f.label :id, class: "mb-2" %>
-              <%= f.search_field :id_cont, class:"form-control", placeholder:"ID" %>
+              <%= f.label :id, class: "mb-1" %>
+              <%= f.search_field :id_eq, class:"form-control mb-2", placeholder:"ID" %>
+
+              <%= f.label :channel_id, class: "mb-1" %>
+              <%= f.search_field :channel_id_eq, class:"form-control mb-2", placeholder:"25" %>
+
+              <%= f.label :server_id, class: "mb-1" %>
+              <%= f.collection_select(:server_id_eq, Server.all,
+              :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select mb-2'}) %>
+
+              <%= f.label :control_point_id, class: "mb-1" %>
+              <%= f.collection_select(:control_point_id_eq, ControlPoint.all,
+              :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select mb-2'}) %>
+
+              <%= f.label :service_id, class: "mb-1" %>
+              <%= f.collection_select(:service_id_eq, Service.all,
+              :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select mb-2'}) %>
             </div>
             <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 my-2'%>
             <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">

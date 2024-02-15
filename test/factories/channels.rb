@@ -8,7 +8,7 @@ FactoryBot.define do
     self_background { 1.5 }
     pre_emergency_limit { 1.5 }
     emergency_limit { 1.5 }
-    consumptiom { 1.5 }
+    consumption { 1.5 }
     conversion_coefficient { 1.5 }
     event_system_value { 1.5 }
     event_not_system_value { 1.5 }

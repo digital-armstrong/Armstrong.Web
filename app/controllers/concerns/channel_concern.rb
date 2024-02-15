@@ -1,7 +1,7 @@
 module ChannelConcern
   extend ActiveSupport::Concern
 
-  included do
+  included do # rubocop:disable Metrics/BlockLength
     def channel_index
       @query = Channel.ransack(params[:q])
       @pagy, @channels = pagy(@query.result.order(:id))
@@ -17,10 +17,33 @@ module ChannelConcern
       end
     end
 
+    def channel_update
+      if @channel.update(channel_params)
+        redirect_back(fallback_location: root_path)
+      else
+        render(:new, status: :unprocessable_entity)
+      end
+    end
+
+    def channel_destroy
+      assigned_histories = History.where(channel_id: @channel.id).count
+
+      if assigned_histories.zero?
+        if @channel.destroy
+          flash[:success] = t('message.admin.channel.delete.success')
+        else
+          flash[:error] = t('message.admin.channel.delete.error')
+        end
+      else
+        flash[:error] = t('message.admin.channel.delete.error')
+      end
+      redirect_to(admin_channel_index_path)
+    end
+
     private
 
     def set_channel
-      @channel = Channel.find(channel_params[:id])
+      @channel = Channel.find(params[:id])
     end
 
     def channel_params

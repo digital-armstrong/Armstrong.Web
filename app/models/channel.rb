@@ -5,6 +5,10 @@ class Channel < ApplicationRecord
   has_many :history
   belongs_to :control_point
 
+  channel_id_msg = 'должен быть в диапозоне от 1 до 48'
+
+  validates :channel_id, presence: true, numericality: { in: 1..48, message: channel_id_msg }
+
   def self.ransackable_associations(_auth_object = nil)
     ['control_point', 'history', 'server', 'service']
   end
