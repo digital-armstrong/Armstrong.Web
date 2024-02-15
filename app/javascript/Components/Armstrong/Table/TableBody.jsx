@@ -13,7 +13,13 @@ export default function TableBody({ columns, data, openModal }) {
             let tData = row[accessor] ? row[accessor] : '——';
             if (accessor === 'chart') {
               tData = (
-                <Button type="button" onClick={openModal} className="btn btn-light" data-id={row.id} data-pointname={row.name}>
+                <Button
+                  type="button"
+                  onClick={openModal}
+                  className="btn btn-light btn-sm"
+                  data-id={row.id}
+                  data-pointname={row.name}
+                >
                   <Icon.GraphUp />
                 </Button>
               );
