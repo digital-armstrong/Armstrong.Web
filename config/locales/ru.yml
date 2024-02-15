@@ -211,6 +211,18 @@ ru:
         room_id: Помещение
         description: Описание
         device: Устройство
+      channel:
+        id: ID
+        channel_id: № кнл.
+        server: № срв.
+        control_point: Точка контроля
+        location_description: Описание располож.
+        self_background: Собств. фон
+        pre_emergency_limit: Пред.-ав. уст.
+        emergency_limit: Ав. уст.
+        consumption: Расход
+        conversion_coefficient: Коэфф. конв.
+        service: Служба
       device:
         inventory_id: Инв. №
         control_point: Точка контроля
@@ -361,6 +373,18 @@ ru:
   shared:
     admin:
       form:
+        channel:
+          placeholders:
+            channel_id: ID канала (1...48)
+            server_id: ID сервера
+            server: Название сервера
+            location_description: Описание канала
+            self_background: Собственный фон (12.34)
+            pre_emergency_limit: Предаварийная уставка (123.45)
+            emergency_limit: Аварийная уставка (1234.56)
+            consumption: Расход (123.45)
+            conversion_coefficient: Коэфф. преобразования (0.0009)
+            service: Служба
         division:
           labels:
             name: Название
