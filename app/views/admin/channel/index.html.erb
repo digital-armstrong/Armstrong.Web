@@ -59,7 +59,7 @@
             <th scope="col"><%= t('activerecord.attributes.channel.conversion_coefficient')%></th>
             <th scope="col"><%= t('activerecord.attributes.channel.service')%></th>
 
-            <th scope="col" style="width: 10%"><%= t('action') %></th>
+            <th scope="col" style="position: sticky; right:  0; background: white; z-index:  1;" style="width: 10%"><%= t('action') %></th>
           </tr>
         </thead>
         <tbody class="text-nowrap">
@@ -82,7 +82,7 @@
             <td><%= channel.service.name %></td>
 
 
-            <td>
+            <td style="position: sticky; right:  0; background: white; z-index:  1;">
               <div class="d-flex">
                 <%= link_to edit_admin_channel_path(channel.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
                   <i class="bi bi-pen"></i>
