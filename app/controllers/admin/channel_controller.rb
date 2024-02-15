@@ -1,9 +1,21 @@
 class Admin::ChannelController < ApplicationController
   include ChannelConcern
   load_and_authorize_resource
-  # before_action :set_building, only: [:show, :edit, :update, :destroy]
+  before_action :set_channel, only: [:show, :edit, :update, :destroy]
 
   def index
     channel_index
   end
+
+  def new
+    @channel = Channel.new
+  end
+
+  def create
+    channel_create
+  end
+
+  def update; end
+
+  def destroy; end
 end

@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-
+  <%= render 'shared/modal_button_add', path: new_admin_channel_path, classes: "btn btn-primary w-100", text: t("b_add") %>
   </div>
   <div class="col-10 my-4 shadow rounded">
     <div class="table-responsive">
@@ -36,7 +36,6 @@
             <th scope="col"><%= t('activerecord.attributes.channel.channel_id')%></th>
             <th scope="col"><%= t('activerecord.attributes.channel.server')%></th>
             <th scope="col"><%= t('activerecord.attributes.channel.control_point.name')%></th>
-
             <th scope="col"><%= t('activerecord.attributes.channel.location_description')%></th>
             <th scope="col"><%= t('activerecord.attributes.channel.self_background')%></th>
             <th scope="col"><%= t('activerecord.attributes.channel.pre_emergency_limit')%></th>
@@ -52,8 +51,8 @@
           <% @channels.each do |channel| %>
           <tr class="align-middle">
             <td><%= channel.id %></td>
-            <td><%= channel.channel_id%></td>
-            <td><%= channel.server_id%></td>
+            <td><%= channel.channel_id %></td>
+            <td><%= channel.server.name %></td>
             <% if channel.control_point.nil? %>
               <td><%= "——" %></td>
             <% else %>
