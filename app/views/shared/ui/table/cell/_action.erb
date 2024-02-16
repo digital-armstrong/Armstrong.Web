@@ -1,0 +1,10 @@
+<td style="position: sticky; right:  0; background: white; z-index:  1;">
+  <div class="d-flex justify-content-end align-items-end">
+    <%= link_to edit_path, class: "btn btn-sm", data: { action: "click->modal#open", turbo_stream: "" } do %>
+      <i class="bi bi-pen"></i>
+    <% end %>
+    <%= button_to destroy_path, method: :delete, class: "btn btn-sm" do %>
+      <i class="bi bi-trash"></i>
+    <% end %>
+  </div>
+</td>
