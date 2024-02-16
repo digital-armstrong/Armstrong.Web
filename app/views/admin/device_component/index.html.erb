@@ -36,49 +36,47 @@
     </div>
     <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-primary w-100 mb-3", text: t("b_add") %>
   </div>
-  <div class="col-10 my-4 shadow rounded"">
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr class="text-nowrap">
-            <th scope="col"><%= t('activerecord.attributes.device_component.serial_id')%></th>
-            <th scope="col"><%= t('activerecord.attributes.device_component.name')%></th>
-            <th scope="col"><%= t('activerecord.attributes.device_component.supplementary_kit')%></th>
-            <th scope="col"><%= t('activerecord.attributes.device_component.measurement_min')%></th>
-            <th scope="col"><%= t('activerecord.attributes.device_component.measurement_max')%></th>
-            <th scope="col"><%= t('activerecord.attributes.device_component.measuring_unit')%></th>
-            <th scope="col"><%= t('activerecord.attributes.device_component.description')%></th>
-            <th scope="col" style="width: 10%"><%= t('action')%></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @device_components.each do |device_component| %>
-          <tr>
-              <td><%= device_component.serial_id %></td>
-              <td><%= device_component.name %></td>
-              <% if device_component.supplementary_kit.nil? %>
-                <td></td>
-              <% else %>
-                <td><%= device_component.supplementary_kit.name %></td>
-              <% end %>
-              <td><%= device_component.measurement_min %></td>
-              <td><%= device_component.measurement_max %></td>
-              <td><%= device_component.measuring_unit %></td>
-              <td><%= device_component.description %></td>
-              <td>
-              <div class="d-flex w-auto">
-                  <%= link_to edit_admin_device_component_path(device_component.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
-                    <i class="bi bi-pen"></i>
-                  <% end %>
-                  <%= button_to admin_device_component_path(device_component.id), method: :delete, form: { data: { turbo_confirm: t('delete_confirm') } }, class: "btn" do %>
-                    <i class="bi bi-trash"></i>
-                  <% end %>
-                </div>
-              </td>
+  <div class="col-10 my-4 p-0">
+    <div class="shadow rounded px-2">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <%= render 'shared/ui/table/caption/all_items',
+              count: DeviceComponent.count %>
+          <thead>
+            <tr class="text-nowrap">
+              <th scope="col"><%= t('activerecord.attributes.device_component.serial_id')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_component.name')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_component.supplementary_kit')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_component.measurement_min')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_component.measurement_max')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_component.measuring_unit')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_component.description')%></th>
+              <%= render 'shared/ui/table/header/action'%>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody class="text-nowrap">
+            <% @device_components.each do |device_component| %>
+            <tr>
+                <td><%= device_component.serial_id %></td>
+                <td><%= device_component.name %></td>
+                <% if device_component.supplementary_kit.nil? %>
+                  <td></td>
+                <% else %>
+                  <td><%= device_component.supplementary_kit.name %></td>
+                <% end %>
+                <td><%= device_component.measurement_min %></td>
+                <td><%= device_component.measurement_max %></td>
+                <td><%= device_component.measuring_unit %></td>
+                <td><%= device_component.description %></td>
+
+                <%= render 'shared/ui/table/cell/action',
+                  edit_path: edit_admin_device_component_path(device_component.id),
+                  destroy_path: admin_device_component_path(device_component.id) %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

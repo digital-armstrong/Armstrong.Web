@@ -371,6 +371,10 @@ ru:
         title: Страница редактирования %{resource}
         we_need_your_current_password_to_confirm_your_changes: введите текущий пароль для подтверждения изменений
   shared:
+    ui:
+      table:
+        caption:
+          all_items: "Всего: "
     admin:
       form:
         channel:

@@ -42,60 +42,56 @@
     </div>
   <%= render 'shared/modal_button_add', path: new_admin_channel_path, classes: "btn btn-primary w-100", text: t("b_add") %>
   </div>
-  <div class="col-10 my-4 shadow rounded">
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead class="text-nowrap">
-          <tr>
-            <th scope="col"><%= t('activerecord.attributes.channel.id') %></th>
-            <th scope="col"><%= t('activerecord.attributes.channel.channel_id')%></th>
-            <th scope="col"><%= t('activerecord.attributes.channel.server')%></th>
-            <th scope="col"><%= t('activerecord.attributes.channel.control_point.name')%></th>
-            <th scope="col"><%= t('activerecord.attributes.channel.location_description')%></th>
-            <th scope="col"><%= t('activerecord.attributes.channel.self_background')%></th>
-            <th scope="col"><%= t('activerecord.attributes.channel.pre_emergency_limit')%></th>
-            <th scope="col"><%= t('activerecord.attributes.channel.emergency_limit')%></th>
-            <th scope="col"><%= t('activerecord.attributes.channel.consumption')%></th>
-            <th scope="col"><%= t('activerecord.attributes.channel.conversion_coefficient')%></th>
-            <th scope="col"><%= t('activerecord.attributes.channel.service')%></th>
+  <div class="col-10 my-4 p-0">
+    <div class="shadow rounded px-2">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <%= render 'shared/ui/table/caption/all_items',
+                count: Channel.count %>
+          <thead class="text-nowrap">
+            <tr>
+              <th scope="col"><%= t('activerecord.attributes.channel.id') %></th>
+              <th scope="col"><%= t('activerecord.attributes.channel.channel_id')%></th>
+              <th scope="col"><%= t('activerecord.attributes.channel.server')%></th>
+              <th scope="col"><%= t('activerecord.attributes.channel.control_point.name')%></th>
+              <th scope="col"><%= t('activerecord.attributes.channel.location_description')%></th>
+              <th scope="col"><%= t('activerecord.attributes.channel.self_background')%></th>
+              <th scope="col"><%= t('activerecord.attributes.channel.pre_emergency_limit')%></th>
+              <th scope="col"><%= t('activerecord.attributes.channel.emergency_limit')%></th>
+              <th scope="col"><%= t('activerecord.attributes.channel.consumption')%></th>
+              <th scope="col"><%= t('activerecord.attributes.channel.conversion_coefficient')%></th>
+              <th scope="col"><%= t('activerecord.attributes.channel.service')%></th>
 
-            <th scope="col" style="position: sticky; right:  0; background: white; z-index:  1;" style="width: 10%"><%= t('action') %></th>
-          </tr>
-        </thead>
-        <tbody class="text-nowrap">
-          <% @channels.each do |channel| %>
-          <tr class="align-middle">
-            <td><%= channel.id %></td>
-            <td><%= channel.channel_id %></td>
-            <td><%= channel.server.name %></td>
-            <% if channel.control_point.nil? %>
-              <td><%= "——" %></td>
-            <% else %>
-              <td><%= channel.control_point.name %>
+              <%= render 'shared/ui/table/header/action'%>
+            </tr>
+          </thead>
+          <tbody class="text-nowrap">
+            <% @channels.each do |channel| %>
+            <tr class="align-middle">
+              <td><%= channel.id %></td>
+              <td><%= channel.channel_id %></td>
+              <td><%= channel.server.name %></td>
+              <% if channel.control_point.nil? %>
+                <td><%= "——" %></td>
+              <% else %>
+                <td><%= channel.control_point.name %>
+              <% end %>
+              <td><%= channel.location_description %></td>
+              <td><%= channel.self_background %></td>
+              <td><%= channel.pre_emergency_limit %></td>
+              <td><%= channel.emergency_limit %></td>
+              <td><%= channel.consumption %></td>
+              <td><%= channel.conversion_coefficient %></td>
+              <td><%= channel.service.name %></td>
+
+              <%= render 'shared/ui/table/cell/action',
+                edit_path: edit_admin_channel_path(channel.id),
+                destroy_path: admin_channel_path(channel.id) %>
+            </tr>
             <% end %>
-            <td><%= channel.location_description %></td>
-            <td><%= channel.self_background %></td>
-            <td><%= channel.pre_emergency_limit %></td>
-            <td><%= channel.emergency_limit %></td>
-            <td><%= channel.consumption %></td>
-            <td><%= channel.conversion_coefficient %></td>
-            <td><%= channel.service.name %></td>
-
-
-            <td style="position: sticky; right:  0; background: white; z-index:  1;">
-              <div class="d-flex">
-                <%= link_to edit_admin_channel_path(channel.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
-                  <i class="bi bi-pen"></i>
-                <% end %>
-                <%= button_to admin_channel_path(channel.id), method: :delete, class: "btn" do %>
-                  <i class="bi bi-trash"></i>
-                <% end %>
-              </div>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
