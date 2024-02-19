@@ -325,6 +325,15 @@ ru:
         organization_id: Организация
         building: Здание
         building_id: Здание
+      server:
+        id: ID
+        name: Название
+        ip_address: IPv4
+        inventory_id: № инв.
+        service: Служба
+        service_id: Служба
+        room: Расположение
+        room_id: Расположение
       user:
         tabel_id: Таб. №
         first_name: Имя
