@@ -62,53 +62,57 @@
       <i class="bi bi-plus-square"></i><span> <%= t('b_add')%></span>
     <% end %>
   </div>
-  <div class="col-10 my-4 shadow rounded">
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr class="text-nowrap">
-            <th scope="col"><%=t('activerecord.attributes.user.tabel_id')%></th>
-            <th scope="col"><%=t('activerecord.attributes.user.last_name')%></th>
-            <th scope="col"><%=t('activerecord.attributes.user.first_name')%></th>
-            <th scope="col"><%=t('activerecord.attributes.user.second_name')%></th>
-            <th scope="col"><%=t('activerecord.attributes.user.role')%></th>
-            <th scope="col"><%=t('activerecord.attributes.user.email')%></th>
-            <th scope="col"><%=t('activerecord.attributes.user.phone')%></th>
-            <th scope="col"><%=t('activerecord.attributes.user.service')%></th>
-            <th scope="col"><%=t('created_at')%></th>
-            <th scope="col"><%=t('updated_at')%></th>
-            <th scope="col" style="width: 10%"><%=t('action')%></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @users.each do |user| %>
-            <tr>
-              <td><%= user.tabel_id %></td>
-              <td><%= user.last_name %></td>
-              <td><%= user.first_name %></td>
-              <td><%= user.second_name %></td>
-              <td><%= user.role %></td>
-              <td class="text-nowrap"><%= user.email %></td>
-              <td class="text-nowrap"><%= user.phone %></td>
-              <td class="text-nowrap"><%= user.service.name %></td>
-              <td><%= formatted_date(user.created_at, :short_full) %></td>
-              <td><%= formatted_date(user.updated_at, :short_full) %></td>
-              <td>
-                <div class="d-flex w-auto">
-                  <%= link_to edit_admin_user_path(user), class: "btn" do %>
-                    <i class="bi bi-pen"></i>
-                  <% end %>
-                  <% unless user.id == current_user.id %>
-                    <%= button_to admin_user_path(user), method: :delete, class: "btn" do %>
-                      <i class="bi bi-trash"></i>
-                    <% end %>
-                  <% end %>
-                </div>
-              </td>
+  <div class="col-10 my-4 p-0">
+    <div class="shadow rounded px-2">
+      <div class="table-responsive">
+        <table class="table table-hover text-nowrap">
+          <%= render 'shared/ui/table/caption/all_items',
+              count: User.count %>
+          <thead>
+            <tr class="text-nowrap">
+              <th scope="col"><%=t('activerecord.attributes.user.tabel_id')%></th>
+              <th scope="col"><%=t('activerecord.attributes.user.last_name')%></th>
+              <th scope="col"><%=t('activerecord.attributes.user.first_name')%></th>
+              <th scope="col"><%=t('activerecord.attributes.user.second_name')%></th>
+              <th scope="col"><%=t('activerecord.attributes.user.role')%></th>
+              <th scope="col"><%=t('activerecord.attributes.user.email')%></th>
+              <th scope="col"><%=t('activerecord.attributes.user.phone')%></th>
+              <th scope="col"><%=t('activerecord.attributes.user.service')%></th>
+              <th scope="col"><%=t('created_at')%></th>
+              <th scope="col"><%=t('updated_at')%></th>
+              <%= render 'shared/ui/table/header/action' %>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.tabel_id %></td>
+                <td><%= user.last_name %></td>
+                <td><%= user.first_name %></td>
+                <td><%= user.second_name %></td>
+                <td><%= user.role %></td>
+                <td class="text-nowrap"><%= user.email %></td>
+                <td class="text-nowrap"><%= user.phone %></td>
+                <td class="text-nowrap"><%= user.service.name %></td>
+                <td><%= formatted_date(user.created_at, :short_full) %></td>
+                <td><%= formatted_date(user.updated_at, :short_full) %></td>
+                <td style="position: sticky; right:  0; background: white; z-index:  1;">
+                  <div class="d-flex justify-content-end align-items-end">
+                    <%= link_to edit_admin_user_path(user), class: "btn btn-sm" do %>
+                      <i class="bi bi-pen"></i>
+                    <% end %>
+                    <% unless user.id == current_user.id %>
+                      <%= button_to admin_user_path(user), method: :delete, class: "btn btn-sm" do %>
+                        <i class="bi bi-trash"></i>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

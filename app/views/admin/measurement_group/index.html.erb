@@ -31,6 +31,8 @@
     <div class="shadow rounded px-2">
       <div class="table-responsive">
         <table class="table table-hover">
+          <%= render 'shared/ui/table/caption/all_items',
+              count: MeasurementGroup.count %>
           <thead>
             <tr>
               <th scope="col"><%= t('activerecord.attributes.measurement_group.name') %></th>

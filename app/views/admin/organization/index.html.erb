@@ -37,65 +37,69 @@
     </div>
     <%= render 'shared/modal_button_add', path: new_admin_organization_path, classes: "btn btn-primary w-100", text: t("b_add") %>
   </div>
-  <div class="col-10 my-4 shadow rounded">
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col"><%= t('activerecord.attributes.organization.id') %></th>
-            <th scope="col"><%= t('activerecord.attributes.organization.name') %></th>
-            <th scope="col"><%= t('activerecord.attributes.organization.full_address') %></th>
-            <th scope="col"><%= t('activerecord.attributes.organization.zip_code') %></th>
-            <th scope="col"><%= t('activerecord.attributes.organization.phone') %></th>
-            <th scope="col"><%= t('activerecord.attributes.organization.fax') %></th>
-            <th scope="col"><%= t('activerecord.attributes.organization.email') %></th>
-            <th scope="col" style="width: 10%"><%= t('action') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @organizations.each do |organization| %>
-          <tr class="align-middle">
-              <td><%= organization.id %></td>
-              <td><%= organization.name %></td>
-              <% if organization.full_address.nil? %>
-                <td><%= "——" %></td>
-              <% else %>
-                <td><%= organization.full_address %></td>
-              <% end %>
-              <% if organization.zip_code.nil? %>
-                <td><%= "——" %></td>
-              <% else %>
-                <td><%= organization.zip_code %></td>
-              <% end %>
-              <% if organization.phone.nil? %>
-                <td><%= "——" %></td>
-              <% else %>
-                <td><%= organization.phone %></td>
-              <% end %>
-              <% if organization.fax.nil? %>
-                <td><%= "——" %></td>
-              <% else %>
-                <td><%= organization.fax %></td>
-              <% end %>
-              <% if organization.email.nil? %>
-                <td><%= "——" %></td>
-              <% else %>
-                <td><%= organization.email %></td>
-              <% end %>
-              <td>
-                <div class="d-flex">
-                  <%= link_to edit_admin_organization_path(organization.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
-                    <i class="bi bi-pen"></i>
-                  <% end %>
-                  <%= button_to admin_organization_path(organization.id), method: :delete, class: "btn" do %>
-                    <i class="bi bi-trash"></i>
-                  <% end %>
-                </div>
-              </td>
+  <div class="col-10 my-4 p-0">
+    <div class="shadow rounded px-2">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <%= render 'shared/ui/table/caption/all_items',
+              count: Organization.count %>
+          <thead>
+            <tr>
+              <th scope="col"><%= t('activerecord.attributes.organization.id') %></th>
+              <th scope="col"><%= t('activerecord.attributes.organization.name') %></th>
+              <th scope="col"><%= t('activerecord.attributes.organization.full_address') %></th>
+              <th scope="col"><%= t('activerecord.attributes.organization.zip_code') %></th>
+              <th scope="col"><%= t('activerecord.attributes.organization.phone') %></th>
+              <th scope="col"><%= t('activerecord.attributes.organization.fax') %></th>
+              <th scope="col"><%= t('activerecord.attributes.organization.email') %></th>
+              <th scope="col" style="width: 10%"><%= t('action') %></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @organizations.each do |organization| %>
+            <tr class="align-middle">
+                <td><%= organization.id %></td>
+                <td><%= organization.name %></td>
+                <% if organization.full_address.nil? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td><%= organization.full_address %></td>
+                <% end %>
+                <% if organization.zip_code.nil? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td><%= organization.zip_code %></td>
+                <% end %>
+                <% if organization.phone.nil? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td><%= organization.phone %></td>
+                <% end %>
+                <% if organization.fax.nil? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td><%= organization.fax %></td>
+                <% end %>
+                <% if organization.email.nil? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td><%= organization.email %></td>
+                <% end %>
+                <td>
+                  <div class="d-flex">
+                    <%= link_to edit_admin_organization_path(organization.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
+                      <i class="bi bi-pen"></i>
+                    <% end %>
+                    <%= button_to admin_organization_path(organization.id), method: :delete, class: "btn" do %>
+                      <i class="bi bi-trash"></i>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
