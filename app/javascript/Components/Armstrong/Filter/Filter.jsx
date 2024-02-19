@@ -4,7 +4,13 @@ import PropTypes from 'prop-types';
 export default function Filter({ filter, onFilterChange }) {
   return (
     <div>
-      <input className="form-control rounded" type="text" placeholder="Поиск..." value={filter} onChange={onFilterChange} />
+      <input
+        className="form-control rounded mb-2"
+        type="text"
+        placeholder="Поиск..."
+        value={filter}
+        onChange={onFilterChange}
+      />
     </div>
   );
 }
