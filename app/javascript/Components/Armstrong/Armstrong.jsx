@@ -26,7 +26,7 @@ export default function Armstrong() {
       case 'normal':
         return <i className="bi bi-circle-fill text-success" />;
       case 'warning':
-        return <i className="bi bi-circle-warning" />;
+        return <i className="bi bi-circle-fill text-warning" />;
       case 'danger':
         return <i className="bi bi-circle-fill text-danger" />;
       default:
@@ -96,7 +96,7 @@ export default function Armstrong() {
   return (
     <div className="row mx-0">
       <div className="shadow rounded mb-4 pt-3">
-        <Filter className="ps-0 pe-0 mb-3" filter={filter} onFilterChange={handleFilterChange} />
+        <Filter className="ps-0 pe-0" filter={filter} onFilterChange={handleFilterChange} />
         <Table data={filteredData} openModal={openModal} />
         {isModalOpen && (
           <ModalComponent

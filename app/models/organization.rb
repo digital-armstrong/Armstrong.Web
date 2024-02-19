@@ -5,7 +5,7 @@ class Organization < ApplicationRecord
 
   validates :name, presence: true
 
-  def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "email", "fax", "full_address", "id", "name", "phone", "updated_at", "zip_code"]
+  def self.ransackable_attributes(_auth_object = nil)
+    ['created_at', 'email', 'fax', 'full_address', 'id', 'name', 'phone', 'updated_at', 'zip_code']
   end
 end

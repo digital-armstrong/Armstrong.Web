@@ -1,0 +1,91 @@
+<%= simple_form_for channel, as: :channel, url: path,
+  class: "form-group row" do |f| %>
+
+  <style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
+
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <%= f.label :channel_id %>
+      </div>
+      <div class="row">
+        <%= f.input :channel_id, label: false, placeholder: t('.placeholders.channel_id'), input_html: {:tabindex => 1} %>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        <%= f.label :server%>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= f.association :server, label: false, input_html: {:tabindex => 2}, include_blank: false %>
+        </div>
+        <div class="col-2 ps-0">
+          <%= render 'shared/modal_button_add', path: new_admin_server_path, classes: "btn btn-ligth", text: nil %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <%= f.label :location_description %>
+      </div>
+      <div class="row">
+        <%= f.input :location_description, as: :string, label: false, placeholder: t('.placeholders.location_description'), input_html: {:tabindex => 3} %>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row">
+        <%= f.label :control_point, label_method: :name %>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= f.association :control_point, label: false, input_html: {:tabindex => 4}, include_blank: false %>
+        </div>
+        <div class="col-2 ps-0">
+          <%= render 'shared/modal_button_add', path: new_admin_control_point_path, classes: "btn btn-ligth", text: nil %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <%= f.input :self_background, placeholder: t('.placeholders.self_background'), input_html: {:tabindex => 5} %>
+    </div>
+    <div class="col">
+      <%= f.input :consumption, placeholder: t('.placeholders.consumption'), input_html: {:tabindex => 6} %>
+    </div>
+    <div class="col">
+      <%= f.input :conversion_coefficient, placeholder: t('.placeholders.conversion_coefficient'), input_html: {:tabindex => 7} %>
+    </div>
+  </div>
+
+    <div class="row">
+    <div class="col">
+      <%= f.input :pre_emergency_limit, placeholder: t('.placeholders.pre_emergency_limit'), input_html: {:tabindex => 8} %>
+    </div>
+    <div class="col">
+      <%= f.input :emergency_limit, placeholder: t('.placeholders.emergency_limit'), input_html: {:tabindex => 9} %>
+    </div>
+  </div>
+
+  <% if current_user.admin? %>
+    <div class="row">
+      <%= f.association :service, input_html: { :tabindex => 10 }, include_blank: false %>
+    </div>
+  <% end %>
+
+  <%= render 'shared/form/actions', f:f %>
+<% end %>

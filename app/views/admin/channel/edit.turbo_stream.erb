@@ -1,0 +1,3 @@
+<%= turbo_stream.update "modal-title", t('.edit_channel') %>
+<%= turbo_stream.update "modal-body", partial: "shared/admin/form/channel",
+ locals: { path: admin_channel_path(@channel), channel: @channel } %>

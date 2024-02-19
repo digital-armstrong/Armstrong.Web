@@ -32,49 +32,46 @@
     </div>
     <%= render 'shared/modal_button_add', path: new_admin_room_path, classes: "btn btn-primary w-100", text: t("b_add") %>
   </div>
-  <div class="col-10 my-4 shadow rounded">
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col"><%= t('activerecord.attributes.room.id') %></th>
-            <th scope="col"><%= t('activerecord.attributes.room.name') %></th>
-            <th scope="col"><%= t('activerecord.attributes.room.building') %></th>
-            <th scope="col"><%= t('activerecord.attributes.room.level') %></th>
-            <th scope="col"><%= t('activerecord.attributes.room.description') %></th>
-            <th scope="col" style="width: 10%"><%= t('action') %></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @rooms.each do |room| %>
-          <tr class="align-middle">
-              <td><%= room.id %></td>
-              <td><%= room.name %></td>
-              <td><%= room.building.name %></td>
-              <% if room.level.nil? %>
-                <td><%= "——" %></td>
-              <% else %>
-                <td><%= room.level %></td>
-              <% end %>
-              <% if room.description.nil? %>
-                <td><%= "——" %></td>
-              <% else %>
-                <td><%= room.description %></td>
-              <% end %>
-              <td>
-                <div class="d-flex">
-                  <%= link_to edit_admin_room_path(room.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
-                    <i class="bi bi-pen"></i>
-                  <% end %>
-                  <%= button_to admin_room_path(room.id), method: :delete, class: "btn" do %>
-                    <i class="bi bi-trash"></i>
-                  <% end %>
-                </div>
-              </td>
+  <div class="col-10 my-4 p-0">
+    <div class="shadow rounded px-2">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <%= render 'shared/ui/table/caption/all_items',
+              count: Room.count %>
+          <thead>
+            <tr>
+              <th scope="col"><%= t('activerecord.attributes.room.id') %></th>
+              <th scope="col"><%= t('activerecord.attributes.room.name') %></th>
+              <th scope="col"><%= t('activerecord.attributes.room.building') %></th>
+              <th scope="col"><%= t('activerecord.attributes.room.level') %></th>
+              <th scope="col"><%= t('activerecord.attributes.room.description') %></th>
+              <%= render 'shared/ui/table/header/action'%>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @rooms.each do |room| %>
+            <tr class="align-middle">
+                <td><%= room.id %></td>
+                <td><%= room.name %></td>
+                <td><%= room.building.name %></td>
+                <% if room.level.nil? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td><%= room.level %></td>
+                <% end %>
+                <% if room.description.nil? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td><%= room.description %></td>
+                <% end %>
+                <%= render 'shared/ui/table/cell/action',
+                  edit_path: edit_admin_room_path(room.id),
+                  destroy_path: admin_room_path(room.id) %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

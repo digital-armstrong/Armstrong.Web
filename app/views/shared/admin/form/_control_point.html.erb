@@ -13,9 +13,10 @@
         </div>
       </div>
        <%= f.input :description, placeholder: 'Описание точки контроля', input_html: {:tabindex => 4}%>
+       <%= f.association :device, label_method: :tabel_id, input_html: {:tabindex => 3} %>
        <% if current_user.admin? %>
         <div class="col">
-          <%= f.association :service, input_html: {:tabindex => 9}, include_blank: false %>
+          <%= f.association :service, input_html: {:tabindex => 4}, include_blank: false %>
         </div>
       <% else %>
         <%= f.input :service_id, label: false, input_html: {hidden: true, value: current_user.service_id} %>

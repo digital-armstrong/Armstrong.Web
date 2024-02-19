@@ -49,7 +49,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-2">
       <% if current_user.admin? %>
         <div class="col">
           <%= f.association :service, input_html: {:tabindex => 9}, include_blank: false %>
@@ -57,9 +57,7 @@
       <% else %>
         <%= f.input :service_id, label: false, input_html: {hidden: true, value: current_user.service_id} %>
       <% end %>
-    <div class="col">
-      <%= f.association :control_point, input_html: {:tabindex => 10}, include_blank: t('combobox_blank')%>
-    </div>
+
   </div>
 
   <%= render 'shared/form/actions', f:f %>

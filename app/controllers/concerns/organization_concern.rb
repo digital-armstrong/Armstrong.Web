@@ -53,7 +53,7 @@ module OrganizationConcern
         :zip_code,
         :phone,
         :fax,
-        :email
+        :email,
       )
     end
   end

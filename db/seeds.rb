@@ -293,21 +293,9 @@ end
   )
 end
 
-
-# seed ControlPoints
-200.times do |i|
-  ControlPoint.create(
-    name: "Точка контроля #{i}",
-    description: "Возможное описание",
-    room: Room.find_by(id: rand(1..99)),
-    service: Service.find_by(id: rand(1..10)),
-  )
-end
-
 # seed Device
 
 100.times do |i|
-  puts ControlPoint.find_by(id: i + 1).name
   Device.create(
     inventory_id: i,
     serial_id: "#{i}-123-N",
@@ -318,7 +306,18 @@ end
     year_of_commissioning: 1991,
     supplementary_kit: SupplementaryKit.find_by(id: rand(1..20)),
     service: Service.find_by(id: rand(1..10)),
-    control_point: ControlPoint.find_by(id: i + 1),
+    inspection_interval: rand(0.1..9.9)
+  )
+end
+
+# seed ControlPoints
+200.times do |i|
+  ControlPoint.create(
+    name: "Точка контроля #{i}",
+    description: "Возможное описание",
+    room: Room.find_by(id: rand(1..99)),
+    service: Service.find_by(id: rand(1..10)),
+    device: Device.find_by(id: rand(1..100)),
   )
 end
 
@@ -393,6 +392,14 @@ end
 100.times do |i|
   History.create(
     channel_id: Channel.first,
+    event_impulse_value: rand(0.0..100.0),
+    event_system_value: Time.now,
+    event_not_system_value: rand(0.0..100.0),
+    event_datetime: Time.now,
+  )
+
+  History.create(
+    channel_id: Channel.last,
     event_impulse_value: rand(0.0..100.0),
     event_system_value: Time.now,
     event_not_system_value: rand(0.0..100.0),

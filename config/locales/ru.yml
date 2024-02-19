@@ -211,6 +211,18 @@ ru:
         room_id: Помещение
         description: Описание
         device: Устройство
+      channel:
+        id: ID
+        channel_id: № кнл.
+        server: № срв.
+        control_point: Точка контроля
+        location_description: Описание располож.
+        self_background: Собств. фон
+        pre_emergency_limit: Пред.-ав. уст.
+        emergency_limit: Ав. уст.
+        consumption: Расход
+        conversion_coefficient: Коэфф. конв.
+        service: Служба
       device:
         inventory_id: Инв. №
         control_point: Точка контроля
@@ -313,6 +325,15 @@ ru:
         organization_id: Организация
         building: Здание
         building_id: Здание
+      server:
+        id: ID
+        name: Название
+        ip_address: IPv4
+        inventory_id: № инв.
+        service: Служба
+        service_id: Служба
+        room: Расположение
+        room_id: Расположение
       user:
         tabel_id: Таб. №
         first_name: Имя
@@ -359,8 +380,24 @@ ru:
         title: Страница редактирования %{resource}
         we_need_your_current_password_to_confirm_your_changes: введите текущий пароль для подтверждения изменений
   shared:
+    ui:
+      table:
+        caption:
+          all_items: "Всего: "
     admin:
       form:
+        channel:
+          placeholders:
+            channel_id: ID канала (1...48)
+            server_id: ID сервера
+            server: Название сервера
+            location_description: Описание канала
+            self_background: Собственный фон (12.34)
+            pre_emergency_limit: Предаварийная уставка (123.45)
+            emergency_limit: Аварийная уставка (1234.56)
+            consumption: Расход (123.45)
+            conversion_coefficient: Коэфф. преобразования (0.0009)
+            service: Служба
         division:
           labels:
             name: Название

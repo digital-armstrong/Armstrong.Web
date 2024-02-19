@@ -3,7 +3,7 @@ class ControlPoint < ApplicationRecord
   belongs_to :service
 
   has_one :channel
-  has_one :device
+  belongs_to :device, optional: true
 
   validates :name, presence: true
 

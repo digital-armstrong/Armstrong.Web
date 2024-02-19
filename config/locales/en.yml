@@ -81,6 +81,11 @@ en:
       body: Eat some more of these...
       category: Public or URB-106
   shared:
+    shared:
+      ui:
+        table:
+          caption:
+            all_items: "All: "
     show:
       device:
         send_to_inspection: Send to inspection

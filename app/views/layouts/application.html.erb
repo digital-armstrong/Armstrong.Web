@@ -26,7 +26,7 @@
               <% if can? :read, :armstrong %>
                 <%= link_to armstrong_index_path, class: "nav-link px-2 link-secondary position-relative" do %>
                   <%= t(".ARMS") %>
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info ">
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ">
                     β
                     <span class="visually-hidden">Этот раздел в разработке</span>
                   </span>
@@ -35,8 +35,14 @@
             </li>
             <li>
               <% if can? :read, Device %>
-                <%= link_to t(".devices"), device_index_path, class: "nav-link px-2 link-secondary" %>
-              <%end%>
+                <%= link_to device_index_path, class: "nav-link px-2 link-secondary position-relative" do %>
+                  <%= t(".devices") %>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ">
+                    β
+                    <span class="visually-hidden">Этот раздел в разработке</span>
+                  </span>
+                <% end %>
+              <% end %>
             </li>
             <li>
               <% if can? :read, Inspection %>

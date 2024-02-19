@@ -29,8 +29,6 @@ class Admin::ControlPointController < ApplicationController
 
   def destroy
     assigned_models_count =
-      Room.where(control_point_id: params[:id]).count +
-      Device.where(control_point_id: params[:id]).count +
       Channel.where(control_point_id: params[:id]).count
 
     if assigned_models_count.zero?
