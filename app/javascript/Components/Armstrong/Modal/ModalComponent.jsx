@@ -8,7 +8,7 @@ export default function ModalComponent({ selectedId, show, pointName, handleClos
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
-    ApiHelper(`http://0.0.0.0/api/v1/histories/${selectedId}`).then((result) => {
+    ApiHelper(`/api/v1/histories/${selectedId}`).then((result) => {
       setChartData(result);
     });
   }, [selectedId]);
