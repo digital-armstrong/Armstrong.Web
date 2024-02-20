@@ -1,4 +1,4 @@
-<%= simple_form_for device_model, as: :device_model, url: path, data: {controller: 'filter', 'filtrator_class': filtrator_class_id, 
+<%= simple_form_for device_model, as: :device_model, url: path, data: {controller: 'filter', 'filtrator_class': filtrator_class_id,
   'prev_mc_val': prev_mc_val }, class: "form-group row" do |f| %>
   <div class="row">
     <div class="col">
@@ -17,7 +17,9 @@
         </div>
       </div>
     </div>
-    <div class="col"></div>
+    <div class="col">
+      <%= f.input :gos_registry_id, placeholder: "7595-80", input_html: {:tabindex => 3}%>
+    </div>
   </div>
   <div class="row">
     <div class="col">
@@ -26,7 +28,7 @@
       </div>
       <div class="row">
         <div class="col-9 pe-0">
-          <%= f.association :measurement_group, label: false, input_html: {:tabindex => 3, data: {'action': 'change->filter#filter',
+          <%= f.association :measurement_group, label: false, input_html: {:tabindex => 4, data: {'action': 'change->filter#filter',
            'to_filter_class': to_filter_class_id, 'filtrator_class': filtrator_class_id}, id: filtrator_class_id}, include_blank: false %>
         </div>
         <div class="col-3 text-end">
@@ -40,7 +42,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <%= f.association :measurement_class, label:false, input_html: {tabindex: 4, id: to_filter_class_id}, include_blank: false %>
+          <%= f.association :measurement_class, label:false, input_html: {tabindex: 5, id: to_filter_class_id}, include_blank: false %>
         </div>
         <div class="col-3 text-end">
           <%= render 'shared/modal_button_add', path: new_measurement_class_path, classes: "btn btn-ligth", text: nil %>
@@ -48,36 +50,44 @@
       </div>
     </div>
     <div class="col">
-      <%= f.input :measuring_unit, placeholder: "мЗв/ч", input_html: {:tabindex => 5} %>
+      <%= f.input :measuring_unit, placeholder: "мЗв/ч", input_html: {:tabindex => 6} %>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <%= f.input :measurement_sensitivity, placeholder: "1.0", input_html: {:tabindex => 6} %>
+      <%= f.input :measurement_sensitivity, placeholder: "1.0", input_html: {:tabindex => 7} %>
     </div>
     <div class="col">
-      <%= f.input :measurement_min, placeholder: "1.0", input_html: {:tabindex => 7} %>
+      <%= f.input :measurement_min, placeholder: "1.0", input_html: {:tabindex => 8} %>
     </div>
     <div class="col">
-      <%= f.input :measurement_max, placeholder: "2.0", input_html: {:tabindex => 8} %>
+      <%= f.input :measurement_max, placeholder: "2.0", input_html: {:tabindex => 9} %>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <%= f.input :safety_class, placeholder: "3Н", input_html: {:tabindex => 9} %>
+      <%= f.input :accuracy_class, placeholder: "0.25", input_html: {:tabindex => 11} %>
     </div>
     <div class="col">
-      <%= f.input :accuracy_class, placeholder: "0.25", input_html: {:tabindex => 10} %>
+      <%= f.input :calibration_min, placeholder: "900"%>
     </div>
-    <div class="col"></div>
+    <div class="col">
+      <%= f.input :calibration_max, placeholder: "1400"%>
+    </div>
   </div>
   <div class="row">
-    <div class="col"></div>
     <div class="col">
-      <%= f.input :is_complete_device, input_html: {:tabindex => 11} %>
-      <%= f.input :is_tape_rolling_mechanism, input_html: {:tabindex => 12} %>
+      <%= f.label :inspection_interval, class: "mb-2" %>
+      <%= f.collection_select :inspection_interval, (1..10).map { |n| [n, n] }, :last, :first, {},  { class: "form-select" } %>
     </div>
-    <div class="col"></div>
+    <div class="col">
+      <%= f.label :safety_class, class: "mb-2" %>
+      <%= f.collection_select :safety_class, (1..4).map { |n| ["#{n}Н", "#{n}Н"] }, :last, :first, {},  { class: "form-select" } %>
+    </div>
+    <div class="col">
+      <%= f.input :is_complete_device, input_html: {:tabindex => 12} %>
+      <%= f.input :is_tape_rolling_mechanism, input_html: {:tabindex => 13} %>
+    </div>
   </div>
   <%= render 'shared/form/actions', f:f %>
 <% end %>

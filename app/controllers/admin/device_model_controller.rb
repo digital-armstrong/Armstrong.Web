@@ -45,24 +45,4 @@ class Admin::DeviceModelController < ApplicationController
   def set_device_model
     @device_model = DeviceModel.find(params[:id])
   end
-
-  def device_model_params
-    params.require(:device_model).permit(
-      :name,
-      :measurement_group_id,
-      :measurement_class_id,
-      :measuring_unit,
-      :safety_class,
-      :accuracy_class,
-      :measurement_sensitivity,
-      :measurement_min,
-      :measurement_max,
-      :manufacturer_id,
-      :supplementary_kit_id,
-      :is_complete_device,
-      :is_tape_rolling_mechanism,
-      :doc_url,
-      :image_url,
-    )
-  end
 end

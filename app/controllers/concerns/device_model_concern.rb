@@ -28,6 +28,10 @@ module DeviceModelConcern
         :is_tape_rolling_mechanism,
         :doc_url,
         :image_url,
+        :calibration_min,
+        :calibration_max,
+        :gos_registry_id,
+        :inspection_interval,
       )
     end
   end

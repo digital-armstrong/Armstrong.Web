@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_19_101812) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_20_061932) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,6 +96,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_19_101812) do
     t.datetime "updated_at", null: false
     t.float "calibration_min"
     t.float "calibration_max"
+    t.string "gos_registry_id"
+    t.integer "inspection_interval", default: 1, null: false
     t.index ["manufacturer_id"], name: "index_device_models_on_manufacturer_id"
     t.index ["measurement_class_id"], name: "index_device_models_on_measurement_class_id"
     t.index ["measurement_group_id"], name: "index_device_models_on_measurement_group_id"
@@ -122,7 +124,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_19_101812) do
     t.bigint "room_id"
     t.string "inspection_expiration_status", default: "prepare_to_inspection", null: false
     t.string "status", default: "in_stock", null: false
-    t.float "inspection_interval", default: 1.0, null: false
     t.index ["device_model_id"], name: "index_devices_on_device_model_id"
     t.index ["device_reg_group_id"], name: "index_devices_on_device_reg_group_id"
     t.index ["inventory_id"], name: "index_devices_on_inventory_id", unique: true

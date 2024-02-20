@@ -33,6 +33,10 @@ class DeviceModel < ApplicationRecord
       'name',
       'safety_class',
       'updated_at',
+      'gos_registry_id',
+      'inspection_interval',
+      'calibration_min',
+      'calibration_min',
     ]
   end
 

@@ -264,6 +264,8 @@ ru:
         measurement_range: Диапазон изм.
         calibration_max: Макс. калибр.
         calibration_min: Мин. калибр.
+        inspection_interval: М/п инт.
+        gos_registry_id: № в ГР
       device_reg_group:
         name: Название
       manufacturer:
