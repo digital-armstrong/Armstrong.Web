@@ -20,7 +20,6 @@ class Device < ApplicationRecord
   validates :serial_id, :tabel_id, presence: true, uniqueness: true
   validates :year_of_commissioning, :year_of_production, numericality: { in: 1900..current_year, message: year_error_msg }, allow_nil: true
   validates :year_of_production, presence: true
-  validates :inspection_interval, presence: true, numericality: { in: 0.1..10.0, message: inspection_interval_msg }
 
   STATUS = {
     verified: 'verified',
