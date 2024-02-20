@@ -10,6 +10,9 @@ module ChannelConcern
     def channel_create
       @channel = Channel.new(channel_params)
 
+      @channel.event_datetime = Time.now
+      @channel.is_online = true
+
       if @channel.save
         redirect_back(fallback_location: root_path)
       else
