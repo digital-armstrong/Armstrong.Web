@@ -122,9 +122,10 @@
                 <% else %>
                   <td>
                     <span>
-                    <% device.control_point.each do |e| %>
-                      <%= content_tag(:span, e.room.name, class: "btn btn-light btn-sm") %>
-                    <% end %>
+                      <% @rooms = device.control_point.map { |cp| cp.room.name } %>
+                      <% @rooms.uniq.each do |e| %>
+                        <%= content_tag(:span, e, class: "btn btn-light btn-sm") %>
+                      <% end %>
                     </span>
                   </td>
                   <td>
