@@ -143,7 +143,8 @@ DeviceModel.create(
   is_complete_device: false,
   is_tape_rolling_mechanism: false,
   doc_url: "https://www.doza.ru/catalog/handheld/124/",
-  image_url: nil
+  image_url: nil,
+  inspection_interval: rand(0.1..9.9)
 )
 
 DeviceModel.create(
@@ -160,7 +161,8 @@ DeviceModel.create(
   is_complete_device: false,
   is_tape_rolling_mechanism: false,
   doc_url: "https://www.doza.ru/catalog/handheld/124/",
-  image_url: nil
+  image_url: nil,
+  inspection_interval: rand(0.1..9.9)
 )
 
 100.times do |i|
@@ -178,7 +180,8 @@ DeviceModel.create(
     is_complete_device: [true, false].sample,
     is_tape_rolling_mechanism: [true, false].sample,
     doc_url: "/this/is/doc/path/#{i}",
-    image_url: "/no/way/this/is/img#{i}"
+    image_url: "/no/way/this/is/img#{i}",
+    inspection_interval: rand(0.1..9.9)
   )
 end
 
@@ -237,7 +240,7 @@ end
 10.times do |i|
   Server.create(
     name: "server-#{i}",
-    ip_adress: "192.168.20.#{i}",
+    ip_address: "192.168.20.#{i}",
     inventory_id: i,
     service: Service.find_by(id: rand(1..10)),
     room: Room.find_by(id: rand(1..100))
@@ -295,7 +298,7 @@ end
 
 # seed Device
 
-100.times do |i|
+300.times do |i|
   Device.create(
     inventory_id: i,
     serial_id: "#{i}-123-N",
@@ -306,7 +309,6 @@ end
     year_of_commissioning: 1991,
     supplementary_kit: SupplementaryKit.find_by(id: rand(1..20)),
     service: Service.find_by(id: rand(1..10)),
-    inspection_interval: rand(0.1..9.9)
   )
 end
 
@@ -317,7 +319,7 @@ end
     description: "Возможное описание",
     room: Room.find_by(id: rand(1..99)),
     service: Service.find_by(id: rand(1..10)),
-    device: Device.find_by(id: rand(1..100)),
+    device: Device.find_by(id: i + 1),
   )
 end
 
@@ -368,14 +370,14 @@ end
 100.times do |i|
   Channel.create(
     channel_id: "#{i}",
-    control_point: ControlPoint.find_by(id: rand(1..100)),
+    control_point: ControlPoint.find_by(id: i + 1),
     server: Server.find_by(id: rand(1..10)),
     service: Service.find_by(id: rand(1..10)),
     location_description: "Description",
     self_background: 1.1,
     pre_emergency_limit: 2.2,
     emergency_limit: 3.3,
-    consumptiom: 1.0,
+    consumption: 1.0,
     conversion_coefficient: 0.0,
     event_system_value: 0.0,
     event_not_system_value: 0.0,
