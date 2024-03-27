@@ -7,7 +7,7 @@ module Api
                     History.where(event_datetime: params[:start_datetime]..params[:end_datetime],
                                   channel_id: @channel.id)
                   else
-                    History.select { |hs| hs.channel_id == @channel.id }.last(100)
+                    History.where(channel_id: @channel.id).last(100)
                   end
 
       result = histories.sort { |a, b| a[:event_datetime] <=> b[:event_datetime] }
