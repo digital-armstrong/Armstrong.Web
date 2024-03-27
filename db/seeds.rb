@@ -241,17 +241,17 @@ end
 
 100.times do |i|
   History.create(
-    channel_id: Channel.first,
+    channel: Channel.first,
     event_impulse_value: rand(0.0..100.0),
-    event_system_value: Time.now,
+    event_system_value: rand(0.0..100.0),
     event_not_system_value: rand(0.0..100.0),
     event_datetime: Time.now,
   )
 
   History.create(
-    channel_id: Channel.second,
+    channel: Channel.second,
     event_impulse_value: rand(0.0..100.0),
-    event_system_value: Time.now,
+    event_system_value: rand(0.0..100.0),
     event_not_system_value: rand(0.0..100.0),
     event_datetime: Time.now,
   )

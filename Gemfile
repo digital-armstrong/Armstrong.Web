@@ -71,7 +71,6 @@ group :development, :test do
 
   gem 'factory_bot_rails'
   gem 'rubocop'
-  gem 'rubocop-rails'
   gem 'faker'
 end
 

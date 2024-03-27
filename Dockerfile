@@ -28,4 +28,4 @@ ADD . $RAILS_ROOT
 ENV PATH=$RAILS_ROOT/bin:${PATH}
 
 EXPOSE 3000
-CMD ["bin/prod"]
+CMD ["make start"]
