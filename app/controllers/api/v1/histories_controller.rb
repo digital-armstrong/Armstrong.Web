@@ -40,8 +40,10 @@ module Api
     # Returns the integer value of the difference
     # between the start and end datetime values
     def diff_hours(start_date, end_date)
-      diff_in_seconds = end_date.to_time - start_date.to_time
-      (diff_in_seconds / (60**2)).to_i
+      if start_date && end_date
+        diff_in_seconds = end_date.to_time - start_date.to_time
+        (diff_in_seconds / (60**2)).to_i
+      end
     end
   end
 end
