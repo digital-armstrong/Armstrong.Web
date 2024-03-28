@@ -8,8 +8,8 @@ module Api
                     History.where(event_datetime: params[:start_datetime]..params[:end_datetime])
                   else
                     {
-                      code: 429,
-                      message: 'Parameters is not a valid or range of the datetime is too long.',
+                      code: 403,
+                      message: 'Forbidden. Parameters is not a valid or range of the datetime is too long.',
                       hint: 'The interval between start_datetime and end_datetime should be no more than two hours.',
                     }.to_json
                   end
