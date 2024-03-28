@@ -59,7 +59,12 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    assigned_inspections_count = Inspection.where(creator_id: params[:id]).or(Inspection.where(performer_id: params[:id])).count + user.posts.count
+    assigned_inspections_count =
+      Inspection.
+        where(creator_id: params[:id]).
+        or(Inspection.where(performer_id: params[:id])).
+        count + user.posts.
+          count
 
     if assigned_inspections_count.zero?
       @user.destroy
