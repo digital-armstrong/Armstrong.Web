@@ -145,7 +145,7 @@ User.create(
   service: Service.find_by(id: rand(1..10))
 )
 
-30.times do |i|
+50.times do |i|
   User.create(
     tabel_id: 10000 + i,
     first_name: Faker::Name.first_name,
@@ -184,13 +184,48 @@ end
 end
 
 # seed Post
-10.times do |i|
+300.times do |i|
   Post.create(
     user: User.first,
-    title: Faker::Movies::HarryPotter.spell,
-    body: Faker::Movies::HarryPotter.quote,
-    category: "Public"
+    title: Faker::Lorem.sentence,
+    body: Faker::Lorem.paragraphs.join("\n"),
+    category: %w[Public УРБ-106 РИК ЦСМИТ].sample
   )
+end
+
+60.times do
+  post_comment = PostComment.create(
+    user: User.find_by(id: rand(1..10)),
+    post: Post.find_by(id: rand(1..30)),
+    content: Faker::Books::Lovecraft.paragraphs.join("\n"),
+    parent_id: nil
+  )
+
+  20.times do
+    PostComment.create(
+      user: User.find_by(id: rand(1..10)),
+      post: post_comment.post,
+      content: Faker::Books::Lovecraft.paragraphs.join("\n"),
+      parent_id: post_comment.id
+    )
+  end
+end
+
+20.times do
+  post = Post.joins(:comments).where.not(comments: { id: nil }).sample
+
+  PostComment.create(
+    user: User.find_by(id: rand(1..10)),
+    post:,
+    content: Faker::Books::Lovecraft.paragraphs.join("\n"),
+    parent_id: post.comments.sample.id
+  )
+end
+
+(1..30).each do |post_id|
+  (1..10).each do |user_id|
+    PostLike.create!(post_id:, user_id:)
+  end
 end
 
 # seed Inspection
@@ -209,7 +244,7 @@ end
     performer: User.find_by_id(rand(1..20)),
     type_target: 'regular',
     state: 'verification_successful',
-    conclusion_date: rand(1.year.ago..Time.now),
+    conclusion_date: rand(10.year.ago..Time.now),
     conclusion: "Всё прекрасно! №#{i}"
   )
 end

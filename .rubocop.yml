@@ -6,6 +6,8 @@ AllCops:
     - node_modules/**/*
     - bin/*
     - vendor/**/*
+  NewCops: enable
+  TargetRubyVersion: "3.2"
 
 Metrics/PerceivedComplexity:
   Enabled: false
@@ -103,7 +105,6 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   CountComments: true # count full line comments?
   Max: 40
-  ExcludedMethods: [elastic_query_parameters, parameters]
   Exclude:
     - "spec/**/*"
     - "db/migrate/*"
@@ -417,7 +418,7 @@ Style/WordArray:
 Style/MethodCallWithArgsParentheses:
   Description: "Use parentheses for method calls with arguments."
   Enabled: true
-  IgnoredMethods:
+  IgnoreMacros:
     - require
     - require_relative
     - raise

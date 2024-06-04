@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_20_061932) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_04_054207) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -204,6 +204,27 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_20_061932) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "post_comments", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.text "content"
+    t.index ["ancestry"], name: "index_post_comments_on_ancestry"
+    t.index ["post_id"], name: "index_post_comments_on_post_id"
+    t.index ["user_id"], name: "index_post_comments_on_user_id"
+  end
+
+  create_table "post_likes", force: :cascade do |t|
+    t.bigint "post_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_likes_on_post_id"
+    t.index ["user_id"], name: "index_post_likes_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
@@ -211,6 +232,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_20_061932) do
     t.string "category"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "likes_count", default: 0
+    t.integer "comments_count", default: 0
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -300,6 +323,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_20_061932) do
   add_foreign_key "inspections", "users", column: "creator_id"
   add_foreign_key "inspections", "users", column: "performer_id"
   add_foreign_key "measurement_classes", "measurement_groups"
+  add_foreign_key "post_comments", "posts"
+  add_foreign_key "post_comments", "users"
+  add_foreign_key "post_likes", "posts"
+  add_foreign_key "post_likes", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "rooms", "buildings"
   add_foreign_key "servers", "rooms"

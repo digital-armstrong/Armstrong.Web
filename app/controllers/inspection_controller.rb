@@ -16,12 +16,12 @@ class InspectionController < ApplicationController
     @query = Inspection.ransack(params[:q])
     @query.sorts = ['updated_at desc']
     @previous_action = method_name
-    if method_name != :service_tasks
-      @pagy, @inspections = pagy(@query.result.where(condition).
-        includes(:device, :creator, :performer))
-    else
+    if method_name == :service_tasks
       @pagy, @inspections = pagy(@query.result.joins(:device).where(condition).
       includes(:device, :creator, :performer))
+    else
+      @pagy, @inspections = pagy(@query.result.where(condition).
+        includes(:device, :creator, :performer))
     end
   end
 

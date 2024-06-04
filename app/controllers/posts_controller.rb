@@ -1,12 +1,17 @@
-class PostController < ApplicationController
+class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
   def index
-    @query = Post.ransack(params[:q])
-    @query.sorts = ['updated_at desc']
-    @pagy, @posts = pagy(@query.result)
+    @pagy, @posts = pagy(Post.includes(:user).all)
+  end
+
+  def show
+    @post = Post.find(params[:id])
+    @post_comments = @post.comments.includes(:user)
+    @user_likes = @post.likes.find_by(user_id: current_user.id) if current_user
+    @comment = PostComment.new
   end
 
   def new
@@ -23,7 +28,7 @@ class PostController < ApplicationController
     if @post.save
       redirect_to(post_path(@post.id))
     else
-      render(:new)
+      render(:new, status: :unprocessable_entity)
     end
   end
 
@@ -37,7 +42,7 @@ class PostController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to(home_index_path)
+    redirect_to(root_path)
   end
 
   private

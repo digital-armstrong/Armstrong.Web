@@ -313,7 +313,7 @@ ru:
         building_id: Здание
         level: Уровень
         description: Описание
-      post:
+      posts:
         title: Заголовок
         body: Текст записи
         user: Автор
@@ -524,19 +524,29 @@ ru:
   device_component:
     new:
       add_device_component: Добавить компонент
-  post:
+  posts:
     index:
       b_new_post: Новый пост
       b_read: Читать далее
       more: (далее...)
+    comments:
+      replay_form:
+        link_text: ответить
     show:
       published: Опубликован
       updated: Обновлен
       author: Автор
-    form:
-      title: Рецепт урановых оладьев
-      body: Съешь еще немного этих...
-      category: Публичный или УРБ-106
+      comments: Комментарии
+    shared:
+      post_footer:
+        published: опубликовано
+        ago: назад
+      post_header:
+        delete_confirm: Безвозвратно удалить пост?
+      form:
+        title: Рецепт урановых оладьев
+        body: Съешь еще немного этих...
+        category: Публичный или УРБ-106
   admin:
     users:
       index:

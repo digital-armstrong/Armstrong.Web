@@ -112,7 +112,7 @@
                 <% end %>
 
                 <th scope="row"><%= device.tabel_id %></th>
-                <td><%= device.serial_id %></td>
+                <td><%= truncate(device.serial_id, length: 10) %></td>
                 <td><%= device.device_model.name %></td>
                 <td><%= device.year_of_production %></td>
                 <td><%= device.year_of_commissioning %></td>
