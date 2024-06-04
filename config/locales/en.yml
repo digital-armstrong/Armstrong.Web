@@ -80,6 +80,7 @@ en:
       updated: Updated
       author: Author
       comments: Comments
+      all_posts: All posts
     shared:
       post_footer:
         published: published

@@ -198,6 +198,7 @@ ru:
       post: Пост
       user: Пользователь
       inspection: Инспекция
+      post_comment: Комментарий
     attributes:
       building:
         id: ID
@@ -313,7 +314,7 @@ ru:
         building_id: Здание
         level: Уровень
         description: Описание
-      posts:
+      post:
         title: Заголовок
         body: Текст записи
         user: Автор
@@ -537,6 +538,7 @@ ru:
       updated: Обновлен
       author: Автор
       comments: Комментарии
+      all_posts: Все посты
     shared:
       post_footer:
         published: опубликовано
