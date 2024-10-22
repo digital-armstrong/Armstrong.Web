@@ -1,0 +1,17 @@
+.row
+  .col
+    .small.text-muted.mss-auto
+      span.me-2 = post.user.email
+      span = "#{t('.published')} #{distance_of_time_in_words_to_now(post.created_at)} #{t('.ago')}"
+  .col.justify-content-end
+    .text-end.small.text-muted.ms-auto
+      - if post.comments_count.zero?
+        span.i.bi.bi-chat-square-text.me-2
+      -else
+        span.i.bi.bi-chat-square-text.text-primary.me-2
+      span.me-2 = post.comments_count
+      - if local_assigns[:selected] == 'post'
+        = render 'posts/likes/like_button', post:, likes: likes
+      - if local_assigns[:selected] == 'post-index'
+        span.i.bi.bi-heart-half.text-danger.me-2
+        span = post.likes_count

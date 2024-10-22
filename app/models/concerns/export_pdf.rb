@@ -5,8 +5,8 @@ module ExportPdf
 
   module ClassMethods
     def to_pdf
-      require 'prawn'
-      require 'prawn/table'
+      require('prawn')
+      require('prawn/table')
 
       options = { position: :center, column_widths: [100, 100, 200, 100, 100], width: 600 }
 

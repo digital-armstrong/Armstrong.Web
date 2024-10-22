@@ -1,0 +1,11 @@
+- if current_user
+  - if likes.present?
+    = link_to post_like_path(post), data: { turbo_method: :delete }
+      span.i.bi.bi-heart-fill.text-danger.me-2
+  - else
+    = link_to post_likes_path(post), data: { turbo_method: :post }
+      span.i.bi.bi-heart.text-danger.me-2
+- else
+  span.i.bi.bi-heart.text-danger.me-2
+
+span = post.likes_count

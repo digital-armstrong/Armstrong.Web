@@ -1,0 +1,14 @@
+- comments.each do |comment|
+  - if comment.is_root?
+    .card.mb-4
+      .card-header
+        span.me-2 = comment.user.email
+        span = I18n.l(comment.created_at)
+      .card-body
+        p = simple_format(comment.content)
+      - if current_user
+        .card-footer
+          = render 'posts/comments/replay_form', comment:
+
+      - if comment.children.any?
+        = render 'posts/comments/child_comment', child_comment: comment.children

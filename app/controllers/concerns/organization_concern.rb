@@ -1,6 +1,8 @@
 module OrganizationConcern
   extend ActiveSupport::Concern
 
+  # rubocop:disable Metrics/BlockLength
+
   included do
     def organization_index
       @query = Organization.ransack(params[:q])
@@ -57,4 +59,6 @@ module OrganizationConcern
       )
     end
   end
+
+  # rubocop:enable Metrics/BlockLength
 end

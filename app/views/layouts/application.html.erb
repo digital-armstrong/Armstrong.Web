@@ -26,15 +26,15 @@
     </style>
   </head>
 
-  <header class="p-3 mb-3 border-bottom">
-    <div class="container">
+  <header class="py-3 mb-3 border-bottom">
+    <div class="container p-0">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><%= link_to t(".home"), root_path, class: "nav-link px-2 link-secondary" %></li>
+          <li><%= link_to t(".home"), root_path, class: "nav-link ps-0 link-secondary" %></li>
           <% if user_signed_in? %>
             <li>
               <% if can? :read, :armstrong %>
-                <%= link_to armstrong_index_path, class: "nav-link px-2 link-secondary position-relative" do %>
+                <%= link_to armstrong_index_path, class: "nav-link link-secondary position-relative" do %>
                   <%= t(".ARMS") %>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ">
                     β
@@ -45,7 +45,7 @@
             </li>
             <li>
               <% if can? :read, Device %>
-                <%= link_to device_index_path, class: "nav-link px-2 link-secondary position-relative" do %>
+                <%= link_to device_index_path, class: "nav-link link-secondary position-relative" do %>
                   <%= t(".devices") %>
                   <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ">
                     β
@@ -57,9 +57,9 @@
             <li>
               <% if can? :read, Inspection %>
                 <% if can? :new_tasks, Inspection %>
-                  <%= link_to t(".inspections"), new_tasks_inspection_index_path, class: "nav-link px-2 link-secondary" %>
+                  <%= link_to t(".inspections"), new_tasks_inspection_index_path, class: "nav-link link-secondary" %>
                 <% elsif can? :service_tasks, Inspection %>
-                  <%= link_to t(".inspections"), service_tasks_inspection_index_path, class: "nav-link px-2 link-secondary" %>
+                  <%= link_to t(".inspections"), service_tasks_inspection_index_path, class: "nav-link link-secondary" %>
                 <%end%>
               <%end%>
             </li>

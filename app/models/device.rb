@@ -5,7 +5,6 @@ class Device < ApplicationRecord
 
   current_year = Date.today.year
   year_error_msg = "должен быть больше 1900 и меньше или равен #{current_year}"
-  inspection_interval_msg = 'должен быть от 0.1 (раз в месяц) до 10.0 (раз в 10 лет)'
 
   belongs_to :device_model
   belongs_to :device_reg_group

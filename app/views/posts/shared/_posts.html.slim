@@ -1,0 +1,10 @@
+- @posts.latest.each do |post|
+  .col-md-12
+    .card.mb-3
+      .card-header = post.category
+      .card-body
+        h5.card-title = link_to post.title, post_path(post), { class: 'nav-link link-dark' }
+        .card-text.mb-2 = link_to post_path(post), { class: 'nav-link link-dark' } do
+          = simple_format(truncate(post.body, length: 200, omission: "#{ link_to('[...]', post_path(post))}", escape: false))
+        hr
+        = render 'posts/shared/post_footer', post:, selected: 'post-index'

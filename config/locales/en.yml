@@ -67,25 +67,35 @@ en:
   device_component:
     new:
       add_device_component: Add device
-  post:
+  posts:
     index:
       b_new_post: New post
       b_read: Read more
       more: (more...)
+    comments:
+      replay_form:
+        link_text: replay
     show:
       published: Created
       updated: Updated
       author: Author
-    form:
-      title: Recipe for uranium pancakes
-      body: Eat some more of these...
-      category: Public or URB-106
-  shared:
+      comments: Comments
+      all_posts: All posts
     shared:
-      ui:
-        table:
-          caption:
-            all_items: "All: "
+      post_footer:
+        published: published
+        ago: ago
+      post_header:
+        delete_confirm: Delete the post irrevocably?
+      form:
+        title: Recipe for uranium pancakes
+        body: Eat some more of these...
+        category: Public or URB-106
+  shared:
+    ui:
+      table:
+        caption:
+          all_items: "All: "
     show:
       device:
         send_to_inspection: Send to inspection

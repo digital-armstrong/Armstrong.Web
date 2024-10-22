@@ -1,0 +1,15 @@
+.container.my-4.px-0
+  - if user_signed_in?
+    - if can? :manage, Post
+      = link_to new_post_path, class: "btn btn-primary my-3 w-100" do
+        .i.bi.bi-plus-square
+          span.ms-2 = t('.b_new_post')
+
+  - if @posts.count.zero?
+    p = t('.no_posts')
+
+  .div#post-section
+    = render 'posts/shared/posts'
+
+  .div#pagination-section
+    .d-flex.justify-content-center == pagy_bootstrap_nav(@pagy)

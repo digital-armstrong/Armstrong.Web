@@ -73,6 +73,8 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    ancestry (4.3.3)
+      activerecord (>= 5.2.6)
     ast (2.4.2)
     bcrypt (3.1.18)
     bindex (0.8.1)
@@ -114,6 +116,8 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    faker (3.3.0)
+      i18n (>= 1.8.11, < 2)
     fugit (1.8.1)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
@@ -256,6 +260,16 @@ GEM
     simple_form (5.2.0)
       actionpack (>= 5.2)
       activemodel (>= 5.2)
+    slim (5.2.1)
+      temple (~> 0.10.0)
+      tilt (>= 2.1.0)
+    slim-rails (3.6.3)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (>= 3.0, < 6.0, != 5.0.0)
+    slim_lint (0.27.0)
+      rubocop (>= 1.0, < 2.0)
+      slim (>= 3.0, < 6.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -272,7 +286,9 @@ GEM
       state_machines-activemodel (>= 0.8.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
+    temple (0.10.3)
     thor (1.2.1)
+    tilt (2.3.0)
     timeout (0.3.1)
     ttfunk (1.7.0)
     turbo-rails (1.3.3)
@@ -307,6 +323,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.13)
+  ancestry (~> 4.3, >= 4.3.3)
   bcrypt (~> 3.1, >= 3.1.18)
   bootsnap
   cancancan (~> 3.5)
@@ -315,6 +332,7 @@ DEPENDENCIES
   debug
   devise (~> 4.2)
   factory_bot_rails
+  faker
   importmap-rails
   jbuilder
   jsbundling-rails
@@ -333,6 +351,9 @@ DEPENDENCIES
   sidekiq-cron (~> 1.10, >= 1.10.1)
   sidekiq-failures (~> 1.0, >= 1.0.4)
   simple_form (~> 5.2)
+  slim (~> 5.2, >= 5.2.1)
+  slim-rails (~> 3.6, >= 3.6.3)
+  slim_lint (~> 0.27.0)
   sprockets-rails
   state_machines (~> 0.5.0)
   state_machines-activerecord (~> 0.8.0)

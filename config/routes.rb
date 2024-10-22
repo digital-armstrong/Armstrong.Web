@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount Sidekiq::Web => '/admin/sidekiq'
 
-  root 'post#index'
+  root 'posts#index'
 
   post 'device/download', to: 'device#download'
   get '/licenses/:locale', to: 'licenses#show', as: 'license'
@@ -9,7 +9,14 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1,  defaults: {format: 'json'} do
       resources :filters, :armstrong, only: :index
-      resources :histories, only: :show
+      resources :histories, only: %i[index show]
+    end
+  end
+
+  resources :posts do
+    scope module: :posts do
+      resources :comments, only: %i[index edit create update destroy]
+      resources :likes, only: %i[create destroy]
     end
   end
 
@@ -52,7 +59,6 @@ Rails.application.routes.draw do
     post :send_from_repair_to_close, :to => 'inspection#send_from_repair_to_close', :on => :member
   end
 
-  resources :post
   get :armstrong, to: 'controllers#react'
 
 end
