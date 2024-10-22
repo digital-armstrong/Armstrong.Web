@@ -13,11 +13,10 @@
             <%= f.association :device_model, label:false, input_html: {tabindex: 7}, include_blank: false %>
           </div>
           <div class="col-3 text-end">
-            <%= render 'shared/modal_button_add', path: new_admin_device_model_path, classes: "btn btn-ligth", text: nil %>
+            <%= render 'shared/modal_button_add', path: new_device_model_path, classes: "btn btn-ligth", text: nil %>
           </div>
         </div>
       </div>
-      <%= f.association :room, input_html: {:tabindex => 9}, include_blank: t('combobox_blank')%>
     </div>
     <div class="col">
       <%= f.input :serial_id, placeholder: 'S/N присвоенный производителем', input_html: {:tabindex => 2} %>
@@ -30,7 +29,7 @@
             <%= f.association :device_reg_group, label: false, input_html: {:tabindex => 4}, include_blank: false %>
           </div>
           <div class="col-3 text-end">
-            <%= render 'shared/modal_button_add', path: new_admin_device_reg_group_path, classes: "btn btn-ligth", text: nil %>
+            <%= render 'shared/modal_button_add', path: new_device_reg_group_path, classes: "btn btn-ligth", text: nil %>
           </div>
         </div>
       </div>
@@ -44,11 +43,21 @@
             <%= f.association :supplementary_kit, label:false, :include_blank => t('combobox_blank'), input_html: {:tabindex => 8} %>
           </div>
           <div class="col-3 text-end">
-            <%= render 'shared/modal_button_add', path: new_admin_supplementary_kit_path, classes: "btn btn-ligth", text: nil %>
+            <%= render 'shared/modal_button_add', path: new_supplementary_kit_path, classes: "btn btn-ligth", text: nil %>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="row mb-2">
+      <% if current_user.admin? %>
+        <div class="col">
+          <%= f.association :service, input_html: {:tabindex => 9}, include_blank: false %>
+        </div>
+      <% else %>
+        <%= f.input :service_id, label: false, input_html: {hidden: true, value: current_user.service_id} %>
+      <% end %>
+
   </div>
 
   <%= render 'shared/form/actions', f:f %>

@@ -1,17 +1,28 @@
 <ul class="nav nav-tabs">
   <% selected = local_assigns[:selected] %>
-  <li class="nav-item">
-    <%= link_to t('.new_tasks'), new_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'new_tasks' }", aria_current: 'page' %>
-  </li>
-  <li class="nav-item">
-    <%= link_to t('.my_tasks'), my_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'my_tasks' }", aria_current: 'page' %>
-  </li>
-  <li class="nav-item">
-    <%= link_to t('.completed_tasks'), completed_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'completed_tasks' }", aria_current: 'page' %>
-  </li>
+  <% if can? :new_tasks, Inspection %>
+    <li class="nav-item">
+      <%= link_to t('.new_tasks'), new_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'new_tasks' }", aria_current: 'page' %>
+    </li>
+  <% end %>
+  <% if can? :my_tasks, Inspection %>
+    <li class="nav-item">
+      <%= link_to t('.my_tasks'), my_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'my_tasks' }", aria_current: 'page' %>
+    </li>
+  <% end %>
+  <% if can? :completed_tasks, Inspection %>
+    <li class="nav-item">
+      <%= link_to t('.completed_tasks'), completed_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'completed_tasks' }", aria_current: 'page' %>
+    </li>
+  <% end %>
   <% if can? :all_tasks, Inspection%>
     <li class="nav-item">
       <%= link_to t('.all_tasks'), all_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'all_tasks' }", aria_current: 'page' %>
+    </li>
+  <% end %>
+  <% if can? :service_tasks, Inspection%>
+    <li class="nav-item">
+      <%= link_to t('.service_tasks'), service_tasks_inspection_index_path, class: "nav-link #{ 'active' if selected == 'service_tasks' }", aria_current: 'page' %>
     </li>
   <% end %>
 </ul>

@@ -1,0 +1,3 @@
+<%= turbo_stream.update "modal-title", t('admin.measurement_group.new.add_measurement_group') %>
+<%= turbo_stream.update "modal-body", partial: "shared/admin/form/measurement_group",
+ locals: {path: measurement_group_index_path, measurement_group: @measurement_group } %>

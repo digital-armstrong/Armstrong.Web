@@ -1,12 +1,22 @@
 Rails.application.routes.draw do
+  mount Sidekiq::Web => '/admin/sidekiq'
 
-  root 'post#index'
+  root 'posts#index'
 
   post 'device/download', to: 'device#download'
+  get '/licenses/:locale', to: 'licenses#show', as: 'license'
 
   namespace :api do
     namespace :v1,  defaults: {format: 'json'} do
       resources :filters, :armstrong, only: :index
+      resources :histories, only: %i[index show]
+    end
+  end
+
+  resources :posts do
+    scope module: :posts do
+      resources :comments, only: %i[index edit create update destroy]
+      resources :likes, only: %i[create destroy]
     end
   end
 
@@ -17,7 +27,8 @@ Rails.application.routes.draw do
       post :create_inspection, :to => 'device#create_inspection'
     end
     resources :device_model, :measurement_class
-    resources :manufacturer, :measurement_group, :device_reg_group, :supplementary_kit, :device_component, except: [:show]
+    resources :server, :channel, :room, :building, :organization, :division, :service, :control_point, :manufacturer, :measurement_group, :device_reg_group,
+              :supplementary_kit, :device_component, except: [:show]
   end
 
   devise_for :users, controllers: {
@@ -26,16 +37,18 @@ Rails.application.routes.draw do
 
   resources :home
   resources :armstrong, only: [:index, :show]
-  resources :about, only: [:index]
   resources :device do
     post :create_inspection, :to => 'device#create_inspection'
   end
+  resources :server, :channel, :room, :building, :organization, :division, :service, :control_point, :device_model, :measurement_class,
+   :manufacturer, :measurement_group, :device_reg_group, :supplementary_kit, :device_component, only: [:create, :new]
 
-  resources :inspection do
+  resources :inspection, except: [:index] do
     get :new_tasks, :to => 'inspection#new_tasks', :on => :collection
     get :my_tasks, :to => 'inspection#my_tasks', :on => :collection
     get :completed_tasks, :to => 'inspection#completed_tasks', :on => :collection
     get :all_tasks, :to => 'inspection#all_tasks', :on => :collection
+    get :service_tasks, :to => 'inspection#service_tasks', :on => :collection
     post :accept_task, :to => 'inspection#accept_task', :on => :member
     post :complete_verification, :to => 'inspection#complete_verification', :on => :member
     post :fail_verification, :to => 'inspection#fail_verification', :on => :member
@@ -46,7 +59,6 @@ Rails.application.routes.draw do
     post :send_from_repair_to_close, :to => 'inspection#send_from_repair_to_close', :on => :member
   end
 
-  resources :post
   get :armstrong, to: 'controllers#react'
 
 end

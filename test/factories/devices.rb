@@ -8,5 +8,6 @@ FactoryBot.define do
     year_of_production { 1990 }
     year_of_commissioning { 1991 }
     supplementary_kit { association :supplementary_kit }
+    service { association :service }
   end
 end

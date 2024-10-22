@@ -12,9 +12,41 @@ en:
       full: "%e %B %Y %H:%M:%S"
   message:
     user:
+      create:
+        success: User was created.
+      update:
+        success: User was updated.
       delete:
         success: User was deleted.
         error: User wasn't deleted! The user has inspections.
+    device:
+      delete:
+        error: Device wasn't deleted! This device has inspections and channels!
+    device_model:
+      delete:
+        error: Device model wasn't deleted! This model has devices!
+    device_reg_group:
+      delete:
+        error: Reg. group wasn't deleted! This reg. group has devices!
+    manufacturer:
+      delete:
+        error: Manufacturer wasn't deleted! This manufacturer has device models!
+    measurement_class:
+      delete:
+        error: Measurement class wasn't deleted! This measurement class has device models!
+    measurement_group:
+      delete:
+        error: Measurement group wasn't deleted! This measurement group has measurement classess!
+    supplementary_kit:
+      delete:
+        error: Kit wasn't deleted! This kit has приборы или компоненты!
+    inspection:
+      create_from_device:
+        success: Inspection was created.
+        error: Inspection wasn't created!
+        generated: This inspection was created by admin.
+    change_state:
+      error: State wasn't changed!
   layouts:
     application:
       home: Home
@@ -35,29 +67,46 @@ en:
   device_component:
     new:
       add_device_component: Add device
-  post:
+  posts:
     index:
       b_new_post: New post
       b_read: Read more
       more: (more...)
+    comments:
+      replay_form:
+        link_text: replay
     show:
       published: Created
       updated: Updated
       author: Author
-    form:
-      title: Recipe for uranium pancakes
-      body: Eat some more of these...
-      category: Public or URB-106
+      comments: Comments
+      all_posts: All posts
+    shared:
+      post_footer:
+        published: published
+        ago: ago
+      post_header:
+        delete_confirm: Delete the post irrevocably?
+      form:
+        title: Recipe for uranium pancakes
+        body: Eat some more of these...
+        category: Public or URB-106
   shared:
+    ui:
+      table:
+        caption:
+          all_items: "All: "
     show:
       device:
         send_to_inspection: Send to inspection
+        admin_send_to_inspection: Send to inspection (admin)
     navbar:
       inspection:
         new_tasks: New tasks
         my_tasks: My tasks
         completed_tasks: Completed tasks
         all_tasks: All tasks
+        service_tasks: Service tasks
     index:
       inspection:
         device: Device
@@ -78,6 +127,8 @@ en:
         creator_last_name: Petrov
         creator_first_name: Petr
         creator_second_name: Petrovich
+        conclusion_date_from: Сonclusion date from
+        conclusion_date_to: Сonclusion date to
       device:
         b_add_device: Add device
         b_add_device_component: Add device
@@ -130,3 +181,5 @@ en:
   updated_at: Updated at
   action: Actions
   filtration: Filtration
+  access_denied: "403: Access Denied"
+  access_denied_message: You don't have permission to access this page.

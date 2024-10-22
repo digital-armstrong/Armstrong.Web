@@ -1,0 +1,11 @@
+.row
+  .col-10
+    h1.mb-4.mb-lg-5 = @post.title
+  .col.justify-content-end.text-end
+    - if can? :manage, Post
+      span.me-2
+        = link_to edit_post_path(@post) do
+          i.bi.bi-pencil
+      span
+        = link_to post_path(@post), data: { turbo_method: :delete, turbo_confirm: t('.delete_confirm') } do
+          i.bi.bi-trash3.text-danger

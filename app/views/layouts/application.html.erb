@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="-ms-overflow-style: none; scrollbar-width: none">
   <head>
     <title><%= full_title(yield(:page_title))%></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,34 +8,70 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <style>
+      /* Disabling scrollbars for Chrome, Opera, and Safari */
+      body::-webkit-scrollbar {
+          display: none;
+      }
+
+      /* Disabling spinner for Chrome, Opera, and Safari */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+    </style>
   </head>
 
-  <header class="p-3 mb-3 border-bottom">
-    <div class="container">
+  <header class="py-3 mb-3 border-bottom">
+    <div class="container p-0">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><%= link_to t(".home"), root_path, class: "nav-link px-2 link-secondary" %></li>
+          <li><%= link_to t(".home"), root_path, class: "nav-link ps-0 link-secondary" %></li>
           <% if user_signed_in? %>
             <li>
-              <% if can? :manage, :all %>
-                <%= link_to t(".ARMS"), armstrong_index_path, class: "nav-link px-2 link-secondary" %>
+              <% if can? :read, :armstrong %>
+                <%= link_to armstrong_index_path, class: "nav-link link-secondary position-relative" do %>
+                  <%= t(".ARMS") %>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ">
+                    β
+                    <span class="visually-hidden">Этот раздел в разработке</span>
+                  </span>
+                <% end %>
               <% end %>
             </li>
             <li>
               <% if can? :read, Device %>
-                <%= link_to t(".devices"), device_index_path, class: "nav-link px-2 link-secondary" %>
-              <%end%>
+                <%= link_to device_index_path, class: "nav-link link-secondary position-relative" do %>
+                  <%= t(".devices") %>
+                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ">
+                    β
+                    <span class="visually-hidden">Этот раздел в разработке</span>
+                  </span>
+                <% end %>
+              <% end %>
             </li>
             <li>
               <% if can? :read, Inspection %>
-                <%= link_to t(".inspections"), new_tasks_inspection_index_path, class: "nav-link px-2 link-secondary" %>
+                <% if can? :new_tasks, Inspection %>
+                  <%= link_to t(".inspections"), new_tasks_inspection_index_path, class: "nav-link link-secondary" %>
+                <% elsif can? :service_tasks, Inspection %>
+                  <%= link_to t(".inspections"), service_tasks_inspection_index_path, class: "nav-link link-secondary" %>
+                <%end%>
               <%end%>
             </li>
           <% end %>
-          <li><%= link_to t(".about"), about_index_path, class: "nav-link px-2 link-secondary" %></li>
         </ul>
 
         <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <%= button_to admin_users_path, method: :get, class: "btn btn-light me-2" do %>
+              <i class="bi bi-gear"></i><span> <%= t('.admin_panel') %></span>
+            <% end %>
+          <% end %>
           <div class="dropdown text-end">
             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
               <%= image_tag "atom-logo.svg", class: "mx-1", width: "32", height: "32", alt: "avatar" %>
@@ -45,6 +81,8 @@
             <ul class="dropdown-menu dropdown-menu-lg-end text-small" aria-labelledby="dropdownUser1">
               <% if current_user.admin? %>
                 <li><%=link_to t('.admin_panel'), admin_users_path, class: "dropdown-item" %></li>
+                <li><%=link_to t('.edit_me'), edit_user_registration_path, class: "dropdown-item" %></li>
+                <li><%= link_to 'SidekiQ', sidekiq_web_path, class: "dropdown-item" %></li>
               <% else %>
                 <li><%=link_to t('.edit_me'), edit_user_registration_path, class: "dropdown-item" %></li>
               <% end %>
@@ -53,8 +91,6 @@
               <li><%= button_to t("b_logout"), destroy_user_session_path, method: :delete, class: "dropdown-item"%></li>
             </ul>
           </div>
-          <% else %>
-            <%= link_to t("b_login"), new_user_session_path, class: "btn btn-primary" %>
           <% end %>
         </div>
       </div>

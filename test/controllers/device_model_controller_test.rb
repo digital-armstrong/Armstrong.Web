@@ -5,6 +5,9 @@ class Admin::DeviceModelControllerTest < ActionController::TestCase
 
   def setup
     sign_in(users(:admin))
+    @mg = create(:measurement_group)
+    @mc = create(:measurement_class, measurement_group_id: @mg.id)
+    @manufacturer = create(:manufacturer)
   end
 
   test 'should get index' do
@@ -20,7 +23,12 @@ class Admin::DeviceModelControllerTest < ActionController::TestCase
 
   test 'should patch update' do
     device_model = create(:device_model)
-    device_model_attrs = device_model.as_json
+    device_model_attrs = attributes_for(
+      :device_model,
+      measurement_class_id: @mc.id,
+      measurement_group_id: @mg.id,
+      manufacturer_id: @manufacturer.id,
+    )
     device_model_attrs.delete('id')
     patch :update, params: { id: device_model.id, device_model: device_model_attrs }
     assert_response :redirect
@@ -28,8 +36,12 @@ class Admin::DeviceModelControllerTest < ActionController::TestCase
 
   test 'should post create' do
     device_model = create(:device_model)
-    device_model_attrs = device_model.as_json
-    device_model_attrs.delete('id')
+    device_model_attrs = attributes_for(
+      :device_model,
+      measurement_class_id: @mc.id,
+      measurement_group_id: @mg.id,
+      manufacturer_id: @manufacturer.id,
+    )
     post :create, params: { id: device_model.id, device_model: device_model_attrs }
     assert_response :redirect
   end

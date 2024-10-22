@@ -53,7 +53,7 @@ class Inspection < ApplicationRecord
     decommissioning: 'decommissioning',
   }.freeze
 
-  STATES = Inspection.state_machine.states.map { |x| x.name }.to_h { |state| [state, state.to_s] }
+  STATES = Inspection.state_machine.states.map(&:name).to_h { |state| [state, state.to_s] }
 
   validates :type_target, presence: true
 

@@ -6,6 +6,13 @@ class Ability
     user ||= User.new
 
     cannot(:manage, :device_admin)
+    cannot(:manage, :device_model_admin)
+    cannot(:manage, :device_reg_group_admin)
+    cannot(:manage, :manufacturer_admin)
+    cannot(:manage, :measurement_class_admin)
+    cannot(:manage, :device_component_admin)
+    cannot(:manage, :measurement_group_admin)
+    cannot(:manage, :supplementary_kit_admin)
 
     if user.present?
       can([:read, :create], Post)
@@ -18,6 +25,7 @@ class Ability
     end
 
     if user.dosimetrist?
+      can(:read, :armstrong)
     end
 
     if user.inspector?
@@ -25,10 +33,25 @@ class Ability
     end
 
     if user.engineer?
-      can([:manage, :create_inspection], Device)
+      can([:manage, :create_inspection], Device, service_id: user.service_id)
+      cannot(:destroy, Device)
       can(:create, [DeviceModel, SupplementaryKit, DeviceRegGroup, MeasurementClass, MeasurementGroup,
                     Manufacturer, DeviceComponent])
-      inspector(user)
+      can([:read, :service_tasks], Inspection)
+      can(:manage, :armstrong)
+    end
+
+    if user.engineer_observer?
+      can(:read, :armstrong)
+      can([:read], Device, service_id: user.service_id)
+    end
+
+    if user.responsible_for_measuring_instruments?
+      can([:manage, :create_inspection], Device, service_id: user.service_id)
+      cannot(:destroy, Device)
+      can(:create, [DeviceModel, SupplementaryKit, DeviceRegGroup, MeasurementClass, MeasurementGroup,
+                    Manufacturer, DeviceComponent])
+      can([:read, :service_tasks], Inspection)
       cannot(:manage, :armstrong)
     end
   end

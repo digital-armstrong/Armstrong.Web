@@ -1,6 +1,7 @@
 class Admin::DeviceRegGroupController < ApplicationController
-  before_action :set_device_reg_group, only: [:edit, :update, :destroy]
+  include DeviceRegGroupConcern
   load_and_authorize_resource
+  before_action :set_device_reg_group, only: [:edit, :update, :destroy]
 
   def index
     @device_reg_group = DeviceRegGroup.new
@@ -10,16 +11,13 @@ class Admin::DeviceRegGroupController < ApplicationController
   end
 
   def new
+    authorize!(:new, :device_reg_group_admin)
     @device_reg_group = DeviceRegGroup.new
   end
 
   def create
-    @device_reg_group = DeviceRegGroup.new(device_reg_group_params)
-    if @device_reg_group.save
-      redirect_back(fallback_location: root_path)
-    else
-      render(:new, status: :unprocessable_entity)
-    end
+    authorize!(:create, :device_reg_group_admin)
+    device_reg_group_create
   end
 
   def update
@@ -36,7 +34,7 @@ class Admin::DeviceRegGroupController < ApplicationController
     if assigned_devices_count.zero?
       @device_reg_group.destroy
     else
-      flash[:error] = 'Ошибка! На эту регистрационную группу ссылаются приборы.'
+      flash[:error] = t('message.device_reg_group.delete.error')
     end
     redirect_to(admin_device_reg_group_index_path)
   end

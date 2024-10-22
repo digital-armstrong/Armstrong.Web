@@ -1,0 +1,9 @@
+<%= simple_form_for division, as: :division, url: path,
+  class: "form-group row" do |f| %>
+  <div class="row">
+      <%= f.input :name, placeholder: 'Название подразделения', input_html: {:tabindex => 1}%>
+      <%= f.association :organization, input_html: {:tabindex => 2}, include_blank: false %>
+  </div>
+
+  <%= render 'shared/form/actions', f:f %>
+<% end %>

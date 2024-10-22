@@ -1,36 +1,53 @@
 class InspectionController < ApplicationController
   before_action :set_inspection, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
+  include DeviceHelper
 
-  def tasks(condition)
+  def tasks(condition, method_name)
     params[:q] ||= {}
-    @query = Inspection.ransack(params[:q])
-    @query.sorts = ['updated_at desc']
+
+    if params[:q][:conclusion_date_lteq].present?
+      params[:q][:conclusion_date_lteq] = params[:q][:conclusion_date_lteq].to_date.end_of_day
+    end
+
     if params[:q][:state_eq].present?
       @selected_state = params[:q][:state_eq].to_sym
     end
-    @pagy, @inspections = pagy(@query.result.where(condition).
+    @query = Inspection.ransack(params[:q])
+    @query.sorts = ['updated_at desc']
+    @previous_action = method_name
+    if method_name == :service_tasks
+      @pagy, @inspections = pagy(@query.result.joins(:device).where(condition).
       includes(:device, :creator, :performer))
+    else
+      @pagy, @inspections = pagy(@query.result.where(condition).
+        includes(:device, :creator, :performer))
+    end
   end
 
   def new_tasks
     @states_to_show = Inspection::STATES.select { |s| s.in?([:task_created]) }
-    tasks(performer_id: nil, state: @states_to_show.keys)
+    tasks({ performer_id: nil, state: @states_to_show.keys }, __callee__)
   end
 
   def my_tasks
     @states_to_show = Inspection::STATES.excluding(:verification_successful, :closed, :task_created)
-    tasks({ performer_id: current_user.id, state: @states_to_show.keys })
+    tasks({ performer_id: current_user.id, state: @states_to_show.keys }, __callee__)
   end
 
   def completed_tasks
     @states_to_show = Inspection::STATES.select { |s| s.in?([:verification_successful, :closed]) }
-    tasks({ state: @states_to_show.keys })
+    tasks({ state: @states_to_show.keys }, __callee__)
   end
 
   def all_tasks
     @states_to_show = Inspection::STATES
-    tasks(nil)
+    tasks(nil, __callee__)
+  end
+
+  def service_tasks
+    @states_to_show = Inspection::STATES
+    tasks({ devices: { service_id: current_user.service_id } }, __callee__)
   end
 
   def new
@@ -52,6 +69,7 @@ class InspectionController < ApplicationController
   def show
     @creator = User.find_by_id(@inspection.creator_id)
     @performer = User.find_by_id(@inspection.performer_id)
+    @previous_action = params[:previous_action]
   end
 
   def update
@@ -64,7 +82,12 @@ class InspectionController < ApplicationController
 
   def destroy
     @inspection.destroy
-    redirect_to(new_tasks_inspection_index_path)
+    action = if params[:previous_action].present?
+               params[:previous_action]
+             else
+               'new_tasks'
+             end
+    redirect_to(action:)
   end
 
   def set_state(condition)
@@ -73,7 +96,7 @@ class InspectionController < ApplicationController
       redirect_back(fallback_location: new_tasks_inspection_index_path)
       true
     else
-      flash[:error] = "Can't change state"
+      flash[:error] = t('message.inspection.change_state.error')
       redirect_back(fallback_location: new_tasks_inspection_index_path)
     end
   end
@@ -82,15 +105,20 @@ class InspectionController < ApplicationController
     if set_state(@inspection.can_accept_task?) { @inspection.accept_task }
       @inspection.update(performer_id: current_user.id)
     else
-      flash.now[:error] = "Can't change state"
+      flash.now[:error] = t('message.inspection.change_state.error')
     end
   end
 
   def complete_verification
-    if set_state(@inspection.can_complete_verification?) { @inspection.complete_verification }
+    if @inspection.can_complete_verification?
+      @inspection.complete_verification
       @inspection.update(conclusion_date: DateTime.now)
+      set_inspection_status(Device.find_by_id(@inspection.device_id))
+
+      redirect_to(edit_inspection_path(@inspection))
     else
       flash.now[:error] = "Can't change state"
+      redirect_back(fallback_location: new_tasks_inspection_index_path)
     end
   end
 
@@ -99,10 +127,13 @@ class InspectionController < ApplicationController
   end
 
   def close
-    if set_state(@inspection.can_close?) { @inspection.close }
+    if @inspection.can_close?
+      @inspection.close
       @inspection.update(conclusion_date: DateTime.now)
+      redirect_to(edit_inspection_path(@inspection))
     else
       flash.now[:error] = "Can't change state"
+      redirect_back(fallback_location: new_tasks_inspection_index_path)
     end
   end
 

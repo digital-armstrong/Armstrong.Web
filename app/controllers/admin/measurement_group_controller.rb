@@ -1,6 +1,7 @@
 class Admin::MeasurementGroupController < ApplicationController
-  before_action :set_measurement_group, only: [:edit, :update, :destroy]
+  include MeasurementGroupConcern
   load_and_authorize_resource
+  before_action :set_measurement_group, only: [:edit, :update, :destroy]
 
   def index
     @query = MeasurementGroup.ransack(params[:q])
@@ -9,16 +10,13 @@ class Admin::MeasurementGroupController < ApplicationController
   end
 
   def new
+    authorize!(:new, :measurement_group_admin)
     @measurement_group = MeasurementGroup.new
   end
 
   def create
-    @measurement_group = MeasurementGroup.new(measurement_group_params)
-    if @measurement_group.save
-      redirect_back(fallback_location: root_path)
-    else
-      render(:new, status: :unprocessable_entity)
-    end
+    authorize!(:create, :measurement_group_admin)
+    measurement_group_create
   end
 
   def update
@@ -35,7 +33,7 @@ class Admin::MeasurementGroupController < ApplicationController
     if assigned_measurement_classes_count.zero?
       @measurement_group.destroy
     else
-      flash[:error] = 'Ошибка! На этот группу измерений ссылаются классы измерений!'
+      flash[:error] = t('message.measurement_group.delete.error')
     end
     redirect_to(admin_measurement_group_index_path)
   end

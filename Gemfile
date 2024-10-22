@@ -51,6 +51,12 @@ gem 'simple_form', '~> 5.2'
 gem 'state_machines', '~> 0.5.0'
 gem 'state_machines-activerecord', '~> 0.8.0'
 
+# bg jobs
+gem 'sidekiq', '~> 7.1', '>= 7.1.1'
+gem 'sidekiq-cron', '~> 1.10', '>= 1.10.1'
+gem 'sidekiq-failures', '~> 1.0', '>= 1.0.4'
+
+gem 'ancestry', '~> 4.3', '>= 4.3.3'
 gem 'pagy', '~> 6.0'
 gem 'ransack', '~> 4.0'
 gem 'responders', '~> 3.1'
@@ -61,11 +67,16 @@ gem 'prawn-table', '~> 0.2.2'
 gem 'devise', '~> 4.2'
 gem 'cancancan', '~> 3.5'
 gem 'tzinfo'
+gem 'slim', '~> 5.2', '>= 5.2.1'
+gem 'slim_lint', '~> 0.27.0'
+gem 'slim-rails', '~> 3.6', '>= 3.6.3'
+
 group :development, :test do
   gem 'debug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'factory_bot_rails'
   gem 'rubocop'
+  gem 'faker'
 end
 
 group :development do

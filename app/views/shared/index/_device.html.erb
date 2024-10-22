@@ -1,7 +1,10 @@
 <% provide :page_title, "Приборы" %>
 <% show_path = show_path.from(0).to(show_path.length-2) %>
 <div class="row mx-0">
-  <div class="col-2 ps-0">
+  <div class="col-2 ps-0 my-4">
+    <% if current_page?(admin_device_index_path)  %>
+      <%= render 'shared/admin/navbar/device_bread', selected: "device" %>
+    <% end %>
     <div class="accordion mb-3" id="accordionFilter">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
@@ -10,7 +13,7 @@
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
-          <%= search_form_for(@query, url:device_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+          <%= search_form_for(@query, url:search_path, method: :get, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
               <%= f.label :tabel_id, class:"mb-2"%>
               <%= f.search_field :tabel_id_eq, class: 'form-control', placeholder: 'Номер' %>
@@ -28,7 +31,7 @@
                 </div>
               </div>
               <%= f.label :year_of_commissioning, class:"my-2" %>
-              <div class="row px-2 mb-2">
+              <div class="row px-2">
                 <div class="col px-1">
                   <%= f.search_field :year_of_commissioning_gteq, class: 'form-control', placeholder: 'От' %>
                 </div>
@@ -36,6 +39,23 @@
                   <%= f.search_field :year_of_commissioning_lteq, class: 'form-control', placeholder: 'До' %>
                 </div>
               </div>
+              <%= f.label :status, class: "my-2" %>
+              <select class="form-select form-select" name="q[inspection_expiration_status_eq]" id="q_inspection_expiration_status_eq">
+                <option value=""><%= t('combobox_blank') %></option>
+                <% Device::INSPECTION_EXPIRATION_STATUS.each do |key,value| %>
+                  <% if key == @selected_status %>
+                    <option value="<%= key %>" selected>
+                  <% else %>
+                    <option value="<%= key %>">
+                  <% end %>
+                  <%= t("activerecord.attributes.device.status_names.#{value}") %></option>
+                <% end %>
+              </select>
+              <% if current_user.admin? %>
+                <%= f.label :service, class:"my-2" %>
+                <%= f.collection_select(:service_id_eq, Service.all,
+                :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select mb-2'}) %>
+              <% end %>
             </div>
             <%= f.submit t("b_accept"), class: 'btn btn-primary w-100 my-2'%>
             <div id="b_clear" onclick="formClear()" class='btn btn-secondary w-100'>
@@ -45,47 +65,96 @@
         </div>
       </div>
     </div>
-    <%= render 'shared/modal_button_add', path: new_path, classes: "btn btn-primary w-100", text: t(".b_add_device") %>
-    <%= render 'shared/modal_button_add', path: new_admin_device_component_path, classes: "btn btn-primary mt-2 w-100", text: t(".b_add_device_component") %>
+    <% if can? :manage, Device %>
+      <%= render 'shared/modal_button_add', path: new_path, classes: "btn btn-primary w-100", text: t(".b_add_device") %>
+      <%= render 'shared/modal_button_add', path: new_device_component_path, classes: "btn btn-primary mt-2 w-100", text: t(".b_add_device_component") %>
+    <% end %>
     <%= button_to device_download_path(request.params.merge(format: :pdf)), data: {turbo: :false}, class: "btn btn-primary my-2 w-100 shadow" do %>
       <i class="bi bi-download"></i><span> <%=t('b_download_pdf')%></span>
     <% end %>
   </div>
-  <div class="col-10 shadow rounded">
-    <div class="table-responsive">
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col"><%=t('activerecord.attributes.device.tabel_id')%></th>
-            <th scope="col"><%=t('activerecord.attributes.device.serial_id')%></th>
-            <th scope="col"><%=t('activerecord.attributes.device.device_model')%></th>
-            <th scope="col"><%=t('activerecord.attributes.device.year_of_production')%></th>
-            <th scope="col"><%=t('activerecord.attributes.device.year_of_commissioning')%></th>
-            <th scope="col"><%=t('activerecord.attributes.device.date_of_inspection')%></th>
-            <th scope="col"><i class="bi bi-circle"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @devices.each do |device| %>
-            <% path = "#{show_path}#{device.id}" %>
-            <tr onclick="document.location = `<%= path %>`" style="cursor:pointer">
-              <th scope="row"><%= device.tabel_id %></th>
-              <td><%= device.serial_id %></td>
-              <td><%= device.device_model.name %></td>
-              <td><%= device.year_of_production %></td>
-              <td><%= device.year_of_commissioning %></td>
-              <td>
-                <%= device.last_successful_inspection %>
-              </td>
-              <% if device.last_successful_inspection.present? %>
-                <td><i class="bi bi-circle-fill text-success"></i></td>
-              <% else %>
-                <td><i class="bi bi-circle-fill text-danger"></i></td>
+  <div class="col-10 my-4 p-0">
+    <div class="shadow rounded px-2">
+      <div class="table-responsive">
+        <table class="table table-hover text-nowrap">
+          <%= render 'shared/ui/table/caption/all_items',
+              count: Device.count %>
+          <thead>
+            <tr class="text-nowrap">
+              <th scope="col"><i class="bi bi-circle"></th>
+              <th scope="col"><%=t('activerecord.attributes.device.tabel_id')%></th>
+              <th scope="col"><%=t('activerecord.attributes.device.serial_id')%></th>
+              <th scope="col"><%=t('activerecord.attributes.device.device_model')%></th>
+              <th scope="col"><%=t('activerecord.attributes.device.year_of_production')%></th>
+              <th scope="col"><%=t('activerecord.attributes.device.year_of_commissioning')%></th>
+              <th scope="col"><%=t('activerecord.attributes.device.room')%></th>
+              <th scope="col"><%=t('activerecord.attributes.device.control_point')%></th>
+              <% if current_user.admin? %>
+                <th scope="col"><%=t('activerecord.attributes.device.service')%></th>
               <% end %>
+              <th scope="col"><%=t('activerecord.attributes.device.date_of_inspection')%></th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @devices.each do |device| %>
+              <% path = "#{show_path}#{device.id}" %>
+              <tr onclick="document.location = `<%= path %>`" style="cursor:pointer">
+                <% if device.status == Device::STATUS[:in_storage] %>
+                  <td><i class="bi bi-circle-fill text-success"></i></td>
+                <% elsif device.status == Device::STATUS[:expired] %>
+                  <td><i class="bi bi-circle-fill text-danger"></i></td>
+                <% elsif device.status == Device::STATUS[:on_repair] %>
+                  <td><i class="bi bi-circle-fill text-info"></i></td>
+                <% elsif device.status == Device::STATUS[:in_stock] %>
+                  <td><i class="bi bi-circle-fill text-success"></i></td>
+                <% elsif device.status == Device::STATUS[:sended_to_inspection] %>
+                  <td><i class="bi bi-circle-fill text-primary"></i></td>
+                <% end %>
+
+                <th scope="row"><%= device.tabel_id %></th>
+                <td><%= truncate(device.serial_id, length: 10) %></td>
+                <td><%= device.device_model.name %></td>
+                <td><%= device.year_of_production %></td>
+                <td><%= device.year_of_commissioning %></td>
+                <% if device.control_point.nil? %>
+                  <td><%= "——" %></td>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td>
+                    <span>
+                      <% @rooms = device.control_point.map { |cp| cp.room.name } %>
+                      <% @rooms.uniq.each do |e| %>
+                        <%= content_tag(:span, e, class: "btn btn-light btn-sm") %>
+                      <% end %>
+                    </span>
+                  </td>
+                  <td>
+                    <% device.control_point.each do |e| %>
+                      <%= content_tag(:span, e.name, class: "btn btn-light btn-sm") %>
+                    <% end %>
+                  </td>
+                <% end %>
+                <% if current_user.admin? %>
+                  <td><%= device.service.name %></td>
+                <% end %>
+                <% if device.inspection_expiration_status == Device::INSPECTION_EXPIRATION_STATUS[:verified] %>
+                  <td class="text-success">
+                    <%= device.last_successful_inspection %>
+                  </td>
+                <% elsif device.inspection_expiration_status ==  Device::INSPECTION_EXPIRATION_STATUS[:prepare_to_inspection] %>
+                  <td class="text-warning">
+                    <%= device.last_successful_inspection %>
+                  </td>
+                <% else %>
+                  <td class="text-danger">
+                    <%= device.last_successful_inspection %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -107,8 +176,12 @@
   function formClear(){
     let form = document.getElementById('for-clear')
     let inputs = Array.from(form.getElementsByTagName("input"))
+    let selects = Array.from(document.getElementById('for-clear').getElementsByTagName("select"))
     inputs.forEach((input) =>{
       input.value = null
+    })
+    selects.forEach((select) =>{
+      select.value = ""
     })
   }
 </script>

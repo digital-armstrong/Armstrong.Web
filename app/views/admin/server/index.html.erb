@@ -1,0 +1,125 @@
+<% provide :page_title, "Службы" %>
+<%= render 'shared/admin/navbar/admin', selected: "asrc" %>
+<%= render 'shared/flash_alert' %>
+<div class="row mx-0">
+  <div class="col-2 ps-0 my-4">
+    <%= render 'shared/admin/navbar/asrc_navbar', selected: "server" %>
+    <div class="accordion mb-3" id="accordionFilter">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFilter">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilter" aria-expanded="true" aria-controls="collapseFilter">
+            <%= t('filtration')%>
+          </button>
+        </h2>
+        <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
+          <%= search_form_for(@query, url: admin_server_index_path, method: :get, class: "rounded accordion-body") do |f| %>
+            <div id="for-clear">
+              <%= f.label :name, class: "mb-1" %>
+              <%= f.search_field :name_cont, class:"form-control mb-2", placeholder:"Название" %>
+              <%= f.label :ip_address, class: "mb-1" %>
+              <%= f.search_field :ip_address_cont, class:"form-control mb-2", placeholder:"192.168.1.101" %>
+              <%= f.label :inventory_id, class: "mb-1"%>
+              <%= f.search_field :inventory_id_cont, class:"form-control mb-2", placeholder:"4321" %>
+
+              <%= f.label :service_id, class: "mb-1" %>
+              <%= f.collection_select(:service_id_eq, Service.all,
+                  :id, :name, {:include_blank => t('combobox_blank')}, {:class =>'form-select mb-2'}) %>
+              <%= f.label :room_id, class: "mb-1" %>
+              <%= f.collection_select(:room_id_eq, Service.all,
+                  :id, :name, {:include_blank => t('combobox_blank')}, {:class =>'form-select mb-2'}) %>
+            </div>
+            <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 my-2'%>
+            <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
+              <%= t("b_clear")%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <%= render 'shared/modal_button_add', path: new_admin_server_path, classes: "btn btn-primary w-100", text: t("b_add") %>
+  </div>
+  <div class="col-10 my-4 p-0">
+    <div class="shadow rounded px-2">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <%= render 'shared/ui/table/caption/all_items',
+              count: Server.count %>
+          <thead>
+            <tr>
+              <th scope="col"><%= t('activerecord.attributes.server.id') %></th>
+              <th scope="col"><%= t('activerecord.attributes.server.name') %></th>
+              <th scope="col"><%= t('activerecord.attributes.server.ip_address') %></th>
+              <th scope="col"><%= t('activerecord.attributes.server.inventory_id') %></th>
+              <th scope="col"><%= t('activerecord.attributes.server.service') %></th>
+              <th scope="col"><%= t('activerecord.attributes.server.room') %></th>
+              <%= render 'shared/ui/table/header/action' %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @servers.each do |server| %>
+            <tr class="align-middle">
+                <td><%= server.id %></td>
+                <td><%= server.name %></td>
+
+                <% if server.ip_address.nil? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td><%= server.ip_address %></td>
+                <% end %>
+
+                <% if server.inventory_id.nil? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td><%= server.inventory_id %></td>
+                <% end %>
+
+                <% if server.service.nil? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td><%= server.service.name %></td>
+                <% end %>
+
+                <% if server.room.nil? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td><%= server.room.name %></td>
+                <% end %>
+
+                <%= render 'shared/ui/table/cell/action',
+                    edit_path: edit_admin_server_path(server.id),
+                    destroy_path: admin_server_path(server.id) %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+<div class="row my-5">
+  <div class="col-2">
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col"></div>
+      <div class="col">
+        <%= pagination @pagy %>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>
+<script>
+  function formClear(){
+    let form = document.getElementById('for-clear')
+    let inputs = Array.from(form.getElementsByTagName("input"))
+    let selects = Array.from(form.getElementsByTagName("select"))
+    inputs.forEach((input) =>{
+      input.value = null
+    })
+    selects.forEach((select) =>{
+      select.value = ""
+    })
+  }
+</script>

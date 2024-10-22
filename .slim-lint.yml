@@ -1,0 +1,9 @@
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: "3.2"
+
+linters:
+  LineLength:
+    max: 120
+  RedundantDiv:
+    enabled: false

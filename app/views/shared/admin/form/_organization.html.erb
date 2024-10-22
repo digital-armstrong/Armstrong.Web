@@ -1,0 +1,13 @@
+<%= simple_form_for organization, as: :organization, url: path,
+  class: "form-group row" do |f| %>
+  <div class="row">
+      <%= f.input :name, label: t('.labels.name'), placeholder: t('.placeholders.name'), input_html: {:tabindex => 1}%>
+      <%= f.input :full_address, label: t('.labels.full_address'), placeholder: t('.placeholders.full_address'), input_html: {:tabindex => 1}%>
+      <%= f.input :zip_code, label: t('.labels.zip_code'), placeholder: t('.placeholders.zip_code'), input_html: {:tabindex => 1}%>
+      <%= f.input :phone, label: t('.labels.phone'), placeholder: t('.placeholders.phone'), input_html: {:tabindex => 1}%>
+      <%= f.input :fax, label: t('.labels.fax'), placeholder: t('.placeholders.fax'), input_html: {:tabindex => 1}%>
+      <%= f.input :email, label: t('.labels.email'), placeholder: t('.placeholders.email'), input_html: {:tabindex => 1}%>
+  </div>
+
+  <%= render 'shared/form/actions', f:f %>
+<% end %>

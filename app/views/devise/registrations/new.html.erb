@@ -2,7 +2,6 @@
   <%= image_tag "atom-logo.svg", class: "mb-4 mt-5", width: "72", height: "57" %>
     <h1 class="h3 mb-3 fw-normal">Форма регистрации</h1>
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= f.error_notification %>
     <div class="form-inputs">
       <div class="row">
         <div class="col">
@@ -15,21 +14,39 @@
         </div>
       </div>
       <div class="row">
-      <%= f.input :tabel_id,
-                  required: true %>
-      <%= f.input :email,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "email" }%>
-      <%= f.input :password,
-                  required: true,
-                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                  input_html: { autocomplete: "new-password" } %>
-      <%= f.input :password_confirmation,
-                  required: true,
-                  input_html: { autocomplete: "new-password" } %>
-      <%= f.input :role, label: false, input_html: {hidden: true, value: "default"} %>
-      <%= render 'shared/timezone_field', f:f, is_new: true%>
+        <%= f.association :service, include_blank: false %>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= f.input :tabel_id,
+                      required: true %>
+        </div>
+        <div class="col">
+          <%= f.input :email,
+                      autofocus: true,
+                      input_html: { autocomplete: "email" }%>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= f.input :password,
+                      required: true,
+                      hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                      input_html: { autocomplete: "new-password" } %>
+        </div>
+        <div class="col">
+          <%= f.input :password_confirmation,
+                      required: true,
+                      input_html: { autocomplete: "new-password" } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= f.input :role, :collection => User::ROLES.reject { |key, _value| key == :admin }.sort.map {|k,v| [v,k]}, include_blank: false, class:'form-select form-select' %>
+        </div>
+        <div class="col">
+          <%= render 'shared/timezone_field', f:f, is_new: true%>
+        </div>
       </div>
     </div>
     <div class="form-actions">

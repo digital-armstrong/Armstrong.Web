@@ -4,15 +4,19 @@ class Admin::UsersController < ApplicationController
 
   def index
     params[:q] ||= {}
+
     if params[:q][:created_at_lteq].present?
       params[:q][:created_at_lteq] = params[:q][:created_at_lteq].to_date.end_of_day
     end
+
     if params[:q][:updated_at_lteq].present?
       params[:q][:updated_at_lteq] = params[:q][:updated_at_lteq].to_date.end_of_day
     end
+
     if params[:q][:role_eq].present?
       @selected_role = params[:q][:role_eq].to_sym
     end
+
     @query = User.ransack(params[:q])
     @pagy, @users = pagy(@query.result.
       order(:tabel_id))
@@ -28,7 +32,7 @@ class Admin::UsersController < ApplicationController
       params[:user].delete(:password_confirmation)
     end
     if @user.update(user_params)
-      flash[:notice] = 'User was updated'
+      flash[:notice] = t('message.user.update.success')
       if @user.id = current_user.id
         Time.use_zone(user_params[:timezone]) { nil }
       end
@@ -46,7 +50,7 @@ class Admin::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:success] = 'User was added'
+      flash[:success] = t('message.user.create.success')
       redirect_to(admin_users_path)
     else
       render(:new, status: :unprocessable_entity)
@@ -55,13 +59,18 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     user = User.find(params[:id])
-    assigned_inspections_count = Inspection.where(creator_id: params[:id]).or(Inspection.where(performer_id: params[:id])).count + user.posts.count
+    assigned_inspections_count =
+      Inspection.
+        where(creator_id: params[:id]).
+        or(Inspection.where(performer_id: params[:id])).
+        count + user.posts.
+          count
 
     if assigned_inspections_count.zero?
       @user.destroy
-      flash[:success] = t("message.user.delete.success")
+      flash[:success] = t('message.user.delete.success')
     else
-      flash[:error] = t("message.user.delete.error")
+      flash[:error] = t('message.user.delete.error')
     end
     redirect_to(admin_users_path)
   end
@@ -83,6 +92,7 @@ class Admin::UsersController < ApplicationController
                                  :password,
                                  :password_confirmation,
                                  :role,
-                                 :timezone)
+                                 :timezone,
+                                 :service_id)
   end
 end

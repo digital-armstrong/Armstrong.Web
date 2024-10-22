@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   rescue_from CanCan::AccessDenied do
-    flash[:error] = 'Access denied!'
-    redirect_to root_url
+    render partial: 'shared/403'
   end
 
   def current_ability
@@ -16,21 +15,20 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_time_zone(&block)
-    timezone = ''
+  def set_time_zone(&)
     timezone = if current_user.nil?
                  'UTC'
                else
                  current_user.timezone
                end
-    Time.use_zone(timezone, &block)
+    Time.use_zone(timezone, &)
   end
 
   protected
 
   def configure_permitted_parameters
-    attributes_sign_up = [:first_name, :last_name, :tabel_id, :email, :timezone]
-    attributes_update = [*attributes_sign_up, :second_name, :phone]
+    attributes_sign_up = [:first_name, :last_name, :tabel_id, :role, :email, :service_id, :timezone]
+    attributes_update = [*attributes_sign_up.excluding(:service_id), :second_name, :email, :phone]
     devise_parameter_sanitizer.permit(:sign_up, keys: attributes_sign_up)
     devise_parameter_sanitizer.permit(:account_update, keys: attributes_update)
   end

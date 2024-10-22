@@ -24,7 +24,7 @@
         <%= @creator.last_name + " " + @creator.first_name %>
       </span>
     </p>
-    <% unless @inspection.performer.nil? %>
+    <% unless @inspection.state == Inspection::STATES[:task_created] %>
       <p>
         <span>
           <strong><%= t('activerecord.attributes.inspection.performer_id')%>: </strong>
@@ -32,13 +32,13 @@
         </span>
       </p>
     <% end %>
-    <p>
-      <span>
-        <strong><%= t('activerecord.attributes.inspection.conclusion')%>: </strong>
-        <%= @inspection.conclusion %>
-      </span>
-    </p>
-    <% unless @inspection.conclusion_date.nil? %>
+    <% if @inspection.state == Inspection::STATES[:verification_successful] || @inspection.state == Inspection::STATES[:closed] %>
+      <p>
+        <span>
+          <strong><%= t('activerecord.attributes.inspection.conclusion')%>: </strong>
+          <%= @inspection.conclusion %>
+        </span>
+      </p>
       <p>
         <span>
           <strong><%= t('activerecord.attributes.inspection.conclusion_date')%>: </strong>
@@ -53,7 +53,7 @@
         </div>
         <% if can? :destroy, @inspection %>
           <div>
-            <%= button_to t("b_delete"), inspection_path(@inspection), method: :delete, class: "btn btn-danger"%>
+            <%= button_to t("b_delete"), inspection_path(id: @inspection.id, previous_action: @previous_action), method: :delete, class: "btn btn-danger"%>
           </div>
         <% end %>
       <% end %>

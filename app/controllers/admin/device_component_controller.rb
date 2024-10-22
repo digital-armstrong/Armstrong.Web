@@ -1,6 +1,7 @@
 class Admin::DeviceComponentController < ApplicationController
-  before_action :set_device_component, only: [:show, :edit, :update, :destroy]
+  include DeviceComponentConcern
   load_and_authorize_resource
+  before_action :set_device_component, only: [:show, :edit, :update, :destroy]
 
   def index
     @query = DeviceComponent.ransack(params[:q])
@@ -10,16 +11,13 @@ class Admin::DeviceComponentController < ApplicationController
   end
 
   def new
+    authorize!(:new, :device_component_admin)
     @device_component = DeviceComponent.new
   end
 
   def create
-    @device_component = DeviceComponent.new(device_component_params)
-    if @device_component.save
-      redirect_back(fallback_location: root_path)
-    else
-      render(:new, status: :unprocessable_entity)
-    end
+    authorize!(:create, :device_component_admin)
+    device_component_create
   end
 
   def update

@@ -1,10 +1,11 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Filter({ filter, onFilterChange }) {
   return (
-    <div className="card shadow rounded p-3">
+    <div>
       <input
-        className="form-control"
+        className="form-control rounded mb-2"
         type="text"
         placeholder="Поиск..."
         value={filter}
@@ -13,3 +14,8 @@ export default function Filter({ filter, onFilterChange }) {
     </div>
   );
 }
+
+Filter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  onFilterChange: PropTypes.func.isRequired,
+};

@@ -4,7 +4,7 @@ class DeviceModel < ApplicationRecord
   belongs_to :manufacturer
   has_many :devices
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :measurement_min, :measurement_max, :accuracy_class, :measurement_sensitivity, numericality: true, allow_nil: true
   validate :validate_measurement_group_belongs_to_measurement_class
 
@@ -33,6 +33,10 @@ class DeviceModel < ApplicationRecord
       'name',
       'safety_class',
       'updated_at',
+      'gos_registry_id',
+      'inspection_interval',
+      'calibration_min',
+      'calibration_min',
     ]
   end
 

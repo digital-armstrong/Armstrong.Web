@@ -1,0 +1,19 @@
+.container.my-4.px-0
+  section#breadcrump
+    ol.breadcrumb
+      li.breadcrumb-item
+        = link_to t('.all_posts'), root_path
+      li.breadcrumb-item.active
+        = @post.category
+  section#post-section
+    = render 'posts/shared/post_header', post: @post
+    p.mb-2 = simple_format(@post.body)
+    = render 'posts/shared/post_footer', post: @post, likes: @user_likes, selected: 'post'
+  hr
+  section#left-comment-section
+    .lead.display-6.my-2 = t('.comments')
+    - if current_user
+      = render 'posts/comments/comment_form', post: @post, comment: @comment
+
+  section#comment-section
+    = render 'posts/comments/comment_block', comments: @post_comments

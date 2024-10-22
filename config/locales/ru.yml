@@ -142,11 +142,49 @@ ru:
       month: Месяц
       second: Секунд
       year: Год
+  placeholders:
+    organization:
+      add_edit_form:
+        name: Название организации
+        full_address: Адрес
+
   message:
     user:
+      create:
+        success: Пользователь создан.
+      update:
+        success: Пользователь обновлен.
       delete:
         success: Пользователь успешно удален.
-        error: Ошибка! Пользователь не удален! На пользователя ссылаются инспекции.
+        error: Пользователь не удален! На пользователя ссылаются инспекции!
+    device:
+      delete:
+        error: Прибор не удален! На этот прибор ссылаются инспекции или каналы!
+    device_model:
+      delete:
+        error: Модель прибора не удалена! На модель прибора ссылаются приборы!
+    device_reg_group:
+      delete:
+        error: Рег. группа не удалена! На эту рег. группу ссылаются приборы!
+    manufacturer:
+      delete:
+        error: Производитель не удален! На этого производителя ссылаются модели приборов!
+    measurement_class:
+      delete:
+        error: Класс измерений не удален! На этот класс измерений ссылаются модели приборов!
+    measurement_group:
+      delete:
+        error: Группа измерений не удалена! На группу измерений ссылаются классы измерений!
+    supplementary_kit:
+      delete:
+        error: Набор не удален! На этот набор ссылаются приборы или компоненты!
+    inspection:
+      create_from_device:
+        success: Инспекция создана.
+        error: Инспекция не создана!
+        generated: Эта инспекция была создана администратором.
+      change_state:
+        error: Состояние не изменено!
   activerecord:
     models:
       device_model: Модель
@@ -160,9 +198,35 @@ ru:
       post: Пост
       user: Пользователь
       inspection: Инспекция
+      post_comment: Комментарий
     attributes:
+      building:
+        id: ID
+        name: Название
+        organization_id: Организация
+        organization: Организация
+        description: Описание
+      control_point:
+        name: Название
+        room: Помещение
+        room_id: Помещение
+        description: Описание
+        device: Устройство
+      channel:
+        id: ID
+        channel_id: № кнл.
+        server: № срв.
+        control_point: Точка контроля
+        location_description: Описание располож.
+        self_background: Собств. фон
+        pre_emergency_limit: Пред.-ав. уст.
+        emergency_limit: Ав. уст.
+        consumption: Расход
+        conversion_coefficient: Коэфф. конв.
+        service: Служба
       device:
         inventory_id: Инв. №
+        control_point: Точка контроля
         device_model: Модель
         device_model_id: Модель
         serial_id: Сер. №
@@ -170,27 +234,39 @@ ru:
         device_reg_group: Рег. группа
         year_of_production: Год выпуска
         year_of_commissioning: Год ввода
-        room: Расположение
-        room_id: Расположение
+        room: Помещение
+        room_id: Помещение
         date_of_inspection: Дата инспекции
         supplementary_kit: Набор
+        service: Служба
+        status: Статус
+        status_names:
+          verified: Поверен
+          prepare_to_inspection: Подготовить
+          expired: Просрочен
+          sent_to_omit: Отправлен в ЦСМИТ
+        service_id: Служба
       device_model:
         name: Название
         manufacturer: Производитель
         manufacturer_id: Производитель
-        measurement_group: Группа измерений
-        measurement_group_id: Группа измерений
-        measurement_class: Класс измерений
-        measurement_class_id: Класс измерений
-        measuring_unit: Ед. измерений
-        measurement_sensitivity: Чувств. измерений
-        measurement_min: Мин. величина измерений
-        measurement_max: Макс. величина измерений
-        safety_class: Класс безопасности
-        accuracy_class: Класс точности
+        measurement_group: Группа изм.
+        measurement_group_id: Группа изм.
+        measurement_class: Класс изм.
+        measurement_class_id: Класс изм.
+        measuring_unit: Ед. изм.
+        measurement_sensitivity: Чувств. изм.
+        measurement_min: Мин. вел. изм.
+        measurement_max: Макс. вел. изм.
+        safety_class: Класс без-ти
+        accuracy_class: Класс точ-ти
         is_complete_device: Полный набор?
-        is_tape_rolling_mechanism: Имеет лентопротяжный механизм?
-        measurement_range: Диапазон измеренийиа
+        is_tape_rolling_mechanism: ЛП механизм?
+        measurement_range: Диапазон изм.
+        calibration_max: Макс. калибр.
+        calibration_min: Мин. калибр.
+        inspection_interval: М/п инт.
+        gos_registry_id: № в ГР
       device_reg_group:
         name: Название
       manufacturer:
@@ -201,28 +277,66 @@ ru:
         site_url: Ссылка на сайт
       measurement_class:
         name: Название
-        measurement_group: Группа измерений
-        measurement_group_id: Группа измерений
+        measurement_group: Группа изм.
+        measurement_group_id: Группа изм.
         arms_device_type: ARMS-тип
       measurement_group:
         name: Название
-      device_component:
-        serial_id: Серийный номер
+      organization:
+        id: ID
         name: Название
-        measurement_min: Мин. величина измерений
-        measurement_max: Макс. величина измерений
-        measurement_unit: Единица измерений
+        full_address: Адрес
+        zip_code: Индекс
+        phone: Телефон
+        fax: Факс
+        email: E-mail
+      device_component:
+        serial_id: Сер. номер
+        name: Название
+        measurement_min: Мин. вел. изм.
+        measurement_max: Макс. величина изм.
+        measuring_unit: Ед. изм.
         description: Описание
         supplementary_kit: Набор
+      division:
+        id: ID
+        name: Название
+        organization: Организация
+        organization_id: Организация
       supplementary_kit:
         serial_id: Серийный номер
         name: Название
+        description: Описание
+      room:
+        id: ID
+        name: Название
+        building: Здание
+        building_id: Здание
+        level: Уровень
         description: Описание
       post:
         title: Заголовок
         body: Текст записи
         user: Автор
         category: Категория
+      service:
+        id: ID
+        name: Название
+        division: Подразделение
+        division_id: Подразделение
+        organization: Организация
+        organization_id: Организация
+        building: Здание
+        building_id: Здание
+      server:
+        id: ID
+        name: Название
+        ip_address: IPv4
+        inventory_id: № инв.
+        service: Служба
+        service_id: Служба
+        room: Расположение
+        room_id: Расположение
       user:
         tabel_id: Таб. №
         first_name: Имя
@@ -235,6 +349,9 @@ ru:
         password: Пароль
         password_confirmation: Подтверждение пароля
         current_password: Текущий пароль
+        service: Служба
+        service_id: Служба
+        timezone: Часовой пояс
       inspection:
         performer_id: Выполняющий
         performer: Выполняющий
@@ -245,13 +362,13 @@ ru:
         conclusion: Заключение
         conclusion_date: Дата заключения
         type_target: Цель
-        verification_successful: Проверка пройдена
+        verification_successful: Поверка выполнена
         task_created: Задача создана
-        task_accepted: Задача принята
-        verification_failed: Проверка провалена
+        task_accepted: Задача в работе
+        verification_failed: Поверка не выполнена
         sent_to_repair: Отправлено на ремонт
         returned_from_repair: Возвращено с ремонта
-        closed: Закрыто
+        closed: Поверка прервана
         incoming: Вх. контроль
         repair: Ремонт
         regular: Поверка
@@ -265,6 +382,97 @@ ru:
         leave_blank_if_you_don_t_want_to_change_it: оставьте поле пустым, если не хотите его менять
         title: Страница редактирования %{resource}
         we_need_your_current_password_to_confirm_your_changes: введите текущий пароль для подтверждения изменений
+  shared:
+    ui:
+      table:
+        caption:
+          all_items: "Всего: "
+    admin:
+      form:
+        channel:
+          placeholders:
+            channel_id: ID канала (1...48)
+            server_id: ID сервера
+            server: Название сервера
+            location_description: Описание канала
+            self_background: Собственный фон (12.34)
+            pre_emergency_limit: Предаварийная уставка (123.45)
+            emergency_limit: Аварийная уставка (1234.56)
+            consumption: Расход (123.45)
+            conversion_coefficient: Коэфф. преобразования (0.0009)
+            service: Служба
+        division:
+          labels:
+            name: Название
+            division: Подразделение
+            organization: Организация
+            building: Здание
+        building:
+          labels:
+            name: Название
+            organization: Организация
+          placeholders:
+            name: "106"
+            description: "Здание СМ-3 и РБТ-6"
+        room:
+          placeholders:
+            name: "112"
+            level: "-4.8"
+            description: "Кобальтовый участок"
+        organization:
+          labels:
+            name: Название
+            full_address: Адрес
+            zip_code: Индекс
+            phone: Телефон
+            fax: Факс
+            email: E-mail
+          placeholders:
+            name: АО ГНЦ НИИАР
+            full_address: Западное шоссе, 9
+            zip_code: "433019"
+            phone: 7-55-25
+            fax: 7-55-25
+            email: info@niiar.ru
+    show:
+      device:
+        send_to_inspection: Отправить на инспекцию
+        admin_send_to_inspection: Отправить на инспекцию (админ)
+    index:
+      division:
+        id: ID
+        name: Название
+      inspection:
+        device: Прибор
+        assigned_user: Инспектор
+        target: Цель
+        state: Состояние
+        conclusion: Заключение
+        conclusion_date: Дата заключения
+        description: Описание
+        creator: Направил
+        device_tabel_id: Таб.№
+        device_serial_id: Сер.№
+        text-no-new-task: Задач пока нет...
+        performer_last_name: Иванов
+        performer_first_name: Иван
+        performer_second_name: Иванович
+        inspection_description: Прибор был поверен...
+        creator_last_name: Петров
+        creator_first_name: Петр
+        creator_second_name: Петрович
+        conclusion_date_from: Дата заключения от
+        conclusion_date_to: Дата заключения до
+      device:
+        b_add_device: Прибор
+        b_add_device_component: Компонент
+    navbar:
+      inspection:
+        new_tasks: Новые задачи
+        my_tasks: Мои задачи
+        completed_tasks: Завершенные задачи
+        all_tasks: Все задачи
+        service_tasks: Задачи службы
   layouts:
     application:
       home: Главная
@@ -277,16 +485,13 @@ ru:
       profile: Профиль
       logout: Выйти
       edit_me: Изм. профиль
-  shared:
-    show:
-      device:
-        send_to_inspection: Отправить на инспекцию
     navbar:
       inspection:
         new_tasks: Новые задачи
         my_tasks: Мои задачи
         completed_tasks: Завершенные задачи
         all_tasks: Все задачи
+        service_tasks: Задачи службы
     index:
       inspection:
         device: Прибор
@@ -307,6 +512,8 @@ ru:
         creator_last_name: Петров
         creator_first_name: Петр
         creator_second_name: Петрович
+        conclusion_date_from: Дата заключения от
+        conclusion_date_to: Дата заключения до
       device:
         b_add_device: Прибор
         b_add_device_component: Компонент
@@ -318,19 +525,30 @@ ru:
   device_component:
     new:
       add_device_component: Добавить компонент
-  post:
+  posts:
     index:
       b_new_post: Новый пост
       b_read: Читать далее
       more: (далее...)
+    comments:
+      replay_form:
+        link_text: ответить
     show:
       published: Опубликован
       updated: Обновлен
       author: Автор
-    form:
-      title: Рецепт урановых оладьев
-      body: Съешь еще немного этих...
-      category: Публичный или УРБ-106
+      comments: Комментарии
+      all_posts: Все посты
+    shared:
+      post_footer:
+        published: опубликовано
+        ago: назад
+      post_header:
+        delete_confirm: Безвозвратно удалить пост?
+      form:
+        title: Рецепт урановых оладьев
+        body: Съешь еще немного этих...
+        category: Публичный или УРБ-106
   admin:
     users:
       index:
@@ -338,6 +556,14 @@ ru:
         created_at_to: Создан до
         updated_at_from: Обновлен от
         updated_at_to: Обновлен до
+    building:
+      new: Добавить здание
+      edit: Изменить здание
+    control_point:
+      new:
+        add_control_point: Добавить т. контроля
+      edit:
+        edit_add_control_point: Изменить т. контроля
     device_component:
       new:
         add_device_component: Добавить компонент
@@ -372,7 +598,13 @@ ru:
       new:
         add_measurement_class: Добавить класс изм.
       edit:
-        edit_measurement_class: Изменить класс изм. 
+        edit_measurement_class: Изменить класс изм.
+    room:
+      new: Добавить пом.
+      edit: Изменить пом.
+    organization:
+      new: Добавить орг.
+      edit: Изменить орг.
   combobox_blank: Не учитывать
   b_change: Изменить
   b_delete: Удалить
@@ -386,3 +618,5 @@ ru:
   updated_at: Обновлен
   action: Действия
   filtration: Фильтрация
+  access_denied: "403: Доступ запрещен"
+  access_denied_message: У вас нет прав для просмотра данной страницы.

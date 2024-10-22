@@ -1,215 +1,63 @@
-User.create(
-  tabel_id: 0,
-  first_name: 'Admin',
-  last_name: 'Adminov',
-  second_name: 'Adminovich',
-  email: 'admin@admin.ru',
-  password: '12345678',
-  role: 'admin'
-)
-
-10.times do |i|
-  User.create(
-    tabel_id: 72000 + i,
-    first_name: "First#{i}",
-    last_name: "Last#{i}",
-    email: "engineer#{i}@email.ru",
-    password: "123456789#{i}",
-    role: 'engineer'
-  )
-end
-
-10.times do |i|
-  User.create(
-    tabel_id: 82000 + i,
-    first_name: "First#{i}",
-    last_name: "Last#{i}",
-    email: "inspector#{i}@email.ru",
-    password: "123456789#{i}",
-    role: 'inspector'
-  )
-end
-
-10.times do |i|
-  User.create(
-    tabel_id: 92000 + i,
-    first_name: "First#{i}",
-    last_name: "Last#{i}",
-    email: "dosimetrist#{i}@email.ru",
-    password: "123456789#{i}",
-    role: 'dosimetrist'
-  )
-end
 # seed Manufacturers
+require 'faker'
 
-Manufacturer.create(
-  name: "НПП ДОЗА",
-  adress: "124498, город Москва, город Зеленоград, Георгиевский проспект, дом 5, этаж 2, комната 49, ООО НПП «Доза»",
-  phone: "+7 (495) 777-84-85",
-  email: "info@doza.ru",
-  site_url: "https://www.doza.ru/"
-)
-
-Manufacturer.create(
-  name: "ОАО Пятигорский завод Импульс",
-  adress: "357500, Россия, Ставропольский край, г. Пятигорск, ул. Малыгина, 5, ОАО «Пятигорский завод «Импульс»",
-  phone: "+7 (879) 333-65-14",
-  email: "contact@pzi.ru",
-  site_url: "http://pzi.ru/"
-)
-
-10.times do |i|
+15.times do |index|
   Manufacturer.create(
-    name: "Manufacturer_name_#{i}",
-    adress: "г. Ульяновск, Ленина #{i}",
-    phone: "+7 (999) 999-01-#{i}",
-    email: "man_email#{i}@mail.ru",
-    site_url: "https://site_#{i}.com"
+    name: Faker::Company.name,
+    adress: Faker::Address.full_address,
+    phone: Faker::PhoneNumber.cell_phone_with_country_code,
+    email: Faker::Internet.email,
+    site_url: Faker::Internet.url
   )
 end
 
 # seed Reg Group
+10.times do |index|
+  DeviceRegGroup.create(name: Faker::Company.name)
+end
 
-DeviceRegGroup.create(name: "ГАН")
-DeviceRegGroup.create(name: "РосТехНадзор")
-DeviceRegGroup.create(name: "Без группы")
+meas_grp = ['Температурный', 'Рад. контроль', 'Электроизмеритель']
+meas_cls = ['Термометр', 'МЭД', 'Альфа', 'Бета', 'Гамма', 'Вольтметр', 'Амперметр']
 
 # seed MeasurementGroup
-
-MeasurementGroup.create(name: "Температурный")
-MeasurementGroup.create(name: "Рад. контроль")
-MeasurementGroup.create(name: "Электроизмеритель")
+3.times { |index| MeasurementGroup.create(name: meas_grp[index]) }
 
 # seed MeasurementClass
-
-MeasurementClass.create(
-  name: "Термометр",
-  measurement_group: MeasurementGroup.find_by(name: "Температурный"),
-  arms_device_type: nil
-)
-
-MeasurementClass.create(
-  name: "МЭД",
-  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
-  arms_device_type: 1
-)
-
-MeasurementClass.create(
-  name: "Альфа",
-  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
-  arms_device_type: 1
-)
-
-MeasurementClass.create(
-  name: "Бета",
-  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
-  arms_device_type: 1
-)
-
-MeasurementClass.create(
-  name: "Гамма",
-  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
-  arms_device_type: 1
-)
-
-MeasurementClass.create(
-  name: "Активность Аэрозолей",
-  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
-  arms_device_type: 3
-)
-
-MeasurementClass.create(
-  name: "Активность Газов",
-  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
-  arms_device_type: 3
-)
-
-MeasurementClass.create(
-  name: "Радиометр/Дозиметр",
-  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
-  arms_device_type: nil
-)
-
-MeasurementClass.create(
-  name: "Амперметр",
-  measurement_group: MeasurementGroup.find_by(name: "Электроизмеритель"),
-  arms_device_type: nil
-)
-
-MeasurementClass.create(
-  name: "Вольтметр",
-  measurement_group: MeasurementGroup.find_by(name: "Электроизмеритель"),
-  arms_device_type: nil
-)
+10.times do |index|
+  MeasurementClass.create(
+    name: meas_cls.sample,
+    measurement_group: MeasurementGroup.find_by(name: meas_grp.sample),
+    arms_device_type: rand(1..4)
+  )
+end
 
 # seed SupplementaryKits
-
-SupplementaryKit.create(
-  name: "МКС-АТ1117М-комплект-1",
-  serial_id: "310",
-  description: "Набор для приборов типа МКС-АТ1117М с тремя БД (Бета, Альфа, Альфа)"
-)
-
 20.times do |i|
   SupplementaryKit.create(
-    name: "Kit №#{i}",
-    serial_id: "#{i * 100}-E250-FF",
-    description: "Набор для приборов типа МКС-1117-#{i}"
+    name: "#{Faker::Device.model_name}-kit-#{i}",
+    serial_id: Faker::Device.serial,
+    description: Faker::Books::Dune.quote
   )
 end
 
 100.times do |i|
   DeviceComponent.create(
-    name: "Device Component #{i}",
-    serial_id: "#{i * 100}-E250-FF",
+    name: Faker::ElectricalComponents.active,
+    serial_id: Faker::Device.serial,
     measurement_min: i.to_f / 2.0,
     measurement_max: i.to_f * 2.0,
     measuring_unit: "мЗв/ч",
-    description: "Набор для теста",
+    description: Faker::Restaurant.description,
     supplementary_kit: SupplementaryKit.find_by(id: rand(1..20))
   )
 end
+
 # seed DeviceModel
-
-DeviceModel.create(
-  name: "МКС-АТ1117М (БОИ)",
-  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
-  measurement_class: MeasurementClass.find_by(name: "Радиометр/Дозиметр"),
-  measuring_unit: "Зв",
-  safety_class: "3Н",
-  accuracy_class: 0.2,
-  measurement_sensitivity: nil,
-  measurement_min: 0.001,
-  measurement_max: 1.0,
-  manufacturer: Manufacturer.find_by(name: "НПП ДОЗА"),
-  is_complete_device: false,
-  is_tape_rolling_mechanism: false,
-  doc_url: "https://www.doza.ru/catalog/handheld/124/",
-  image_url: nil
-)
-
-DeviceModel.create(
-  name: "МКС-АТ1117М (БДПБ-01)",
-  measurement_group: MeasurementGroup.find_by(name: "Рад. контроль"),
-  measurement_class: MeasurementClass.find_by(name: "Радиометр/Дозиметр"),
-  measuring_unit: "мин-1·см-2",
-  safety_class: "3Н",
-  accuracy_class: 0.2,
-  measurement_sensitivity: nil,
-  measurement_min: 1,
-  measurement_max: 500000,
-  manufacturer: Manufacturer.find_by(name: "НПП ДОЗА"),
-  is_complete_device: false,
-  is_tape_rolling_mechanism: false,
-  doc_url: "https://www.doza.ru/catalog/handheld/124/",
-  image_url: nil
-)
-
 100.times do |i|
   DeviceModel.create(
-    name: "Model_name_#{i}",
-    measurement_group: MeasurementGroup.find_by(name: "Температурный"),
-    measurement_class: MeasurementClass.find_by(name: "Термометр"),
+    name: Faker::Device.model_name,
+    measurement_group: MeasurementGroup.find_by(id: rand(1..3)),
+    measurement_class: MeasurementClass.find_by(id: rand(1..10)),
     measuring_unit: "мЗв/ч",
     safety_class: "#{i}Н",
     accuracy_class: i.to_f,
@@ -219,44 +67,168 @@ DeviceModel.create(
     manufacturer: Manufacturer.find_by(id: rand(1..10)),
     is_complete_device: [true, false].sample,
     is_tape_rolling_mechanism: [true, false].sample,
-    doc_url: "/this/is/doc/path/#{i}",
-    image_url: "/no/way/this/is/img#{i}"
+    doc_url: Faker::Internet.url,
+    image_url: Faker::Internet.url,
+    inspection_interval: rand(0.1..9.9)
+  )
+end
+
+# seed Organization
+Organization.create(
+  name: Faker::Company.name,
+  full_address: Faker::Address.full_address,
+  zip_code: Faker::Address.zip_code,
+  phone: Faker::PhoneNumber.cell_phone_with_country_code,
+  fax: Faker::PhoneNumber.cell_phone_with_country_code,
+  email: Faker::Internet.email
+)
+
+# seed Division
+10.times do |i|
+  Division.create(
+    name: Faker::FunnyName.name,
+    organization: Organization.first
+  )
+end
+
+# seed Building
+
+10.times do |i|
+  Building.create(
+    name: "Build №#{i}",
+    organization: Organization.first
+  )
+end
+
+# seed Room
+
+100.times do |i|
+  Room.create(
+    name: "#{i}",
+    building: Building.find_by(id: rand(1..10)),
+    level: rand(0.0..10.0)
+  )
+end
+
+# seed Service
+
+10.times do |i|
+  Service.create(
+    name: "Service-#{i}",
+    division: Division.find_by(id: rand(1..10)),
+    organization: Organization.first,
+    building: Building.find_by(id: rand(1..10))
+  )
+end
+
+# seed Server
+
+10.times do |i|
+  Server.create(
+    name: "server-#{i}",
+    ip_address: Faker::Internet.ip_v4_address,
+    inventory_id: i,
+    service: Service.find_by(id: rand(1..10)),
+    room: Room.find_by(id: rand(1..100))
+  )
+end
+
+# seed User
+User.create(
+  tabel_id: 0,
+  first_name: 'Service',
+  last_name: 'Administrator',
+  second_name: nil,
+  email: 'admin@admin.ru',
+  password: '12345678',
+  role: 'admin',
+  service: Service.find_by(id: rand(1..10))
+)
+
+50.times do |i|
+  User.create(
+    tabel_id: 10000 + i,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: "123456789#{i}",
+    role: ['engineer', 'inspector', 'dosimetrist'].sample,
+    service: Service.find_by(id: rand(1..10))
   )
 end
 
 # seed Device
-
-1000.times do |i|
+300.times do |i|
   Device.create(
     inventory_id: i,
-    serial_id: "#{i}-123-N",
+    serial_id: Faker::Device.serial,
     tabel_id: i,
     device_model: DeviceModel.find_by(id: rand(1..100)),
     device_reg_group: DeviceRegGroup.find_by(id: rand(1..5)),
-    year_of_production: 1990,
-    year_of_commissioning: 1991,
+    year_of_production: rand(1990..2020),
+    year_of_commissioning: rand(1991..2020),
     supplementary_kit: SupplementaryKit.find_by(id: rand(1..20)),
+    service: Service.find_by(id: rand(1..10)),
   )
 end
 
-10.times do |i|
+# seed ControlPoints
+200.times do |i|
+  ControlPoint.create(
+    name: Faker::Space.star_cluster,
+    description: Faker::Space.star,
+    room: Room.find_by(id: rand(1..99)),
+    service: Service.find_by(id: rand(1..10)),
+    device: Device.find_by(id: i + 1),
+  )
+end
+
+# seed Post
+300.times do |i|
   Post.create(
     user: User.first,
-    title: "This is post title №#{i}",
-    body: "Some who have read the book, or at any rate have reviewed it, found it boring, absurd, or contemptible, and I have no cause to complain, since I have similar opinions of their works, or of the kinds of writing that they evidently prefer.",
-    category: "Public"
+    title: Faker::Lorem.sentence,
+    body: Faker::Lorem.paragraphs.join("\n"),
+    category: %w[Public УРБ-106 РИК ЦСМИТ].sample
   )
 end
 
-2.times do |i|
-  Post.create(
-    user: User.first,
-    title: "This is post title №#{i}",
-    body: "Some who have read the book, or at any rate have reviewed it, found it boring, absurd, or contemptible, and I have no cause to complain, since I have similar opinions of their works, or of the kinds of writing that they evidently prefer.",
-    category: "УРБ-106"
+60.times do
+  post_comment = PostComment.create(
+    user: User.find_by(id: rand(1..10)),
+    post: Post.find_by(id: rand(1..30)),
+    content: Faker::Books::Lovecraft.paragraphs.join("\n"),
+    parent_id: nil
+  )
+
+  20.times do
+    PostComment.create(
+      user: User.find_by(id: rand(1..10)),
+      post: post_comment.post,
+      content: Faker::Books::Lovecraft.paragraphs.join("\n"),
+      parent_id: post_comment.id
+    )
+  end
+end
+
+20.times do
+  post = Post.joins(:comments).where.not(comments: { id: nil }).sample
+
+  PostComment.create(
+    user: User.find_by(id: rand(1..10)),
+    post:,
+    content: Faker::Books::Lovecraft.paragraphs.join("\n"),
+    parent_id: post.comments.sample.id
   )
 end
 
+(1..30).each do |post_id|
+  (1..10).each do |user_id|
+    PostLike.create!(post_id:, user_id:)
+  end
+end
+
+# seed Inspection
 20.times do |i|
   Inspection.create(
     device: Device.find_by_id(rand(1..1000)),
@@ -272,74 +244,23 @@ end
     performer: User.find_by_id(rand(1..20)),
     type_target: 'regular',
     state: 'verification_successful',
-    conclusion_date: rand(1.year.ago..Time.now),
+    conclusion_date: rand(10.year.ago..Time.now),
     conclusion: "Всё прекрасно! №#{i}"
   )
 end
 
-
-Organization.create(
-  name: "АО ГНЦ НИИАР",
-  full_address: "Западное шоссе 9",
-  zip_code: "9001",
-  phone: "5-55-55",
-  fax: "5-55-55",
-  email: "niiar@niiar.ru"
-)
-
-10.times do |i|
-  Division.create(
-    name: "Division-#{i}",
-    organization: Organization.first
-  )
-end
-
-10.times do |i|
-  Building.create(
-    name: "Build №#{i}",
-    organization: Organization.first
-  )
-end
-
+# seed Channel
 100.times do |i|
-  Room.create(
-    name: "#{i}",
-    building: Building.find_by(id: rand(1..10))
-  )
-end
-
-10.times do |i|
-  Service.create(
-    name: "Service-#{i}",
-    division: Division.find_by(id: rand(1..10)),
-    organization: Organization.first,
-    building: Building.find_by(id: rand(1..10))
-  )
-end
-
-10.times do |i|
-  Server.create(
-    name: "server-#{i}",
-    ip_adress: "192.168.20.#{i}",
-    inventory_id: i,
-    service: Service.find_by(id: rand(1..10)),
-    room: Room.find_by(id: rand(1..100))
-  )
-end
-
-200.times do |i|
   Channel.create(
-    name: "ДКЗ-#{i}",
     channel_id: "#{i}",
-    device: Device.find_by(id: rand(1..1000)),
-    room: Room.find_by(id: rand(1..100)),
+    control_point: ControlPoint.find_by(id: i + 1),
     server: Server.find_by(id: rand(1..10)),
     service: Service.find_by(id: rand(1..10)),
     location_description: "Description",
     self_background: 1.1,
     pre_emergency_limit: 2.2,
     emergency_limit: 3.3,
-    consumptiom: 1.0,
+    consumption: 1.0,
     conversion_coefficient: 0.0,
     event_system_value: 0.0,
     event_not_system_value: 0.0,
@@ -350,5 +271,23 @@ end
     is_special_control: false,
     is_online: true,
     state: "normal"
+  )
+end
+
+100.times do |i|
+  History.create(
+    channel: Channel.first,
+    event_impulse_value: rand(0.0..100.0),
+    event_system_value: rand(0.0..100.0),
+    event_not_system_value: rand(0.0..100.0),
+    event_datetime: Time.now,
+  )
+
+  History.create(
+    channel: Channel.second,
+    event_impulse_value: rand(0.0..100.0),
+    event_system_value: rand(0.0..100.0),
+    event_not_system_value: rand(0.0..100.0),
+    event_datetime: Time.now,
   )
 end

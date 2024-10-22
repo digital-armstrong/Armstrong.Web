@@ -1,8 +1,8 @@
 <% provide :page_title, "Модели" %>
 <%= render 'shared/admin/navbar/admin', selected: "device" %>
-<%= render 'shared/admin/navbar/device_bread', selected: "device_model" %>
-<div class="row">
-  <div>
+<div class="row mx-0">
+  <div class="col-2 ps-0 my-4">
+    <%= render 'shared/admin/navbar/device_bread', selected: "device_model" %>
     <div class="accordion mb-3" id="accordionFilter">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
@@ -11,76 +11,47 @@
           </button>
         </h2>
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
-          <%= search_form_for(@query, url:admin_device_model_index_path, method: :get, 
+          <%= search_form_for(@query, url:admin_device_model_index_path, method: :get,
           data:{controller: "filter", 'filtrator_class': 'filtrator-class-index'}, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
-              <div class="row">
-                <div class="col">
-                  <%= f.label :name, class:"mb-1"%>
-                  <%= f.search_field :name_cont, class: 'form-control', placeholder: 'Название' %>
-                </div>
-                <div class="col">
-                  <%= f.label :manufacturer_id, class:"mb-1" %>
-                  <%= f.collection_select(:manufacturer_id_eq, Manufacturer.all,
-                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select'}) %>
-                </div>
-                <div class="col">
-                  <%= f.label :measurement_group_id, class:"mb-1" %>
-                  <%= f.collection_select(:measurement_group_id_eq, MeasurementGroup.all,
-                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select', id:"filtrator-class-index", data: {'action': 'onchange -> filter#filter', 'to_filter_class': 'filter-class-index', 'filtrator_class': 'filtrator-class-index'}}) %>
-                </div>
-                <div class="col">
-                  <%= f.label :measurement_class_id, class:"mb-1" %>
-                  <%= f.collection_select(:measurement_class_id_eq, MeasurementClass.all,
-                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select', id: "filter-class-index"}) %>
-                </div>
-                <div class="col">
-                  <%= f.label :measuring_unit, class:"mb-1" %>
-                  <%= f.search_field :measuring_unit_cont, class: 'form-control', placeholder: 'мЗв/ч' %>
-                </div>
-              </div>
-              <div class="row mt-2">
-                <div class="col">
-                  <%= f.label :measurement_sensitivity, class:"mb-1" %>
-                  <%= f.search_field :measurement_sensitivity_eq, class: 'form-control', placeholder: '1.0' %>
-                </div>
-                <div class="col">
-                  <%= f.label :measurement_min, class:"mb-1" %>
-                  <%= f.search_field :measurement_min_eq, class: 'form-control', placeholder: '1.0' %>
-                </div>
-                <div class="col">
-                  <%= f.label :measurement_max, class:"mb-1" %>
-                  <%= f.search_field :measurement_max_eq, class: 'form-control', placeholder: '1.0' %>
-                </div>
-                <div class="col">
-                  <%= f.label :safety_class, class:"mb-1" %>
-                  <%= f.search_field :safety_class_cont, class: 'form-control', placeholder: '3Н' %>
-                </div>
-              </div>
-              <div class="row mt-2 mb-3">
-                <div class="col">
-                  <%= f.label :accuracy_class, class:"mb-1" %>
-                  <%= f.search_field :accuracy_class_eq, class: 'form-control', placeholder: '1.0' %>
-                </div>
-                <div class="col">
-                  <%= f.label :is_complete_device, class:"mb-1" %>
-                  <%= f.select(:is_complete_device_eq, [['Да', true], ['Нет', false]],
-                  {:include_blank => t('combobox_blank')}, {:class =>'form-select form-select'})%>
-                </div>
-                <div class="col">
-                  <%= f.label :is_tape_rolling_mechanism, class:"mb-1" %>
-                  <%= f.select(:is_tape_rolling_mechanism_eq, [['Да', true], ['Нет', false]],
-                  {:include_blank => t('combobox_blank')}, {:class =>'form-select form-select'})%>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col"></div>
-              <%= f.submit "Применить", class: 'col btn btn-primary w-100'%>
-              <div id="b_clear" onclick="formClear()" class="ms-2 col btn btn-secondary w-100">
+              <%= f.label :gos_registry_id, class: "mb-1" %>
+              <%= f.search_field :gos_registry_id_cont, class: "form-control mb-2", placeholder: "7595-80" %>
+              <%= f.label :name, class:"mb-1"%>
+              <%= f.search_field :name_cont, class: 'form-control mb-2', placeholder: 'Название' %>
+              <%= f.label :manufacturer_id, class:"mb-1" %>
+              <%= f.collection_select(:manufacturer_id_eq, Manufacturer.all,
+                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select mb-2'}) %>
+              <%= f.label :inspection_interval, class: "mb-1" %>
+              <%= f.collection_select :inspection_interval_eq, (1..10).map { |n| [n, n] }, :last, :first, {:include_blank => t('combobox_blank')},  { class: "form-select mb-2"} %>
+              <%= f.label :measurement_group_id, class:"mb-1" %>
+              <%= f.collection_select(:measurement_group_id_eq, MeasurementGroup.all,
+                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select mb-2', id:"filtrator-class-index", data: {'action': 'onchange -> filter#filter', 'to_filter_class': 'filter-class-index', 'filtrator_class': 'filtrator-class-index'}}) %>
+              <%= f.label :measurement_class_id, class:"mb-1" %>
+              <%= f.collection_select(:measurement_class_id_eq, MeasurementClass.all,
+                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select mb-2', id: "filter-class-index"}) %>
+              <%= f.label :measuring_unit, class:"mb-1" %>
+              <%= f.search_field :measuring_unit_cont, class: 'form-control mb-2', placeholder: 'мЗв/ч' %>
+              <%= f.label :measurement_sensitivity, class:"mb-1" %>
+              <%= f.search_field :measurement_sensitivity_eq, class: 'form-control mb-2', placeholder: '1.0' %>
+              <%= f.label :measurement_min, class:"mb-1" %>
+              <%= f.search_field :measurement_min_eq, class: 'form-control mb-2', placeholder: '1.0' %>
+              <%= f.label :measurement_max, class:"mb-1" %>
+              <%= f.search_field :measurement_max_eq, class: 'form-control mb-2', placeholder: '1.0' %>
+              <%= f.label :safety_class, class:"mb-1" %>
+              <%= f.collection_select :safety_class_eq, (1..4).map { |n| ["#{n}Н", "#{n}Н"] }, :last, :first, {:include_blank => t('combobox_blank')},  { class: "form-select mb-2" } %>
+              <%= f.label :accuracy_class, class:"mb-1" %>
+              <%= f.search_field :accuracy_class_eq, class: 'form-control mb-2', placeholder: '1.0' %>
+              <%= f.label :is_complete_device, class:"mb-1" %>
+              <%= f.select(:is_complete_device_eq, [['Да', true], ['Нет', false]],
+                  {:include_blank => t('combobox_blank')}, {:class =>'form-select mb-2'})%>
+              <%= f.label :is_tape_rolling_mechanism, class:"mb-1" %>
+              <%= f.select(:is_tape_rolling_mechanism_eq, [['Да', true], ['Нет', false]],
+                  {:include_blank => t('combobox_blank')}, {:class =>'form-select mb-2'})%>
+
+              <%= f.submit t('b_accept'), class: 'col btn btn-primary w-100 my-2'%>
+              <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
                 <%= t("b_clear")%>
               </div>
-              <div class="col"></div>
             </div>
           <% end %>
         </div>
@@ -88,41 +59,69 @@
     </div>
     <%= render 'shared/modal_button_add', path: new_admin_device_model_path, classes: "btn btn-primary w-100 mb-3", text: t("b_add") %>
   </div>
-</div>
-<div class="row mx-0">
-  <div class="col shadow rounded">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col"><%= t('activerecord.attributes.device_model.name')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.manufacturer')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measurement_group')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measurement_class')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measuring_unit')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measurement_sensitivity')%>.</th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measurement_min')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.measurement_max')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.safety_class')%></th>
-          <th scope="col"><%= t('activerecord.attributes.device_model.accuracy_class')%></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @device_models.each do |device_model| %>
-          <tr onclick="document.location = `<%=admin_device_model_path(device_model)%>`" style="cursor:pointer">
-            <td><%= device_model.name %></td>
-            <td><%= device_model.manufacturer.name %></td>
-            <td><%= device_model.measurement_group.name %></td>
-            <td><%= device_model.measurement_class.name %></td>
-            <td><%= device_model.measuring_unit %></td>
-            <td><%= device_model.measurement_sensitivity %></td>
-            <td><%= device_model.measurement_min %></td>
-            <td><%= device_model.measurement_max %></td>
-            <td><%= device_model.safety_class %></td>
-            <td><%= device_model.accuracy_class %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="col-10 my-4 p-0">
+    <div class="shadow rounded px-2">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <%= render 'shared/ui/table/caption/all_items',
+              count: DeviceModel.count %>
+          <thead>
+            <tr class="text-nowrap">
+              <th scope="col"><%= t('activerecord.attributes.device_model.gos_registry_id')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.name')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.manufacturer')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.inspection_interval')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.measurement_group')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.measurement_class')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.measuring_unit')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.measurement_sensitivity')%>.</th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.measurement_min')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.measurement_max')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.calibration_min')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.calibration_max')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.safety_class')%></th>
+              <th scope="col"><%= t('activerecord.attributes.device_model.accuracy_class')%></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @device_models.each do |device_model| %>
+              <tr onclick="document.location = `<%=admin_device_model_path(device_model)%>`" style="cursor:pointer">
+                <% if device_model.gos_registry_id.nil? or device_model.gos_registry_id.empty? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td>
+                    <strong>
+                      <%= device_model.gos_registry_id %>
+                    </strong>
+                  </th>
+                <% end %>
+                <td><%= device_model.name %></td>
+                <td><%= device_model.manufacturer.name %></td>
+                <% if device_model.inspection_interval.nil? or device_model.inspection_interval.zero? %>
+                  <td><%= "——" %></td>
+                <% else %>
+                  <td>
+                    <strong>
+                      <%= device_model.inspection_interval %>
+                    </strong>
+                  </th>
+                <% end %>
+                <td><%= device_model.measurement_group.name %></td>
+                <td><%= device_model.measurement_class.name %></td>
+                <td><%= device_model.measuring_unit %></td>
+                <td><%= device_model.measurement_sensitivity %></td>
+                <td><%= device_model.measurement_min %></td>
+                <td><%= device_model.measurement_max %></td>
+                <td><%= device_model.calibration_min %></td>
+                <td><%= device_model.calibration_max %></td>
+                <td><%= device_model.safety_class %></td>
+                <td><%= device_model.accuracy_class %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 <div class="row my-5">

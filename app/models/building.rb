@@ -6,4 +6,8 @@ class Building < ApplicationRecord
   has_many :servers
 
   validates :name, presence: true
+
+  def self.ransackable_attributes(_auth_object = nil)
+    ['created_at', 'description', 'id', 'name', 'organization_id', 'updated_at']
+  end
 end

@@ -1,9 +1,9 @@
 <% provide :page_title, "Классы измерения" %>
 <%= render 'shared/admin/navbar/admin', selected: "device" %>
-<%= render 'shared/admin/navbar/device_bread', selected: "measurement_class" %>
 <%= render 'shared/flash_alert' %>
 <div class="row mx-0">
-  <div class="col-2 ps-0">
+  <div class="col-2 ps-0 my-4">
+    <%= render 'shared/admin/navbar/device_bread', selected: "measurement_class" %>
     <div class="accordion mb-3" id="accordionFilter">
       <div class="accordion-item">
         <h2 class="accordion-header" id="headingFilter">
@@ -14,13 +14,13 @@
         <div id="collapseFilter" class="accordion-collapse collapse shadow" aria-labelledby="headingFilter" data-bs-parent="#accordionFilter">
           <%= search_form_for(@query, url: admin_measurement_class_index_path, method: :get, class: "rounded accordion-body") do |f| %>
             <div id="for-clear">
-              <%= f.label :name, class: "mb-2" %>
-              <%= f.search_field :name_cont, class:"form-control", placeholder:"Название" %>
-              <%= f.label :measurement_group_id, class:"mb-1" %>
-                  <%= f.collection_select(:measurement_group_id_eq, MeasurementGroup.all,
-                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select form-select'}) %>
-              <%= f.label :arms_device_type, class: "my-2" %>
-              <%= f.search_field :arms_device_type_eq, class:"form-control", placeholder:"1" %>
+              <%= f.label :name %>
+              <%= f.search_field :name_cont, class:"form-control mb-2", placeholder:"Название" %>
+              <%= f.label :measurement_group_id %>
+              <%= f.collection_select(:measurement_group_id_eq, MeasurementGroup.all,
+                  :id, :name, {:include_blank => t('combobox_blank')}, {:class=>'form-select mb-2'}) %>
+              <%= f.label :arms_device_type %>
+              <%= f.search_field :arms_device_type_eq, class:"form-control mb-2", placeholder:"1" %>
             </div>
             <%= f.submit t('b_accept'), class: 'btn btn-primary w-100 my-2'%>
             <div id="b_clear" onclick="formClear()" class="btn btn-secondary w-100">
@@ -32,36 +32,37 @@
     </div>
     <%= render 'shared/modal_button_add', path: new_admin_measurement_class_path, classes: "btn btn-primary w-100", text: t("b_add") %>
   </div>
-  <div class="col-10 shadow rounded">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th scope="col"><%= t('activerecord.attributes.measurement_class.name') %></th>
-          <th scope="col"><%= t('activerecord.attributes.measurement_class.arms_device_type') %></th>
-          <th scope="col"><%= t('activerecord.attributes.measurement_class.measuremnt_group') %></th>
-          <th scope="col" style="width: 10%"><%= t('action') %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @measurement_classes.each do |measurement_class| %>
-        <tr>
-            <td><%= measurement_class.name %></td>
-            <td><%= measurement_class.arms_device_type %></td>
-            <td><%= measurement_class.measurement_group.name %></td>
-            <td>
-              <div class="d-flex">
-                <%= link_to edit_admin_measurement_class_path(measurement_class.id), class: "btn", data: { action: "click->modal#open", turbo_stream: "" } do %>
-                  <i class="bi bi-pen"></i>
-                <% end %>
-                <%= button_to admin_measurement_class_path(measurement_class.id), method: :delete, class: "btn" do %>
-                  <i class="bi bi-trash"></i>
-                <% end %>
-              </div>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+
+  <div class="col-10 my-4 p-0">
+    <div class="shadow rounded px-2">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <%= render 'shared/ui/table/caption/all_items',
+              count: MeasurementClass.count %>
+          <thead>
+            <tr>
+              <th scope="col"><%= t('activerecord.attributes.measurement_class.name') %></th>
+              <th scope="col"><%= t('activerecord.attributes.measurement_class.arms_device_type') %></th>
+              <th scope="col"><%= t('activerecord.attributes.measurement_class.measurement_group') %></th>
+
+              <%= render 'shared/ui/table/header/action' %>
+            </tr>
+          </thead>
+          <tbody>
+            <% @measurement_classes.each do |measurement_class| %>
+              <tr>
+                <td><%= measurement_class.name %></td>
+                <td><%= measurement_class.arms_device_type %></td>
+                <td><%= measurement_class.measurement_group.name %></td>
+                <%= render 'shared/ui/table/cell/action',
+                    edit_path: edit_admin_measurement_class_path(measurement_class.id),
+                    destroy_path: admin_measurement_class_path(measurement_class.id) %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
   </div>

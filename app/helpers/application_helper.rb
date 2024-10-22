@@ -6,7 +6,9 @@ module ApplicationHelper
   end
 
   def formatted_date(param, type)
-    I18n.l(param, format: type)
+    unless param.nil?
+      I18n.l(param, format: type)
+    end
   end
 
   def full_title(page_title = '')
